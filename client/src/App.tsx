@@ -1,3 +1,4 @@
+/** Math4Fun — Field Journal Quest router: the local prototype starts as a single exploratory dashboard. */
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
