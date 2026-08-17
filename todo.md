@@ -14,3 +14,11 @@
 - [x] Thay câu hỏi mẫu trong station bằng ngân hàng câu hỏi đã xác nhận.
 - [x] Kiểm thử đáp án đúng/sai, gợi ý, nguồn trang và combat feedback.
 - [x] Lưu checkpoint bản nội dung Toán 4 đã xác minh.
+
+## Hoàn thiện game local
+
+- [x] Chuẩn hóa game state, unlock rule và lưu/khôi phục dữ liệu localStorage.
+- [x] Mở rộng ngân hàng câu hỏi Toán 4 có nguồn kiểm chứng theo từng station.
+- [x] Làm các khu vực Bản đồ học, Bộ sưu tập, Trạm học và Đấu Boss có thể truy cập.
+- [x] Thêm gameplay hoàn chỉnh: XP, streak, unlock guardian, tiến độ và combat turn.
+- [x] Kiểm thử điều hướng, luồng học, local persistence và responsive; lưu checkpoint.

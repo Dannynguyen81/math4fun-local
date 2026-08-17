@@ -1,17 +1,27 @@
-/** Math4Fun — Field Journal Quest router: the local prototype starts as a single exploratory dashboard. */
+/** Math4Fun — Field Journal Quest router: routes are wrapped by one persistent journal shell and local game state. */
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import GameLayout from "./components/GameLayout";
+import { GameProvider } from "./contexts/GameContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import BossPage from "./pages/BossPage";
+import CollectionPage from "./pages/CollectionPage";
 import Home from "./pages/Home";
+import MapPage from "./pages/MapPage";
+import StationPage from "./pages/StationPage";
 
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/map"} component={MapPage} />
+      <Route path={"/collection"} component={CollectionPage} />
+      <Route path={"/station/:id"} component={StationPage} />
+      <Route path={"/boss"} component={BossPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -33,7 +43,11 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <GameProvider>
+            <GameLayout>
+              <Router />
+            </GameLayout>
+          </GameProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

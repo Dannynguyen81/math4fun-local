@@ -88,3 +88,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Route map luôn là hệ thống dẫn đường chính: station phải lệch trục trên đường chỉ khâu/dotted path; không được trở lại dạng lưới nhiệm vụ đều.
 - Surface chính biểu đạt nhiều lớp giấy, tem, ghim, note và dấu vết tiến bộ; card đồng đều chỉ dành cho lựa chọn đáp án hoặc input học có tính cấu trúc.
 - Guardian luôn hiển thị theo hệ thống field-guide stamp với taxonomy, viền mực, seal và nhãn tiến trình; không trình bày như nhân vật game rời rạc.
+- Mọi màn hình ngoài bản đồ phải có một route fragment hoặc evidence trail nhìn thấy được để duy trì cảm giác một hành trình liên tục.
+- Locked guardian vẫn là một mẫu vật field-guide có niêm phong, taxonomy và dấu vết tiến độ; không dùng ô trống hoặc thẻ xám vô danh.
+- Marigold Compass chỉ xuất hiện ở thao tác tiếp theo, route đang hoạt động, XP/bằng chứng tiến độ và phản hồi “aha”; các chi tiết trang trí dùng giấy, Indigo Trail, Leaf Green hoặc Coral Spark thay thế.
