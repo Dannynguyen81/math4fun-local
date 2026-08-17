@@ -1,0 +1,2402 @@
+
+
+===== PDF PAGE 1 =====
+| NGUYỄN THUÝ HẰNG
++ 4
+HƯỚNG DAN HOC „
+TAP MOT
+@ NHA XUAT BAN GIAO DUC VIET NAM
+OO et eed |
+ss sry nã Mi
+: sae
+GomNhom.com
+
+
+===== PDF PAGE 2 =====
+NGUYỄN THUÝ HẰNG
+Hướng dẫn học
+
+TOÁN
+
+Tập một
+NHÀ XUẤT BẢN GIÁO DỤC VIỆT NAM |
+tri E7
+
+TIẾN
+bee Gì ng
+Opa Đà
+GomNhom.com
+
+
+===== PDF PAGE 3 =====
+F==----------~vVỔT 7= es TÔ ỐC
+LỜI GIỚI THIỆU
+
+Các em học sinh yêu quý!
+Sách Hướng dẫn học Toán 4 được biên soạn dành riêng cho
+học sinh thuộc hệ thống Archimedes School. Cuốn sách nhằm
+hỗ trợ các em hệ thống hoá, mở rộng và nâng cao kiến thức
+cũng như kĩ năng tư duy légic. Với những ví dụ minh hoạ sống động
+và gần gũi, cuốn sách không chỉ giúp học sinh nam vững kiến thức
+mà còn khơi dậy niềm đam mê với toán học.
+
+Sách Hướng dẫn học Toán 4 được thiết kế khoa học, dễ hiếu.
+
+Các ví dụ gần gũi được Lựa chọn kĩ lưỡng nhằm tạo động lực, kích
+
+thích sự hứng thú, từ đó giúp các em ghi nhớ kiến thức dễ dàng
+
+và làm quen với toán học một cách tự nhiên, hiệu quả.
+
+Nội dung của cuốn sách bao gồm:
+
+Go Các chuyên dé da dạng từ cơ ban đến nâng cao gắn liền
+thực tiễn, phù hợp với Lứa tuổi giúp kích thích khả nang suy
+luận légic và rèn luyện tư duy nhạy bén của học sinh.
+
+; l2) Phương pháp giải toán hiệu quả: Cung cấp các bước giải
+toán giúp các em học sinh có thể giải quyết các bài toán
+một cách hiệu quả và nhanh chóng.
+
+3) Bài tập phong phú và đa dạng: Bao gồm nhiều bài tập thực
+hành từ dễ đến khó, được chọn lọc kĩ lưỡng để phù hợp với
+khả năng và nhu cầu học tập của các em học sinh.
+
+Chúng tôi tin rằng, sách Hướng dẫn học Toán 4 của hệ thống
+
+Archimedes School không chỉ là người bạn đồng hành mà còn
+
+la nguồn động luc giúp các em học sinh tự tin khám phá và phát -
+
+triển tư duy légic, sáng tạo. Chúc các em có những giờ học toán
+
+thật thú vị và bổ ích!
+
+Nguyễn Thuý Hằng
+Rp e1 :
+
+_ BI
+
+Đến Ghi
+
+ei KT
+
+see
+
+GomNhom.com
+
+Hướng đắn hoc Toán 4 ~ Tập một
+
+
+===== PDF PAGE 4 =====
+MỤC LỤC (Table of Contents)
+©) Viết số với điều kiện cho trước 5
+8 Đếm số và chữ số 12
+©) bo tường 18
+o Ki nang tinh toan 22
+©) Tính chu viva diện tích các hình 28
+©) day số cách đều 35
+K2 Bài toán trồng cây 41
+| ©) Bài toán tổng - hiệu 46
+©) Phép nhân, phép chia 51
+2) Phép chia hết, phép chia có du 56
+® Cấu tạo số 59 -
+| | ects |
+2650| -
+GomNhom.com
+4 maeosssedeoeedtevse
+
+
+===== PDF PAGE 5 =====
+ait
+nee
+GomNhom.com
+en a -* eon
+|
+- af aw cP a aA +
+Gp | Viết số với điều kiện cho trước
+x Ầsẽ tự nhiên
+© Các số 0; 1; 2; 3; 4;... là các số tự nhiên.
+® Tia số
+0 1 2 3 4 5 6
+—————————.+—— ¿cờ
+® Mỗi số tự nhiên được biểu diễn bởi một điểm trên tia số, các diém này cách
+đầu nhau như hình vẽ.
+* Số 0 được biểu diễn ở vị trí đầu tiên của tia số Boi là gốc của tia số. Hai số
+được xếp cạnh nhau trên tia số được Boi là hai số tự nhiên liên tiếp.
+l2) Số và chữ số. Cấu tạo thập phân của số tự nhiên
+¢ Số tự nhiên bất kì được viết từ 10 chữ số là: 0:1:2:3:..; 8,9.
+s Cấu tạo thập phan của sé tự nhiên: phân theo hang/ldp. Từ đó, chúng ta
+đọc và viết được số tự nhiên.
+Lớp Ti __Trigu Nghìn Đơn vị
+Sn =
+| ¬ | lọ) | | =! | 9 |
+at |O a |Z su
+x | > c | c z =a |O 0
+Hàng |Š |§ |= |š |5 |# |5 lễ ales
+aie ® |G 5 ị5 9 ls. |
+= E 5 Ss
+© Quy ước khi viết số tự nhiên có nhiều chữ số: chữ số hàng cao nhất khác 0.
+s_ Số chẵn là các số tự nhiên có chữ số hàng đơn vị là 0; 2; 4; 6; 8. Số lẻ là các
+số tự nhiên có chữ số hàng đơn vị là 1; 3; 5; 7; 9, .
+3 So sánh số tự nhiên
+; ¢ Số tự nhiên càng lớn khi số các chữ sổ của số đó càng nhiều và giá trị các
+chữ số càng lớn. Có nghĩa: Không có số tự nhiên lớn nhất.
+s Số tự nhiên càng bé khí số các chữ số của số đớ càng ít và giá trị các chữ số
+9 càng bé. Có nghĩa: Số 0 là số tự nhiên bé nhất.
+Người ta so sánh hai số tự nhiên bằng cách so sánh số chữ số, số nào có số chữ
+số nhiều hơn thì số đó lớn hơn. Nếu số chữ số bằng nhau thì so sánh từng cặp :
+chữ số ở cùng một hàng, kể từ trái sang phải.
+Hướng đắc: nọc Toán 4 | Tập một 5
+
+
+===== PDF PAGE 6 =====
+m RHỊ
+ữ c
+[li
+GomNhom.com
+=”.`.ẳỶ.——————————————x———————————————————————————sễ---sẳsỶẳãtsễẳs-ẳaẳiẳï=ẳïẳơ
+| :
+| Ví dụ 1
+Viết số tự nhiên A lớn nhất có các chữ số khác nhau và:
+; a. Tổng các chữ số bằng 19.
+b. Tổng các chữ số bằng 14.
+e. Tổng các chữ số bằng 45.
+Hướng dẫn
+a. Như ta đã biết, số tự nhiên càng tớn khi số đó có càng nhiều chữ số.
+Khi viết số 19 thành tổng nhiều chữ số nhất có thé thì giá trị các chữ số cần Lựa
+chọn càng bé cảng tốt. Tuy nhiên, do các chữ số này khác nhau nên ta chọn theo
+thứ tự ưu tiên từ 0; 1; 2;...
+Ta có: 19=0+1+2+3+4+5+4.
+Nhận thấy số A lớn nhất có các chữ số khác nhau khi cỏ sáu chữ số. Để có được
+chữ số có giá trị cao nhất của sáu chữ số đó ta bổ sung 4 đơn vị vào chữ số 5.
+Khi đó, 19 = 0 + 1 +2 + 3+ 4+9. Số A lớn nhất cần tìm là 943 210.
+b. Làm tương tự như trên, ta có: 14=0+1+2+3+4+4.
+ˆ Số A có số chữ số nhiều nhất có thể là năm chữ số. Để có chữ số lớn nhất ta
+bố sung 4 đơn vị vào chữ số 4 để được 8. Khi đó, 14 = 0 + † +2 + 3+ 8.
+Số A lớn nhất cần tim la 83 210.
+c. Tương tự, số Ala 9 876 543 210.
+Kết luận
+Số tự nhiên lớn nhất có các chữ số khác nhau là 9 876 543 210. Số này có tổng
+các chữ số là 45. Do đó, không tồn tại số tự nhiên lớn nhất có các chữ số khác
+nhau và tống các chữ số lớn hơn 45.
+Do không có số tự nhiên lớn nhất nên khi tìm các số lớn nhất cần có thêm ràng
+buộc về điều kiện số các chữ số (hoặc các chữ số phải khác nhau, hoặc số chữ
+số bị giới hạn).
+Ví dụ2
+Viết số tự nhiên B lớn nhất có ba chữ số và tổng các chữ số là:
+` a. 13.
+b. 20. D ;
+c. 8.
+_ 6 Rise above onesel! and grasp the world
+=
+
+
+===== PDF PAGE 7 =====
+| Ẳ, `
+Hướng dẫn
+a. Số B có ba chữ số nên số này lớn nhất khi chữ số hàng tram lớn nhất có thé.
+Chọn chữ số hàng trăm là 9. Ta có: 13 = 9 + 4.
+- Chữ số hàng chục là chữ số Lớn nhất không vượt qua 4, chọn chữ số hàng chục là 4.
+Khi đó, chữ số hàng đơn vị là 0. Số B là 940,
+b. Tương tự như trên, chọn chữ số hang tram là 9. Ta có: 20 = 9 + 11.
+Chọn chữ số hàng chục là 9. Ta cỏ: 20 = 9 + 9 + 2. Số Bla 992.
+e. Tương tự, chữ số hàng trăm là chữ số lớn nhất khöng quá 8, chọn chữ số hàng tram
+là 8,
+Khi đó, các chữ số hàng chục và hàng đơn vị đều bằng 0. Số B là 800,
+Kết tuận
+Nếu ràng buộc số chữ số (ví dụ: ba chữ số) thì số lớn nhất la 999. Số này có tổng
+các chữ số là 27. Do đó, nếu câu hỏi cho tổng các chữ số lớn hơn 27 sẽ không có
+số nào thoả mãn.
+Ngoài ra, có thể thay dữ kiện tổng các chữ số thành tích các chữ số.
+Ví dụ 3
+a. Tìm số tự nhiên C lớn nhất có các chữ số khác nhau mà tích các chữ số là 40.
+s b. Tìm số tự nhiên C lớn nhất có năm chữ số mà tích các chữ số là 40.
+e. (*) Tìm số tự nhiên C chan lớn nhất có nãm chữ số mà tích các chữ số là 40.
+d. (*) Tìm số tự nhiên C chan bé nhất có năm chữ số mà tích các chữ số là 40.
+Hướng dẫn
+a. Ta viết: 40 = 1 x 2 x 2 x 2 x 5.
+Số lớn nhất khi nó nhiều chữ số nhất.
+Theo đề bài, các chữ số khác nhau nên ta ghép 2 với 2 thành số 4 và chỉ ghép một
+ln để số các chữ số được nhiều nhất. .
+Khi đó, ta viết: 40 = 1 x 2x 4 x 5 là tích của bốn chữ số khác nhau.
+Với bốn chữ số 1; 2; 4; 5, ta được số C lớn nhất là 5421.
+; b. Ta viết: 40 = 1 x 2 x 2x 2 x 5. Vì số C có năm chữ số nên số đó lớn nhất khi
+chữ số hàng chục nghìn lớn nhất. Ta chon hàng chục nghìn là 2 x 2 x 2 = 8. Khi đó,
+các chữ số có tích là 40 được chọn la 1; 1; 1; 5 và-8. Số C là 85 111.
+‘ 5 e. Ưu tiên tính chan/lé sau đó mới xét đến giá trị lớn nhất của mỗi chữ số. Thêm
+các chữ số 1 để đủ năm chữ số cần tìm trước khi sắp xếp chúng. Số C là 54 112.
+d. Tương tự, số C là 11 158. ; :
+Hướng đẫn học Toán 4 | Tập một xẺ.
+
+
+===== PDF PAGE 8 =====
+Ví dụ 4
+| Viết số tự nhiên D bé nhất và:
+a. Có tổng các chữ số là 19.
+b. Có các chữ số khác nhau và tổng các chữ số của số đó là 19.
+Hướng dẫn
+a. Số D bé nhất khi số đó có ít chữ số nhất.
+Số D có tổng các chữ số là 19.
+Muốn viết 19 thành tống của ít chữ số nhất có thế thi gia trị mỗi chữ sổ lớn nhất
+có thé. Chọn các chữ số cao nhất là 9, lap lại đến hết.
+Ta có: 19 = 9 + 9+ 1. Sắp xếp các chữ số ta được số D bé nhất là 199.
+b. Số D bé nhất khi nó có ít chữ số nhất.
+Số D có tổng các chữ số là 19. Muốn viết 19 thành tổng của ít chữ số nhất có thế
+thì giá trị mỗi chữ số Lớn nhất có thể. Lại có số cần chọn có các chữ sổ khác nhau
+nên chon ưu tiền theo thứ tự 9; 8; 7;...
+Ta có: 19=9+8+2.
+Sắp xếp các chữ số ta được số D bé nhất là 289.
+: Kết luận
+Với bài toán tìm số bé nhất có tổng các chữ số không đổi, ta viết tổng đó thành
+tổng của ít chữ số nhất có thể và giá trị các chữ số sẽ được ưu tiên chọn từ cao
+xuống thấp. Sau khi đã xác định được các chữ số sắp xếp lai dé được số bé nhất.
+Với dạng toán này, học sinh có thể làm nhanh theo các bước được giới thiệu ở trên
+mà không cần giải thích.
+Ví dụ 5
+Viết số tự nhiên E thoả mãn:
+a. Bé nhất có tổng các chữ số là 38. :
+b. Bé nhất có các chữ số khác nhau và tổng các chữ số là 38.
+: c. Bé nhất có tích các chữ số là 120.
+Hướng dẫn
+. a. 38 Š 9+ 9 + 9 + 9 +2. Số E là 29999,
+; b.38=9+8+7+6+5+3, Số E là 356 789. ;
+c. 120 = 2 x 2 x 2 x 3 x 5. Số E là 358, ì `
+8. Rise above onesell and grasp the world
+
+
+===== PDF PAGE 9 =====
+https://vnstorage.com
+', ~
+
+Ví dụ 6 (*)
+
+Cho số tự nhiên 127 062 492. Xoá di năm chữ số, giữ nguyên thứ tự các chữ số con lại
+
+để được số tự nhiên:
+
+a. Lớn nhất.
+
+b. Bé nhất.
+
+Hướng dẫn
+Số 127 062 492 có chín chữ sổ. Sau khi xoá năm chữ số ta được số có bốn chữ số.
+a. Đế kết quả là số lớn nhất, các chữ số còn lại tạo thành số có bốn chữ số với
+hàng cao nhất có giá trị Lớn nhất.
+* Xét sáu chữ số đầu tiên (là 1; 2; 7; 0; 6; 2), ta có chữ số 7 là chữ số lớn nhất.
+Giữ chữ số 7 đứng đầu bằng cách xoá hai chữ số 1 và 2. Ta được số 7 062 492 và
+cần xoá tiếp ba chữ số kể từ chữ số 0.
+* Trong bốn chữ sổ tiếp theo từ chữ số 0 (là 0; 6; 2; 4), ta có chữ số 6 là chữ số lớn
+nhất. Giữ chữ số 6 bằng cách xoá chữ số 0. Ta được số 762 492 và cần xoá tiếp
+hai chữ số kế từ chữ số 2 (sát chữ số 6).
+* Trong ba chữ số tiếp theo từ chữ số 2 (là 2; 4; 9) thì chữ số 9 lớn nhất. Giữ chữ số
+
+* 9 bằng cách xoá hai chữ số 2 và 4. Như vậy, ta đã xoá đủ nãm chữ số.
+Số còn lại là 7692 tả số lớn nhất.
+b. Tương tự với số bé nhất.
+Để kết quả là số bé nhất, các chữ số còn lại tạo thành số có không quá bốn chữ
+số với hàng cao nhất có giá trị bé nhất.
+* Xét sáu chữ số đầu tiên (la 1; 2; 7; 0; 6; 2) thi chữ số 0 là chữ số bé nhất, Giữ chữ
+số 0 bằng cách xoá ba chữ số 1; 2; 7. Ta được số 062 492 và cần xoá tiếp hai chữ
+số kể từ chữ số 6.
+* Trong ba chữ số tiếp theo từ chữ số 6 (la 6; 2; 4) thì chữ số 2 bé nhất. Giữ chữ
+số 2 bằng cách xoá chữ sổ 6. Ta được số 02 492 va cần xoá tiếp một chữ số kể từ
+chữ số 4.
+* Trong hai chữ số tiếp theo từ chữ số 4 (tà 4; 9) thì chữ số 4 bé hơn. Giữ tại luõn
+chữ số 4. Ta được số 02 492 và cần xoá một chữ số nữa kế từ chữ số 9.
+` Š * Trong hai chữ số còn lại (la 9; 2) thì chữ số 2 bé hơn. Giữ chữ số 2 bằng cách xoá
+chữ số 9. Các chữ số còn lại là 0242. -
+Số bé nhất sau khi xoá là 242. :
+Hướng đắc: học Toán 4 | Tập một 9
+
+
+===== PDF PAGE 10 =====
+https://vnstorage.com
+>—=———PỂŠỂẾẾ5ẾẾỄẾỄẾỄẾỄỄỄ
+* ~
+Bài 1.
+Viết nhanh các số tự nhiên chan (lẻ) thoả mãn:
+a. Lớn nhất và có bốn chữ số.
+b. Lớn nhất và có bốn chữ số khác nhau.
+c, Bé nhất và có nam chữ số.
+d. Bé nhất và có năm chữ số khác nhau.
+Bài 2.
+Từ các chữ số 0; 2; 5; 6; 8; 9, viết các số tự nhiên thoả mãn điều kiện sau:
+a. Số chẵn (lẻ) lớn nhất có bốn chữ số khác nhau.
+b. Số chẵn (lẻ) bé nhất có ba chữ số khác nhau.
+Bài 3.
+Viết số tự nhiên lớn nhất có bốn chữ số và tống các chữ số là:
+a. 29. b. 34. c..7. d. 18.
+Bai 4.
+Viết số tự nhiên lớn nhất có năm chữ số và tổng các chữ số là:
+; a. 29. b. 34. c.7. d. 18.
+Bài 5.
+Viết số tự nhiên bé nhất có tổng các chữ số là:
+a.29. b. 34. c.7. d. 18.
+Bài 6.
+Viết số tự nhiên bé nhất có năm chữ số và tong các chữ số là:
+a.29. b. 34. e.7. d. 18.
+Bài 7. ›
+Viết số tự nhiên bé nhất có các chữ số khác nhau và tống các chữ số tà:
+a. 29. b. 34. e©-.7. d. 18.
+: Bài 8.
+Viết số tự nhiên lớn nhất có các chữ số khác nhau và tích các chữ số là:
+' a.20. * b. 8. c.60. ˆ d. 240.
+` Bài 9.
+Viết số tự nhiên lớn nhất có năm chữ số và tích các chữ»số là: :
+a. 20. b.8. c. 60. d. 240.
+10 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 11 =====
+https://vnstorage.com
+——————————ễ———————————
+Bài 10.
+Viết số tự nhiên bé nhất có tích các chữ số là:
+a. 20. b.8. c. 60. d. 240.
+Bài 11.
+Viết số tự nhiên bé nhất có bốn chữ số và tích các chữ số là:
+a. 20. b. 8. c. 60. d. 240.
+Bài 12.
+a. Viết các số có hai chữ số, hiệu các chữ số là 4. Tìm hiệu của số tớn nhất và
+số bé nhất trong các số đó.
+b. Viết các số có hai chữ số, thương các chữ số là 2. Tính tống của các số đó.
+c. Viết số có ba chữ số biết chữ số hàng chục gấp ba lần chữ số hàng đơn vị và
+bằng một nửa chữ số hàng trăm.
+d. (*) Viết số lẻ lớn nhất, các chữ số khác nhau, tổng các chữ số là 35.
+e. (*) Viết số chẵn lớn nhất, các chữ số khác nhau, tích các chữ số là 420.
+Bài 13.
+Cho số 205 316 795. Xoá đi nam chữ số, giữ nguyên thứ tự các chữ số còn lai dé
+5 được số tự nhiên:
+a. Bé nhất.
+b. Lớn nhất.
+Bài 14.
+Viết liên tiếp các số có hai chữ số từ 30 đến 25 theo thứ tự từ lớn đến bé để được một
+số A có nhiều chữ số.
+a. Hỏi số A có bao nhiêu chữ số?
+b. Xoá đi năm chữ số của số A và giữ nguyên thứ tự các chữ số còn lại để được số
+lớn nhất (số bé nhất). ˆ
+Bài 15.
+Viết liên tiếp các số tự nhiên từ 5 đến 15 theo thứ tự từ bé đến lớn để được một số B
+có nhiều chữ số 567...1415.
+a. Hỏi số B có bao nhiêu chữ số? :
+š : b. Xoá đi mười một chữ số của số B và giữ nguyên thứ tự các chữ số còn lại để
+được số lớn nhất/số bé nhất/số chẵn lớn nhất/số tròn chục lớn nhất.
+Hướng dlin học Toán 4 | Tập một AW
+
+
+===== PDF PAGE 12 =====
+https://vnstorage.com
+3 ~
+2) Đêm so và chữ so
+@ Biéu didn số tự nhiên bang cher
+
+* Khindi đến một số tự nhiên, người ta thường dùng các kí hiệu A, B,... để đặt
+tên cho chúng. Việc này không thể hiện giá trị hay số chữ số của số đó.
+
+se Nếu số tự nhiên A được biết đến là một số có ba chữ số thì nó sẽ được kí
+hiệu bởi ba kí tự, đứng liền nhau và được kết nối bởi một gạch ngang phía
+trên với điều kiện các chữ a, b, c là chữ đại diện cho giá trị của chữ số hàng
+tram, hàng chục, hang đơn vị. Do đó, a, b, c đều có thể nhận các giá trị từ 0
+đến 9 và a ở hàng trăm nên a khác 0.
+
+* Cách viết: Gọi số có ba chữ số là abc (a khác 0; a, b, c < 9).
+
+Tương tự, hãy biểu diễn số B có bốn chữ số; số C có sáu chữ số.
+
+Khi cần biểu diễn một số có nhiều chữ số, người ta thường dùng kí hiệu chữ
+
+kèm số chỉ số thứ tự (nhỏ hơn, nằm thấp xuống) a, thay cho a, b, c,...
+
+Khi đó, số C sẽ được biểu diễn bởi a,a.a,a,a.a, (a, khác 0; a,, a....., a, < 9).
+J2) Phân tích cấu tạo thập phân của một số tự nhiên
+
+se Mỗi số tự nhiên được viết từ các chữ số từ 0 đến 9. Giá trị các chữ số
+phụ thuộc vào vị trí của chữ số đỏ trong hàng/lớp mà nó biểu diễn.
+
+e Hệ thập phân: là hệ số đếm, số tự nhiên chúng ta dang sử dụng. Với hệ đếm
+này, cứ 10 đơn vị ở một hàng sẽ được biếu diễn bằng 1 đơn vị ở hàng trước
+nó (10 đơn vị bang 1 chục; 10 chục bang 1 tram;...).
+
+Ví dụ 1
+
+Phân tích thành phần cấu tạo của các số sau: 345; 508; 1347; 4920.
+
+Hướng dẫn
+
+i 345 = 345 (345 don vi) .
+k = 340 +5 (34 chục và 5 đơn vị)
+= 300 + 40 + 5 (3 tram, 4 chục và 5 đơn vị} ; -
+Khi phân tích 345, ta viết: 345 = 300 + 40 + 5.
+1 2 Rise above onesel! and grase the world
+
+
+===== PDF PAGE 13 =====
+https://vnstorage.com
+| $ =
+|
+Tương tự với các số khác:
+508 = 500 + 8.
+1347 = 1000 + 300 + 40 + 7.
+; 4920 = 4000 + 900 + 20.
+Ví dụ2
+a. Ở một khu vườn thần kì có 5 cây thần kì. Mỗi cây có 4 cảnh và mỗi cành có
+8 chiếc lá. Hỏi số cành cây, lá cây của khu vườn thần kì đó tà bao nhiêu?
+b. Đến một ngày nọ, tại chãn của mỗi chiếc lá trong vườn thần kì đều xuất hiện
+3 bông hoa gồm 2 bông màu trắng và 1 bông màu đỏ. Hỏi có bao nhiêu bông
+hoa màu đỏ, bao nhiêu bông hoa màu trắng?
+e. Mỗi bông hoa màu trắng kết hợp với một bông hoa đỏ tạo ra một chùm có 7 quả.
+Mỗi quả này khi chín đều cho ra 3 hạt. Vậy đến khi quả chín, chủ khu vườn thu
+được bao nhiêu hạt cây thần kì?
+Hướng dẫn
+a, Có 5 cay, mỗi cây có 4 cảnh. Số cành cây là: 5 x 4 = 20 (cành).
+Mỗi cảnh có 8 chiếc lá. Số tá cây là: 20 x 8 = 160 (chiếc).
+z b. Số bông hoa màu đó là: 160 x 1 = 160 (bông hoa).
+Số bông hoa màu trắng là: 160 x 2 = 320 (bông hoa).
+c. Số cặp hoa là 160, mỗi cặp tạo ra 7 quả, mỗi quả cho ra 3 hạt.
+Số hạt là: 160 x 7 x 3 = 3360 (hạt).
+Tổng quát
+Các bài toán sử dụng sơ đồ cây được mô tả như sau:
+Một bộ nhiều yếu tố, nếu có a cách lựa chọn cho yếu tố thứ nhất.
+Trong mỗi cách lựa chọn yếu tố thứ nhất có b cách lựa chọn cho yếu tố thứ hai,...
+Khi đỏ, số khả năng xảy ra bộ đó là: a x b x ... (cách).
+Ví dụ 3
+Có bao nhiêu số tự nhiên có ba chữ số?
+Hướng dẫn ‘
+: = Các số tự nhiên có ba chữ số là bộ số gồm 3 yếu tố gồm hàng tram, hàng chục và
+hàng đơn vị. ‘5
+Có 9 cách chon chữ số hang tram (1 đến 9, do chữ số hàng trăm khác 0). ;
+Mutong din học Toán 4 | Tap một 43;
+
+
+===== PDF PAGE 14 =====
+https://vnstorage.com
+1 : Ề : MA
+Với mỗi cách chọn chữ sổ hàng trăm, có 10 cách chọn chữ số hàng chục (0 đến 9).
+Do do, ta có 9 x 10 = 90 cách chọn hộ chữ số hàng tram và hàng chục.
+Với mỗi cách chọn bộ chữ số hàng trăm và hàng chục trên, có 10 cách chọn chữ
+- số hàng đơn vị (0 đến 9).
+Do đó, ta có 90 x 10 = 900 số có ba chữ số.
+Vậy, có 9 x 10 x 10 = 900 số tự nhiên có ba chữ số.
+Vidya
+Có bao nhiêu số tự nhiên có ba chữ số khác nhau?
+Hướng dẫn
+Các số cần tìm gồm 3 yếu tố gồm hang tram, hàng chục và hang đơn vị khác nhau.
+Có 9 cách chọn chữ số hang tram (1 đến 9, do chữ số hang tram khác 0).
+Với mỗi cách chọn chữ số hàng tram ở trên, có 9 cách chon chữ số hàng chục
+(từ 0 đến 9, khác hàng trăm), có 9 x 9 = 81 cách chọn bộ chữ số hàng trăm và
+hàng chục.
+Với mỗi cách chọn bộ chữ số hàng tram và hàng chục ở trên, có 8 cách chọn chữ
+- số hàng đơn vị (từ 0 đến 9, khác chữ sổ hàng trăm và khác chữ số hàng chục).
+Do đó, ta có 81 x 8 = 648 số có ba chữ số khác nhau.
+Vậy, có 9 x 9 x 8 = 648 số tự nhiên có ba chữ số khác nhau.
+Ví dụ5
+Từ ba chữ số 2; 3; 5, viết được bao nhiêu số tự nhiên:
+a. Có ba chữ số?
+b. Có ba chữ số khác nhau?
+c. Có ba chữ số khác nhau và là số chan?
+Hướng dẫn ,
+: a. Các chữ số 2; 3; 5 đầu có thế ở hàng tram, hang chục và hang đơn vị nên co
+. 3 cách chon cho mỗi hàng. Vậy, có 3 x 3 x 3 = 27 số thoả mãn.
+b. Các chữ số 2; 3; 5 đều có thể ở hàng trăm, hàng chục và hàng đơn vị.
+: Tuy nhiên, do số đó có ba chữ số khác nhau nên cớ 3 cách chọn chit số hàng trăm;
+` 2 cách chọn chữ số hàng chục (khác chữ số hàng trăm đã chọn); 1 cách chọn chữ
+số hàng đơn vị (khác chữ số hàng trăm và khác chữ số hàng chục đã chọn).
+Vậy, có 3 x 2 x 1 = 6 số thoả mãn. ; a
+if Rise above oneself and grasp the world
+
+
+===== PDF PAGE 15 =====
+https://vnstorage.com
+`, =
+A
+_ ©. Trong trường hợp có yếu tố chan, ta cần ưu tiên xét chữ số hang đơn vị trước.
+Có 1 cách chọn chữ số hàng đơn vị (chữ số 2). Khi đó, có 2 cách chọn chữ số hàng
+tram (chữ số 3 hoặc 5) và 1 cách chọn chữ số hàng chục (chữ số hàng chục khác
+' chữ số hàng trãm và chữ số hàng đơn vị).
+Tức là có 1 x 2 x 1 = 2 số thoả mãn.
+Hoặc co thể làm bang cách tiệt kê rồi đếm (phù hợp với những bài có số lượng ít)
+như sau:
+Số chan nên hang đơn vị bằng 2. Hàng tram va hàng chục là hai chữ số còn lại
+3 và 5.
+Ta có, hai số thoả mãn là 352 và 532.
+Ví dụ6
+Từ bốn chữ số 0; 2; 3; 5, viết được bao nhiêu số tự nhiên:
+a. Có ba chữ số?
+b. Có ba chữ số khác nhau?
+Hướng dẫn
+a. Có 3 cách chọn chữ số hàng trăm (chữ số hàng trăm khác 0), 4 cách chọn chữ số
+„ hàng chục và 4 cách chọn chữ số hàng đơn vị.
+Vậy, có 3 x 4 x 4 = 48 số thoả mãn.
+b. Lưu ý yếu tố “có ba chữ số khác nhau” ta có 3 cách chọn chữ số hàng tram
+(một trong các chữ số 2; 3; 5); có 3 cách chọn chữ số hàng chục (một trong các
+chữ số 0; 2; 3; 5, khác chữ số hàng tram đã chọn) và có 2 cách chọn chữ số hàng
+đơn vị (một trong các chữ số 0; 2; 3; 5, khác chữ sổ hang tram và chữ số hàng chục
+đã chọn).
+Vậy, có 3 x 3 x 2= 18 số thoả mãn.
+Ví dụ 7 *
+Từ năm chữ số 0; 1; 3; 7; 8, viết được bao nhiêu số lẻ có ba chữ sổ khác nhau?
+Hướng dẫn
+Gọi các số có ba chữ số thoả mãn điều kiện là abe (a khác 0; a, b, c< 9 và đôi một
+khác nhau; cla số lẻ). Ta có 3 cách chọn chữ số c lẻ (một trong các chữ số 1; 3; 7).
+: š Với mỗi cách chọn chữ số c, có 3 cách chọn chữ số a (một trong các chữ số 1; 3;
+7; 8, khác c, khác 0). :
+Với mỗi cách chọn bộ các chữ số c và a, có 3 cách chọn chữ số b (một trong các :
+chữ số 0; 1; 3; 7; 8, khác c va a). Vậy, có 3 x 3 x 3 = 27 số thoả mãn.
+Hường dẫn học Toán4|Tậpmột T5
+
+
+===== PDF PAGE 16 =====
+https://vnstorage.com
++ "
+Ví dụ 8
+Từ năm chữ số 0; 1; 3; 6; 8, viết được bao nhiêu số chan có ba chữ số khác nhau?
+Hướng dẫn
+: Gọi các số có ba chữ số thoả mãn điều kiện la abc (a khác 0; a, b, c< 9 và đôi một
+khác nhau; ¢ là số chan). Có 3 cách chon để c chan là 0; 6 hoặc 8.
+(1) Nếu c =0.
+Có 4 cách chọn a (1; 3; 6; 8); có 3 cách chọn b (1; 3; 6; 8 và khác a).
+Suy ra, có 4 x 3 = 12 số thoả mãn (hàng đơn vị bang 0).
+(2) Nếu c khác 0.
+Có 2 cách chọn c (6 hoặc 8); có 3 cách chọn a (1; 3; 6; 8 và khác c).
+Có 3 cách chọn b (0; 1; 3; 6; 8 và khác c; khác a).
+Suy ra, có 2 x 3 x 3= 18 số thoả mãn (hàng đơn vị khác 0).
+Từ (1) và (2), ta có 12 + 18 = 30 số thoả mãn.
+_ Luyện tập
+Bài 16.
+Từ các chữ số 3; 4; 5; 6, viết được bao nhiều số tự nhiên thoả mãn:
+a. Có ba chữ số?
+: b. Có bốn chữ số khác nhau?
+e. Là số chan, có ba chữ số khác nhau?
+Bài 17.
+Từ các chữ số 0; 1; 2; 8; 9, viết được bao nhiêu số có bốn chữ số khác nhau?
+Bài 18.
+Từ các chữ số 0; 1; 2; 8; 9, viết được bao nhiêu số lẻ có bốn chữ số khác nhau?
+Bài 19.
+Từ các chữ số 0; 1; 2; 8; 9, viết được bao nhiêu số chan có bốn chữ số khác nhau?
+Bài 20. j
+Cỏ bao nhiêu số tự nhiên:
+a. Có bốn chữ số khác nhau?
+; b. Có bốn chữ số khác nhau đều là chữ số chan?
+Bài 21.
+Từ các chữ số 0; 1;5; 7; 9, viết được bao nhiêu số có bốn chữ số bé hơn 7000?
+: ._ Bài22.
+Có bao nhiêu số tự nhiên có hai chữ số mà cả hai chữ số đó đều bé hơn 6?
+Bài 23. . :
+Có bao nhiêu số tự nhiên có ba chữ số chứa đúng một chữ số 7?
+as Rise above oneself and grasp the world
+
+
+===== PDF PAGE 17 =====
+https://vnstorage.com
+: ; 7
+
+Bai 24.
+Từ bốn chữ số 2; 3; 5; 6, viết các số tự nhiên có ba chữ số khác nhau từ bốn chữ số
+trên. Hỏi mỗi chữ số xuất hiện bao nhiêu lần ở mỗi hàng?
+Bài 25.
+
+- Có thể lập được bao nhiêu số tự nhiên có ba chữ số khác nhau từ các chữ số 0; 1; 2; 8?
+Hỏi mỗi chữ số xuất hiện bao nhiêu lần ở mỗi hàng?
+Bài 26.
+Có thể lập được bao nhiêu số tự nhiên có ba chữ số khác nhau từ các chữ số 2; 3; 5?
+Tính tổng của các số đó.
+Bài 27.
+Có thể lập được bao nhiêu số tự nhiên có bốn chữ số khác nhau từ các chữ số 1; 2;
+3; 4? Tính tống của các số đó.
+Bài 28.
+Có thé lap được bao nhiêu số tự nhiên có ba chữ số khác nhau từ các chữ số 3; 4; 6; 7?
+Tính tổng của các số đó.
+Bài 29.
+Mật khẩu điện thoại của cô Hà là bốn chữ số mà khi đọc các chữ số theo thứ tự từ
+trái sang phải hay từ phải sang trái đều được cùng một số có bốn chữ số. Hỏi có thể
+lập được bao nhiêu mật khẩu thoả mãn điều kiện trên?
+Bài 30.
+
+: Hoàng muốn mở ổ khoá của Nam. Ổ khoá của Nam có ba vòng số, mỗi vòng số là
+một chữ số từ 0 đến 9. Nam gợi ý cho Hoàng các chữ số từ trải sang phải: chữ số đầu
+tiên bằng chữ số cuối cùng và là số chan; chữ số ở giữa tà số \ẻ. Hỏi Hoàng phải thử
+Ít nhất bao nhiêu lần khác nhau đế mở được ố khoá?
+
+Bài 31. (*)
+
+Một sân vận động bán vé với số sê-ri đánh số từ 00 001 đến 20 000. Người nào có
+chiếc vé may man sẽ được tặng một đồ uống miễn phí. Một chiếc vé may mắn là khi
+số sé-ri của vẻ đó có ba chữ số cuối cùng giống nhau. Hỏi có bao nhiêu chiếc vé may
+mắn như thế?
+
+Bài 32. (*)
+
+Có thể lap được bao nhiêu số tự nhiên có bốn chữ số khác nhau từ các chữ số 1; 2;
+3; 4 mà chữ số 2 và 3 luôn đứng cạnh nhau?
+
+Bài 33. (*)
+
+Năm bạn Hoàng, Hùng, Hưng, Hải và Huy xếp thành một hàng ngang để chụp ảnh.
+
+; Hỏi có bao nhiêu cách xếp thành một hang ngang sao cho bạn Hải và Huy không
+đứng cạnh nhau?
+
+Bài 34. „ :
+: „_. Có bao nhiêu số tự nhiên có ba chữ số mà tổng các chữ số bang 5?
+Bài 35. (*)
+Tống các chữ số của 2024 là 8. Hỏi có bao nhiêu số tự nhiên có bốn chữ số khác -
+nhau bé hơn 3000 và lớn hơn 2000 mà tổng các chữ số là 8?
+butting die học Toán 4 | Tập một. T 7
+age
+
+
+===== PDF PAGE 18 =====
+https://vnstorage.com
+; ; 7
+3) | Đo lường
+| Cần lưu ý: Luôn phải đổi về cùng một loại đơn vị trước khi thực hiện việc tính toán.
+@ don vị do khối tượng
+Trong hệ thống đo lường của Việt Nam, đơn vị đo khối lượng phố biến là ki-l6-gam.
+Lớn hơn ki-t6-gam | Kiiô-gam | Bé hơn ki-ô-gam
+Lưu ý: Trong bảng này, đơn vị đo khối lượng Lớn nhất là tấn, bé nhất là gam (g).
+Trong tiếng Anh không có “yến” và nhỏ hơn gam có đơn vị mi-li-gam (mg).
+Ví dụ 1
+a. Đổi theo yêu cầu.
+1kgBg=?g, 4tấn2tạ=?kg, 5tấn6yến=?kg, 765kg=?yến ?kg.
+. b. Tinh.
+A=2tấn 5tạx3; B=3tấn 280 kg+ 5tấn 890kg; C=S5tdnStax5.
+Hướng dẫn
+a. 1006 g; 4200 kg; 5060 kg; 76 yến 5 kg.
+b. A= 2 tấn 5 tạ x 3= 25 tạ x 3 = 75 tạ = 7 tấn 5 tạ (hoặc A = 6 tấn 15 ta = 7 tấn 5 tạ).
+B=8 tấn 1170 kg = 9 tấn 170 kg; C = 27 tấn 5 tạ.
+9 Đơn vị đo thời gian
+Đơn vị đo thời gian phổ biến là giờ.
+e_ Bé hơn giờ gồm phút và giây. Trong đó:
+' 1 phút = 60 giây 1 giờ = 60 phút = 3600 giây
+e Lớn hơn giờ:
+: 1 ngày = 24 giờ 1tuần=7ngày ˆ
+` 1 tháng có từ 28 đến 31 ngày 1 năm = 12 tháng (có 365 hoặc 366 ngày)
+1 thập ki=10 năm 1 thế ki= 100 năm , :
+1 8 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 19 =====
+https://vnstorage.com
+` ~
+Ví dụ 2
+a. Đối theo yêu cầu.
+2 giờ 10 phút = ? phút 2 phút 37 giây = ? giây
+- 3 thế kỉ 2 năm = ? năm 500 năm = ? thé ki
+b. Tính.
+3 giờ 15 phút + 2 giờ 45 phút 5 giờ 25 phút + 2 giờ 35 phút
+c. Trong một cuộc thi chạy trên cùng một quãng đường, An chạy hết 13 phút, Binh
+chạy hết 4 gid, Cường chạy hết 700 gidy, Dũng chạy hết 10 phút 45 giây. Hỏi ai
+tà người về đích đầu tiên, ai vẽ đích cuối cùng?
+Hướng dẫn
+a. 130 phút; 157 giây; 302 nam; 5 thế ki.
+b. Thực hiện phép cộng giờ với giờ, phút với phút (gọi tà cộng cùng đơn vị) sau đó đối:
+3 giờ 15 phút + 2 giờ 45 phút = 5 giờ 60 phút = 6 giờ.
+c. Đổi: 2 gid = 12 phút; 700 giây = 11 phút 40 giây.
+So sánh thời gian của mỗi người ta có:
+: (Dũng) 10 phút 45 giây < (Cường) 11 phút 40 giây < (Bình) 12 phút < (An) 13 phút,
+Do đó, Dũng về dích đầu tiên, An về đích cuối cùng.
+Hoặc có thổ đổi ra giây để so sánh.
+ben vị do a6 aai
+Lưu ý: Trong bang này, đơn vị do độ dài lớn nhất là ki-l6-mét (km), bé mhat
+là mi-li-mét (mm).
+: Ví dụ 3
+Đổi theo yêu cầu.
+s 705cm =?m?cm †2m=?dm
+` 7m15dm =?dm 2024 m =? km ?m
+Hướng dẫn : ; :
+7m5em; 120 dm; 85 dm; 2 km 24 m.
+Hướng cân noc Toán 4 | Tập một 19
+
+
+===== PDF PAGE 20 =====
+https://vnstorage.com
+: =
+bon vi do diện tích
+| Lớnhơn métvuông | Mếtvuông | Nhỏhơnmétvuông —
+ee Saas
+Lưu ý: Trong bảng này, đơn vị đo diện tích lớn nhất là ki-l6-mét vuông (km?),
+bé nhất là mi-li-mét vuông (mm?).
+Ví dụ 4
+a. Đổi theo yêu cầu.
+3m?=?cm? 315 dm? =? m?? dm?
+345 m' = ? dm? 30 800 cm? = ? m?? cm?
+b. Tính.
+4m? 3dm? + 2 m? 7 dm’; 3m?1cm?:-2m?7cm° 9m?60cm?:4.
+Hướng dẫn
+a. 30 000 cm?; 3m? 15 dm’; 34 500 dm?; 3 m? 800 cm’.
+: b. 6 m? 10 dm?; 9994 cm?; 2 m? 2515 cm”,
+Bài 36.
+a. Lễ ki niệm 100 năm ngày sinh của Bác Hồ được tổ chức vào năm 1990.
+Hỏi Bác Hồ sinh vào năm nào? Năm đó thuộc thế kỉ nào?
+b. Lý Thái Tổ dời đô về Thăng Long năm 1010. Hỏi năm đó thuộc thế kỉ nào?
+Bài 37. >
+Tính khối lượng của hình vuông biết khối lượng của mỗi hình tròn la 400 g.
+20 Fuse above oneself and grasp the world
+
+
+===== PDF PAGE 21 =====
+https://vnstorage.com
+: =
+| Bài 38.
+Tháng Hai của một năm nao đó có năm ngày thứ Năm. Hỏi ngày 1 tháng Hai đó là
+ngày thứ mấy trong tuần? Chủ nhật cuối cùng của tháng Hai đó là ngày nào?
+Bài 39.
+Trong một tháng nao đó có ba ngày thứ Năm đều là ngày chan. Hỏi ngày 27 của
+tháng đó là thứ mấy?
+Bài 40.
+a. Lan sinh vào tháng 5. Năm nay là năm nhuận, sinh nhật của Lan rơi vào thứ
+Sáu. Hỏi năm sau, sinh nhật của Lan là thứ mấy?
+b. Ngày 5 tháng 9 của một năm là thứ Năm. Hỏi ngày 5 tháng 9 năm sau là thứ
+mấy? (biết năm sau là năm nhuận).
+Bài 41.
+Một kho xuất 3 tấn gạo trong ba ngày. Ngày thứ nhất xuất 800 kg, ngày thứ hai xuất
+bằng i số gạo ngày thứ nhất. Hỏi ngày thứ ba kho xuất bao nhiêu tấn gạo?
+Bài 42.
+‘ Một chai đựng dung dịch nặng 1300 g. Nếu chai đó đựng một nửa lượng dung dich
+thi nặng 750 g. Hỏi chai rỗng nặng bao nhiêu gam?
+Bài 43.
+Mat san căn phòng dạng hình chữ nhật có chiều dải 6 m, chiều rộng 3 m. Người ta
+lát căn phòng bằng các tấm gỗ hình chữ nhật có chiều dài 6 dm và chiều rộng 1 dm.
+Hỏi cần dùng ít nhất bao nhiêu tấm gỗ để lát kín sàn đó? (biên không đáng kể).
+Bài 44.
+Có ba thửa ruộng, biết tống sản lượng thóc thu được trên thửa thứ nhất và thửa thứ
+hai la 950 kg, trên thửa thứ hai và thửa thứ ba là 1050 kg, trên thửa thứ ba và thửa thứ
+nhất là 1100 kg. Tính lượng thóc thu được trên mỗi thửa ruộng.
+‘ Bai 45.
+Chi dùng một cân đĩa thang bang, 1 quả cân loại 1 kg va 1 quả cân loại 5 kg, lam thế
+Ƒ nao để lấy được đúng 3 kg đường từ một bao đường qua 2 lần cân?
+Hướng đắn học Toán 4 | Tập một 21
+
+
+===== PDF PAGE 22 =====
+https://vnstorage.com
+| ;
+| 4) | Kinangtinh toán
+
+@ Khai niệm, định nghĩa biểu thức chứa chữ
+
+e Một Biểu thức số là một hoặc nhiều phép tính cộng, trừ, nhân, chia giữa
+các số.
+
+Ví dụ: Biểu thức A = (23 + 8) x 10 - 24 : 6 là một biểu thức số.
+
+e Một biếu thức chứa chữ là một biểu thức trong đó có một số các số được
+biểu diễn bởi chữ. Nói cách khác là biểu thức giữa các chữ hoặc giữa chữ
+và số.
+
+Ví dụ: Hình chữ nhật có hai cạnh là a và b (cùng đơn vị đo độ dài). Khi đó:
+
+Biểu thức chỉ chu vi hình chữ nhật này là P = (a + b) x 2.
+
+Biểu thức chỉ diện tích hình chữ nhật này là S = a x b.
+
+P và S là các biểu thức chứa chữ.
+
+Khi thay mỗi giá trị a, b bởi các số cụ thể ta có một biểu thức số. Kết quả tính
+
+: toán biểu thức số này chính là giá trị của biểu thức.
+
+Ví dụ: Chu vi và diện tích của hình chữ nhật có cạnh a = 5 và b = 12 là:
+P= (5 + 12) x 2 = 34 (đơn vị đo độ dài).
+S=5 x 12 = 60 (đơn vị đo diện tích).
+
+Ví dụ 1
+
+a. Cho biểu thức A = m + (735 - n). Tính giá trị của A khi m = 105, n = 182.
+
+b. Tìm m để biểu thức B = 20 + m có giá trị là 35.
+
+c. Cho biểu thức C = 2026~ 2024 : m. '
+
+Tinh giá trị của C với m = 4.
+
+: Tìm m để C = 2018.
+Hướng dẫn
+§ a. A = 658. ,
+3 b.m=15.
+c. Khi m = 4 ta được C = 1520; đế C = 2018 thì m = 253.
+22 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 23 =====
+https://vnstorage.com
+: , E
+Brinn chat của phép cộng, phép trừ
+® Cộng, trừ với 0: a+0=0+a=a; a-0=a; a-a=0.
+5 s Tính chất giaohoán: a+b=b+a.
+*® Tính chất kết hợp: a+b+ec=(a+b]+c=a+ (b + c).
+Nhận xét: Trong một tổng, nếu thêm bao nhiêu đơn vị vào một Số hạng thì
+Tổng đó tang lên bấy nhiêu đơn vị.
+Ví dụ 2
+Tính nhanh.
+A= 4885 + 136 + 264 + 515 B = 3456 + 4567 + 6544 + 5433
+€ = 19 + 199 + 1999 + 19 999 D=21 + 201 +2001 + 20 001
+Hướng dẫn
+A= 485 + 136 + 264 + 515 = (485 + 515) + (136 + 264) = 1000 + 400 = 1400.
+B= 3456 + 4567 + 6544 + 5433 = (3456 + 6544) + (4567 + 5433) = 10 000 + 10 000 = 20 000.
+C= 19 + 199 + 1999 + 19 999 = 20 + 200 + 2000 + 20 000 - 4 = 22 220 - 4 = 22 216.
+D=21 + 201 + 2001 + 20 001 = 20 + 200 + 2000 + 20 000 + 4 = 22 220 + 4= 22 224.
+Ví dụ 3
+Tính giá trị của các biểu thức sau rồi cho nhận xét.
+Ị A=m-(n—p); B=m-ntp;
+C=m-n-p; D=m-(n+p).
+a. Biết m = 57, n = 28, p = 8.
+b. Biết m = 2023, n= 1995, p = 5.
+Hướng dẫn
+a.A=37; B=37; C=21; D=21.
+b. A = 33; B=33; C=23; D=23. ›
+Nhận xét: A = B; C = D.
+Tính chất: Một số trừ đi một Tống (Hiệu):
+; a-(b+c)=a-b-c; a-(b-c)=a-b+c.
+Q Trong một phép trừ, nếu giữ nguyên Số bị trừ thì Số trừ tăng/giảm bao nhiêu,
+, Hiệu giảm/tăng bấy nhiêu đơn vị.
+h ¢ Téng hai số không đổi nếu một Số hạng tăng a đơn vị và Số hạng còn lại giảm
+a đơn vị. s ' -
+© Hiệu hai số không đổi nếu Số bị trừ và Số trừ cùng tăng/giảm a đơn vị.
+tưởng dẫn học Toán 4 | Tập một 23
+TY”
+
+
+===== PDF PAGE 24 =====
+https://vnstorage.com
+1 - = ¬
+Ví dụ4
+a. Tìm Tổng của hai số, biết rằng nếu thêm 21 đơn vị vào Số hạng thứ nhất và giữ
+nguyên Số hạng thứ hai thì được Tổng mới bằng 305.
+. b. Tim Hiệu của hai số, biết rằng nếu thêm 13 đơn vị vào Sổ trừ và giữ nguyên Số
+bị trừ thì được Hiệu mới bằng 40.
+Hướng dẫn
+a. Trong một phép cộng, khi thêm vào một trong hai số hạng 21 đơn vị thì Tống sẽ
+tăng thêm 21 đơn vị. Tống mới bằng 305. Tống ban đầu là: 305 - 21 = 284.
+b. Trong một phép trừ, nếu giữ nguyên Số bị trừ và tang Số trừ thêm 13 đơn vị thì
+Hiệu sẽ giảm đi 13 đơn vị. Hiệu mới là 40.
+Hiệu ban đầu là: 40 + 13 = 53.
+Tính chất của phép nhân
+se Tính chất giaohoán: axb=bxa.
+© Tinh chất kết hợp: axbxc=(axb)xc=ax(bxc).
+e Nhân với 0: ax0=0xa=0.
+: e Nhân với 1: ax1=1xa=za.
+© Tinh chất phân phối của phép nhân với phép cộng: a x (b + c) =a x b+ a x e.
+«Tính chất phân phối của phép nhân với phép trừ: ax (b-c)=axb-axc.
+s® Nhân với 10; 100; 1000;...
+Một tính chất khác của phép nhân có thể suy ra từ tính chất kết hợp: :
+Trong một phép nhân, nếu gấp một Thừa số lên bao nhiêu lần thì Tích gấp lên
+tương ứng bấy nhiêu lần.
+Trong một phép nhân, nếu giảm một Thừa số đi bao nhiêu lần thì Tích giảm, đi
+tương ứng bấy nhiêu lần.
+Trong một phép nhân, nếu gấp Thừa số này Lên bao nhiêu lần và giảm Thừa số kia
+‘ đi bấy nhiêu lần thi Tích không thay đổi.
+Ví dụ:
+Š A=2x4972 x 5 = 1972 x (2 x 5) = 1972 x 10 = 19 720.
+k B= (2012 x 3012 + 9654 x 1237) x (48 ~ 16 x 3)
+= (2012 x 3012 + 9654 x 1237) x 0 s š -
+=0.
+24 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 25 =====
+https://vnstorage.com
+. ; = " ———————
+Ví dụ5
+Tính nhanh, nhầm.
+A=57 x10 B= 1564 x 100
+C= 98 x 1000 D= jab x 10
+E= 148 x 3+ 148 x 7 G=521 x 78 + 521 x 23-521
+Hướng dẫn
+A=570 B = 156 400
+C = 98000 D=1abØ
+E=1480 G=52100
+Ví dụ6
+Tống của hai số la 20. Nếu giữ nguyên Số hạng thứ nhất và gấp Số hạng thứ hai lên
+5 lần thì được Tổng mới là 36. Tìm hai số ban đầu.
+Hướng dẫn
+Cách 1
+Vẽ sơ đồ đoạn thẳng:
+' Tổng cũ: 20 —_=-..............
+Tổng mới: 36 a a ee er
+4 lần số thứ hai là: 36 - 20 = 16.
+Số thứ hai là: 16 : 4 = 4.
+Số thứ nhất là: 20 - 4 = 16,
+Cách 2
+Gọi hai số ban đầu là a và b.
+Ta có: a + b= 20 vả a + 5 x b = 36. :
+Biến đổi: 36 = a + 5 x b=(a+b)+4xb.
+Mà a + b = 20.
+Ta có: 36 = 20 + 4 x b.
+Do đó: 4 x b = 36~ 20 = 16. .
+* Ta được: b = 16: 4 = 4.
+| a=20-4=16. ` ;
+Hai số cần tìm ta 16 và 4.
+Hướng dẫn học Toán 4 | Tập một 25
+
+
+===== PDF PAGE 26 =====
+https://vnstorage.com
+r L2 " = — PA"
+Bài 46.
+- Tính gia trị biểu thức.
+A=a+b~c với a = 538; b = 853; c = 402.
+B=m+*nxp với m =287; n = 27; p = 12.
+C=uxv;:z với u = 305; v = 42; z = 7.
+D=(e + g) x h với e = 2987; g = 1023; h = 200.
+Bai 47.
+Tìm b để các biểu thức sau có giá trị là 125.
+A = 154 - (b + 9) D=bx6B-25
+B= (2023-b) :8 E=b:5+35
+C=5x(b+25) G = 625 : (9-b)
+Bai 48.
+Tinh nhanh.
+A=732 + 184 + 216-132 E = 3565 - (2388 ~ 435)
+: B= 636 + 278 - 236 ~- 178 + 500 G = 644 - (243 - 156) + 143
+C = 5492 + (508 - 325) H = 2234 - (234 - 50)
+D=527-~(186 + 327) | = 55 555 - 49 - 499 - 4999
+Bài 49.
+Tính nhanh.
+A=2024 x 2x5 G=957 x 11-957
+B=8x21x3x125 H=149 x 12- (149 + 23) x 2 + 46
+C=4 x 698 x 25 |= 23 x 20 x 8 x 5 x 125 :
+D=20x 125x5x8x777 K = 343 x 17 + 82 x 343 + 343
+- E =468 x 24-468 x 14 L=147 x 111-147 x 11
+Bài 50.
+: Tìm a, biết: .
+ụ a. a+ 1890 + 456 = 7890 b. 456 + a~ 3456 = 56
+c.ax 2~149 = 51 d.3456+a:25=3480  ' :
+e. 7026- a: 12 = 6978 ø. 2024 : a + 160: a= 273
+26 Rise above oneself and grasp the word
+
+
+===== PDF PAGE 27 =====
+https://vnstorage.com
+| : : =
+Bài 51.
+a. Tổng hai sổ là 370. Nếu thêm vào Số hạng thứ nhất 89 đơn vị và bớt đi Số hạng
+thứ hai 45 đơn vị thì Tổng mới bằng bao nhiêu?
+‘ b. Hiệu hai số là 886. Nếu thêm vào Số bị trừ 230 đơn vị va giữ nguyên Số trừ thi
+Hiệu mới bằng bao nhiêu?
+c. Hiệu hai số la 2024. Nếu giữ nguyên Số bị trừ và thêm vào Số trừ 405 đơn vị thì
+Hiệu mới bằng bao nhiêu?
+Bài 52.
+a. Tìm Tống hai số, biết nếu thêm vào Số hạng thứ nhất 206 đơn vị và bớt đi Số hạng
+thứ hai 625 đơn vị thì được Tổng mới là 1995.
+b. Tìm Hiệu hai số, biết nếu thêm vào Số bị trừ 112 đơn vị và bớt đi Số trừ 279 đơn vị
+thì được Hiệu mới là 1234.
+Bài 53.
+Tổng của hai số là 80. Nếu gấp Số hạng thứ nhất lên 4 lần và giữ nguyên Số hạng thứ
+hai thì được Tống mới là 185. Tìm hai số.
+Bài 54.
+“ Hiệu của hai số là 299. Nếu gấp Số bị trừ tên 2 tần và giữ nguyên Số trừ thì được Hiệu
+mới là 833. Tim hai số ban đầu.
+Bài 55.
+Hiệu của hai số là 710. Nếu giữ nguyên Số bị trừ và gấp Số trừ lên 4 lần thì được số
+nhỏ hơn Số bị trừ là 335. Tìm hai số ban đầu.
+h 27
+Hướng dẫn học Toán 4|Tập một <7
+
+
+===== PDF PAGE 28 =====
+https://vnstorage.com
+f ` _— OC
+(5 J | Tinh chu vi va dién tich cac hinh
+© Hình vuông
+a tà độ dài cạnh hình vuông.
+Chu vi hình vuông là: P =a x 4.
+Diện tích hình vuông là: S = a x a.
+a
+hình chữ nhật
+a là chiều dài hình chữ nhật.
+b là chiều rộng hình chữ nhật. b
+Chu vi hình chữ nhật là: P = (a + b) x 2.
+Diện tích hình chữ nhật là: S = a x b. a
+M Ví dụ 1
+Một hình vuông có cạnh là 16 cm. Một hình chữ nhật có chu vi bằng chu vi hình
+vuông và chiều dài bằng 20 cm.
+a. Tính chu vi hình chữ nhật.
+b. Tính diện tích hình chữ nhật.
+Hướng dẫn
+a. Chu vi hình vuông là: 16 x 4 = 64 (cm).
+Do đó, chu vi hình chữ nhật la 64 cm. :
+b. Nửa chu vi hình chữ nhật là: 64 ; 2 = 32 (cm).
+Chiều rộng hình chữ nhật là: 32 - 20 = 12 (cm).
+Diện tích hình chữ nhật là: 20 x 12 = 240 (cm?).
+Ví dụ2 , `
+* Một hình chữ nhật nếu giảm chiều dài đi 3 cm thì hình chữ nhật trở thành hình
+vuông. Biết diện tích hình vuông đó nhỏ hơn diện tích hình chữ nhật ban dau 30 cm.
+Tính diện tích hình chữ nhật ban đầu. ?
+28 Rise above onesel! and grasp the world
+
+
+===== PDF PAGE 29 =====
+https://vnstorage.com
+. ; 7
+Hướng dan
+Ta có hình vẽ bên. 3cm
+Từ hình vẽ ta có:
+Chiều rộng hình chữ nhật ban đầu là: 30 : 3= 10 (cm).
+Chiều dài hình chữ nhật ban đầu là: 10 + 3 = 13 (cm).
+Diện tich hình chữ nhật ban đầu là: 13 x 10 = 130 (cm?).
+Ví dụ 3
+Tính diện tích hình mũi tên dưới đây biết mỗi 6 vuông đơn vị có cạnh dài 1 cm.
+Hướng dẫn
+: Cách 1
+Chia hình mũi tên thành hai phần A và B như hình dưới đây.
+Diện tích hình A là: 2 x 4 = 8 (cm?).
+al Diện tích hình tam giác B bang một nửa diện tích
+› hình chữ nhật bao ngoài.
+Fick Diện tích hình B là: (4 x 2): 2 = 4 (cm).
+Diện tích hình mũi tên là: 8 + 4 = 12 (cm?).
+Cách 2
+Di chuyển hai cánh ở đầu mũi tên,
+Diện tích hình mũi tên bằng diện tích hình chữ nhật
+có chiều dài 6 cm, chiều rộng 2 em.
+2 Diện tích hình chữ nhật là: 6 x 2 = 12 (cm?).
+| Diện tích hình mũi tên là:12cm?. :
+*sướng din học Toán 4 | Tập một 29
+
+
+===== PDF PAGE 30 =====
+https://vnstorage.com
+- ; =
+Mở rộng:
+Vẽ các hình khác nhau có diện tích bằng diện tích hình mũi tên trên. Ví dụ:
+Ví dụ 4
+Tính diện tích của hình sau.
+5cm
+cm 9cm
+ment 12cm
+16cm
+Hướng dan
+Cach1
+Chia hình cần tính thành 3 hình chữ nhật A, B va C (như hình dưới đây).
+Diện tích hình A là:
+9x5=45 (cm?).
+Diện tích hình B là: -
+16 x (12-9) = 48 (cm?).
+Diện tích hình C là: 8h Sạn .
+9x (16-5 -6) = 45 (cm?). 6cm tem
+: Diện tích hình cần tính là:
+° = 2
+45 + 48 + 45 = 138 (cm?). 18cm
+Cách 2 ¿
+` Dùng phần bù ta được:
+Diện tích hình cần tính bằng diện tích hình chữ nhật lớn trừ đi diện tích hình chữ
+nhật nhỏ.
+30 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 31 =====
+https://vnstorage.com
+- + =
+^
+Diện tích hình chữ nhật ton là: 5cm
+16 x 12 = 192 (cm).
+Diện tích hình chữ nhật nhỏ là: 9cm 9cm
+š 9x 6= 54 (cm?), 6cm 12cm
+Diện tích hình cần tính là:
+NA = 2
+192 ~ 54 = 138 (cm'). TT
+Bài 56.
+Tính diện tích của một hình vuông có chu vi bằng chu vi một hình chữ nhật có
+chiều rộng 6 cm và bằng nửa chiều dài.
+Bài 57.
+Tính diện tích của một hình chữ nhật có chu vi bằng chu vi một hình vuông có
+diện tích 81 dm?. Biết một cạnh hình chữ nhật ta 4 dm.
+Bài 58.
+Tính diện tích của một hình chữ nhật có chu vi gấp 8 lần chiều rộng và có chiều dài
+hơn chiều rộng là 12 cm.
+: Bài 59.
+Tính diện tích của một hình chữ nhật có chu vi 32 cm. Biết rằng tăng chiều rộng lên
+4 cm và giữ nguyên chiều dài thì diện tích hình đó tăng thêm 40 cm°.
+Bài 60.
+Tính diện tích một hình chữ nhật có chu vi 64 cm. Biết nếu giảm chiều dài đi 6 cm và
+giữ nguyên chiều rộng thì diện tích hình chữ nhật giảm đi 48 em?.
+Bài 61.
+Tính diện tích một hình chữ nhật có chu vi 40 cm. Biết nếu tăng chiều rộng thêm
+5 cm và giảm chiều dài đi 3 cm thì hình chữ nhật đó trở thành hình vuông.
+Bài 62. `
+Tính diện tích hình chữ nhật, biết nếu tăng chiều dài thêm 6 m thì diện tích tăng thêm
+48 m°, Còn nếu giảm chiều rộng đi 4 m thì diện tích giảm đi 48 m°.
+' Bài 63.
+Một hình chữ nhật gồm 7 hình vuông (như hình bên).
+Trong đó,,A là hình vuông lớn nhất và B là hình vuông
+x bé nhất. Hỏi diện tích hình A gấp mấy lần diện tích
+` 1B
+io i a at
+2em _8em
+Hướng gắn học Toán 4 | Tập một 31
+
+
+===== PDF PAGE 32 =====
+https://vnstorage.com
+| | -
+Bài 64.
+Một miếng bìa dạng hình vuông được cắt thành bốn
+miếng bìa hình chữ nhật có chu vi tần lượt là 10 cm,
+- 12 cm, 16 cm và 18 cm (như hình bên). Tính diện tích
+của miếng bìa hình vuông ban đầu.
+Bài 65. 3 cm
+Tinh chu vi và diện tích của miếng bia có kích thước 4cm
+như hình bên.
+5cm
+4cm
+12cm
+Bài 66.
+5cm
+; Tính chu vi và diện tích của miếng bìa có kích thước 7cm
+như hình bên.
+4cm
+10cm
+Bài 67. 2cm
+Một miếng bìa dạng hình vuông có độ dài cạnh  ' k
+10 cm. Người ta cắt đi bốn góc của miếng bìa các OH
+hình vuông nhỏ cạnh 2 cm (như hình bên). Tính L]
+chu vi và diện tích của phần bìa còn lại. | }
+- see« =: «e2
+10cm
+. Bai 68.
+Một mảnh đất dạng hình chữ nhật có chu vi là 120 m. 10m|
+š Người ta mở rộng bằng cách tăng chiều dài và -
+„chiều rộng thêm 10m (như hình bên). Hỏi diện tích
+phần mở rộng là bao nhiêu mét vuông?
+10m
+32 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 33 =====
+https://vnstorage.com
+- -
+^
+Bài 69.
+Tính diện tích phần tô mau trong hình dưới đây.
+16 cm
+= i
+Bài 70. 8cm
+Tính diện tích phần tô màu trong hình bên. |
+sem| | 20 cm
+— 88em  -
+Bài 71. (*)
+: Người ta mở rộng một hình vuông về cả bốn phía,
+mỗi phía thêm 3 m nên diện tích tăng thêm 96 m?
+(như hình bền). Tính chu vi của hình vuông ban đầu.
+Bài 72.
+Tính diện tích hình tam giác được tô màu trong hình bên,
+biết mỗi 6 vuông nhỏ có cạnh la 1 em.
+Bài 73.
+Hình bên chia thành 16 ô vuông bằng nhau. Mỗi 6 vuông
+có cạnh là 2 cm. Tính diện tích phần được tô màu. _.
+Hướng aie hoe Toán 4 | Tập một 33
+
+
+===== PDF PAGE 34 =====
+https://vnstorage.com
+- %, =
+A
+Bài 74.
+Cho hình bên. Biết mỗi hình vuông nhỏ có diện tích là |
+1 cm?. Tính diện tích phần được tô màu. :
+Bài 75. =~
+Tinh diện tích các hình được tô màu dưới đây, biết mỗi 6 vuông nhỏ có diện tích là 1 cm”.
+34 Rise above oneself and grasp the world:
+
+
+===== PDF PAGE 35 =====
+https://vnstorage.com
+. : ẫ 7
+6) | Dây số cách đều
+Ầknái niệm day số cach đều
+Dãy số cách đều là dãy số tiến (hoặc lùi) mà số sau hơn (hoặc kém) số kề liền
+trước nó cùng một số đơn vị nhất định.
+e Cho dãy số 1; 4; 7; 10;...; 100.
+Khoảng cách giữa hai số liên tiếp trong dãy là như nhau.
+1*3=4;4+3=7; 7 + 3 = 10;,.. Khoảng cách của day số trên là 3 đơn vị.
+Số đầu tà 1; Số cuối tà 100.
+* Một số dãy số chạy đến vô hạn sẽ không có số cuối.
+© Một vài dãy cách đầu thường gặp:
+Day số tự nhiên liên tiếp: 0; 1; 2; 3; 4;...
+Day số chan liên tiếp: 0; 2; 4; 6;...
+Day số lẻ liên tiếp: 1; 3; 5; 7;...
+E l2) Một số công thức cần nhớ
+© Số số hạng = (số cuối - số dau): khoảng cách + 1
+© Số hạng thứn = số đầu + (n - 1) x khoảng cách
+© Tống = (số đầu + số cuối) x số số hang: 2
+| Chú ý với các dãy số giảm dan thì chúng ta cần thay đổi công thức cho phù hợp.
+Ví dụ 1
+Tìm số hạng thứ 15 của dãy số: 2; 4; 6; 8;...
+Hướng dẫn :
+Cach1
+Day số trên la dãy số cách đều với khoảng cách là 2 đơn vị.
+; Số hạng thứ 15 của day là: 2 + (15-1) x 2 = 30.
+Cách 2
+Nhận xét: `
+\ Š Số hạng thứ nhất là: 2 x 1 = 2.
+Số hạng thứ hai là: 2 x 2 = 4. -
+Số hạng thứ 15 là: 2 x 15 = 30.
+Hướng din sọc Toán 4 | Tập một 35
+
+
+===== PDF PAGE 36 =====
+https://vnstorage.com
+| ` ˆ
+^
+Ví dụ2
+Tính tống dãy số:
+A=5+10+15+20 +... + 55.
+B=59 + 56 + 53 +... +2.
+Hướng dẫn
+A=5+ 10+ 15+ 20+... + 55,
+Tổng A gồm các số cách đều.
+Áp dụng công thức, lần lượt tính khoảng cách, số số hang và tổng của day.
+Khoảng cách là: 10 - 5 = 5 (đơn vị).
+Số số hạng của dãy số là: (55 - 5) : 5 + 1 = 11 (số).
+Tổng các số hạng của day là: (55 + 5) x 11 : 2= 330.
+B=59 +56 + 53+... + 2.
+Tương tự như cách tinh trên, ta được B = 610,
+Ví dụ 3
+Một quyển sách đánh số trang từ trang 3 đến trang 232. Hỏi cần bao nhiêu chữ số để
+đánh số trang của quyển sách đó?
+Hướng dẫn
+Số trang có một chữ số là: (9— 3) : 1 + 1 = 7 (trang).
+Số trang có hai chữ số la: (99 - 10) : 1 + 1 = 90 (trang).
+Số trang có ba chữ số là: (232~ 100) : 1 + 1 = 133 (trang).
+Số chữ số cần dùng la: 7 x 1 + 90 x 2 + 133 x 3 = 586 (chữ số.
+Ví dụ 4
+Người ta dùng 432 chữ số để đánh số trang một quyển sách bắt đầu từ trang 1.
+Tính số trang của quyển sách đó. ,
+. Hướng dẫn
+` Số trang có một chữ số là: (9-1); 1 + 1 = 8 (trang).
+Số trang có hai chữ số là: (99 - 10) : 1 + 1 = 90 (trang).
+: Số chữ số để đánh số trang từ 1 đến 99 la: 9 x 1 + 90 x 2 = 189 (chữ số).
+k Số chữ số để đánh số trang có ba chữ số là: 432 - 189 = 243 (chữ số).
+Số trang có ba chữ số là: 243 : 3 = 81 (trang). ` - -
+Số trang của quyển sách đó là: 9 + 90 + 81 = 180 (trang).
+36 Rose above one3elf and graap the wortd
+
+
+===== PDF PAGE 37 =====
+https://vnstorage.com
+| : =
+Ví dụ 5 (*)
+Viết các số tự nhiên liên tiếp từ 1 đến 123 để tạo thành số A = 1234...122123. Hỏi số
+A có bao nhiêu chữ số 5?
+: Hướng dan
+Các số có chữ số 5 ở hang đơn vị là: 5; 15; 25;...; 115.
+Số chữ số 5 ở hàng đơn vị là: (115 ~ 5) : 10 + 1 = 12 (chữ số 5).
+Các số có chữ số 5 ở hàng chục là: 50; 51; 52;...; 59.
+Số chữ số 5 ở hàng chục là: (59 ~ 50) : 1 + 1 = 10 (chữ số 5).
+Hang tram không có chữ số 5.
+Số A có số chữ số 5 là: 12 + 10 = 22 (chữ số 5).
+_ Luyện tập _
+Bài 76.
+Điền tiếp ba số hạng vào các dãy số sau để được dãy cách đều.
+a. 1; 4; 7; 10;...
+b. 5; 10; 15; 20;...
+. c. 2; 10; 18; 26;...
+d. 285; 281; 277; 273;...
+e. 3; 19; 35; 51; 67;...
+Bài 77.
+Tìm số số hạng của các dãy số sau.
+a. 1; 4; 7; 10;...; 331.
+b. 1; 5; 9; 13;...; 805.
+c. 0; 3; 6; 9;...; 264.
+d. 245; 235; 225;...; 15. :
+e. 256; 231; 206;...; 31.
+Bài 78.
+Cho dãy số tự nhiên liên tiếp từ 1 đến 203. Hỏi:
+a. Có bao nhiêu số lẻ? 7
+; ` b. Có bao nhiêu số chan?
+e. Có bao nhiêu số có tận cùng là chữ số 5? . :
+d. (*) Có bao nhiêu số có đúng hai chữ số giống nhau? ;
+Hướng dẫn học Toán 4 | Tập một 37
+
+
+===== PDF PAGE 38 =====
+https://vnstorage.com
+- ; = Ta
+^
+Bài 79.
+Cho dãy số tự nhiên liên tiếp từ 1010 đến 2500. Hỏi:
+- a. Có bao nhiêu số lẻ?
+b. Có bao nhiêu số chan?
+e. Có bao nhiêu số tròn chục?
+d. Có bao nhiêu số có hai chữ số cuối là 25?
+Bài 80.
+Cho dãy số cách đều 2024; 2022; 2020;...; 20.
+a. Dãy số trên có bao nhiêu số hạng?
+b. Tìm số hạng thứ 258 của dãy số trên.
+c. Số nào trong các số 461; 800; 1945; 2046 thuộc dãy trên? Nếu thuộc thì là
+số hạng thứ bao nhiêu?
+Bài 81.
+Cho dãy số cách đều 0; 3; 6; 9;...
+a. Tim số hạng thứ 75 của day số trên.
+b. Trong các số 2024; 2025, số nào thuộc dãy trên? Nếu thuộc thì là số hạng thứ
+bao nhiêu?
+e. Tính tổng 50 số hạng đầu tiên của dãy số đó.
+Bài 82.
+Cho dãy số cách đều 11; 16; 21; 26;...
+a. Tìm số hạng thứ 85 của dãy số.
+b. Số 951 là số hạng thứ bao nhiêu của dãy?
+e. Tính tổng 100 số hạng đầu tiên của dãy số đó.
+Bài 83. Ĩ
+: a. Cho tổng dãy số cách đều A = 1 + 3 + 5 +... + 199. Hỏi:
+. e Tổng A có bao nhiêu số hạng?
+e Số hạng thứ 50 của tổng là bao nhiêu?
+: « A bằng bao nhiêu? ’
+` ___ b.Cho tống day số cách đều B = 100 + 95 + 90 +... + 5.
+e Hỏi tống B có bao nhiêu số hạng? . -
+s Nêu hai cách tính B khác nhau.
+38 Rise above onesett and grasp the word
+
+
+===== PDF PAGE 39 =====
+https://vnstorage.com
+. ; = ——
+Bai 84.
+Tim a, biết các số hang của mỗi tổng đều lập thành một dãy số cách đều.
+a. (a + 1) * (a + 3) + (a + 5) +... + (a + 17)=513
+b. (a + 2) + (a + 4) + (a + 6) +... + (a + 50) = 1150
+c. (a + 1) + (a * 4) + (a + 7) +... + (a + 34) =282
+Bài 85.
+a. Có bao nhiêu số tự nhiên có hai chữ số mà chữ số tận cùng là 4?
+b. Có bao nhiêu số tự nhiên có ba chữ số mà chữ số tận cùng là 52
+Bài 86.
+a. Tính tổng 10 số tự nhiên liên tiếp kể từ 12.
+b. Tính tống 12 số chan liên tiếp kể từ 60.
+e. Tính tổng 16 số lẻ liên tiếp kế từ 21.
+d. Tinh tống các số có hai chữ số, chữ số tận cùng là 3.
+Bài 87. (*)
+* Cho dãy số có quy luật 1; 2; 4; 7; 113...
+a. Tìm quy luật của dãy.
+b. Số hang thứ 10 của dãy số trên là sổ nào?
+Bài 88. (*)
+Cho day các hình tam giác có quy luật sau.
+a. Hình 12 có bao nhiêu hình tam giác?
+b. Tính tổng số các hình tam giác lớn nhỏ từ Hình 1 đến Hình 12.
+: + Bài 89.
+Một quyến sách đánh số trang từ trang 3 đến trang 278. Hỏi cần bao nhiêu chữ số để .
+đánh số trang của quyển sách đó?
+Hướng đắn noc Toán 4 | Tập một 39
+—
+
+
+===== PDF PAGE 40 =====
+https://vnstorage.com
+| : `
+is
+Bai 90.
+Bách viết các số tự nhiên liên tiếp bat đầu từ 1. Sau khi viết 492 chữ số thì Bách dừng
+lại. Hỏi chữ số cuối cùng Bách viết là chữ số nào? Chữ số đó của số tự nhiên nào?
+- Bài 91.
+Thầy Nam có một tập tài liệu và cần dùng đúng 240 chữ sổ để đánh số trang của
+tập tài liệu đó, bắt đầu từ trang 1. Hỏi tập tài liệu cla thầy Nam có bao nhiêu trang?
+Bài 92.
+Viết các số tự nhiên liên tiếp từ 1 để tạo thành số A = 1234...
+Hỏi chữ số thứ 245 của A là chữ số nào? Chữ số đó ở hàng nào và là của số tự
+nhiên nào?
+Bài 93. (*)
+Viết các số tự nhiên liên tiếp giảm dần từ 1000 đến 0 để tạo thành số
+B = 1000999998...3210. Hỏi:
+a. Số B có bao nhiêu chữ số?
+b. Chữ số thứ 421 của số B là chữ số nao? Chữ số đó ở hàng nào và là của số tự
+nhiên nao?
+* c. Chữ số 6 xuất hiện bao nhiêu lần trong số B?
+d. Tổng các chữ số của số B là bao nhiêu?
+Bài 94. (*)
+Viết các số tự nhiên liên tiếp từ 1 đến 400 dé tạo thành số có nhiều chữ số
+C = 1234...399400. Hỏi:
+a. Số C có bao nhiêu chữ số?
+b. Số C có bao nhiêu chữ số 6?
+e. Số C có bao nhiêu chữ số 1?
+d. Tổng các chữ số của C là bao nhiêu? Š
+Bài 95. (*)
+Người ta đánh số nhà bằng số lẻ ở một bên của dãy phố từ nha số 1 đến nhà số 325.
+. Hỏi:
+a. Nhà số 135 là nhà thứ bao nhiêu bên day số lẻ tinh từ đầu phố?
+: b. Nhữ số 235 là nhà thứ bao nhiêu bên dãy số lẻ tỉnh từ cudi phố?
+sở c. Cần bao nhiêu chữ số để đánh số nhà bên dãy số lẻ này?
+40 Rise above oneself and grasp the word
+
+
+===== PDF PAGE 41 =====
+https://vnstorage.com
+: =
+cà | Bài toán trong cây
+@ trong cay ở hai dau
+We + —_ 4
+(oY Vn, ee
+Khoảng
+cách
+Khi trồng cây ở cá hai đầu đường thì số cây sẽ nhiều hơn số khoảng cách là 1.
+Số cây = Độ dài đoạn đường : Khoảng cách + 1.
+Độ dài đoạn đường = (Số cây - 1) x Khoảng cách.
+Khoảng cách = Độ dài đoạn đường : (Số cây - 1).
+Ví dụ 1
+Trên một đoạn via hè dài 24 m, người ta cắm 13 tá cờ cách đều nhau, các la cờ được
+đánh số thứ tự 1; 2;...; 13. Biết hai đầu của đoạn via hè đều cắm cờ.
+a. Hỏi khoáng cách giữa các lá cờ liên tiếp là bao nhiêu mét?
+b. Người ta rút ra 6 lá cờ để những lá cờ còn lại vẫn cách đều nhau. Hỏi cần rút ra
+những la cờ nào?
+Hướng dẫn
+a. Số khoảng cách là: 13 - 1 = 12 (khoảng cách).
+Khoảng cách giữa hai lá cờ liền nhau là: 24 : 12 = 2 (m).
+b. Rút các lá cờ số 2, 4, 6, 8, 10, 12. Khi đó, các lá cờ còn lại cách nhau 4 m.
+Ví dụ 2
+Người ta trồng cây ở hai bên của một đoạn đường dài 1005 m. Biết khoảng cách giữa
+hai cây liền nhau là 5 m và ở cả hai đầu của đoạn đường đều cỏ cây. Tính số cây phải
+trồng ở cả hai bên của đoạn đường đó.
+Hướng dẫn :
+a : Số cây phải trồng ở một bên của đoạn đường đó là:
+1005 : 5 + 1 = 202 (cây). -
+Số cây phải trồng ở cả hai bên của đoạn đường đó là: .
+202 x 2 = 404 (cay).
+Hướng die hee Toán 4 | Tâp một 41
+
+
+===== PDF PAGE 42 =====
+https://vnstorage.com
+: : =
+Trồng cây ở một đầu
+Fa D ai
+POOOO
+——+——t—————¬
+———
+Khoảng
+cách
+F tly F4 “CN tif, TƯ el
+APP VPPY
+pH HH
+nnn Ci Nil
+Khoang
+cach
+Khi trồng cây ở một đầu đường thi số cây sẽ bằng số khoảng cach giữa các cây.
+Số cây = Độ dài đoạn đường : Khoảng cách.
+Độ dài đoạn đường = Số cây x Khoảng cách.
+Khoảng cách = Độ dài đoạn đường : Số cây.
+Ví dụ 3
+- Đoạn đường từ nhà Hải đến cống trường dài 550 m. Người ta trồng cây ở cả hai bên
+đường, khoảng cách giữa hai cây liền nhau tà 10 m. Tính số cây đã trồng trên đoạn
+đường đó, biết cống nhà Hải có trồng cây còn cổng trường không có cây.
+Hướng dẫn
+Số cây trồng ở một bên của đoạn đường đó là:
+550 : 10 = 55 (cây).
+Số cây trồng ở cả hai bén của đoạn đường do là:
+55 x 2 = 110 (cây).
+Không trồng cây ở hai đầu
+F về, ait BEEP a(R
+` yp YQ YP YD
+a
+7 ae ee a ea
+Khoang
+cach :
+, _ Sốcây= Độ dài đoạn đường: Khoảng cách - 1.
+Độ dài đoạn đường = (Số cây + 1) x Khoảng cách. :
+Khoảng cách = Độ dài đoạn đường : (Số cây + 1). -
+42 Rise above oneself and grasp the world
+» sứ
+
+
+===== PDF PAGE 43 =====
+https://vnstorage.com
+: + b ”
+Ví dụ 4
+Ở một bên via hè của đoạn đường từ đầu ngõ đến cổng nhà Lan có 11 cột đèn,
+khoảng cách giữa hai cột đèn liền nhau là 15 m. Hỏi độ dài đoạn đường từ đầu ngõ
+- đến nhà Lan là bao nhiêu mét? Biết tại đầu ngõ và cổng nhà Lan không có cột đèn,
+khoảng cách từ đầu ngõ hay cổng nha Lan đến cột đèn gần nhất đều là 15 m.
+Hướng dẫn
+Số khoảng cách la: 11 + 1 = 12 (khoảng cách).
+Độ dài đoạn đường đó là: 15 x 12 = 180 (m).
+trồng cay theo hình khép kín (có trồng ở các đỉnh)
+@_Ñ@ ©
+Khoảng
+Ấ sán 4
+Khi trồng cây theo hình khép kín thì số cây sẽ bằng số khoảng cách giữa các cây.
+. Số cây = Chu vi hình khép kín : Khoảng cách.
+Chu vi hình khép kín = Số cây x Khoảng cách.
+Khoảng cách = Chu vi hình khép kín : Số cây.
+Ví dụ 5
+Một khung tranh hình chữ nhật có chiều dài 90 cm, chiều rộng 60 cm. Người ta đính
+hoa trang trí xung quanh khung tranh đó, biết cứ cách 10 cm lại đính một bông hoa
+và bốn góc khung tranh đều có hoa,
+a. Hỏi cần bao nhiêu bông hoa để trang trí khung tranh? °
+b. Nếu cứ cách 6 cm tại đính một bông hoa thì cần phải thêm bao nhiêu bông hoa
+nữa? Biết bốn góc khung tranh đều có hoa.
+Hướng dẫn
+a. Chu vi khung tranh hình chữ nhật là: (90 + 60) x 2 = 300 (cm).
+v Số bông hoa cần dùng dé trang trí khung tranh đó là: 300 : 10 = 30 (bông).
+b. Nếu cứ cách 6 cm lại đính một bông hoa thì số bông hoa cần dùng đế trang tri
+khung tranh đó là: 300 ; 6 = 50 (bông). ` .
+Số bông hoa cần thém là: 50 - 30 = 20 (bông).
+trưởng dc noe Taán 4 | Tập một 43
+
+
+===== PDF PAGE 44 =====
+https://vnstorage.com
+: - Oe
+Ỳ =
+Bài 96.
+Trên dải phân cách của một đoạn đường dài 1400 m, người ta đặt các cột đèn cách
+. đều nhau. Hỏi có tất cả bao nhiêu cột đèn? Biết rằng các cột đèn được đặt ở cả hai
+đầu dải phân cách và khoảng cách giữa hai cột đèn liền nhau là 35 m.
+Bài 97.
+Nhãn ngày thành lập Quan đội nhân dân Việt Nam 22 tháng 12, các chú bộ đội cắm cờ
+đỏ sao vàng dọc cả hai bên đoạn đường vào doanh trại dài 450 m. Biết cách 5 m cam
+một lá cờ và cả hai đầu đường đều cắm cờ. Hỏi có bao nhiêu tá cờ trên đoạn đường đó?
+Bài 98.
+Một đoạn đường trồng cây ở một bên đường và ở cả hai đầu. Nếu trồng mỗi cây cách
+nhau 4m thì cần 16 cây. Hỏi nếu trồng mỗi cây cách nhau 5 m thì cần bao nhiêu cây?
+Bài 99.
+Đoạn đường từ nhà Chi đến trạm xe buýt dai 180 m. Chi đếm được cỏ 12 cây hoa
+sữa cách đều nhau ở một bên đường. Tính khoảng cách giữa hai cây liền nhau trên
+đoạn đường đỏ, biết cổng nhà Chỉ có trồng cây còn trạm xe buýt không trồng cây.
+Bài 100.
+Dọc quãng đường từ cơ quan bố Hùng đến bưu điện, người ta mắc đèn cao áp ở một
+bên đường, hai đèn liền nhau cách nhau 40 m. Hỏi quãng đường từ cơ quan bố Hùng
+đến bưu điện dài bao nhiêu mét? Biết số đèn là 35 cái và cổng cơ quan không có đèn,
+b còn ở cổng bưu điện có đèn.
+Bài 101.
+Dọc quãng đường từ một trường học đến bệnh viện, người ta dựng 150 đèn cao áp
+ở hai bên đường, hai đèn liền nhau cách nhau 45 m. Tính quãng đường từ trường
+đến bệnh viện, biết trước cổng bệnh viện có đèn còn cổng trường không có đèn.
+Bài 102.
+Người ta cưa một cây gỗ dài 5 m thành các đoạn nhỏ, mỗi đoạn dài 50 cm.
+a. Hỏi cưa được bao nhiêu đoạn?
+b. Biết thời gian cho mỗi lần cưa là 5 phút. Tính thời gian để cưa hết cây gỗ đó.
+Bài 103.
+Một người thợ dùng máy cắt tự động để cắt một thanh sắt dài 15 m thành các đoạn
+nhỏ, mỗi đoạn dài 50 cm. Mỗi lần cắt hết 2 phút. Hỏi máy cắt xong thanh sắt đó hết
+. bao nhiêu phút?
+Bài 104.
+; Một người thợ mộc cưa một cây gỗ dai 5 m 4 dm thành những đoạn 45 cm. Mỗi lần
+cưa hết 3 phút. Cứ sau mỗi lần cưa, người thợ lại nghỉ 2 phút rồi mới cưa tiếp. Hỏi
+: người thợ cưa xong cây gỗ đó hết bao nhiêu phút?  -
+„ Bài 105,
+Bình đi bộ từ cột đèn đầu tiên đến cột đèn thứ năm hết 2 phút. Hỏi nếu Bình đi tiếp
+10 phút nữa thì đến cột đèn thử mấy? Biết tốc độ đi bộ của Bình không đổi và các cột :
+đèn cách đều nhau.
+44 Rise above oneself and grasp the world
+a a
+
+
+===== PDF PAGE 45 =====
+https://vnstorage.com
+" . res
+Ỳ -
+Bài 106.
+Người ta phải bước 24 bậc cầu thang dé đi bộ từ tầng 5 tên tầng 6 của một toà nhà.
+Hỏi người ta phải bước bao nhiêu bậc cầu thang để đi bộ từ tầng 1 lên tầng 4 của toà
+nhà đó, biết số bậc cầu thang giữa các tầng là như nhau?
+. Bài 107.
+Bạn Hà mất 90 giây để đi cầu thang bộ từ tầng 1 lên tầng 3 của một toà nhà. Hỏi Hà
+mất bao nhiêu giây để đi từ tầng 1 Lên tầng 6 của toà nhà đỏ, biết thời gian di chuyển
+giữa các tầng là như nhau?
+Bài 108.
+Người ta quyết định trồng 20 cây dừa xung quanh một cái ao hình vuông, hai cây liền
+nhau cách nhau 4 m. Hỏi chu vi ao la bao nhiêu mét, biết bốn góc ao đều có cây dừa?
+Bài 109.
+Một cái ao hình chữ nhật có chiều dài 42 m và gấp đôi chiều rộng. Người ta trồng cây
+chuối xung quanh ao, khoảng cách giữa hai cây liền nhau la 3 m. Tính số cây chuối
+phải trồng, biết mỗi góc ao đều có cây.
+Bài 110.
+Mai đặt các viên kẹo cách đều nhau lên bàn tạo thành một hình tam giác có ba cạnh
+bằng nhau. Biết mỗi đình của tam giác đều đặt một viên kẹo, mỗi cạnh của tam giác
+có 20 viên kẹo. Hỏi Mai đã đặt tất cả bao nhiêu viên kẹo?
+Bài 111.
+Bác Lan đóng cọc rào để bảo vệ một ao cá hình vuông có cạnh 15 m, cách 1 m
+đóng một cọc rồi đan nứa để rào xung quanh, bốn góc vườn đều đóng cọc. Hỏi tổng
+: số tiền nứa và tiền cọc hết bao nhiêu? Biết rào 1 m mất hai cây nứa, gid một cây nửa
+tà 5000 đồng và giá một cọc rào là 7500 đồng.
+Bài 112. (*)
+Khu vườn hình chữ nhật có chiều dài 32 m, chiều rộng 16 m. Người ta đóng cọc rào
+xung quanh vườn, cách 2 m đóng một cọc và chỉ trừ một cửa ra vào rộng 4m. Tính số
+cọc cần dùng, biết hai cọc ở cửa chính là hai cọc rào và bốn góc vườn đều đóng cọc.
+Bài 113. (*)
+Dọc quãng đường dài 1600 m, người ta trồng xen kẽ các cây phượng và cây bàng
+ở một bên đường, cứ 1 cây phượng rồi đến 1 cây bàng. Biết khoảng cách giữa hai
+cây liền nhau là 25 m và hai đầu đường trồng hai cây phượng. Hỏi có bao nhiêu cây
+phượng trên quãng đường đó? .
+Bai 114. (*)
+Trên quãng đường từ nhà Minh đến trường dài 960 m, người ta trồng xen kẽ các cây
+- phượng và bằng lăng ở một bên đường, cứ 2 cây phượng rồi đến 1 cây bằng lăng,
+khoảng cách giữa hai cây liền nhau là 8 m. Hỏi có bao nhiêu cây phượng trên quãng
+đường đó, biết cống nhà Minh và cổng trường đều có cây bằng lăng?
+5 Bài 118. + h
++ Có hai đội công nhân cùng sản xuất những sản phẩm như nhau. Đội thứ nhất sau
+20 phút làm được 120 sản phẩm. Đội thứ hai sau 30 phút làm được 150 sản phẩm.
+Hai đội cùng làm từ 8 giờ sáng. Hỏi đến 11 giờ trưa cùng ngày thì cả hai đội làm được :
+bao nhiêu sản phẩm?
+tưng dẫn học Toán 4 | Tập một s
+
+
+===== PDF PAGE 46 =====
+https://vnstorage.com
+. : <n.” ae i
+8) Bài toán tông - hiệu
+Orim hai số khi biết tổng và hiệu của hai số đó
+Bài toán
+Tim hai số a và b khi biết tổng T = a + b và hiệu H = a~b.
+Hướng dẫn
+Cách 1
+Ta có sơ đồ: Tương tự ta có thé tìm số a như sau:
+? ?
+Sốa: ————+—+2 Số a: ————¬
+- : H }T HT
+Số b: ——— Số b: —----I
+? ở?
+Hai lần số b tà T - H. Hai lần số a làT+H,
+Số b la (T—H) : 2. Số a là (T + H) : 2.
+Số a là T~ b hoặc b + H. Số b là T~a hoặc a~H.
+; Cach 2
+Nhận xét:
+T+H=a+rb+a-b=2xa.
+Do tổng (T) và hiệu (H) đều đã biết nên dễ dàng tính được giá trị của a. Từ đó
+Suy ra giá trị của b.
+Ví dụ 1
+Tim hai số a và b, biết a + b = 120 và a ~ b = 16.
+Hướng dẫn ï
+Cách 1
+; Ta có: T+H=a+b+ a-b = 120 + 16 = 136. Biến đổi: a + b + a—b = 2 x a.
+Từ đó, 2 x a= 136. Suy ra, a = 136 : 2 = 68. Khi đó, b = 120 — 68 = 52.
+Cách 2 3
+š 2 Ta có: T-H =a +b- (a~ b) = 2 x b. Tinh giá tri của b. Từ đó suy ra a,
+Nhận xét: :
+Số bé = (T~ H) : 2; Số lớn = T~ Số bé (hoặc Số lớn = Số bé + H). :
+Số lớn = (T + H) : 2; Số bé = T~ Số lớn (hoặc Số bé = Số lớn - H).
+46 Rise sbove anesalf and grasp the world
+
+
+===== PDF PAGE 47 =====
+https://vnstorage.com
+: —< °° °° +=< =<
+Bài toán liên quan đến thêm, bớt, cho, nhận
+Ở dạng bài này, chúng ta thường gặp các dữ kiện như “Bạn A cho bạn B...", “thùng
+dầu thứ nhất dé sang thùng dầu thứ hai...”.
+- Nhắc tại
+© Cac tính chất của phép cộng hai số:
+Số hạng thứ nhất + Số hạng thứ hai = Tổng.
+Nếu một Số hạng không thay đổi, Số hạng còn lại tăng (giảm) bao nhiêu
+đơn vị thì Tổng tang (giảm) bấy nhiêu đơn vị.
+Số hạng này tăng bao nhiêu, Số hạng kia giảm bấy nhiêu thì Tống không
+thay đổi.
+© Cac tính chất của phép trừ hai số: Số bị trừ - Số trừ = Hiệu.
+Giữ nguyên Số trừ, tăng (giảm) Số bị trừ bao nhiêu đơn vị thì Hiệu tăng (giảm)
+bấy nhiêu đơn vị.
+Giữ nguyên Số bị trừ, tăng (giảm) Số trừ bao nhiêu đơn vị thì Hiệu giảm (tăng)
+bấy nhiêu đơn vị.
+Cùng tăng (giảm) cả Số bị trừ và Số trừ cùng một số thì Hiệu không thay đổi.
+Nói cách khác
+Tổng hai số không thay đổi nếu tăng Số hang thứ nhất bao nhiêu và giảm
+Số hạng thứ hai bấy nhiêu đơn vị.
+° Hiệu hai số không thay đổi nếu Số bị trừ và Số trừ cùng tăng hoặc cùng giảm
+| một số đơn vị.
+Ví dụ 2
+Hải có hai hộp đựng 36 viên bi. Hải chuyển 10 viên bi từ hộp thứ nhất sang hộp thứ
+hai thì lúc này hộp thứ hai có số bi nhiều hơn hộp thứ nhất là 6 viên. Tính số viên bi
+của mỗi hộp lúc đầu.
+Hướng dẫn
+Sau khi Hải chuyển 10 viên bi từ hộp thứ nhất sang hộp thứ hai thì tổng số viên bi
+của hai hộp không thay đổi và vẫn bằng 36 viên. R
+Lúc sau, số viên bi ở hộp thứ hai là:
+(36 + 6) : 2 = 21 (viên).
+Lúc đầu, số viên bi ở hộp thứ hai la:
+; 21-10 = 11 (viên).
+Lúc đầu, số viên bi ở hộp thứ nhất là:
+lạ , 36 - 11 = 25 (viên). ;
+` hài toán tien quan đến tuổi
+Chú ý: Hiệu số tuổi của hai người không thay đổi theo thời gian. ;
+Huting din học Toán 4 | Tập một 47
+
+
+===== PDF PAGE 48 =====
+https://vnstorage.com
+% ^
+Ví dụ 3
+Hiện nay, tổng số tuổi của ông và cháu là 68 tuổi. Cách đây 5 nam, cháu kém ông
+52 tudi. Tính số tuổi của mỗi người hiện nay.
+: Hướng dẫn
+Mỗi năm mỗi người đều tang 1 tuối nên hiệu số tuổi của hai người không thay đổi.
+Do đó, ông luôn hơn cháu 52 tuổi.
+Hiện nay, tuổi của ông là: (68 + 52) : 2 = 60 (tuối)
+Hiện nay, tuổi của cháu là: 60 - 52 = 8 (tuổi).
+l4) Bài toán liên quan đến khoảng cách
+© Các bài toán liên quan đến số tự nhiên.
+e Sử dụng tí thuyết toán “trồng cây” hoặc vẽ sơ đồ để tìm hiệu của hai số đã cho.
+© Tính chan lẻ của một tổng.
+Nhận xét
+Chan = Chan + Chan = Lẻ + Lẻ;
+Lẻ = Chẩn + Lẻ = Lẻ + Chan.
+Nói cách khác
+Tổng của hai số ta một số chẵn thì hai số cùng tính chẳn/Iẻ;
+7 Tổng của hai số là một số lẻ thi hai số không cùng tinh chan/lé.
+Ví dụ 4
+Tìm hai số có tổng là 246, biết giữa chúng có đúng 2 số chan.
+Hướng dẫn
+Tổng hai số là 246 là một số chẵn nên hai số đó cùng tính chẵn/tẻ.
+Trường hợp 1
+Hai số cùng lẻ.
+LÊ cL :
+3` a 4
+Hiệu của hai số là: 2 + 1 +1= 4.
+. Số bé là: (246 - 4) ; 2 = 121.
+Số lớn là: 121 + 4 = 125.
+š Trường hợp 2 `
+` Hai số cùng chan.
+c Cc Cc c :
+=e 2 3
+Hiệu của hai số là: 2 + 2 + 2 = 6.
+48 Rise above oneself and grasp the worid
+
+
+===== PDF PAGE 49 =====
+https://vnstorage.com
+: + ~
+Số bé là: (246 -6) : 2 = 120.
+Số lớn là: 120 + 6 = 126.
+Vậy có hai cặp số thoả mãn là (121; 125) hoặc (120; 126).
+; Lưu ý: Trên sơ đồ biếu diễn số lẻ (L), số chan (C).
+Ví dụ 5
+Tim hai số có tổng là 1001, biết giữa chúng có đúng 5 số chan.
+Hướng dẫn
+Tống hai số la 1001 la một số lẻ nên hai số đó không cùng tính chẵn/tẻ.
+Trường hợp 1
+tc Cc c Cc c c
+4 5 58 5 & 8
+Trường hợp 2
+c Cc Cc Cc Cc CÁL
+"3= 2 ee N7. §
+| Hiệu của hai số tà: (5-1) x 2+ 2+ 1= 11.
+Số bé là: (1001 - 11) : 2 = 495,
+2 Số lớn là: 495 + 11 = 506.
+_ kuyện tập _
+Bài 116.
+Một miếng bia dạng hình chữ nhật có chu vi 48 cm, chiều dài hơn chiều rộng 4 cm.
+Hỏi diện tích miếng bia đó là bao nhiêu xang-ti-mét vuông?
+Bài 117.
+Một hình chữ nhật có chu vi 96 cm. Nếu giảm chiều dài đi 4 cm và tăng chiều rộng
+thêm 4 cm thì được một hình vuông. Tính diện tích hình chữ nhật đó theo đơn vị
+xang-ti-mét vuông. 5
+Bài 118.
+Số hạng thứ nhất kém Số hạng thứ hai 48 đơn vị, nếu thêm vào Số hạng thứ nhất
+17 đơn vị và giữ nguyên Số hạng thứ hai thì được Tổng mới là 335. Tìm hai số đó.
+Bài 119.
+Tống của hai số là 467, nếu thêm vào Số hạng thứ nhất 19 đơn vị và giữ nguyên
+* Số hạng thứ hai thì Số hạng thứ nhất lớn hơn Số hạng thứ hai 28 đơn vị. Tìm hai số đó.
+>_ Bài 120.
+Hai hộp có 50 chiếc bút màu. Nếu lay ra 5 chiếc bút ở hộp thứ nhất thì hộp thứ nhất :
+có ít hơn hộp thứ hai 15 chiếc. Tinh số bút màu ở mỗi hộp.
+Hướng dân học Toán 4 | Tập một AS
+
+
+===== PDF PAGE 50 =====
+https://vnstorage.com
+. —— SSS =
+Bài 121. ’
+Hai ngăn có 184 quyến sách. Hà chuyển 50 quyển sách từ ngăn dưới lên ngăn trên
+thi số sách ngăn dưới ít hơn ngăn trên 12 quyển. Tính số sách mỗi ngăn lúc đầu.
+Bài 122.
+: Thu và Hà có 88 con hac giấy. Nếu Thu gấp thêm 6 con hac và Hà cũng gấp thêm 6 con
+hạc thì Thu có nhiều hơn Hà 12 con hạc. Hỏi Thu gấp được bao nhiêu con hạc giấy?
+Bài 123.
+Hai năm nữa, tổng số tuổi của hai anh em là 27 tuổi. Biết anh hơn em 5 tuổi. Tính tuổi
+của mỗi người hiện nay.
+Bài 124.
+Cách đây ba năm, tổng số tudi của hai mẹ con là 35 tuổi. Biết mẹ hơn con 25 tudi.
+Tính tuối của mỗi người hiện nay.
+Bài 125.
+Tổng của hai số tự nhiên là 346, biết rằng nếu xoá chữ số 3 ở hàng tram của số lớn thi
+được số bé. Tìm hai số đó.
+Bài 126.
+Tống của hai số tự nhiên là 572, biết nếu viết thêm chữ số 4 vào bên trái số bé ta
+được số lớn. Tìm hai số đó.
+Bài 127.
+Ba thùng A, B và C chứa 275 8 dầu, biết tổng số dầu ở hai thùng B và C nhiều hơn số
+dầu ở thùng A là 65 £ và số dầu ở thùng B ít hơn thùng C là 20 8. Hỏi mỗi thùng chứa
+b bao nhiêu tít dầu?
+Bài 128. (*) Một bên đoạn phố có 20 số nhà lẻ liên tiếp. Biết tổng của 20 số nhà ở
+bên đoạn phố đó là 600. Hỏi số nhà đầu tiên, số nhà cuối cùng của đoạn phố đó là
+bao nhiêu?
+Bài 129.
+Tim hai số lẻ có tổng là 586, biết giữa chúng có 10 số chan.
+Bài 130.
+Tim hai số tự nhiên có tống là 2035, biết giữa chúng cỏ 14 số tự nhiên liên tiếp.
+Bài 131.
+Tim hai số chan có tổng là 400, biết giữa chúng có 16 số lẻ. š
+Bài 132. (*)
+Tim hai số tự nhiên có tổng là 2125, biết giữa chúng có 7 số tẻ.
+Bài 133. (*)
+: Tìm hai số tự nhiên có tống là 1996, biết giữa chúng có 21 số chan.
+Bài 134. (*)
+; Cho hai số tự nhiên có tổng la 65 460. Nếu ở số thứ nhất lần tượt thay chữ số 7 ở
+„_ hàng đơn vị bằng chữ số 3, thay chữ số 9 ở hàng chục bằng chữ số 6, thay chữ số 5 ở
+hàng tram bang chữ số 8 thì ta được số thứ hai. Tìm hai số đã cho. .
+Bài 135. (*) ˆ .
+Tổng của 16 số lẻ liên tiếp la 416. Tìm số bé nhất trong các số đó.
+50 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 51 =====
+https://vnstorage.com
+© | Phép nhân, phép chia
+; 4] Phép nhan
+ax b=c(avab là các Thừa số, c là Tích}
+Tính chất của phép nhân:
+© Tính chất giao hoán: axb=bxa.
+¢ Tinh chất nhân với số 0: ax0=0xa=0.
+¢ Tinh chất nhân với số 1: ax1=1xa=za.
+© Tính chất kết hợp: axbxec=(axb) xc=ax (b x c).
+Nhận xét: Trong một phép nhân, nếu gấp một Thừa số lên bao nhiêu lần thì
+Tich gấp lên bấy nhiêu lần; nếu giảm một Thừa số di bao nhiêu lần thì Tích giảm đi
+bấy nhiêu lần.
+Ví dụ 1
+Tính nhanh.
+A=2x2130x5 B=5x8x9x2x 125
+: Hướng dẫn
+A=2x5x2130
+= 10 x 2130
+= 21300.
+B=(5 x2) x (125 x 8) x 9
+= 10 x 1000 x 9
+= 90 000.
+Ví dụ 2 >
+Tích của hai số là 124. Nếu gấp Thừa số thứ nhất lên 4 lần và giữ nguyên Thừa số thứ
+hai thì Tích mới là bao nhiêu?
+Hướng dẫn
+Nếu gấp Thừa số thứ nhất lên 4 lần và giữ nguyên Thừa số thứ hai thì Tích cũng
+gấp lên 4 lần.
+. Tích mới là: 124 x 4 = 496.
+: Ví dụ 3 2
+Trong một phép nhân, nếu thêm vào Thừa số thứ nhất 6 đơn vị và giữ nguyên Thừa số
+thứ hai thì Tích tăng thêm 324 đơn vị. Tìm Thừa số thứ hai.
+Hướng clin hoc Toán 4 | Tập một $1
+
+
+===== PDF PAGE 52 =====
+https://vnstorage.com
+Hướng dẫn
+Tích mới tăng thêm 6 lần Thừa số thứ hai.
+Thừa số thứ hai là: 324 : 6 = 54.
+Ví dụ 4
+Khi nhân một số tự nhiên với 32, một học sinh đã đặt các tích riêng thẳng cột như
+trong phép cộng nên Tích giảm đi 1485 đơn vị. Tìm Tích đúng của phép nhân.
+Hướng dẫn
+Khi đặt các tích riêng thẳng cột, số tự nhiên da không được nhân với 32 ma là
+nhân với 3 + 2 = 5. Suy ra, Tích giám đi 32 - 5 = 27 lan số tự nhiên đó.
+Số tự nhiên đó là: 1485 : 27 = 55. Tích đúng của phép nhân đó la: 55 x 32 = 1760.
+Phép chia
+Với các số tự nhiên a, b bất kì (b khác 0) ta luôn có a: b = c (dư r < b).
+Ta nói, a là Số bị chia, b la Số chia, c là Thương và r la Số dư.
+Nếu r =0 ta gọi là phép chia hết hay a chia hết cho b.
+Nếu r > 0 ta gọi là phép chia có dư hay a chia cho b dư r.
+3 Số dư tớn nhất là số kém số chia 1 đơn vị (hay r = b = 1).
+Tính chất của phép chia (mở rộng):
+© Chia một số cho 1: a:1=a.
+e Chia một số cho chínhnó:  a:a=1(a khác 0).
+se Số 0 chia cho một số: 0:a=0 (a khác 0).
+e Chia một tống cho mộtsố:  (a+b):c=a:c+b:c (c khác 0).
+e Chia một hiệu cho mộtsố:  (a-b):c=a:c~=b:c (c khác 0).
+Ví dụ 5 .
+Số A chia cho 14 dư 7. Nếu giữ nguyên Số chia thi A sẽ tăng hay giảm bao nhiêu
+đơn vị dé Thương tang thêm 3 đơn vị và phép chia đó không còn dư nữa?
+Hướng dẫn
+Đề Thương tăng thêm 3 đơn vị và Số dư vẫn là 7 thi A cần tang thêm 14 x 3 = 42
+š (đơn vị).
+¡ Đề phép chia trở thành chia hết thì sau khi tang A cần bớt đi 7 đơn vị.
+Vậy số A phải tăng 42 ~ 7 = 35 (đơn vị) dé Thương tầng thêm 3 đơn vị và phép chia ,
+không còn dư.
+52 Rise above onesel! and grasp the word
+
+
+===== PDF PAGE 53 =====
+https://vnstorage.com
+r cs E == —= —~¬nag “PT —~—"
+© Mở rộng: Trong một phép chia hết, ta có Số bị chia : Số chia = Thương.
+Mở rộng 1: Giữ nguyên Số chia
+Nếu gấp Số bị chia lên bao nhiêu lần thì Thương cũng gấp lên bấy nhiêu lần.
+- Nếu giảm Số bị chia đi bao nhiêu lần thì Thương cũng giảm di bấy nhiêu lần.
+Chia một Tích cho một số: (axb):c=a:cxb=b:c x a(c khác 0).
+Mở rộng 2: Giữ nguyên Số bị chia
+Nếu gấp Số chia lên bao nhiêu lần thì Thương sẽ giảm đi bấy nhiêu lần.
+Nếu giảm Số chia đi bao nhiêu tần thì Thương sẽ gấp lên bấy nhiêu lần.
+Một số chia cho một Tích: a:(bxc)=(a: bì: c = (a : c) : b (b, c khác 0).
+Một số chia cho một Thương: a: (b:c)=(a:b)x c= (a x c) : b (b, c khác 0).
+Ví dụ 6
+Tim Thương của một phép chia hết, biết nếu giảm Số bị chia đi 4 lần và gấp Số chia
+tên 2 lần thì được Thương mới là 240.
+Hướng dẫn
+se Nếu giảm Số bị chia di 4 lần thì Thương giảm đi 4 lần.
+s Nếu gấp Số chia lên 2 lần thì Thương giảm đi 2 lần.
+Sau hai lần giảm, Thương mới là 240.
+Ẵ Do đỏ, Thương ban đầu của phép chia là: 240 x 2 x 4 = 1920.
+_ kuyện tập _
+Bài 136.
+Tính nhanh.
+A=25x9x8x4x 125
+B=317x 42+ 317 x58
+C=57x 114+42 x 114 + 114
+D=576 x 87 + 576 x 14-576
+E=8x 348 x 3 + 12 x 652 x 2 *
+G =(642 x 7-321 = 14) x (499 x 7 + 1)
+Bài 137.
+Tính nhanh.
+A = 1400 : 35 + 2100 : 35
+B=2544 : 12~ 144 : 12 >
+: C =4050; (5 x 9)
+— Đ=12300:25:4
+E=21 600: (216 : 12) » :
+G=9000:72x8
+Hung din hee Toán 4 | Tập một 53
+
+
+===== PDF PAGE 54 =====
+https://vnstorage.com
+i ; - << - <r
+Bai 138.
+Tim a, biét:
+a. (a~ 32) x 2024 = 2024 x 27
+- b. 252 x 37 = 37 x (348 - a)
+c. 250 x a + 750 x a = 35 000
+d.ax 101-a=2400
+e. 360 : a + 240 : a = 10
+g. 4250 : a - 250 : a = 80
+Bài 139.
+a. Tích của hai số là 452. Nếu gấp Thừa số thứ nhất lên 2 lần và gấp Thừa số thứ
+hai lên 3 tn thì Tích mới là bao nhiêu?
+b. Tích của hai số là 3450. Nếu giảm Thừa số thứ nhất đi 5 lan và giảm Thừa số thứ
+hai đi 3 Lần thì Tích mới la bao nhiêu?
+c. Khi gấp Thừa số thứ nhất lên 5 lần và giảm Thừa số thứ hai đi 10 lần thi Tích mới
+là 350. Tìm Tích ban đầu.
+d. Khi giảm Thừa số thứ nhất đi 2 lan và gấp Thừa số thứ hai lên 4 tần thì Tích mới
+là 160. Tim Tích ban đầu.
+- Bài 140.
+Tích của hai số là 2860. Nếu thêm vào Thừa số thứ nhất 30 đơn vị và giữ nguyên Thừa
+số thứ hai thì Tích mới là 4810. Tìm hai số đó.
+Bài 141.
+Tích của hai số là 6270. Nếu giữ nguyên Thừa số thứ nhất và bớt ở Thừa số thứ hai di
+6 đơn vị thì Tích mdi là 5610. Tìm Thừa số thứ nhất.
+Bài 142.
+Khi nhân một số tự nhiên với 45, một bạn đã viết nhầm số 45 thành 54 nên kết quả
+của phép tính tăng thêm 207 đơn vị. Tìm Tích đúng.
+Bài 143. x
+Khi nhân một số tự nhiên với 218, một bạn đã đổi chỗ chữ số hàng chục và hàng đơn
+vị của số 218 cho nhau nên kết quả của phép tính tăng thêm 20 475 đơn vị. Tìm số
+. tự nhiên đó.
+Bài 144.
+r Khi nhân.một số tự nhiên với 140, một bạn đã viết thiểu chữ số 1 của số 140 nên kết
+„ quả của phép tính giảm đi 1200 đơn vị. Tìm Tích đúng.
+Bài 145. `
+Khi nhân một số tự nhiên với 103, bạn An đã quên viết chữ số 0 của số 103 nên kết
+quả của phép tính giảm đi 37 080 đơn vị. Hỏi An đã nhân số nào với 103?
+54 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 55 =====
+https://vnstorage.com
+. : SSS a
+Bai 146.
+Khi nhân một số tự nhiên với 215, một bạn đã đặt các tích riêng thẳng cột như trong
+phép cộng nên được kết qua sai la 6528, Tìm Tích đúng.
+: Bai 147.
+Khi nhân một số tự nhiên với 15, một ban đã dat các tích riêng thang cột như trong
+phép cộng nên kết quả của phép tính giảm đi 279 đơn vị. Tìm Tích đúng.
+Bài 148.
+a. Trong một phép chia hết có Thương là 324. Nếu gấp Số bị chia lên 3 lần và giữ
+nguyên Số chia thì được Thương mới là bao nhiêu?
+b. Trong một phép chia hết có Thương là 195. Nếu giữ nguyên Số bị chia và giảm
+Số chia đi 4 lần thì được Thương mới là bao nhiều?
+e. Tìm thương của một phép chia hết, biết nếu gấp Số bị chia lên 16 lần và giữ
+nguyên Số chia thì được Thương mới là 3616.
+d. Tìm thương của một phép chia hết, biết nếu giảm Số bị chia đi 3 lần và gấp Số
+chia lên 3 lần thì được Thương mới là 121.
+Bài 149.
+Trong một phép chia có Số chia kém Thương 3 đơn vị, nếu gấp Số chia lên 2 lần thì
+Thương là 6. Tìm phép chia đó, biết tất cả các phép chia trong bài đều không dư.
+Ẵ Bài 150.
+Khi chia một số tự nhiên cho 8 được Thương là 50 và Số dư là 3. Hỏi số đó chia cho
+24 thì Thương bang bao nhiêu? Số dư bằng bao nhiêu?
+Bài 151.
+Khi chia 4959 cho một số tự nhiên được Thương là một số tự nhiên và dư 31. Biết
+đó là Số dư lớn nhất có thể có của phép chia này. Tìm Số chia và Thương của phép
+chia đó.
+Bài 152.
+Trong một phép chia hai số tự nhiên, biết Số bị chia là 1719, Thương là 19 và Số dư là
+số dư lớn nhất có thể có của phép chia đó. Tìm Số chia và Số dư. .
+Bai 153.
+Khi chia số tự nhiên A cho 12 thấy dư 8. Nếu giữ nguyên Số chia thi A sẽ tăng hay giảm
+bao nhiêu đơn vị để Thương tăng thêm 2 đơn vị và phép chia đó không còn dư nữa?
+Bài 154.
+Khi chia một số tự nhiên A cho 112 thấy dư 79. Hỏi khi chia sổ A đó cho 56 thi Thương
+: thay đổi thế nào và Số dư la bao nhiều?
+` Bài 185.
+Tìm một số, biết rang khi chia số đó cho 48 thì thấy du 17 nhưng khi chia số đó cho `
+12 thì được Thương là 65 và vẫn còn du.
+Hướng dẫn hoe Toán 4 | Tập một 55
+
+
+===== PDF PAGE 56 =====
+https://vnstorage.com
+:
+10) | Phép chia hết, phép chia co du’
+@ Phép chia nết
+¢ ava b là hai số tự nhiên, b khác 0; luôn có số tự nhiên c và r sao cho:
+a=bxc+*r(r<b).
+Nếu r = 0 ta nói a chia hết cho b hay phép chia a : b là phép chia hết.
+Nếu 0 < r < b ta nói a không chia hết cho b hay phép chia a: b là phép chia
+có dư.
+s Phép chia đó có thể viết như sau:
+a : b = c (dư rì
+Sốbiens
+Ta có: Số bị chia = Số chia x Thương + Số dư hay a = b x c +r.
+Số chia = (Số bị chia - Số dư) : Thương hay b = (a - r) : c.
+Ví dụ 1
+k Cho các số 213; 789; 2024; 2340; 4015; 4950. Hỏi trong các số đã cho:
+a. Số nào chia hết cho 2? d. Số nào chia hết cho 9?
+b. Số nào chia hết cho 3? e. Số nào chia hết cho cả 2 và 5?
+e. Số nào chia hết cho 5? g. Số nào chia hết cho cả 5 và 9?
+Vi dụ 2
+Tìm số dư trong mỗi trường hợp sau:
+a. Chia (265 + 1982 + 201) cho 5.
+b. Chia (328 - 306 + 1000 - 903) cho 9. .
+Hướng dan
+Z
+Số — 265 1982 201
+Số dư khí chia 5 dư0 dư 2
+Ta có: (265 + 1982 + 201) chia cho 5 dư 3 (Số dư = 0+ 2 + 1).
+: Số | 328 | 306 1000 | 903
+Số dự khi chia 9 ` du4 | dư0 | dư1 dự3 | ;
+Ta cỏ: (328 - 306 + 1000 - 903) chia 9 dư 2 (Số du=4-0+1-3).
+56 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 57 =====
+https://vnstorage.com
+. : SESS Fr
+: Ví dụ 3
+C6 bao nhiêu số tự nhiên có hai chữ số chia hết cho 2?
+Hướng dẫn
+5 Số tự nhiên có hai chữ số chia hết cho 2 la: 10, 12, 14,...
+Đây la dãy số cách đầu, có khoảng cách là 2. Số đầu tiên của day là số 10, số cuối
+cùng của dãy là số 98.
+Vậy có số số tự nhiên có hai chữ số chia hết cho 2 là: (98 - 10) : 2+ 1= 45.
+Ví dụ 4
+Khi đóng hộp những chiếc bánh trung thu người ta xếp các loại bánh theo thứ tự như
+sau: thập cẩm, đậu xanh, khoai môn, hương nếp, thập cẩm, đậu xanh, khoai môn,
+hương nếp,... Hỏi chiếc bánh thứ 54 được đóng vào hộp tà toại bánh nào?
+Hướng dẫn
+Một nhóm lập lại có 4 Loại bánh: thập cấm, đậu xanh, khoai môn, hương nếp.
+Ta có:
+54:4 = 13 (dư 2). Bánh thứ 54 la bánh thứ hai trong nhóm và là bánh đậu xanh.
+_ Luyện tập _
+Bài 156.
+ˆ Trong các số 3745; 8698; 3949; 2970; 3056; 3565; 4324, tìm các số:
+a. Chia hết cho 2; chia hết cho 5.
+b. Chia hết cho cả 2 và 5.
+c. Chia hết cho 4; chia hết cho 8.
+Bài 157.
+Trong các số 123; 1360; 2010; 3945; 5768; 12 846, tìm các số:
+a. Chia hết cho 3.
+b. Chia hết cho 9.
+e. Chia hết cho cả 2; 5 và 3. ›
+Bài 158.
+Điền số thích hợp vào ô trống trong bảng sau.
+"am a S/O) es ae a
+* ˆ Ch mEaim
+Beam == a
+Hutng din học Toán 4 | Tập một 57
+
+
+===== PDF PAGE 58 =====
+https://vnstorage.com
+- " _
+Bai 159.
+Tìm số dư trong các phép chia sau.
+a. (815 + 640 + 273) chia cho 5.
+: b. (732 + 564 + 640 + 351) chia cho 3.
+c. (564 - 351 + 640) chia cho 9.
+Bai 160.
+Minh có một số nhãn vở, biết số đó chia hết cho 2; 3 và nằm trong khoảng từ 20 đến
+30. Hỏi Minh có bao nhiêu nhãn vở?
+Bài 161.
+Một lớp học có nhiều hơn 20 học sinh và ít hơn 35 học sinh. Biết học sinh trong lớp
+học đó có thể chia đều thành 3 tổ hoặc thành 5 tố. Tìm số học sinh của lớp học đó.
+Bài 162.
+Có bao nhiêu số tự nhiên có ba chữ số chia hết cho 2?
+Bài 163.
+Có bao nhiêu số tự nhiên có ba chữ số nhỏ hơn 540 chia hết cho 5?
+Bài 164.
+Có bao nhiêu số tự nhiên có ba chữ số chia hết cho cả 2 và 5?
+Bài 165.
+z Có bao nhiêu số tự nhiên có ba chữ số không chia hết cho 5?
+Bài 166.
+Cho 253 viên bi vào hộp theo thứ tự bi vàng, xanh, đỏ, tím, hồng rồi tại bi vàng, xanh,
+đỏ, tím, hồng,... Hỏi viên bi cuối cùng bỏ vào hộp có màu gì?
+Bài 167.
+Người ta cam liên tiếp các lá cờ theo thứ tự màu cam, xanh, trang, cam, xanh,
+trắng,... thành một hàng dài bắt đầu từ màu cam. Hỏi:
+a. Lá cờ thứ 100 mau gi?
+b. Nếu cắm 152 lá cờ thì mỗi màu có bao nhiêu lá?
+Bài 168. x
+Bảng điện tử của trường đang chạy cụm từ CHAMNGOANHOCGIOI liên tiếp thành
+dãy CHAMNGOANHOCGIOICHAMNGOANHOCGIOI... Hỏi chữ cái thứ 1000 của
+. day la chữ cái nào, trong từ nào?
+Bài 169. (*)
+Tìm số bé nhất có hai chữ số thoả mãn: š
+š Ề a. Đồng thời chia hết cho 2; 3 và 5.
+b. Chia cho 2; 3 và 5 đều dư 1. -
+Bài 170. (*) ì h
+Tim số bé nhất có ba chữ số chia 3; 4; 5 đều dư 1.
+58 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 59 =====
+https://vnstorage.com
+| | -
+1, | Câu tạo số
+1Ì Biểu diễn một số dưới dạng tổng quát
+
+© Cách biểu diễn một số tự nhiên bất kì, không rõ số chữ số của nó: A, B,...
+
+s Cách biểu diễn một số tự nhiên có chữ đại diện cho hàng đơn vi: Aa, Bb,...
+Điều kiện: a,b<9; số A, B là bất kì số tự nhiên nào, kế cả 0.
+Ví dụ: số 349 thì A = 34 (chỉ số chục) và a = 9.
+
+s Tương tự, biểu diễn một số tự nhiên có chữ số đại diện cho hàng chục và
+hàng đơn vị Aab.. Số này bao gồm A trăm và ab đơn vị (hoặc a chục và b đơn vị).
+Ví dụ: Số 349 thì A = 3 (chỉ số tram) và ab = 49.
+Tương tự với các hàng tiếp theo: tram, nghin....
+Người ta dùng các chữ cái a, b, c,... dé mô tả các chữ số. Các chữ cái giống
+nhau chắc chắn chỉ các số giống nhau.
+Ví dụ: Số aabS (a khác 0) chi các số có bốn chữ số trong đó chữ số hàng nghìn
+và hàng trăm giống nhau, chữ số hàng đơn vị là 5.
+
+ia Phân tích cấu tạo số theo hàng
+
+s Một số ví dụ về cấu tao của một số tự nhiên khi biết số chữ số của nó
+Số có hai chữ số: ab = a x 10 + b.
+Số có ba chữ số: abe =a x 100 + b x 10 + c = ab x 10 +e =a x 100 + be.
+Số đã biết chữ số hàng đơn vị: Aa= A x 10 + a.
+Số đã biết hai chữ số tận cùng: Aab = A x 100 +a x 10 +b =Ax 100 + ab.
+
+© Một số ví dụ về số tự nhiên đặc biệt .
+a0 =ax 10
+a00 =ax 100
+aa =ax11
+aaa =a x 111
+
+: abab=ab x 101
+ababab=ab x 10101 3
+abcabc=abc x 1001
+tướng dẫn hoc Toán 4 | Tap một 59
+
+
+===== PDF PAGE 60 =====
+https://vnstorage.com
+† bỏ SSS a
+Các dạng bai
+e Dạng 1: Thêm (bớt) một số chữ số vào bên phải một số.
+Ví dụ 1
+Tim số tự nhiên, biết nếu viết thêm chữ số 3 vào bên phải của số đó thì được số mới
+Lớn hơn số ban đầu 417 đơn vị.
+Hướng dẫn
+Cách 1
+Gọi số tự nhiên cần tìm là A, nên số mới là A3.
+Ta có: A3 =A+417
+Ax10+3=A+417
+Ax9=414
+A=414:9=46
+Số cần tìm là 46.
+Cách 2
+s Khi thêm số 3 vào bên phải của một số thì số đó gấp lên 10 lần và thêm 3 đơn vị.
+Ta có sơ đồ:
+Số ban đầu: + __ #17 _ ~ ey
+Số mới: —>—————>— tH
+3
+Số ban đầu là:
+(4173) : 9 = 46.
++ Dạng 2: Thêm (bớt) một số chữ số vào bên trái một số
+Ví dụ 2
+: Tìm số tự nhiên có hai chữ số, biết nếu viết thêm chữ số 2 vào bên trái số đó thì được
+- số mới gấp 5 lần số đã cho.
+Hưởng dẫn
+Cách 1, š
+3 Gọi số tự nhiên cần tìm la ab (a khác 0; a, b < 9).
+Thêm chữ số 2 vào bên trái ta có số 2ab. ;
+Ta có: ab x 5 = 2ab. ' :
+ab x 5 = 200 + ab; ab= 50,
+60 Rise above oneself and grasp the world
+
+
+===== PDF PAGE 61 =====
+https://vnstorage.com
+Cách 2
+Khi thêm chữ số 2 vào bên trải số có hai chữ số sẽ được số mới lớn hơn số ban
+đầu 200 đơn vị.
+- Ta có sơ đồ:
+Số ban đầu: —+ 200
+Số mới: ——+—————a
+Số ban đầu là:
+200 : (5-1) = 50.
+Ví dụ 3
+Tim số tự nhiên có hai chữ số, biết nếu viết thêm chữ số 0 vào chỉnh giữa hai chữ số
+của số đó thì được số mới gấp 9 lần số đó.
+Hướng dẫn
+Gọi số cần tìm la ab (a khác 0; a, b < 9). Số mới là ab.
+Ta có: ab x 9= a0B.
+° (ax 10 + b) x9= a x 100 + b hay a x 90 + b x 9= a x 100 + b.
+bx8=ax 10 (Trừ cả hai vế đi a x 90 và b).
+bx4=a x5 (Chia cả hai vế cho 2).
+Nhận xét: Vế phải (a x 5) chia hết cho 5 nên b chia hết cho 5.
+Ta có b =0; 5.
+b =0 thì a = 0 (loại).
+b =5 thì a = 4 (chon).
+Vidya
+Tim số có hai chữ số, biết số đó gấp 2 lần tổng các chữ số của nó.
+Hướng dẫn Š
+` Gọi số cần tìm là ab (a khác 0; a, b < 9).
+: Ta có: (a + b) x 2= ab hayax2+bx2=ax10+b. :
+b=a x8 (Bớt cả hai vế đi a x 2 và b). : :
+Vì b< 9 nên a x 8 < 9 mà a khác 0 nên a = 1, do đỏ b = 8.
+Hướng afin học Toản 4 | Tập một 61
+
+
+===== PDF PAGE 62 =====
+https://vnstorage.com
+r * mm...
+‡ =
+Bài 171.
+5 Thay các chữ a, b, c bằng các chữ số thích hợp để được phép tinh đúng.
+a. abc+3832=abc7
+b. abc5+abc=4163
+Bài 172.
+Tìm số tự nhiên, biết:
+a. Nếu viết thêm chữ số 5 vào bên phải của số đó thì số đó tăng thêm 887 đơn vị.
+b. Nếu viết thêm số 28 vào bên phải của số đó thì số đó tăng thêm 3592 đơn vị.
+Bài 173.
+Tìm số tự nhiên, biết:
+a. Nấu xoả chữ số 2 ở hàng đơn vị của số đó thì số đó giảm đi 929 đơn vi.
+b. Nếu xoá đi số 56 ở bên phải của số đó thì số đó giảm đi 4808 đơn vị.
+Bài 174.
+Tìm số tự nhiên, biết nếu viết thêm chữ số 5 vào bên phải của số đỏ thì được số mới
+và tổng số mới và số ban đầu là 4801 đơn vị.
+° Bài 175.
+Tìm số tự nhiên, biết nếu viết thêm vào bên phải số đó một chữ số thì được số mới
+lớn hơn số ban đầu là 3308 đơn vị.
+Bài 176.
+Tìm số tự nhiên có hai chữ số, biết nếu viết thêm hai chữ số nữa vào bên phải số đó
+thì được số mới lớn hơn số ban đầu là 2451 đơn vị.
+Bài 177.
+Thay các chữ a, b bằng các chữ số thích hợp để được phép tính đúng.
+a. ab xQ9= 4ab °
+b. ab x 26 = 12ab
+Bài 178.
+: Tim số tự nhiên có hai chữ số, biết:
+a. Nếu viết thêm chữ số 3 vào bên trải số đó thì được số mới gấp 5 lần số ban đầu.
+° b. Nếu Viết thêm số 21 vào bên trái số đó thì được số mới gấp 31 lần số ban đầu.
+_ Bài 179.
+Tim số tự nhiên có ba chữ số, biết nếu xoá đi chữ số 3 ở hàng trắm thì số đó giảm đi .
+7 lần.
+62 Rise above oneself and grasp the wortd
+
+
+===== PDF PAGE 63 =====
+https://vnstorage.com
+Bài 180.
+Tìm số tự nhiên có bốn chữ số, biết:
+
+a. Nếu xoá đi chữ số 9 ở hàng nghìn của số đó thì số đó giảm đi 11 lần.
+b. Nếu xoá đi số 32 ở bên trái của số đỏ thì số đó giảm di 51 lần,
+Bài 181.
+Tìm số tự nhiên có ba chữ số, biết nếu thay chữ số 1 ở hàng tram của số đó bằng chữ
+số 6 thì được số mới gấp 5 lần số ban đầu.
+Bài 182.
+Tìm số tự nhiên có hai chữ số, biết nếu viết thêm chữ số 3 ở cả bên trái và bên phải
+Số đó thì được số mới lớn hơn số ban đầu la 3381 đơn vị.
+Bài 183.
+: Tìm các chữ số a, b, c sao cho cabe = 21 x ab.
+Bai 184.
+Thay các chữ a, b bằng các chữ số thích hợp để được phép tính đúng.
+a. ab x 7= a0b b. (a+b) x 6= ab
+Bài 185.
+ý Tìm số có ba chữ số, biết nếu xoá đi chữ số 6 ở hàng chục thì số đó giảm đi 12 lần.
+Bài 186.
+Tìm số tự nhiên có hai chữ số, biết nếu viết thêm số 12 xen giữa hai chữ số của số đó
+thì ta được số mới gấp 85 lần số ban đầu.
+Bài 187.
+Tìm số tự nhiên có hai chữ số, biết số đó gấp 9 lần tổng các chữ số của nó.
+Bài 188.
+Tìm một số có hai chữ số, biết số đó chia cho tống các chữ số của nó được 5 dư 12.
+Bài 189.
+Tìm số có hai chữ số biết chữ số hàng chục Lớn hơn chữ số hàng đơn vị. Nếu lấy số
+đó chia cho Hiệu của chữ số hàng chục và hàng đơn vị thì được Thương tà 18 dư 4.
+Bài 190. (*)
+$ Thay a, b, c bằng các chữ số thích hợp dé được phép tính đúng.
+5 a. ab x cc x abe = abcabc b. abc =5 x ax b xe -
+| e. abc+ab+a=430 d. abc+a+b+c=789 :
+Hướng alin học Toán 4 | Tập một 63
+
+
+===== PDF PAGE 64 =====
+https://vnstorage.com
+r 3 : =
+CÁCH SỬ DỤNG HIỆU QUẢ ’
+@ Hoc sinh Pa
+* - Đọc kỹ phần lý thuyết và làm các ví dụ @ ~ pe (=)
+từ dé đến khó trước khi chuyển qua Pe
+phần bài tap tự luyện; ae A TS
+* Sau khi hoàn thành các bài tập, kiểmtra |] Sak at 38
+đáp án bằng cách quét mã QR bên cạnh. @ 8. Oe
+L a Se
+thầy cô và Cha mẹ học sinh |
+¢ . Khi hướng dẫn hoc sinh, cần đọc ki phần
+hướng dẫn trong các ví dụ, thảo luận
+cùng các em để đảm bảo các em hiểu rõ
+cách giải;
+* . Khuyến khích học sinh trình bày các bước
+giải ngắn gọn, rõ ràng và kiểm tra đáp án
+sau khi hoàn thành. re
+MOT SỐ LƯU Ý QUAN TRONG a:
+1) Học sinh cần thành thao bốn phép tinh cơ bản (cộng, trừ,
+: nhân, chia) với số tự nhiên, phân số, va số thập phan. Đây là
+nền tảng thiết yếu cho những năm học tiếp theo.
+Đối với học sinh thuộc Hệ thống Archimedes school, mỗi tuần
+nhà trường sẽ bố trí thời gian để các em có thể tiếp thu và làm
+việc với tài liệu một cách hiệu quả.
+Duy trì thói quen học toán đều đặn hàng ngày, kết hợp giữa học
+trên lớp và lam bài tập về nhà sẽ giúp học sinh tự tin hơn và
+yêu thích môn học này.
+Chúc thầy cô và các em học sinh có những giờ học thật thú vị và
+, bổ ích với bộ sách này!
+° 3 Trân trọng,
+' Nhóm biên soạn Archimedes School
+
+
+===== PDF PAGE 65 =====
+https://vnstorage.com
+Hướng dẫn học Toán 1 - tập một, tập hai
+Hướng dẫn học Toán 2 - tập một, tập hai
+Hướng dẫn học Toán 3 - tập một, tập hai
+Hướng dẫn học Toán 4 - tập một, tập hai
+Hướng dẫn học Toán 5 - tập một, tập hai
+Hướng dẫn học Tiếng Việt 1 - tập một, tập hai
+Hướng dẫn học Tiếng Việt 2 - tập một, tập hai
+Hướng dẫn học Tiếng Việt 3 - tập một, tập hai
+Hướng dẫn học Tiếng Việt 4 - tập một, tập hai
+Hướng dẫn học Tiếng Việt 5 - tập một, tập hai
+Hướng dẫn học Tiếng Anh 1 - tập một, tập hai
+Hướng dẫn học Tiếng Anh 2 - tập một, tập hai
+Hướng dẫn học Tiếng Anh 3 - tập một, tập hai
+Hướng dẫn học Tiếng Anh 4 - tập một, tập hai
+Hướng dẫn học Tiếng Anh 5 - tập một, tập hai
+CÔNG TY CỐ PHAN DỊCH VỤ XUẤT BẢN GIÁO DỤC HÀ NỘI
+Địa chỉ: Tang 4, Tòa Diamond Flower, số 48 Lê Văn Lương,
+Q, Thanh Xuân, TP. Hà Nội
+Điện thoại: 024 35121533 (số máy lẻ 118) - 0904893398
+Fax: O24 35123278
+Email: kinhddoanh.heps@gmøil.com
+Website: http://xbadhn.vn/
+j ‘Gag ISBN 974.604. 4502
+|
+g” 786040 " 450272
+Giá: 150.000 ding
+
+
+===== PDF PAGE 66 =====
+
