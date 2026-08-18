@@ -1,4 +1,5 @@
 /** Math4Fun — Field Journal Quest global theme: parchment, indigo ink, Marigold Compass. */
+/* Field Journal Quest: tactile parchment, indigo trail, and restrained elemental magic for child-friendly combat feedback. */
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -135,7 +136,25 @@
   .guardian-evidence-compact .guardian-evidence-caption { margin-top: 8px; }
   .guardian-evidence-compact .guardian-taxonomy { display: none; }
   .guardian-guide-compact::before { width: 86px; height: 86px; }
+  .guardian-battle-avatar { position: relative; display: grid; width: 78px; gap: 2px; place-items: center; border: 1px dashed rgba(255,255,255,.45); background: rgba(23,42,72,.68); color: #d5dfed; padding: 4px; transition: transform .16s cubic-bezier(.23,1,.32,1), border-color .16s ease; }
+  .guardian-battle-avatar img { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 3px 0 rgba(23,42,72,.65)); }
+  .guardian-battle-avatar span { max-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 800 8px/1.1 "DM Sans", sans-serif; }
+  .guardian-battle-avatar.is-active { border: 2px solid var(--spell-color); background: rgba(23,42,72,.92); box-shadow: 0 0 0 2px rgba(255,253,246,.68), 0 0 18px color-mix(in srgb, var(--spell-color) 70%, transparent); transform: rotate(-2deg); }
+  .guardian-battle-avatar.is-casting::after { content: ""; position: absolute; inset: -7px; border: 2px dotted var(--spell-color); border-radius: 50%; animation: spell-orbit .42s linear; }
+  .spell-ready-card { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 8px; align-items: center; min-width: min(100%, 280px); border: 2px solid #172a48; background: #fffdf6; box-shadow: 3px 3px 0 var(--spell-color); padding: 6px; }
+  .spell-ready-card img { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 3px 0 rgba(23,42,72,.25)); }
+  .spell-ready-card span, .spell-ready-card small { display: block; color: #58708b; font: 800 8px/1.25 "DM Sans", sans-serif; letter-spacing: .06em; }
+  .spell-ready-card b { display: block; margin: 3px 0; color: #172a48; font: 900 13px/1.12 "Fraunces", Georgia, serif; }
+  .spell-effect { position: absolute; z-index: 5; inset: 0; display: grid; place-items: center; pointer-events: none; overflow: hidden; }
+  .spell-effect::before { content: ""; position: absolute; width: 26%; height: 26%; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--spell-color) 95%, white) 0 10%, var(--spell-color) 18%, transparent 68%); filter: blur(4px); opacity: .88; animation: spell-burst .68s ease-out both; }
+  .spell-effect span { position: relative; z-index: 1; color: var(--spell-color); font: 900 clamp(58px, 10vw, 138px)/1 "Fraunces", Georgia, serif; text-shadow: 0 0 8px #fff, 0 0 18px var(--spell-color), 3px 3px 0 rgba(23,42,72,.55); }
+  .spell-effect.is-counter { transform: scaleX(-1); filter: grayscale(.45); }
+  .thunder-study-reel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 16px; border: 2px solid #172a48; background: repeating-linear-gradient(0deg, #fffdf6, #fffdf6 22px, #f5efdf 23px); box-shadow: 4px 4px 0 #f6b73c; padding: 12px; }
+  .thunder-study-reel h2 { margin: 9px 0 5px; color: #172a48; font: 900 20px/1.08 "Fraunces", Georgia, serif; }
+  .thunder-study-reel p { max-width: 38ch; color: #58708b; font-size: 12px; line-height: 1.55; }
+  .thunder-study-reel video { width: 100%; aspect-ratio: 16 / 9; border: 2px solid #172a48; background: #172a48; object-fit: cover; }
   @media (min-width: 640px) {
+    .thunder-study-reel { grid-template-columns: minmax(0, 1fr) 260px; align-items: center; }
     .map-canvas { display: block; min-height: 550px; }
     .route-stitch { position: absolute; inset: 18px 2% 14px; display: block; width: 96%; height: 91%; }
     .map-stop { position: absolute; width: min(43%, 350px); }
@@ -159,6 +178,8 @@
 }
 
 @keyframes battle-pop { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes spell-orbit { from { transform: rotate(0) scale(.6); opacity: 1; } to { transform: rotate(260deg) scale(1.18); opacity: 0; } }
+@keyframes spell-burst { 0% { transform: scale(.15); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(4.6); opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }

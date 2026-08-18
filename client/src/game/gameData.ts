@@ -57,7 +57,7 @@ export type VerifiedQuestion = {
 };
 
 export type Spell = {
-  id: "thunder" | "flame" | "tide" | "gust" | "venom";
+  id: "thunder" | "flame" | "tide" | "gust" | "venom" | "quarry";
   name: string;
   element: string;
   icon: string;
@@ -81,7 +81,7 @@ export const GUARDIANS: Guardian[] = [
   { id: "nori", name: "Nori", type: "GRAPH / TIDE", element: "nước", description: "Đọc số liệu như đọc làn sóng trên bản đồ.", stationId: 9, sprite: sprite(183), tone: "bg-blue-500" },
   { id: "pavo", name: "Pavo", type: "GEOMETRY / MARK", element: "độc", description: "Săn tìm góc, đoạn thẳng và hình trong rìa sổ tay.", stationId: 10, sprite: sprite(234), tone: "bg-violet-500" },
   { id: "soli", name: "Soli", type: "REVERSE / FLAME", element: "lửa", description: "Lần ngược dấu vết để tìm số ban đầu.", stationId: 11, sprite: sprite(37), tone: "bg-red-500" },
-  { id: "dexo", name: "Dexo", type: "MULTIPLY / SPARK", element: "sấm", description: "Biến quy luật nhân chia thành tia chớp có thứ tự.", stationId: 12, sprite: sprite(25), tone: "bg-amber-500" },
+  { id: "dexo", name: "Dexo (Pikachu)", type: "MULTIPLY / SPARK", element: "sấm", description: "Bạn đồng hành Pikachu hệ Sấm sét, biến quy luật nhân chia thành tia chớp có thứ tự.", stationId: 12, sprite: sprite(25), tone: "bg-amber-500" },
   { id: "maru", name: "Maru", type: "DIVIDE / TIDE", element: "nước", description: "Chia đường đi đều nhau, không bỏ sót dấu mốc.", stationId: 13, sprite: sprite(158), tone: "bg-teal-500" },
   { id: "sena", name: "Sena", type: "DECIMAL / MIST", element: "gió", description: "Giữ những con số bé xíu đúng vị trí trên dòng kẻ.", stationId: 14, sprite: sprite(133), tone: "bg-slate-500" },
   { id: "kora", name: "Kora", type: "SYMMETRY / LEAF", element: "đất", description: "Soi đường gấp đôi để nhận ra vẻ cân xứng.", stationId: 15, sprite: sprite(152), tone: "bg-green-500" },
@@ -162,16 +162,18 @@ export const QUESTIONS: VerifiedQuestion[] = [
 ];
 
 export const SPELLS: Spell[] = [
-  { id: "thunder", name: "Tia Chớp", element: "Sấm", icon: "ϟ", tone: "border-[#f6b73c] bg-[#fff0b6]", damage: 24, counterDamage: 10, note: "Đòn nhanh, phản công vừa phải." },
+  { id: "thunder", name: "Tia Chớp", element: "Sấm", icon: "ϟ", tone: "border-[#f6b73c] bg-[#fff0b6]", damage: 26, counterDamage: 10, note: "Đòn hệ Sấm sét của Pikachu và các guardian sấm." },
   { id: "flame", name: "Hỏa Ấn", element: "Lửa", icon: "✦", tone: "border-[#ee6b4e] bg-[#ffe4dc]", damage: 30, counterDamage: 14, note: "Mạnh hơn, Atlas phản công mạnh hơn." },
   { id: "tide", name: "Thủy Thuẫn", element: "Nước", icon: "≈", tone: "border-[#55a9dd] bg-[#e4f3fb]", damage: 18, counterDamage: 6, note: "Gây sát thương vừa, giảm phản công." },
   { id: "gust", name: "Phong Ảnh", element: "Gió", icon: "≋", tone: "border-[#3e9b7a] bg-[#e7f2e5]", damage: 21, counterDamage: 8, note: "Cân bằng giữa công và thủ." },
   { id: "venom", name: "Độc Ấn", element: "Độc", icon: "☾", tone: "border-[#8e69ad] bg-[#f0e7f6]", damage: 26, counterDamage: 12, note: "Đòn bền bỉ từ dấu niêm phong." },
+  { id: "quarry", name: "Thạch Ấn", element: "Đất", icon: "◆", tone: "border-[#b17a3d] bg-[#f7ead5]", damage: 24, counterDamage: 8, note: "Đòn đất chắc chắn, giữ thế phòng thủ." },
 ];
 
 export const QUESTIONS_BY_ID = Object.fromEntries(QUESTIONS.map((question) => [question.id, question])) as Record<string, VerifiedQuestion>;
 export const BOSS_QUESTION_IDS = QUESTIONS.filter((question) => question.pool === "boss" && question.difficulty === "H").map((question) => question.id);
 export const getGuardian = (guardianId: string) => GUARDIANS.find((guardian) => guardian.id === guardianId);
+export const getSpellForGuardian = (guardian?: Guardian) => SPELLS.find((spell) => spell.element.toLocaleLowerCase("vi-VN") === guardian?.element) ?? SPELLS[0];
 export const getStation = (stationId: number) => STATIONS.find((station) => station.id === stationId);
 export const getStationQuestions = (stationId: number) => QUESTIONS.filter((question) => question.stationId === stationId && question.pool === "station");
 export const getReadyStations = () => STATIONS.filter((station) => station.status === "ready");

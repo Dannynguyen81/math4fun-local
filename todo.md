@@ -32,3 +32,10 @@
 - [x] Thêm tạo hồ sơ local, chọn nhân vật, đội guardian dùng để chiến đấu và giới hạn mở hai chủ đề mỗi tuần.
 - [x] Thêm hiệu ứng âm thanh, dashboard thống kê học tập local và kiểm thử cân bằng toàn bộ game.
 - [ ] Tiếp tục đối chiếu và bổ sung tối thiểu 10 câu E–M–H cho từng chủ đề 4–20 trước khi cho phép mở toàn bộ lộ trình.
+
+## Guardian và phép thuật
+
+- [x] Rà soát thuộc tính nguyên tố của từng guardian và gán đúng phép đặc trưng, bao gồm Pikachu hệ Sấm sét.
+- [x] Thêm hoạt ảnh guardian chủ động tung phép, đòn bay, va chạm và phản công trong trận Boss.
+- [x] Tạo đoạn minh họa Manim ngắn cho kỹ năng Sấm sét và tích hợp như tư liệu luyện phép local.
+- [x] Kiểm tra màn hình Boss, hiệu năng hoạt ảnh và lưu checkpoint.
