@@ -4,7 +4,7 @@
  * Boss runs use a non-repeating hard-question pool, and magic progression stays local-only.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId = "compass" | "ember" | "tide" | "leaf";
 export type StudentProfile = {
@@ -29,6 +29,10 @@ export type StudentProfile = {
   magicUsage: Partial<Record<ElementName, number>>;
   elementXp: Partial<Record<ElementName, number>>;
   weeklyMagicQuest: WeeklyMagicQuest;
+  gold: number;
+  inventory: Record<ShopItem["id"], number>;
+  guardianHealth: Record<string, GuardianHealth>;
+  guardianLosses: string[];
   metrics: LearningMetrics;
 };
 
@@ -57,7 +61,10 @@ export type BattleState = {
   bossHp: number;
   lastResult?: { correct: boolean; playerDamage: number; bossDamage: number; spellId: string };
   startedAt?: string;
+  guardianId?: string;
 };
+
+export type GuardianHealth = { hp: number; updatedAt: string };
 
 export type LearningMetrics = {
   totalAnswers: number;
@@ -69,8 +76,8 @@ export type LearningMetrics = {
 };
 
 export type ElementLevelUp = { element: ElementName; previousLevel: number; nextLevel: number; totalXp: number };
-type ParentPinRecord = { salt: string; hash: string; createdAt: string };
-type GameStore = { version: 5; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
+type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
+type GameStore = { version: 6; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
 export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp };
@@ -95,7 +102,7 @@ type GameContextValue = {
   startStationSession: (stationId: number) => StationAttempt | null;
   answerStationQuestion: (questionId: string, answer: number) => AnswerResult | null;
   isBossUnlocked: boolean;
-  startBattle: () => boolean;
+  startBattle: (guardianId: string) => boolean;
   resolveBattleAnswer: (answer: number, spellId: string) => BattleAnswerResult | null;
   advanceBattle: () => void;
   markMagicVideoWatched: (element: ElementName) => void;
@@ -107,9 +114,19 @@ type GameContextValue = {
   weeklyMagicQuest: WeeklyMagicQuest | null;
   createProfileBackup: () => string | null;
   hasParentPin: boolean;
-  setParentPin: (pin: string) => Promise<{ ok: boolean; message: string }>;
+  parentSecurityQuestion: string | null;
+  setParentPin: (pin: string, securityQuestion: string, securityAnswer: string) => Promise<{ ok: boolean; message: string }>;
+  changeParentPin: (currentPin: string, nextPin: string, securityQuestion: string, securityAnswer: string) => Promise<{ ok: boolean; message: string }>;
+  resetParentPin: (securityAnswer: string, nextPin: string) => Promise<{ ok: boolean; message: string }>;
   restoreProfileBackup: (raw: string, pin: string) => Promise<{ ok: boolean; message: string }>;
   toggleTeamGuardian: (guardianId: string) => void;
+  exitGame: () => void;
+  gold: number;
+  inventory: Record<ShopItem["id"], number>;
+  elementBadges: ElementName[];
+  guardianHp: (guardianId: string) => number;
+  purchaseItem: (itemId: ShopItem["id"]) => { ok: boolean; message: string };
+  useHealingItem: (itemId: ShopItem["id"], guardianId: string) => { ok: boolean; message: string };
   setAudioEnabled: (enabled: boolean) => void;
   resetActiveProfile: () => void;
 };
@@ -118,7 +135,10 @@ type GameContextValue = {
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const DEFAULT_STORE: GameStore = { version: 5, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0 });
+const GUARDIAN_MAX_HP = 100;
+const GUARDIAN_HP_PER_HOUR = 20;
+const DEFAULT_STORE: GameStore = { version: 6, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -134,6 +154,13 @@ async function hashParentPin(pin: string, salt: string) {
   const encoded = new TextEncoder().encode(`${salt}:${pin}`);
   const digest = await window.crypto.subtle.digest("SHA-256", encoded);
   return bytesToHex(new Uint8Array(digest));
+}
+function normalizeSecurityAnswer(answer: string) { return answer.trim().toLocaleLowerCase("vi-VN"); }
+function effectiveGuardianHealth(health?: GuardianHealth, now = Date.now()): GuardianHealth {
+  if (!health) return { hp: GUARDIAN_MAX_HP, updatedAt: new Date(now).toISOString() };
+  const lastUpdate = new Date(health.updatedAt).getTime();
+  const elapsedHours = Number.isFinite(lastUpdate) ? Math.floor(Math.max(0, now - lastUpdate) / 3_600_000) : 0;
+  return { hp: Math.min(GUARDIAN_MAX_HP, Math.max(0, health.hp) + elapsedHours * GUARDIAN_HP_PER_HOUR), updatedAt: new Date(now).toISOString() };
 }
 function weekKey() {
   const date = new Date();
@@ -176,6 +203,10 @@ function createProfileRecord(name: string, avatar: AvatarId): StudentProfile {
     magicUsage: {},
     elementXp: {},
     weeklyMagicQuest: getWeeklyMagicQuest(),
+    gold: 0,
+    inventory: emptyInventory(),
+    guardianHealth: {},
+    guardianLosses: [],
     metrics: emptyMetrics(),
   };
 }
@@ -207,6 +238,10 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     magicUsage: candidate.magicUsage && typeof candidate.magicUsage === "object" ? candidate.magicUsage : {},
     elementXp: candidate.elementXp && typeof candidate.elementXp === "object" ? candidate.elementXp : {},
     weeklyMagicQuest: { ...currentQuest, ...validQuest, usedCount: Math.min(currentQuest.target, Math.max(0, Number(validQuest.usedCount) || 0)), rewardClaimed: Boolean(validQuest.rewardClaimed) },
+    gold: typeof candidate.gold === "number" && Number.isFinite(candidate.gold) ? Math.max(0, Math.floor(candidate.gold)) : 0,
+    inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
+    guardianHealth: candidate.guardianHealth && typeof candidate.guardianHealth === "object" ? candidate.guardianHealth : {},
+    guardianLosses: Array.isArray(candidate.guardianLosses) ? candidate.guardianLosses.filter((id): id is string => typeof id === "string") : [],
     metrics: { ...emptyMetrics(), ...(candidate.metrics && typeof candidate.metrics === "object" ? candidate.metrics : {}) },
   };
 }
@@ -218,7 +253,7 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 5,
+      version: 6,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
@@ -247,6 +282,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setStore((previous) => ({ ...previous, profiles: [...previous.profiles, record], activeProfileId: record.id }));
   }, []);
   const selectProfile = useCallback((profileId: string) => setStore((previous) => previous.profiles.some((entry) => entry.id === profileId) ? { ...previous, activeProfileId: profileId } : previous), []);
+  const exitGame = useCallback(() => setStore((previous) => ({ ...previous, activeProfileId: null })), []);
   const setAudioEnabled = useCallback((audioEnabled: boolean) => setStore((previous) => ({ ...previous, audioEnabled })), []);
 
   const weeklyOpenCount = useMemo(() => {
@@ -310,11 +346,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       const collected = masteredNow && !current.collectedGuardianIds.includes(station.guardianId) ? [...current.collectedGuardianIds, station.guardianId] : current.collectedGuardianIds;
       const completed = masteredNow && !current.completedStationIds.includes(station.id) ? [...current.completedStationIds, station.id] : current.completedStationIds;
       const team = masteredNow && !current.teamGuardianIds.includes(station.guardianId) && current.teamGuardianIds.length < 3 ? [...current.teamGuardianIds, station.guardianId] : current.teamGuardianIds;
+      const recaptured = masteredNow && current.guardianLosses.includes(station.guardianId);
       const today = localDate();
       const streak = current.lastStudyDate === today ? current.streak : current.lastStudyDate ? current.streak + 1 : 1;
       return {
         ...current,
         xp: current.xp + (correct && !alreadyCorrect ? ({ E: 25, M: 35, H: 50 } as Record<Difficulty, number>)[question.difficulty] : 0),
+        gold: current.gold + (correct ? ({ E: 12, M: 18, H: 25 } as Record<Difficulty, number>)[question.difficulty] : 4),
         streak,
         lastStudyDate: today,
         correctQuestionIds: correct && !alreadyCorrect ? [...current.correctQuestionIds, questionId] : current.correctQuestionIds,
@@ -322,6 +360,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         completedStationIds: completed,
         collectedGuardianIds: collected,
         teamGuardianIds: team,
+        guardianLosses: recaptured ? current.guardianLosses.filter((id) => id !== station.guardianId) : current.guardianLosses,
+        guardianHealth: recaptured ? { ...current.guardianHealth, [station.guardianId]: { hp: GUARDIAN_MAX_HP, updatedAt: new Date().toISOString() } } : current.guardianHealth,
         attempts: { ...current.attempts, [question.stationId]: updatedAttempt },
         metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), lastActiveAt: new Date().toISOString() },
       };
@@ -330,12 +370,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }, [profile, updateProfile]);
 
   const isBossUnlocked = Boolean(profile && profile.collectedGuardianIds.filter((id) => id !== "atlas").length >= 2);
-  const startBattle = useCallback(() => {
+  const startBattle = useCallback((guardianId: string) => {
     if (!profile || !isBossUnlocked) return false;
+    if (!profile.teamGuardianIds.includes(guardianId) || !profile.collectedGuardianIds.includes(guardianId)) return false;
+    const health = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
+    if (health.hp <= 0) return false;
     const unseen = BOSS_QUESTION_IDS.filter((id) => !profile.bossQuestionHistory.includes(id));
     if (unseen.length < 5) return false;
     const questionIds = shuffle(unseen).slice(0, 5);
-    updateProfile(profile.id, (current) => ({ ...current, battle: { status: "active", questionIds, questionIndex: 0, playerHp: 100, bossHp: 150, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
+    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 150, guardianId, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
     return true;
   }, [profile, isBossUnlocked, updateProfile]);
   const resolveBattleAnswer = useCallback((answer: number, spellId: string): BattleAnswerResult | null => {
@@ -349,7 +392,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const bossDamage = correct ? selectedSpell.damage : 0;
     const playerDamage = correct ? selectedSpell.counterDamage : 34;
     const bossHp = Math.max(0, profile.battle.bossHp - bossDamage);
-    const playerHp = Math.max(0, profile.battle.playerHp - playerDamage);
+    const guardianId = profile.battle.guardianId ?? profile.teamGuardianIds[0];
+    if (!guardianId) return null;
+    const currentGuardianHealth = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
+    const playerHp = Math.max(0, currentGuardianHealth.hp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
     const currentQuest = profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest();
     const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
@@ -362,15 +408,28 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const nextElementLevel = Math.floor(totalElementXp / ELEMENT_XP_PER_LEVEL) + 1;
     const levelUp = nextElementLevel > previousLevel ? { element: magicElement, previousLevel, nextLevel: nextElementLevel, totalXp: totalElementXp } : undefined;
     updateProfile(profile.id, (current) => {
+      const guardianStation = STATIONS.find((station) => station.guardianId === guardianId);
+      const guardianLost = playerHp === 0;
+      const nextAttempts = { ...current.attempts };
+      if (guardianLost && guardianStation) delete nextAttempts[guardianStation.id];
+      const removedQuestionIds = guardianLost && guardianStation ? guardianStation.questionIds : [];
       return {
         ...current,
         battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } },
         xp: current.xp + (correct ? 30 : 0) + questReward,
+        gold: current.gold + (correct ? 30 : 10),
         magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
         elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain },
         weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
         metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() },
-        collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
+        collectedGuardianIds: guardianLost ? current.collectedGuardianIds.filter((id) => id !== guardianId) : bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
+        teamGuardianIds: guardianLost ? current.teamGuardianIds.filter((id) => id !== guardianId) : current.teamGuardianIds,
+        guardianHealth: guardianLost ? Object.fromEntries(Object.entries(current.guardianHealth).filter(([id]) => id !== guardianId)) : { ...current.guardianHealth, [guardianId]: { hp: playerHp, updatedAt: new Date().toISOString() } },
+        guardianLosses: guardianLost && !current.guardianLosses.includes(guardianId) ? [...current.guardianLosses, guardianId] : current.guardianLosses,
+        correctQuestionIds: guardianLost ? current.correctQuestionIds.filter((id) => !removedQuestionIds.includes(id)) : current.correctQuestionIds,
+        incorrectQuestionIds: guardianLost ? current.incorrectQuestionIds.filter((id) => !removedQuestionIds.includes(id)) : current.incorrectQuestionIds,
+        completedStationIds: guardianLost && guardianStation ? current.completedStationIds.filter((id) => id !== guardianStation.id) : current.completedStationIds,
+        attempts: nextAttempts,
       };
     });
     return { correct, playerDamage, bossDamage, ended, levelUp };
@@ -392,6 +451,29 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       return { ...current, teamGuardianIds: selected ? current.teamGuardianIds.filter((id) => id !== guardianId) : [...current.teamGuardianIds, guardianId] };
     });
   }, [profile, updateProfile]);
+  const guardianHp = useCallback((guardianId: string) => {
+    if (!profile?.collectedGuardianIds.includes(guardianId)) return 0;
+    return effectiveGuardianHealth(profile.guardianHealth[guardianId]).hp;
+  }, [profile]);
+  const purchaseItem = useCallback((itemId: ShopItem["id"]) => {
+    if (!profile) return { ok: false, message: "Hãy vào một hồ sơ trước khi ghé Shop." };
+    const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
+    if (!item) return { ok: false, message: "Vật phẩm này chưa có trong sổ hàng." };
+    if (profile.gold < item.price) return { ok: false, message: `Cần thêm ${item.price - profile.gold} Gold để mua ${item.label}.` };
+    updateProfile(profile.id, (current) => ({ ...current, gold: current.gold - item.price, inventory: { ...current.inventory, [itemId]: current.inventory[itemId] + 1 } }));
+    return { ok: true, message: `Đã thêm ${item.label} vào Kho đồ.` };
+  }, [profile, updateProfile]);
+  const useHealingItem = useCallback((itemId: ShopItem["id"], guardianId: string) => {
+    if (!profile) return { ok: false, message: "Hãy vào một hồ sơ trước khi dùng vật phẩm." };
+    if (profile.battle.status === "active") return { ok: false, message: "Không thể dùng bình hồi phục trong lúc Atlas đang phản công." };
+    if (!profile.collectedGuardianIds.includes(guardianId)) return { ok: false, message: "Guardian này chưa có trong Bộ sưu tập." };
+    const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
+    if (!item || !profile.inventory[itemId]) return { ok: false, message: "Kho đồ chưa có bình hồi phục này." };
+    const health = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
+    if (health.hp >= GUARDIAN_MAX_HP) return { ok: false, message: "Guardian này đã đầy sinh lực." };
+    updateProfile(profile.id, (current) => ({ ...current, inventory: { ...current.inventory, [itemId]: Math.max(0, current.inventory[itemId] - 1) }, guardianHealth: { ...current.guardianHealth, [guardianId]: { hp: Math.min(GUARDIAN_MAX_HP, health.hp + item.heal), updatedAt: new Date().toISOString() } } }));
+    return { ok: true, message: `${item.label} đã hồi sinh lực cho guardian.` };
+  }, [profile, updateProfile]);
   const resetActiveProfile = useCallback(() => { if (profile) updateProfile(profile.id, (current) => createProfileRecord(current.name, current.avatar)); }, [profile, updateProfile]);
 
   const level = Math.floor((profile?.xp ?? 0) / 250) + 1;
@@ -405,18 +487,39 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const weeklyMagicQuest = useMemo(() => profile ? (profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest()) : null, [profile]);
   const elementLevel = useCallback((element: ElementName) => Math.floor((profile?.elementXp[element] ?? 0) / ELEMENT_XP_PER_LEVEL) + 1, [profile]);
   const createProfileBackup = useCallback(() => profile ? JSON.stringify({ format: "math4fun-profile-backup", version: 1, exportedAt: new Date().toISOString(), profile }, null, 2) : null, [profile]);
-  const hasParentPin = Boolean(store.parentPin);
-  const setParentPin = useCallback(async (pin: string) => {
-    if (!isParentPin(pin)) return { ok: false, message: "PIN cần gồm 4–8 chữ số." };
-    if (typeof window === "undefined" || !window.crypto?.subtle) return { ok: false, message: "Trình duyệt này chưa hỗ trợ tạo PIN an toàn." };
+  const saveParentPin = useCallback(async (pin: string, securityQuestion: string, securityAnswer: string) => {
+    if (!isParentPin(pin)) return { ok: false as const, message: "PIN cần gồm 4–8 chữ số." };
+    if (securityQuestion.trim().length < 5 || securityAnswer.trim().length < 2) return { ok: false as const, message: "Hãy ghi câu hỏi bảo mật và câu trả lời dễ nhớ cho phụ huynh." };
+    if (typeof window === "undefined" || !window.crypto?.subtle) return { ok: false as const, message: "Trình duyệt này chưa hỗ trợ tạo PIN an toàn." };
     const salt = createParentPinSalt();
-    const hash = await hashParentPin(pin, salt);
-    if (!hash) return { ok: false, message: "Không thể tạo PIN trên trình duyệt này." };
-    const parentPin = { salt, hash, createdAt: new Date().toISOString() };
+    const answerSalt = createParentPinSalt();
+    const [hash, answerHash] = await Promise.all([hashParentPin(pin, salt), hashParentPin(normalizeSecurityAnswer(securityAnswer), answerSalt)]);
+    if (!hash || !answerHash) return { ok: false as const, message: "Không thể tạo PIN trên trình duyệt này." };
+    const parentPin: ParentPinRecord = { salt, hash, answerSalt, answerHash, securityQuestion: securityQuestion.trim(), createdAt: new Date().toISOString() };
     parentPinRef.current = parentPin;
     setStore((previous) => ({ ...previous, parentPin }));
-    return { ok: true, message: "Đã thiết lập PIN phụ huynh trên thiết bị này." };
+    return { ok: true as const, message: "Đã lưu PIN và câu hỏi bảo mật trên thiết bị này." };
   }, []);
+  const hasParentPin = Boolean(store.parentPin);
+  const parentSecurityQuestion = store.parentPin?.securityQuestion ?? null;
+  const setParentPin = useCallback(async (pin: string, securityQuestion: string, securityAnswer: string) => {
+    if (parentPinRef.current) return { ok: false, message: "PIN đã tồn tại. Hãy dùng mục Đổi PIN." };
+    return saveParentPin(pin, securityQuestion, securityAnswer);
+  }, [saveParentPin]);
+  const changeParentPin = useCallback(async (currentPin: string, nextPin: string, securityQuestion: string, securityAnswer: string) => {
+    const savedPin = parentPinRef.current;
+    if (!savedPin) return { ok: false, message: "Chưa có PIN phụ huynh để thay đổi." };
+    const enteredHash = await hashParentPin(currentPin, savedPin.salt);
+    if (!enteredHash || enteredHash !== savedPin.hash) return { ok: false, message: "PIN hiện tại chưa chính xác." };
+    return saveParentPin(nextPin, securityQuestion, securityAnswer);
+  }, [saveParentPin]);
+  const resetParentPin = useCallback(async (securityAnswer: string, nextPin: string) => {
+    const savedPin = parentPinRef.current;
+    if (!savedPin?.answerSalt || !savedPin.answerHash) return { ok: false, message: "PIN cũ chưa có câu hỏi bảo mật; hãy phụ huynh thiết lập lại trực tiếp trên thiết bị này." };
+    const answerHash = await hashParentPin(normalizeSecurityAnswer(securityAnswer), savedPin.answerSalt);
+    if (!answerHash || answerHash !== savedPin.answerHash) return { ok: false, message: "Câu trả lời bảo mật chưa chính xác." };
+    return saveParentPin(nextPin, savedPin.securityQuestion ?? "Câu hỏi bảo mật", securityAnswer);
+  }, [saveParentPin]);
   const restoreProfileBackup = useCallback(async (raw: string, pin: string) => {
     if (raw.length > 500_000) return { ok: false, message: "Tệp sao lưu quá lớn để khôi phục an toàn." };
     const savedPin = parentPinRef.current;
@@ -433,6 +536,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       return { ok: false, message: "Không thể đọc tệp JSON. Vui lòng chọn tệp sao lưu chưa bị chỉnh sửa." };
     }
   }, []);
+  const elementBadges = useMemo(() => profile ? ELEMENT_ORDER.filter((element) => (profile.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2) : [], [profile]);
   const value = useMemo<GameContextValue>(() => ({
     profile,
     profiles: store.profiles,
@@ -465,12 +569,22 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     weeklyMagicQuest,
     createProfileBackup,
     hasParentPin,
+    parentSecurityQuestion,
     setParentPin,
+    changeParentPin,
+    resetParentPin,
     restoreProfileBackup,
     toggleTeamGuardian,
+    exitGame,
+    gold: profile?.gold ?? 0,
+    inventory: profile?.inventory ?? emptyInventory(),
+    elementBadges,
+    guardianHp,
+    purchaseItem,
+    useHealingItem,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, setParentPin, restoreProfileBackup, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

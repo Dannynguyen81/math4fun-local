@@ -98,3 +98,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Sổ Phép trình bày hệ nguyên tố như mẫu vật lưu trữ: taxonomy, dấu niêm phong, liên kết guardian và mốc route phải đi cùng mỗi video hoặc âm thanh đã mở.
 - Trạng thái trạm khi chưa có hồ sơ là một **phiếu nhiệm vụ hành trình**: luôn có route fragment, mốc khóa, một mẫu guardian niêm phong và lời dẫn giải thích bằng chứng sẽ được ghi sau khi ký tên.
 - Guardian trên mọi màn hình phải được trình bày như **tiêu bản Math4Fun**: khung tròn/tem mực, nhãn phân loại, trạng thái niêm phong và dấu vết tiến độ; không dùng portrait nhân vật đứng một mình.
+- Trang phụ như Shop và Thống kê phải tổ chức nội dung bằng một **chuỗi chuyển hóa nhìn thấy được** (lời giải → bằng chứng → Gold/ấn → guardian), không chỉ đặt route thread ở phần đầu.
+- Trạng thái chưa ký tên của mỗi trang phải có một **guardian/specimen riêng theo chức năng** (ví dụ Dexo cho tiếp tế, Atlas cho báo cáo Boss), kèm taxonomy và phần thưởng/mốc mở khóa liên quan.
+- Side navigation là chỉ mục ghi chú dã ngoại; artifact, route và evidence trong phần nội dung chính phải luôn chiếm ưu thế thị giác hơn điều hướng.

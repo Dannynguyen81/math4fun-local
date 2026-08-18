@@ -76,3 +76,14 @@
 - [x] Rà soát tài liệu Archimede đã đối chiếu để chọn câu hỏi chính xác cho hai trạm được mở trong đợt này.
 - [x] Bổ sung hai bộ 10 thử thách E–M–H, giữ xáo trộn và chống lặp, cho T2.03 và T1.08.
 - [x] Kiểm tra TypeScript, build và giao diện của luồng mới; cần chơi thử thủ công thêm với hồ sơ thật và tệp JSON thực tế.
+
+## Tiến trình, kinh tế và hành trình guardian
+
+- [x] Thiết kế huy hiệu nguyên tố và điều kiện mở khi hoàn thành đủ ba bậc XP của một hệ.
+- [x] Đối chiếu PDF Archimede và mở thêm hai trạm tiếp theo, mỗi trạm có đúng 10 câu hỏi kèm nguồn, gợi ý và đáp án kiểm chứng.
+- [x] Bổ sung câu hỏi bảo mật, đổi PIN và đặt lại PIN phụ huynh theo luồng local an toàn.
+- [x] Cải tổ tạo hồ sơ với bộ hình đại diện dễ thương, chọn nhanh và hiển thị rõ nhân vật đã chọn.
+- [x] Thêm Gold cho mỗi câu trả lời, kho đồ cá nhân và dữ liệu sản phẩm Shop.
+- [x] Thiết kế hồi máu theo thời gian, bình hồi phục 25%/50%/100% và luồng mua/dùng vật phẩm.
+- [x] Áp dụng luật guardian hết HP bị mất, gỡ khỏi đội và phải thu phục lại qua trạm.
+- [x] Kiểm tra TypeScript, build và các màn hình đại diện; cần chơi thử thủ công thêm chuỗi chiến đấu dài, mua/dùng bình và đặt lại PIN với dữ liệu thật.
