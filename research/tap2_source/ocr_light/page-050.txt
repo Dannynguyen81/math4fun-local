@@ -1,0 +1,23 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Minh và Hoàng, mỗi người đều có một đồng xu, mỗi đồng xu đều có hai mặt:
+mặt sấp và mặt ngửa. Hỏi có bao nhiêu khả năng có thể xảy ra nếu:
+a. Hai bạn đều tung được mặt giống nhau?
+b. Hai bạn tung được mặt khác nhau?
+
+.3. Gieo đồng thời 2 xúc xắc. Mỗi xúc xắc có 6 mặt được đánh số từ 1 đến 6.
+.a. Có bao nhiêu khả năng có thể xảy ra khi gieo đồng thời 2 xúc xắc đớ?
+
+'b. Có bao nhiêu khả năng có thế xảy ra khi gieo đồng thời 2 xúc xắc đó xuất hiện.
+hai mặt có cùng số chấm?
+
+©. Có bao nhiêu khả năng có thể xây ra khi gieo đồng thời 2 xúc xắc đó xuất hiện
+hai mặt có số chấm khác nhau?
+
+.4. Trong hộp có 12 viên bi vàng, 10 viên bi xanh và 6 viên bi đỏ cùng kích thước, khối
+tượng. Không nhìn vào hộp, cần lấy ra ít nhất bao nhiêu viên bi để chắc chắn trong
+số các viên bi lấy ra:
+
+a. Có đủ 3 màu?
+b. Ít nhất 4 viên bị đỏ?
+©. Ít nhất 7 viên bí cùng màu?

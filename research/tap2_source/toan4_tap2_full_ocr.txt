@@ -1,0 +1,2936 @@
+NGUYỄN THUÝ HẰNG
+
+HƯỚNG DẪN HỌC +
+
+TOAN
+
+3
+
+TẬP HAI
+
+NGUYỄN THUÝ HÃNG
+
+Hướng dẫn học
+
+TOÁN
+
+Tập hai
+
+NHÀ XUẤT BẢN GIÁO DỤC VIỆT NAM
+LỜI GIỚI THIỆU
+
+Các em học sinh yêu quỷ!
+
+Sách Hướng dẫn học Toán 4 được biên soạn dành riêng cho.
+học sinh thuộc hệ thống Archimedes School. Cuốn sách nhằm
+hỗ trợ các em hệ thống hoá, mở rộng và nâng cao kiến thức.
+cũng nhưkĩ năng tư duy lögïc. Với những ví dụ minh hoạ sống động
+'và gần gũi, cuốn sách không chỉ giúp học sinh nắm vững kiến thức.
+mà còn khơi dậy niềm đam mô với toán học.
+
+Sách Hướng dẫn học Toán 4 được thiết kế khoa học, dễ hiểu.
+
+Các ví dụ gần gũi được lựa chọn kĩ lưỡng nhằm tạo động lực, kích
+
+thích sự hứng thú, từ đó giúp các em ghi nhớ kiến thức dễ dàng
+
+và làm quen với toán học một cách tự nhiên, hiệu quả.
+
+Nội dung của cuốn sách bao gồm:
+
+€Ồ các chuyên đề eo oáng từ cơ bán đến năng cáo gắn tiền
+'thực tiễn, phù hợp với lứa tuối giúp kích thích khả năng suy
+tuận lôgic và rèn luyện tư duy nhạy bén của học sinh.
+
+nương phép gái toán hiệu quả: Cung cấp các bước giải
+toán giúp các em học sinh có thể giải quyết các bài toán
+một cách hiệu quả và nhanh chóng.
+
+Bài tập phong phú và đa dạng: Bao gồm nhiều bài tập thực
+hành từ dễ đến khó, được chọn lọc kĩ lưỡng đế phù hợp với.
+khả năng và nhu cầu học tập của các em học sinh.
+
+Chúng tôi tin rằng, sách Hướng dẫn học Toán 4 của hệ thống.
+
+Archimedes School không chỉ là người bạn đồng hành mà còn
+
+tà nguồn động lực giúp các em học sinh tự tin khám phá và phát
+
+triển tư duy Lôgic, sáng tạo. Chúc các em có những giờ học toán.
+thật thú vị và bổ ích!
+
+Nguyễn Thuý Hằng
+
+40 g dẫn học Toán 4 ~Tập hai
+
+GomNhom com
+
+MỤC LỤC (Table of Contents)
+Trung bình cộng 5
+Bài toán tính ngược. 18
+Bài toán thừa và thiếu. 25
+Bài toán rút về đơn vị 3
+GÌ Thống kê - Xác suất 44
+Phân số 52
+So sánh phân số s9
+Phép tính phân số 68
+Một số bài toán về phân số %6
+(Œ Giai bài toán bằng sơ đồ đoạn thẳng 101
+
+"`" ........ÓÔ
+
+Khái niệm về trung bình cộng
+
+Bài toán 1: Sau hai bài kiểm tra toán, An được điểm 6 và điểm 10, Bình được
+điểm 8 và điểm 10. Hỏi ai trong số hai bạn được xếp hạng cao hơn?
+
+Để giải quyết vấn đề trên, người ta chọn một “điểm” thay cho các điểm của
+mỗi bạn. Điểm này gọi tá điểm “trung bình”.
+
+Điểm trung bình của An là: (6 + 10) : 2=
+Điểm trung bình của Bình là: (8 + 10) :
+Vậy: Bình được xếp hạng cao hơn.
+Trung bình cộng của hai hay nhiều số là tổng của các số đó chìa cho số các
+số hạng.
+
+Kết luận: Các bước tìm số trung bình cộng:
+
+Bước 1: Xác định số các số hạng. Tính tổng các số.
+
+Bước 2: Trung bình cộng = Tổng : Số các số hạng.
+
+Vidu1
+Gia đình bác An phải trả 1 550 000 đồng cho hoá đơn tiền điện tháng Bảy này.
+Hỏi trung bình mỗi ngày trong tháng đó, gia định bác An phải trả bao nhiêu tiền điện?
+Hướng dẫn
+
+Tháng Bảy có 31 ngày. Trung bình mỗi ngày gia đình bác An phải trả số tiền điện là:
+
+1 880 000. 31 = 50 000 (đồng)
+Đáp số: 50 000 đồng.
+
+Vidu2
+
+Bác Hoà gánh hai thúng quả ra chợ bán. Thúng thứ nhất đựng 13 kg. Thúng thứ hại
+đựng 19 kg. Hỏi bác Hoà phải chuyển bớt bao nhiều ki-lô-gam từ thúng nào sang.
+thúng nào để khối lượng quả của hai thúng bằng nhau cho tiện việc chuyển hàng.
+của bác?
+
+Hướng dẫn
+Tổng khối lượng của hai thúng là: 13 + 19 = 32 (kg).
+Khi khốf lượng quả của hai thúng bằng nhau thì mỗi thúng có khối lượng tà:
+$ 32:2 = 16 (kg)
+Khối lượng quá bác cần chuyến từ thúng thứ hai sang thủng thứ nhất là:
+19~16= 3 (kg)
+
+Đáp số: 3 kg.
+"eưỡng gân học Toán] Tập hai —_ Đ
+
+omNhom.ec
+Đài toán tm số hàng chưa biết khí cho trước trung bình cộng.
+
+Vidu3.
+
+Trung bình cộng số cây của ba lớp 4A, 4B và 4C trồng được tà 68 cây. Biết lớp 4A.
+
+Hưởng dẫn
+Tống số cây ba lớp trồng được là:
+68 x 3= 204 (cây)
+Lớp 4C trồng được số cây tà:
+'204~62~70 = 72 (cây)
+Đáp số: 72 cây.
+
+Vidu4.
+Trung bình cộng của hai số là 1024. Biết số thứ nhất là 957. Tìm số thứ hai..
+
+Hướng dẫn
+Tổng Hai số là: 1024 x 2 = 2048,
+Số thứ hai là: 2048 = 987 = 1091.
+Đáp số: 1091.
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Trung bình cộng của các số trong một dãy số cách đều
+
+ViduS
+Cho dây số 2; 4; 6; 8; 10; 12. Tìm trung bình cộng của các số trong dây số đó.
+Hướng dẫn
+
+Dây số trên có 6 số hạng.
+
+Trung bình cộng của các số trong dãy số là:
+ˆ (2+4+6+8+10+12):6=7
+
+Đáp số: 7.
+Mặt khác: 7 = (2 + 12) : 2 và dây số đã cho là dãy số cách đều 2 đơn vị.
+Nhận xét:
+Trung bình cộng của các số trong một dãy số cách đều bằng trung bình cộng của.
+số đầu dây và số cuối dãy.
+Vidu6
+Tìm trung bình cộng của các số trong dãy số: 2013; 2015; 2017; 2019; 2021;
+2023; 2025.
+Hướng dẫn
+Vì dãy số trên là dây số cách đều nên trung bình cộng của các số trong dãy
+sổ là:
+
+(2013 + 2025) : 2 = 2019.
+Đáp số: 2019.
+
+Nhận xét khác: Dây số trên là dãy số cách đều có lẻ số hạng (7 số) nên trung bình
+công của các số trong dãy số bằng số hạng ở chính giữa là 2019.
+
+Ví dụ7
+Biết tổng của ba số chẩn liên tiếp bằng 216. Tìm ba số đó.
+Hưởng dẫn
+Trung bình cộng của ba số là:
+216:3=72
+
+Ba số chẵn liên tiếp tạo thành dãy số cách đều nên trung bình cộng của ba số đó
++... bằng số ở chính giữa. Do đó, số ở chính giữa là 72.
+
+Ba số cần tìm là: 70; 72; 74.
+
+.Hường cân học Toán 4 Tập hai
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+bong sơ đồ đoạn thẳng giải toán trung bình cộng.
+
+Bài toán 3; Nam chạy bộ mỗi ngày. Ngày thứ nhất, Nam chạy 30 phút. Ngày thứ:
+hai, Nam chạy 40 phút. Ngày thứ ba, Nam chạy số phút bằng trung bình cộng,
+của cả ba ngày. Hồi trong ngày thứ ba Nam chạy bộ bao nhiêu phút?
+
+Tổng số phút Nam chạy trong ngày thứ nhất và ngày thứ hai là: 30 +40 =70 (phút)
+ứng với 2 phần.
+
+Ngày thử ba Nam chạy số phút là: 70 : 2 = 35 (phút).
+Đáp số: 35 phút.
+
+Trong bài toán, số phút của ngày thứ ba bằng trung bình cộng của cả ba ngày.
+nên ta chưa thể tính trung bình cộng bằng cách tính tổng của ba ngày rồi chia.
+cho 3.
+
+Ta sử dụng sơ đồ biếu diễn trung bình cộng là 1 phần thì tổng là 3 phần như trên.
+
+Số phút của ngày thứ ba bằng số trung bình cộng (1 phần), suy ra tổng số phút.
+chạy của hai ngày đầu là: 3~ 1 = 2 (phần). Thời gian chạy của hai ngày đầu đã.
+biết nên ta tính được giá trị 1 phần hay trung bình cộng.
+
+Kết tuộn:
+
+'Nếu một số hạng bằng trung bình cộng của tất cả các số hạng trong dãy thì số
+hạng đó cũng bằng trung bình cộng của các số hạng còn lại.
+
+'Các bước giải bài toán trung bình cộng bằng sơ đồ đoạn thắng:
+
+'Bước 1: Xác định được các đại lượng đã biết, đại tượng chưa biết và mối quan
+hệ của chủng với trung bình cộng. *
+Bước 2: Vẽ sơ đồ biểu diễn các đại lượng theo trung bình cộng tử đó tìm ra trung.
+bình công.
+
+Bước 3: Dựa vào trung bình cộng tìm các đại tượng được yêu cầu..
+
+Víidu8
+
+Tổ Một được thưởng 24 ngôi sao, tổ Hai được thưởng 28 ngôi sao. Tổ Ba được thưởng.
+số ngôi sao bằng trung bình cộng số ngôi sao của ba tổ. Hỏi tổ Ba được thưởng bao
+nhiêu ngôi sao?
+
+SỔ Beseeseomswlenogmepthevond
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Tổng số ngôi sao của tổ Một và tố Hai là: 24 + 28 = 52 (ngôi sao) ứng với 2 phần.
+Số ngôi sao của tổ Ba là: 52 : 2 = 26 (ngôi sao).
+Đáp số: 26 ngôi sao.
+Víidu9
+An đọc xong một quyển truyện trong ba ngày. Ngày thứ nhất An đọc 39 trang, ngày
+
+thứ hai An đọc 41 trang, ngày thứ ba An đọc nhiều hơn trung bình cộng của cả ba
+ngày là 8 trang. Hỏi quyển truyện đó dày bao nhiêu trang?
+
+Hướng dẫn
+bê SG SA s
+Ngày thứ bại Z——>+^—+
+Ì Ngày thứ nhất và ngày thứ hai
+Tổng: ————_
+
+Hai phần tương ứng với số trang là: 39 + 41 + 8 = 88 (trang).
+
+Trung bình cộng số trang An đọc trong cả ba ngày là: 8B : 2 = 44 (trang).
+
+Quyền truyện đó có số trang là: 44 x 3= 132 (trang).
+
+Đáp số: 132 trang.
+
+Ví dụ 10
+Đầu năm học nhà trường kiếm tra sức khoẻ của học sinh. Bạn Hà nặng 38 kg, bạn
+Nam nặng 34 kg. Bạn Cường có số cân nặng kém trung bình cộng số cân nặng của
+ba bạn là 4 kg. Hỏi bạn Cường năng bao nhiêu ki-lô-gam?
+Hướng dẫn P
+
+Ta có sơ đồ:
+lon sim xe
+Tổng: =
+Hai phần tương ứng với: 36 + 34 ~4 = 66 (kg). — ~
++ _.._ Trung bình cộng số cân nặng của ba bạn tà: 66 : 2 = 33 (kg).
+Cân nặng của Cường là: 33 - 4 = 29 (kg).
+
+Đáp số: 29 kg.
+
+Hà và Nam
+
+`"... x.‹
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 1.
+
+1. Tìm trung bình cộng của các số trong dãy số sau:
+
+a. 12; 16; 20 b.7; 15; 23; 35
+
+e. 41; 45; 42; 44 .d, 92; 98; 67; 81; 52
+
+2. Bảng dưới đây ghi lại nhiệt độ các ngày trong tuần đầu tháng 10 của Hà Nội:
+
+Thứ Hai | Thứ Ba | Thứ Tư | Thứ Năm | Thứ Sáu | Thử Bảy | Chủ nhật
+Nhiệt độ | 27C | 28% | 28C | 29C | 30%Œ | 3C | 30C
+Tính nhiệt độ trung bình các ngày trong tuần đầu tháng 10 của Hà Nội.
+
+3. Điểm kiếm tra môn Toán tháng 9 của lớp 4C (thang điểm 15) được cho trong bảng sau:
+
+40 | 12 | 19 | 1⁄4 | 15
+6| 4 |9 |12| 5
+a. Hỏi lớp 4C có bao nhiêu học sinh?
+
+b. Tính trung bình cộng điểm kiểm tra môn Toán tháng 9 của lớp 4C.
+
+4. Cho dãy số liệu về điểm thi môn Toán cuối học kì I của các bạn tổ Một của lớp 4A
+như sau: 7; 8; 9; 9; 10; 10; 10; 8; 9; 10.
+
+a, Tính trung bình cộng điểm thi môn Toán cuối học kì | của các bạn trong tố Một.
+
+b. Hỏi có bao nhiêu bạn trong tố Một có số điểm thi nhỏ hơn trung bình cộng điểm
+thị môn Toán cuối học kì | của các bạn tổ Một?
+
+“+ TT =
+
+đỒ, naanssoseeUsedgaepmesode
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. Một người đi xe máy trong 3 giờ đầu, mỗi giờ đi được 45 km và trong 2 giờ sau,
+mỗi giờ đi được 50 km. Hỏi trung bình mỗi giờ người đó đi được bao nhiêu
+ki-lô-mét?
+
+6. Detox là một loại nước uống giúp giảm cân bằng việc sử dụng những thực
+phẩm giúp thanh lọc cơ thể. Chị Hoa pha nước detox hoa nhài và chanh để
+giảm cân trong một tuần. Mỗi ngày, chị Hoa uống 210 m\ nước detox. Từ ngày.
+'thứ năm kể từ khi bắt đầu uống thì chị Hoa tăng lượng uống thêm 70 mI mỗi
+ngày. Hỏi trung bình mỗi ngày của tuần đó, chị Hoa đã uống bao nhiều mi-li-lít
+nước detox?
+
+7. Black Friday ~ ngày vàng mua sắm là thứ Sáu lần thứ tư của tháng 11 hằng năm..
+'Vào ngày đó, do chính sách giảm giá lớn nên lượng sản phẩm của các cửa hãng
+được bán ra tốt nhiều. Tại một cửa hàng, trong tháng 11, lượng hàng bán ra trong.
+ngày Black Friday cao gấp 10 lần số lượng hàng bán ra trung bình cả tháng. Biết số
+lượng hàng bán ra của tháng đó là 3000 sản phẩm. Hỏi ngày thứ Sáu đó cửa hàng.
+đã bán ra bao nhiêu sản phẩm?
+
+tươngsithocTeana|Tiphai 1Í
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 2.
+
+1. Trung bình cộng của ba số tà 273, biết số thứ nhất là 253, số thứ nhất hơn số thứ
+hai 53 đơn vị. Tìm số thứ ba.
+
+2. Trung bình công của năm số là 245. Nếu bớt đi số thứ năm thì trung bình cộng của
+bốn số là 230. Tìm số thứ năm.
+
+43. Trung bình cộng của bổn số là 3500. Hỏi nếu thêm số thứ năm là 2800 thì trung
+bình công của năm số là bao nhiêu?
+
+4. Hiện nay, trung bình số tuổi của bố, mẹ và Hoa là 30 tuổi. Nếu không tính tuối bố
+thì trung bình số tuổi của mẹ và Hoa là 24 tuối. Tính tuối bố hiện nay.
+
+Í2 nưanneeeesstamogasptheseee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. Trong một đội bóng, tuổi trung bình của 11 cầu thủ là 22 tuổi. Nếu không tính đội
+trưởng thì tuổi trung bình của 10 cầu thủ là 2 tuối. Tính tuổi đội trưởng.
+
+6. Có 8 xe buýt số 46 (tuyến xe đi từ Cổ Loa đến bến xe Mỹ Đình). Trong một ngày,
+trung bình mỗi xe chở được 342 lượt khách. Nếu điều động thêm 1 xe nữa thì
+trung bình mỗi xe chở được bao nhiêu lượt khách trong một ngày?
+
+7. Gia đình Hải có 4 người nhưng chỉ có bố và mẹ đi làm. Biết lương tháng của mẹ
+tà 15 000 000 đồng, lương tháng của bổ gấp đôi lương tháng của mẹ. Mỗi tháng.
+gia đình Hải đều để dành được 20 000 000 đồng. Hỏi:
+
++. Mỗi tháng trung bình mỗi người trong gia đình Hải đã tiêu bao nhiêu tiền?
+
+b. Nếu Hải có thêm một người em nữa và gia đình Hải vẫn để dành số tiền như trước
+thì trung bình hằng tháng số tiền mỗi người tiêu sẽ giảm đi bao nhiêu?
+
+Bài 3.
+1. Tìm trung bình cộng của các số trong dãy số sau: ˆ
+¬.-..-
+
+s b. 9; 12;
+
+Ra denearma 18
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+^
+
+2. Tìm trung bình cộng của các số lẻ bé hơn 1000.
+
+3. Trung bình cộng của ba số tự nhiên liên tiếp bằng 128. Tìm ba số đó..
+
+4. Tổng của ba số chẵn liên tiếp bằng 444. Tìm ba số đó.
+
+5. Tổng của nắm số lẻ liên tiếp bằng 975. Tìm năm số đó.
+
+200. Hà đã xoá đi ba số tự nhiên tiên
+
+6. Cho dãy số tự nhiên liên tiếp: 1; 2; 3;
+tiếp thì tống của các số còn lại là 19 848. Tìm ba số mà Hà đã xoá.
+
+TỔ aessboscnesefsadgraspmewode
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 4.
+
+'1. Mẹ mua cho ba anh em một cuốn sách, một bộ đồ chơi và một bộ quần áo. Biết cuốn.
+sách có giá 340 000 đồng, bộ đồ chơi có giá 560 000 đồng và bộ quần áo có giá tiền
+bằng trung bình cộng giá tiền cả ba món đồ. Hỏi mẹ đã mua hết bao nhiêu tiền?
+
+2. Hướng ứng phong trào bảo vệ môi trường, lớp 4A thu gom chai nhựa đã qua sử
+dụng. Tổ Một thu được 142 chai và nhiều hơn tổ Hai 26 chai, tổ Ba thu được số
+chai nhựa bằng trung bình cộng số chai nhựa của cả ba tổ. Hỏi lớp 4A thu được.
+
+tất cả bao nhiều chai nhựa?
+
+3. Ba bạn Thuỷ, Hiền, Hoà cùng nhau đi hiệu sách để chuấn bị đồ dùng cho năm học.
+mới. Thuỷ mua 30 nhãn vở, Hiền mua 20 nhãn vở, số nhãn vở Hoà mua Ít hơn trung.
+bình cộng số nhãn vở của cả ba bạn là 6 chiếc. Hỏi Hoà mua bao nhiêu nhãn vở?
+
+4 Ì |
+
+4. Cầu Thị Nại (Quy Nhơn) tà cây cầu vượt biển dài thứ hai của Việt Nam, có phần.
+chiều dài cầu chính là 2477 m. Cầu Mỹ Thuận 1 (nổi tiền Tiền Giang và Vĩnh Lonj là
+cây cầu dây vãng đầu tiên của nước ta có chiều dài thân cău là 1535 m. Cầu Sông,
+'Hàn (Đà Nẵng) là cầu quay đầu tiên của Việt Nam có chiều dài kém trung bình cộng.
+chiều dài ba cây cầu là 1012 m. Tính chiều dài của cầu Sông Hàn.
+
+15
+.ưỡng dẫn bọc oán Tập hai
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+6. Bốn bạn An, Bình, Chỉ, Dũng góp tiền chung để mua sách. An góp 120 000 đồng,
+Bình góp 150 000 đồng, Chỉ góp nhiều hơn An 50 000 đồng, Dũng góp kém trung
+bình cộng số tiền của cả bốn bạn lä 20 000 đồng. Tính tổng số tiền mà bốn bạn
+
+góp được.
+
+6. Ba bạn Tú, Nam, Nghĩa cùng thi giải câu đố. Trong cùng một thời gian, Tú giải
+được 12 câu, Nam giải được 15 câu, Nghĩa giải được nhiều hơn trung bình cộng.
+số câu của cả ba bạn là 3 câu. Hỏi bạn Nghĩa giải được bao nhiêu câu đố?
+
+7. Một đội có ba xe chở hàng, xe thứ nhất chở được 45 tạ và chở ít hơn xe thứ hai
+10 tạ. Trung bình công số hàng cả ba xe chở được ít hơn số hàng xe thứ ba là 6 tạ.
+Hỏi cả ba xe chở được bao nhiêu tạ hàng?
+
+16 `. ......
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+8. Ba bạn Tân, Hùng, Dũng cùng đi câu cá. Tân câu được 18 con cá, Hùng cầu được ít
+hơn trung bình công số cá của cả ba bạn là 2 con, Dũng câu được nhiều hơn trung.
+bình cộng số cá của ba bạn là 4 con. Hỏi Dũng câu được bao nhiêu con cá?
+
+Bài 5.
+
+1. Bạn Nam cần phải đạt 100 điểm tuyệt đối ở bài kiếm tra môn Tiếng Anh cuối cùng.
+trong năm để điểm trung bình cộng từ 84 điểm thành 86 điểm. Hỏi Nam có tất cả
+bao nhiêu bài kiểm tra Tiếng Anh trong năm?
+
+2. Một nhóm giáo viên gồm 15 người có tuổi trung bình tà 29 tuổi. Biết rằng, tuổi
+trung bình của các thầy giáo là 33 tuổi, tuối trung bình của các cõ giáo là 27 tuổi.
+Hỏi có bao nhiêu thầy giáo, cô giáo trong nhóm giáo viên đớ?
+
+Hường dẫn học Toán “| Tập hai
+
+17
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2) Bài toán tính ngược
+
+Dùng sơ đồ đoạn thẳng giải bài toán tính ngược
+
+Bàitoần: Mẹ có mộtgiô trứng. Mỹ đã dùng ~ số trửng và 5 quả nữa thì trong giỏ.
+còn lại 13 quả trứng. Hỏi lúc đầu, giỏ trứng đó có bao nhiêu quả? ,
+
+Hướng dẫn.
+Ta có sơ đồ: Squê _8quá
+Số trứng trong giỏ: ——>==—————==—
+Ba phần tương ứng với số trứng là: 13 + 6 = 18 (quá).
+Một phần tương ứng với số trứng là: 18 : 3 = 6 (quả).
+Lúc đầu, trong giỏ có số trứng là: 8 x 4 = 24 (quả).
+Đáp số: 24 quả trửng.
+'Cách giải trên được gọi là phương pháp dùng “sơ đồ đoạn thẳng”.
+
+'Bằng cách xác định được số trứng ban đầu được chia làm 4 phần bằng nhau,
+sau khi sử dụng một phần và thêm 5 quả thì số trứng còn lại tà 13 quả..
+
+'Từ sơ đồ, 13 quả trứng còn lại công thêm 5 quả thì tương ứng với 3 phần bằng.
+nhau, tìm giá trị 1 phần rồi từ đó tính giá trị của 4 phần.
+
+Khí dùng sơ đồ đoạn thẳng giải bài toán tính ngược, cần lưu ý vẽ các đoạn thẳng.
+'bằng nhau để biểu thị các phần “bằng nhau”.
+
+Kết tuận: Các bước giải bài toán tính ngược sử dụng sơ đồ đoạn thẳng:
+
+Bước 1; Xác định được các đại lượng đã biết, đại lượng chưa biết và mối quan
+hệ của chúng với nhau. *
+
+Bước 2: Vẽ sơ đồ biếu diễn các đại lượng theo các phần bằng nhau, đánh dấu.
+các điểm trên đường thẳng tương ứng với các giá trị của đại lượng đã cho.
+
+'Bước 3: Tìm giá trị 1 phần và tìm ra giá trị các đại lượng được yêu cầu..
+
+Ví dụ1
+
+Lan có một số viên kẹo. Lan cho Hà š số kẹo đó và thêm 4 viên nữa thì Lan còn tại
+18 viên kẹo. Hỏi lúc đầu, Lan có bao nhiêu viên kẹo?
+
+TỔ naaeseemwandpsspnswede
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Hướng dẫn
+
+Ta có sơ đồ:
+4 4B...
+
+Số kẹo của Lan: ——————>—~>>———>——————
+Hai phần tương ứng với số kẹo là:
+
+18+4=22 (viên)
+Một phần tương ứng với số kẹo là:
+
+22:2= 11 (viên)
+Lúc đầu, Lan có số kọo là:
+
+11333 (viên)
+
+Đáp số: 33 viên kẹo.
+Vi dụ2
+
+kh xác bi cAieclbc nàn eg Ngày thứ nhất bạn đó đọc được ~ Số trang,
+ngày thứ hai bạn đó đọc được Khang cán l4 1002etffoiiti706316 107
+Hỏi quyển sách đồ cổ bao nhiều ranế?
+Hưởng dẫn
+Ta có sơ đồ:
+Tống số trang: —————————
+Số trang còn lại sau ngày thứ nhất: Em... ...n
+Số trang còn lại sau ngày thứ hai: —...
+?0
+Nấu ngày thứ hai bạn đó không đọc thêm 10 trang thì còn lại số trang là:
+70 + 10 = 80 (trang)
+Số trang còn lại sau ngày thứ nhất là:
+80:2 x 3= 120 (trang)
+Quyển sách đó có số trang là:
+120 :4 x 5= 150 (trang)
+* Đáp số: 150 trang. _*
+
+can
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+Bài 6.
+
+1. Hà có một số nhãn vở. Hà đã dùng. ¡ số nhãn vở đó thì còn tại 36 chiếc. Hỏi
+túc đầu, Hà có bao nhiêu chiếc nhãn vớ?
+
+2. Tìm một số, biết rằng nếu lấy số đó trừ đi § của nó rồi cộng thêm 25 thì được
+kết quả là 310.
+
+3. Nam đi xe đạp từ nhà đến trường. Nam đã đi được 1 km 50 m thì còn cách trường.
+h quãng đường. Tính độ dài quãng đường từ nhà Nam đến trường.
+
+Bài 7.
+1. Người ta xếp sách vào ba ngăn sách, Ỹ số sách được xếp vào ngăn thứ nhất, ¡ số
+
+sách còn lại được xếp vào ngăn thứ hai và 24 quyển sách cuối cùng được xếp vào.
+ngăn thứ ba. Hỏi cả ba ngăn có tất cả bao nhiêu quyền sách?
+
+2Ô nưươsonestmddeooseoee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Một mảnh đất hình chữ nhật có chiều dài 18 m. Người ta dùng, h diện tích mảnh
+đất đổ trồng rau, sau khi dùng, ị diện tích còn lại để trồng hoa thì còn tại 144 m?.
+
+Tính chiều rộng của mảnh đất đó.
+
+3. Trong thùng có một số quả bóng gồm ba màu: xanh, đỏ, vàng. Trong đó, Ỹ số
+bóng là màu xanh, ị số bóng còn lại là màu đỏ và số bóng màu vàng là 24 quả.
+
+Hỏi có bao nhiêu quả bóng màu xanh, bao nhiêu quả bóng mâu đở?
+
+4. Trong thùng có một số lít dầu. Mỗi lần người ta đều rút ra : số dầu đang có
+trong thùng. Sau ba lần rút như thế, trong thùng còn lại 54 ® dầu, Hỏi lúc đầu,
+trong thùng có bao nhiêu lít đầu?
+
+.....‹2:
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+^
+
+5. Câu lạc bộ cờ vua của một trường tiểu học được thành tập vào đầu năm học.
+Hết học kì l, số học sinh của câu lạc bộ tăng thêm. h số học sinh tham gia đầu
+năm học. Hết năm học, số học sinh của câu lạc bộ đó tăng thêm. 2 số học sinh.
+tham gia cuối học kì l nên có 35 học sinh. Hỏi có bao nhiêu học sinh tham gia câu.
+
+tạc bộ lúc đầu năm?
+
+Bài 8.
+'1. Một cửa hàng buổi sáng bán được. š số táo, buổi chiều bán được h số táo còn lại
+và 2 kg, buổi tối bán được 10 kg táo nữa thì vừa hết. Hỏi trước khi bán, cửa hàng
+
+có bao nhiêu ki-lð-gam táo?
+
+22 neeaboseneetandgspthesodd
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Một cửa hàng có một số gạo. Ngày thứ nhất cửa hàng bản được. Ỹ SỐ gạo và
+20 kg, ngày thứ hai bán được. Ỹ số gạo còn lại và 24 kg thì còn lại 216 kg gạo nữa.
+Hỏi lúc đầu, cửa hàng có bao nhiêu ki-lô-gam gạo?
+
+3. Một xe buýt khởi hành từ đầu bến. Ở trạm dừng thứ nhất, có. h số hành khách
+
+trên xe xuống và 6 hành khách lên. Ở trạm dừng thứ hai, có : số hành khách
+trên xe xuống và 8 hành khách lên. Lúc nảy, trên xe buýt có tất cá 20 hành khách.
+Hỏi khi xe buýt khới hành từ đầu bến, trên xe có bao nhiêu hành khách?
+
+kươngeionocleanalriphal 23
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. (*) Trong một đợt trồng cây, một trường chia số cây cho các lớp đế trồng như sau:
+
+1
+~ Lớp thứ nhất trồng 9 cây và 8 số cây còn lại..
+~ Lớp thứ hai trồng 18 cây và ẹ số cây còn lại.
+
+~ Lớp thứ ba trồng 27 cây và h sổ cây còn lại.
+
+Nếu chia như vậy thì số cây chia vừa hốt và số cây ở các lớp bằng nhau. Hỏi có mấy
+(ớp tham gia trồng cây và có bao nhiêu cây được trồng?
+
+ẢO saanoacsesuteogeaoneuoss
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài toán: Chị chia táo cho các em, nếu chia cho mỗi em 3 quả thì thửa 2 quả,
+nếu chia cho mỗi em 4 quả thì thiếu 3 quả. Hỏi có bao nhiều quả táo và bao
+
+nhiêu em được chia táo?
+Hướng dẫn
+
+Giải bằng sơ đồ
+
+Tạ có sơ đồ:
+
+Số quả táo ban đầu:
+Số quả táo chia 3quả@m: ——————— !
+
+Số quả táo chia 4 quảem:
+
+Mỗi em 4 quá nhiều hơn mỗi em 3 quả là:
+
+4~3=1 (quả),
+Nhìn vào sơ đồ ta thấy chẽnh lệch số táo giữa hai cách chia là:
+
+3+2=8 (quả).
+Sự chênh lệch trên là do mỗi em đã được tăng thêm 1 quả.
+Từ đó suy ra:
+Số em được chia táo là:
+
+5:1=5 (em).
+Số quả táo là:
+
+5x3+2= 17 (quả).
+Đắp số: 5 em và 17 quả táo.
+
+Nhận xét:
+
+Số quả táo và số em được cha táo được cố định ban đầu.
+Số quả táo được chia theo hai cách nên xuất hiện trường hợp số táo ban đầu.
+khi chia bị “thừa” hoặc “thiếu” tuỳ theo cách chia. Chênh lệch giữa hai cách
++ chia (Hiệu 1) chính là sự chênh lệch giữa số lượng được chia (Hiệu 2) nhân số
+`... người được chia,
+Từ đó ta có: Số người = (Hiệu 1) : (Hiệu 2) (gọi là bài toán thừa và thiếu hay bài
+toán hai hiệu số).
+
+tưởng dăn học Toán4|Tipbal 2
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídụ1
+
+Minh có một số viên bi và một số túi. Nếu Minh bỏ vào mỗi túi 10 viên thì còn thừa
+| 16 viên. Nếu Minh bỏ vào mỗi túi 12 viên thì còn thừa 4 viên. Hỏi Minh có bao nhiều
+viên bi và bao nhiêu túi bi?
+
+| Hướng dẫn
+Ta có sơ đồ:
+
+Số viên bi ban đầu: +
+300i se i0 CC
+Số viên biolle12viänftdi:L———————Ì
+'Nhìn vào sơ đồ ta thấy hiệu số viên bi giữa hai cách chía là:
+
+16~4= 12 (viên)
+Mỗi túi 12 viên nhiều hơn mỗi túi 10 viên là:
+12~10=2 (viên)
+Số túi bị là:
+12:2= 6 (túi)
+Số viên bi là:
+6x 10+ 16 =76 (viên)
+Đáp số: 76 viên bi và 6 túi bi.
+Giải vẫn tắt
+10 viên/túi: thừa 16 viên
+12 viên/túi: thừa 4 viên
+Số túi là: $
+(16~4): (1210) = 6 (túi)
+Số viên bi là:
+8x 10+16=76 (viên)
++ Vidu2 * :
+
+Một cứa hàng đóng gói một số chiếc áo vào một số thùng. Nếu mỗi thùng đóng
+20 chiếc thì thiếu 5 chiếc. Nếu mỗi thùng đóng 25 chiếc thì thiếu 40 chiếc. Hỏi cửa
+hàng dự định đóng gói bao nhiêu chiếc áo?
+
+đổ. meeeseimmeee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Hướng dẫn
+Ta có sơ đồ:
+Số chiếc áo.
+ban đầu: ———————n
+
+Số chiếc áo chía '
+20 chiếc/thùng:
+
+Số chiếc áo chia !
+2W EPHáeNhfieSiS=
+
+Nhìn vào sơ đồ ta thấy hiệu số chiếc áo giữa hai cách chia là:
+.40~S = 35 (chiếc)
+
+Mỗi thùng 25 chiếc nhiều hơn mỗi thùng 20 chiếc là:
+25~20 = (chiếc)
+
+Số thùng là:
+35:5 = 7 (thùng)
+Số chiếc áo là:
+20 x 7~8 = 185 (chiếc)
+Đáp số: 135 chiếc áo.
+Giải vần tắt:
+20 chiếc/thúng: thiếu 5 chiếc
+25 chiếc/thùng: thiếu 40 chiếc
+Số thùng là:
+(40~5) : (25~20) = 7 (thùng)
+Số chiếc áo là:
+
+20x 7~5= 185 (chiếc)
+
+Meidloseseilgea: .Z7,
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+
+Bài 9.
+
+1. Cô giáo chia vở cho học sinh đạt kết quả tốt trong học kì l, nếu chia mỗi bạn
+5 quyến vở thì thừa 8 quyến vở, nếu chia cho mỗi bạn 6 quyển vớ thi vừa đủ. Hỏi
+cô giáo có bao nhiêu quyển vớ và bao nhiêu em được chia vở?
+
+2. Bắc Hùng thu hoạch xoài và cho vào hộp mang đi bán. Nếu mỗi hộp chứa 10 quả
+thì vừa đủ, còn mỗi hộp chứa 12 quả thì thiểu 10 quả. Hỏi bác Hùng thu hoạch
+được bao nhiêu quả xoài?
+
+3. Chị chia kẹo cho các em, nếu mỗi em 5 chiếc thì thừa 2 chiếc, nếu mỗi em 6 chiếc.
+thì thiếu 4 chiếc. Hỏi chị có bao nhiêu chiếc kẹo và bao nhiêu em được chia keo?
+
+2Ö, naưonnmetedesonexee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Một nhóm bạn cùng tham gia trải nghiệm hái dâu tại vườn. Nếu tất cả số dâu hái
+được chia cho mỗi bạn 2 kg thì còn thừa 1 kg, nếu chia cho mỗi bạn 3 kg thì còn
+thiếu 4 kg. Hỏi nhóm đó có bao nhiêu bạn?
+
+5. Một tổ xe tải dự định chở gạo. Nếu mỗi xe chở 15 bao gạo thì còn thừa 15 bao,
+nếu mỗi xe chở 20 bao gạo thì thiếu 20 bao. Hỏi tổ có mấy xe tải và dự định chở.
+bao nhiêu bao gạo?
+
+§. Một tớp có một số tổ, mỗi tổ có 6 bạn. Thầy giáo thưởng vở cho học sinh và dự tính.
+nếu thưởng mỗi tố 30 quyến thì thiếu 3 quyến, nếu thưởng mỗi bạn 4 quyến thì
+thừa 33 quyển, Hỏi lớp đó có bao nhiêu học sinh?
+
+"`"...
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 10.
+
+1. Một đội trồng rừng được giao nhiệm vụ trồng một số cây. Nếu mỗi người trồng
+5 cây thì còn 3 cây chưa trồng, nếu mỗi người trồng 4 cây thì còn 12 cầy chưa trồng..
+Hỏi đội trồng rừng đó có bao nhiêu người và cần trồng bao nhiều cây?
+
+2. Cô giáo phát một số tờ giấy màu cho một số học sinh để làm thiệp trang trí.
+Nếu mỗi học sinh được phát 3 tờ thì thừa 24 tờ. Nếu mỗi học sinh được phát 5 tờ.
+thì thừa 4 tờ, Hỏi cô giáo phát bao nhiêu tờ giấy màu?
+
+3. Ở một phòng họp, nếu mỗi bàn ngồi 3 người thì có 15 người chưa có chỗ ngồi, nếu
+mỗi bàn ngồi 4 người thì có 3 người chưa có chỗ ngồi. Hỏi có bao nhiêu người dự
+họp và bao nhiêu bàn?
+
+SDẺ 121100100155
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Một đơn vị bộ đội dùng một số chiếc thuyền đế sang sông. Nếu mỗi thuyền chở.
+†6 người thì có 36 người chưa được sang sông. Nếu mỗi thuyền chớ thêm 5 người
+thì có 10 người chưa được sang sông. Hỏi có bao nhiêu chiếc thuyền và đơn vị bộ
+đội đó có bao nhiêu người (không kể người lái)?
+
+Bài 11.
+
+1. Bạn Nhi sưu tầm được một số thẻ bài và xếp các thẻ bài đó vào các hộp. Nếu mỗi
+hộp có 20 thẻ bài thì thiếu 5 thẻ bài. Nếu mỗi hộp có 25 thẻ bài thì thiếu 30 thẻ bài..
+Hỏi bạn Nhỉ đã sưu tăm được bao nhiêu thẻ bài?
+
+2. Cô Hoa xếp một số chiếc bánh rán vào một số chiếc hộp. Nếu cô xếp vào mỗi
+hộp 8 chiếc bánh thì thiếu 3 chiếc, còn nếu cô xếp vào mỗi hộp 10 chiếc thì thiếu
+9 chiếc. Hỏi cô Hoa có bao nhiêu chiếc bánh?
+
+tsưỡng dân học Toán 4 Tập hai
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+^
+
+$3. Họ sinh khối Bốn của trường chuẩn bị đi dã ngoại. Nếu mỗi xe chở 30 học sinh thì
+có 4 ghế trống. Nếu mỗi xe chờ 32 học sinh thì có 18 ghế trống. Hỏi có bao nhiêu.
+xe, có bao nhiêu học sinh đi dã ngoại?
+
+4. Hai công nhân được giao dệt một sổ khăn mặt bằng nhau. Mỗi ngày người thứ
+nhất dệt được 20 cái, người thứ hai dệt được 30 cái. Sau khi dệt một số ngày như:
+nhau tính ra người thứ nhất còn phải dệt thêm 60 cái, người thứ hai phải dệt thêm.
+'30 cái mới đủ số tượng quy định. Hỏi sổ khăn cần dệt của mỗi người là bao nhiêu?
+
+5, Ở một lớp học, nếu xếp mỗi bàn 3 bạn thì 6 bạn không có chỗ ngồi, nếu xếp mỗi
+bàn 4 bạn thì thừa 1 bàn. Hỏi lớp học đó có bao nhiêu học sinh và bao nhiêu bàn?
+
+3 neeoeessrendpsotesoed
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+(4) Bài toán rút về đơn vị
+
+Giai bài toán bắng cách rút về đơn vị
+
+Bài toán 1; Có 240 kg táo được đựng đều vào 8 thùng. Hỏi 10 thùng như thế có
+tất cá bao nhiêu ki-1Ô-gam táo?
+Hướng dẫn
+Một thùng đựng được số táo là: 240 : 8 = 30 (kg).
+10 thùng có số ki-ô-gam táo tà: 30 x 10 = 300 (kg).
+Đáp số: 300 kg.
+
+Cách giải trên được gọi là “rút về đơn vị”. Bằng cách tính khối lượng của † thùng
+táo ~ta gọi là 1 đơn vị rồi từ đó tính giá trị của nhiều đơn vị theo yêu cầu đề bài.
+
+Bài toán 2: May 5 bộ quần áo như nhau hết 15 m vải. Hỏi có 240 m vải thì may
+được bao nhiêu bộ quần áo như thế?
+Hướng dẫn
+Một bộ quần áo dùng hết số vải là: 15: 5= 3 (m).
+Số bộ quần áo may được là: 240 : 3 = 80 (bộ).
+.Đáp số: B0 bộ.
+Kết luận: Các bước giải bài toán rút về đơn vị:
+Bước 1: Tìm giá trị † phần - rút về đơn vị (thực hiện phép chia).
+
+'Bước 2: Tuỳ theo yêu cầu bài toán mà người ta tìm giá trị của số đơn vị cần tính.
+hoặc số đơn vị cần tính.
+
+Bài toán chỉ được giải bằng cách rút về đơn vị khi đề bài thể hiện yếu tố “như
+nhau” hoặc “đều nhau” và các câu hỏi có yếu tố “như thế”, “giống thế”.
+
+Từ đó ta có thế làm gộp các bước giải. Cụ thể có thể tính như sau:
+Bài toán 1:
+
+10 thùng có số ki-ô-gam táo là: 240 : 8 x 10 = 300 (kg).
+
+Bài toán 2: ì
+
+Số bộ quần áo may được là: 240 : (15 : 5) = 80 (bộ).
+
+Hường dân học Toánd|Tạpha 3)
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+: —=
+^
+Ví dụ1
+May 4 cái áo như nhau hết8 m vải. Hỏi may 24 cái áo như thế cần bao nhiêu mét vải?
+Hướng dẫn
+
+1 cải áo cần số mét vải là: 8 : 4 = 2 (m).
+24 cái áo như thế cần số mét vải là: 2 x 24 = 48 (m).
+,Đắp số: 48 m.
+Vídụ2
+Một nhà may làm được 360 bộ quần áo trong 9 ngày. Hỏi trong 4 ngày nhà may.
+tàm được bao nhiều bộ quần áo? Biết năng suất làm việc mỗi ngày là như nhau.
+Hướng dẫn
+Trong 4 ngày nhà may làm được số bộ quần áo là: 360 ; 9 x 4 = 160 (bộ).
+,Đáp số: 160 bộ.
+
+Đài toán về các đại tượng cùng tăng/giảm số lần như nhau
+
+'Bài toán 3: Có 6 hộp bánh như nhau đựng được 72 cái bánh. Hỏi 18 hộp bánh.
+như thế đựng được bao nhiêu cái bánh?
+
+Hướng dẫn
+
+Bài toán trên có đú yếu tố “như nhau”, “như thế” để giải bằng cách rút về đơn vị.
+1 hộp có số bánh tà: 72: 6= 12 (cái).
+
+18 hộp có số bánh là: 12 x 18 = 216 (cái).
+
+Nhận xét:
+
+Dễ thấy, giá trị của 1 đơn vị (số 12) chính là “cỡ” của hộp bánh, nó là số cố định,
+cho trước bởi giả thiết 6 hộp bánh như nhau đựng được 72 cái bánh.
+
+'Do đó, ta có thế làm gộp bằng phép tính: 72 : 6 x 18 = 216 (cái). vị
+
+Ngoài ra, áp dụng tính chất của phép tính nhân, chia ta có thể tính: 8 : 6 = 3,
+sau đó nhân 72 với 3 đế được 216.
+
+Xét số hộp bánh và số cái bánh liên hệ với nhau bởi công thức:
+Số cái bánh = số hộp bánh x số bánh trong mỗi hộp.
+
++ Nhận thấy, số cái bánh luôn gấp số hộp bánh một số lần nhất định (chính là số.
+'bánh trong mỗi hộp). Do đó, số hộp bánh gấp lên (giảm đi) bao nhiêu lần thì số.
+cái bánh cũng gấp tên (giảm đi) bấy nhiêu lần. * Z
+
+SE Ben
+https;//vnstorage.com ~ Trang tải tài liệu miễn phí
+
+72
+
+?=72x CC =72x3=216
+
+Vidu8
+'Có 8 gói kẹo như nhau đựng được 160 cái kẹo. Hỏi 15 gói như thế đựng được bao.
+nhiêu cái kẹo?
+Hướng dẫn
+`1 gối kẹo đựng được số kẹo là: 160 : 8 = 20 (cái). Ề
+16 gồi như thế đựng được số kẹo là: 20 x 15 = 300 (cái).
+Đáp số: 300 cái kẹo.
+Giải vẫn tắt:
+
+` 8 180
+
+15 ?~160x T2 =20x 16= 300
+
+35
+ưôngolinhoceándYiphel. ,ỞỔ,
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídụ4
+
+Đổ đặt ống nước, 5 công nhân đào trong2 ngày được 20 m đường. Hỏi 10 công nhân đào.
+trong 4 ngày được bao nhiều mét đường? (Biết năng suất mỗi công nhân là như nhau).
+
+Hướng dẫn
+† người trong 2 ngày hoàn thành được số mét đường là: 20 : 5 = 4 (m).
+0 người trong 2 ngày hoàn thành được số mét đường là: 4 x 10 = 40 (m).
+10 người trong 4 ngày hoàn thănh được số mét đường là: 40 x (4 : 2) = 80 (m).
+.Đắp số: 80 m.
+Giải vần tắt
+
+5 2
+
+10 4
+
+hài toán một dại tượng tăng, một đại tượng giảm số tần như nhau
+
+Bài toán 4: Một đội công nhân gồm 10 người hoàn thành một công việc trong
+30 ngày. Nếu đội có 20 công nhân thì hoàn thành công việc như thế trong thời
+gian bao lâu? Biết năng suất làm việc của mỗi người là như nhau.
+Hướng dẫn
+Bài toán trên có đú yếu tố “như nhau", “như thế” để giái bằng cách rút về đơn vị.
+Đơn vị được quy về là lượng công việc 1 người làm trong 1 ngày.
+Gọi lượng công việc 1 người làm trong 1 ngày là 1 phần công việc.
+Do đó, 10 người, 1 ngày được 10 phần công việc;
+
+“10 người, 30 ngày được 300 phần công việc (chính là † công việc “như thế”).
+'Với 300 phần công việc và 20 người tàm thì số ngày cần để hoàn thành là:
+
+.300:20 = 15 (ngày)
+
+Nhận xót:
+
+Dễ thấy, giá trị của công việc (số 300) chính tà “cỡ"của công việc, nó là số cố
+định, cho trước bởi giả thiết 10 người (sức như nhau) làm trong 30 ngày.
+
+Xót số nhân lực (số người) và số ngày làm việc tiên hệ với nhau bởi công thức:
+Số phần công việc = số người x số ngy làm việc.
+
+đỔ nmgosonsetmddpmomavene
+https//vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Nhận thấy, số phần công việc là một tích, không đổi nên số người gấp lên
+(giảm đi) bao nhiêu lần thì số ngày làm việc giảm đĩ (gấp lên) bấy nhiêu lần và
+
+ngược lại.
+Kết luận:
+
+Hai đại lượng A và B được liên hệ với nhau bởi công thức A x B = k. Trong đó,
+k có thể là một số cụ thế cho trước hoặc một số không đổi.
+
+Khi đó gấp A lên bao nhiêu lần thì B giảm đi bấy nhiêu lần và ngược lại..
+Ta nói: A tăng, B giảm số lần như nhau.
+
+Cách nhận biết bài toán một đại lượng tăng, một đại lượng giảm số lần
+như nhau
+
+Một đội công nhân gồm 10 người hoàn thành một công việc trong 30 ngày. Nếu
+đội có 20 công nhân thì hoàn thành công việc như thế trong thời gian bao (âu?
+Biết năng suất làm việc của mỗi người là như nhau.
+
+Yếu tố không đổi: năng suất ~ sức làm việc như nhau, công việc như thế.
+Công thức: Số phần côngviệc = số người x số ngày làm việc.
+Giải chỉ tiết:
+
+Khối lượng công việc không thay đối, khi số công nhân tầng lên (giảm đi) bao
+nhiều lần thì thời gian hoàn thành sẽ giảm đi (tăng lên) bấy nhiều lần,
+
+Cách1
+20 công nhân gấp 10 công nhân số lần là: 20 : 10 = 2 (tần).
+'20 công nhân hoàn thành công việc trong thời gian là: 30 : 2 = 15 (ngày).
+
+Đáp số: 15 ngày.
+Cách2
+Một công nhân hoàn thành công việc đó trong thời gian là:
+10 x 30 = 300 (ngày). :
+20 công nhân hoàn thành công việc trong thời gian là: 300 : 20 = 15 (ngày).
+Đáp số: 15 ngày.
+ì Giải vắn tắt:
+Ẫ „_ SốngưỡI Số ngày.
+$ 10 30
+10 Tung
+20 ?=30x22 = 80x =1
+
+kươngsinnocTeinalYiphal 7
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Ví dụS
+
+Một đội công nhân gồm 24 người hoàn thành một công việc trong 5 ngày. Nếu đội có.
+16 công nhân thì hoàn thành công việc như thế trong thời gian bao Lâu? (Năng suất
+(ao động của mỗi người như nhau).
+Hướng dẫn
+Giải chỉ tiết:
+Một công nhân hoàn thành công việc đó trong thời gian là: 24 x 5 = 120 (ngày).
+15 công nhân hoàn thành công việc trong thời gian là: 120 : 15 = 8 (ngây).
+
+.Đáp số: B ngày.
+Giải vấn tắt:
+24 5
+5 Ầ_—
+18 ?a2AxTs=24xa n8
+Vidụ6
+
+Một đội gồm 2 người hoàn thành một công việc trong giờ. Hỏi có thêm 4 người tham
+gia công việc đó thì đội sẽ hoàn thành công việc trong bao lâu? (Năng suất lao động.
+của mỗi người tà như nhau).
+Hướng dẫn
+
+Giải chỉ tiết:
+
+Một công nhân hoàn thành công việc đó trong thời gian là: 2 x 6 = 12 (giờ).
+
+Thêm 4 người nữa thì số công nhân là: 2 + 4 “ 6 (người).
+
+'6 công nhân hoàn thành công việc trong thời gian là: 12 : 6 = 2 (giờ).
+
+Đáp số: 2 giờ. .
+Giải vần tắt:
+2 6
+' *2+4=6 ?=2x5=2
+
+38 _
+V3Ổ nasseeerespmonesee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+Bài 12.
+
+1. Một xưởng may làm được 981 bộ quần áo trong 9 ngày. Hỏi trong 3 ngày xưởng.
+may làm được bao nhiêu bộ quần áo? Biết năng suất làm việc mỗi ngày là
+như nhau.
+
+2. Mua 4 đôi dép giống nhau hết 240 000 đồng, mua 3 đôi giày vải giống nhau hết
+375 000 đồng. Hỏi mua 3 đôi dép và 1 đôi giày vải cùng loại như trên hết bao
+nhiêu tiền?
+
+3. Cô giáo mua 6 gói kẹo như nhau được 240 cái kẹo. Cô lấy 4 gói chia đều cho
+các bạn trong lớp 4A, mỗi bạn được 5 cái kẹo thì vừa hết. Hỏi lớp 4A có bao.
+nhiêu bạn?
+
+4. Có 2 đoàn xe chớ xi măng vào kho, đoàn xe thứ nhất có 9 xe, đoàn xe thứ hai
+có 6 xe. Đoàn xe thứ nhất chở nhiều hơn đoàn xe thứ hai 222 bao xi măng..
+Hỏi mỗi đoàn xe chở bao nhiêu bao xi măng? Biết mỗi xe chở số bạo xi mắng.
+tả như nhau.
+
+Hưởng dân học Toán 4| Tập hai
+
+39
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+8. Đế cưa một khúc gỗ thành 7 đoạn phải mất 48 phút, Hỏi muốn cưa khúc gỗ đó
+thành 4 đoạn phải mất bao nhiêu phút? Biết thời gian mỗi lần cưa là như nhau.
+
+Bài 13.
+
+1. Nam có 65 000 đồng mua được 5 quyển truyện tranh. Dũng có nhiều hơn Nam
+26 000 đồng. Hỏi Dũng mua được bao nhiêu quyển truyện tranh? Biết giá tiền các
+quyến truyện tranh bằng nh:
+
+2. Để chuẩn bị cho một hội nghị, người ta kẽ 15 hàng ghế đủ chỗ cho 180 người ngồi.
+Trên thực tế có 204 người đến dự. Hỏi phải kê thêm bao nhiêu hàng ghế nữa?
+Biết rằng mỗi hàng ghế có số chỗ ngồi như nhau.
+
+.3. Học sinh lớp 4C tham gia trồng cây, dự định cứ một nhóm 5 bạn thì trồng 27 cây.
+Nhưng thực tế mỗi nhóm lại trồng nhiều hơn nhiệm vụ được giao là 4 cây nên tổng
+số cây trồng được tà 186 cây. Hỏi lớp 4C có bao nhiều học sinh?
+
+4. Một tổ công nhân mỗi ngày sản xuất được 770 sản phẩm. Nếu thêm vào tổ 3 công.
+nhân nữa thì mỗi ngày tổ sẽ sản xuất được 875 sản phẩm. Hỏi lúc đầu, tổ công.
+nhãn đó có bao nhiêu người? Biết năng suất làm việc của mỗi người là như nhau,
+
+đỒ, nahoesetmedmomeson
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. Một cửa hàng có một số thùng sơn như nhau chứa tổng cộng 1080 8 sơn. Cửa hàng.
+đã bản 5 thùng sơn thì còn lại 990 # sơn. Hỏi lúc đầu, cửa hàng có bao nhiêu
+thùng sơn?
+
+Bài 14.
+
+1. Giả sử một chiếc xe máy chạy được 150 km với 5 # xăng. Hỏi với 10 8 xăng xe đó.
+chạy được bao nhiêu ki-(ð-mét?
+
+2. Một cửa hàng bán 8 kg táo cùng loại với giá 240 000 đồng. Hỏi với 24 kg táo như
+thế có giá bao nhiễu?
+
+3. Một tố thợ mộc có 3 người trong 5 ngày đóng được 75 cái ghế. Hỏi nếu tổ đó có.
+6 người làm trong 10 ngày thì đóng được bao nhiêu cái ghế? Biết năng suất
+tao động của mỗi người là như nhau.
+
+Hướng dẫn học Toán #| Tập hai
+
+41
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+.4. Nếu 5 người, mỗi người làm việc trong 6 giờ thì được nhận tất cá 1 500 000 đồng.
+Hỏi nếu 15 người mỗi người làm việc trong 18 giờ thì nhận được tất cả bao nhiều
+tiền? Biết số tiền trả cho mỗi giờ làm của mỗi người là như nhau.
+
+5. Người ta tính rằng cứ 3 xe cùng loại chở hàng, mỗi xe đi 50 km thì tổng chí phí vận.
+chuyển hết 1 200 000 đồng. Hỏi 6 xe như thế, mỗi xe đi 100 km thì tổng chỉ phí vận
+chuyển là bao nhiêu?
+
+Bài 15.
+
+1. Một nhóm gồm 50 người thợ xây xong một bế bơi trong 42 ngày. Hỏi bể bơi xây
+xong trong bao lâu nếu nhóm đó chỉ có 30 người thợ xây? Biết năng suốt làm
+của các người thợ xây là như nhau.
+
+2. Một nhóm gồm 3 người làm xong một công việc trong 6 giờ. Hỏi nếu có 9 người thì
+thời gian hoàn thành công việc đó là bao nhiêu? Biết năng suất lao động của
+mỗi người là như nhau.
+
+Á2 seaesoeeteodeomesels
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+$8. Một đơn vị bộ đội có 45 người đã chuẩn bị gạo đủ ăn trong 16 ngày. Do kế hoạch
+thay đối nên đơn vị đó tiếp nhận thêm 45 người nữa. Hỏi lúc sau, số gạo đó đủ cho.
+đơn vị ăn trong mấy ngày? Biết sức ăn của mỗi người là như nhau.
+
+.4. Một công trường dự trữ lương thực đủ cho 112 người ăn trong 15 ngày. Vì có một
+số người đến thêm nên số lương thực đó chỉ đủ dùng trong 5 ngày. Tính số người
+mới đến thêm. Biết sức ăn của mỗi người là như nhau.
+
+5. Một đoàn thợ có 120 người dự định làm trong 50 ngày. Khi bắt đầu lâm, có một số
+người đến thêm nên làm xong công việc đó trong 30 ngày. Hỏi có bao nhiêu người
+đến thêm? Biết năng suất lao động của mỗi người là như nhau.
+
+xaegslohocTesnalrpphal 43
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Thống kê - Xác suất
+
+Dãy số liệu thống kê
+
+'Bảng thống kê: Dùng để ghi chép, biểu diễn các số liệu thống kê.
+“Các dạng toán liên quan đến dãy số liệu thống kẽ:
+
+® Đọc số liệu trong dãy số liệu hoặc bảng thống kẽ cho trước.
+«So sánh, tính toán với các số liệu.
+
+s_ Hoàn thành bảng thống kê hoặc dây số liệu.
+
+Ví dụ 1
+
+Cho dãy số liệu về cân nặng (đơn vị là kg) của 8 bạn học sinh lớp 4 trong một buổi
+kiểm tra sức khoẻ như sau: 40; 43; 45; 48; 44; 45; 39; 40.
+
+.a. Tính trung bình cộng cân nặng của 8 bạn.
+b. Tính trung bình cộng căn nặng của ba bạn nặng nhất trong nhóm.
+
+Hướng dẫn
+.a. Tổng cân nặng của 8 bạn là: 40 + 43 + 45 + 4B + 44 + 45 + 39 + 40 = 344 (kg).
+Trung bình cộng cân nặng của các bạn là: 344 : 8 = 43 (kg).
+b, Ba bạn nặng nhất có cân nặng là: 45 kg, 45 kg, 48 kg.
+Trung bình cộng cân nặng của ba bạn nặng nhất là: (45 + 48 + 45) : 3 = 46 (kg).
+
+Đáp số: a. 43 kg; b. 46 kg.
+
+Biểu đồ
+
+Biểu đồ là một cách biểu diễn số liệu thống kê dưới dạng các hình vẽ. .
+
+'Biếu đồ cột bao gồm: Tên biểu đồ, tên các đối tượng thống kê được viết phía
+dưới của mỗi cột, chiều cao của cột biếu thị số liệu thống kê.
+
+Các dạng bài tập liên quan:
++ Đọc và mô tả được các số liệu, nhận xét được các giá trị trong biếu đồ,
+* Tínñ được giá trị trung bình của các số liệu trong bảng hay biểu đồ.
+
++ Làm quen với việc phát hiện vấn đề hoặc quy luật đơn giản dựa trên quan sát
+các số liệu từ biểu đồ. ` z
+
+ẢT neesononeetsnopaspbesoed
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+`
+Ví dụ2
+Biểu đồ dưới đây cho biết số quyền vở khối lớp 4 của một trường tiểu học đã quyên
+góp cho các bạn vùng cao.
+Số quyền vở quyên góp của khối lớp 4
+(Quyến)
+100 2
+Bá
+s0
+96
+60
+°= 49
+40
+20
+0
+4A 48 4C 4D 4E 4G lLớp)
+
+Quan sát biểu đồ trên và trả lời câu hỏi:
+.a. Trung bình mỗi tớp quyên góp được bao nhiều quyển vở?
+'b. Có bao nhiêu lớp quyên góp trên 60 quyển vở?
+Hướng dẫn
+a. Tổng số vở khối lớp 4 quyên góp là:
+46 + 66 + 84 + 49 + 72 + 98 = 414 (quyền vớ)
+Trung bình mỗi lớp quyên góp được số quyền vở là: 414 : 6 = 69 (quyến vớ).
+'b. Các lớp quyên góp trên 60 quyển vớ là: 4B, 4C, 4E, 4G.
+Vậy có 4 lớp quyên góp trõn 60 quyến vớ.
+Đáp số: a. 69 quyền vở; b. 4 lớp.
+
+'Số lần xuất hiện của một sự kiện.
+
+'Gieo một xúc xắc cân đối đồng chất nhiều lần, quan sát số chấm ở mặt trên của
+xúc xắc đó và ghỉ lại kết quả nhận được vào bảng dưới đây.
+
+. mmmmn
+|Số tần xuấthiện |_ 4 RSIE| Sa 4 TẾ [VN g5: !|'9579:1|)*/28
+
+_ Xúc xắc được gieo: 4 +5 + 4+ 6+ 5 + 6= 30 (lần).
+
+'Có 6 sự kiện có thế xảy ra là gieo được mặt có 1 chấm, 2 chấm, 3 chấm, 4 chấm,
+5 chấm, 6 chấm. Số lần xuất hiện của các sự kiện nây có thế khác nhau với mỗi
+tần gieo.
+
+ .A-
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+
+Bài 16.
+1. Cho dãy số liệu về điểm thi môn Toán học kì | của một nhóm học sinh:
+8; 10; 8; 9; 9; 10; 9; 9; 8; 10.
+a, Hỏi nhóm có bao nhiêu học sinh?
+b. Tính trung bình cộng điểm thi của nhóm.
+
+2. Cho dãy số liệu về số lượt khách tham quan của một khu du lịch từ thứ Hai đến
+'Chủ nhật của một tuần nào đó theo thứ tự là: 432; 567; 689; 512; 568; 799; 801.
+Hỏi trung bình mỗi ngày có bao nhiêu lượt khách tham quan khu du lịch đó?
+
+3. Dãy số liệu về chiều cao (đơn vị là cm) của một nhóm học sinh là: 132; 137; 134; 132;
+135; 140; 138; 140. Tính trung bình cộng chiều cao của các học sinh trong nhóm.
+
+4. Cho dãy số liệu về sổ quyển truyện tranh các tớp khối Bốn quyên góp cho các bạn.
+vùng cao là: 35; 34; 23; 48; 56; 87; 32; 45; 31; 49.
+a. Tính trung bình cộng số truyện tranh của các lớp đã quyên góp.
+b. Có bao nhiêu tớp quyên góp nhiều hơn trung bình cộng số sách của khối?
+
+ÁỔ na osoneereersecsesea
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5 `
+^
+5. Kết quả kiểm tra cuối học kì | môn Toán của lớp 4C được cho trong bảng sau:
+Điểm 8 | 9 |10
+Số học sinh 32|'4an|52
+
+Tính trung bình cộng điếm kiếm tra cuối học kì l môn Toán của lớp 4C.
+
+Bài 17.
+1. Bảng số iệu đưới đây cho biết số kem ốc quế bán ra tại một cửa hàng trong một ngày,
+Các loại kem Số kem được bán ra trong một ngày
+
+“mi — TÊÊỆ
+TT
+¬—¬
+
+«asa« lỆttữ££t£ứ
+—¬
+
+HH bùi g2 12156216 H6
+
+sa. Loại kem ốc quế nào được cửa hàng bán ra nhiều nhất trong ngày đớ?
+
+b. Số chiếc kem ốc quế của hai loại kem nào bán ra có cùng số lượng? ;
+e. Tổng số chiếc kem ốc quế cửa hàng bán ra trong ngày đó là bao nhiêu chiếc?
+
+EEÌ5S IETESIEH LINH,
+
+xaenamea 47,
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+2. Biểu đồ dưới đây cho biết số lượng điện thoại bán được tại một cửa hàng trong
+6 tháng đầu năm 2024.
+
+Số lượng điện thoại bán được tại cửa hàng,
+
+(Chiếc)
+250
+214
+200
+tự đ4n 156
+124 d6
+100 | - m5
+s0
+Ù
+Đã 2 3 4 5 6 (Tháng)
+
+, a. Tính tổng số điện thoại cửa hàng bán được trong 6 tháng đầu năm 2024.
+b. Tháng 7 năm 2024, lượng điện thoại bán được của cửa hàng ít hơn trung bình
+cộng của 6 tháng đầu năm là 10 chiếc. Tính số lượng điện thoại bán được trong
+tháng 7.
+
+ÁB a«sesossetaegmeomnwels
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+3. Biểu đồ dưới đây cho biết số cốc trà sữa của một cửa hàng bán ra trong một tuần.
+Biết Chủ nhật bán nhiều hơn thử Ba 180 cốc. Tính số cốc trà sữa cửa hàng bán
+được trong ngày thứ Bảy.
+
+Số cốc trà sữa bán ra trong một tuần
+
+ThỨHai ThứBa ThửTư ThứNäm ThứSáu ThứBáy Chủnhật
+
+1. Một hộp kín có 10 viên bi gồm 2 viên bi màu đỏ, 3 viên bí màu vàng và 8 viên bi
+màu xanh cùng kích thước, khối lượng. Lấy ra ngẫu nhiên 1 viên bi từ hộp đó.
+
+a. Viết các khả năng về màu của viên bí được tấy ra từ hộp.
+b. Viên bi màu nào có khả năng được lấy ra nhiều hơn các viên bi còn lại?
+
+`. 7.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Minh và Hoàng, mỗi người đều có một đồng xu, mỗi đồng xu đều có hai mặt:
+mặt sấp và mặt ngửa. Hỏi có bao nhiêu khả năng có thể xảy ra nếu:
+a. Hai bạn đều tung được mặt giống nhau?
+b. Hai bạn tung được mặt khác nhau?
+
+.3. Gieo đồng thời 2 xúc xắc. Mỗi xúc xắc có 6 mặt được đánh số từ 1 đến 6.
+.a. Có bao nhiêu khả năng có thể xảy ra khi gieo đồng thời 2 xúc xắc đớ?
+
+'b. Có bao nhiêu khả năng có thế xảy ra khi gieo đồng thời 2 xúc xắc đó xuất hiện.
+hai mặt có cùng số chấm?
+
+©. Có bao nhiêu khả năng có thể xây ra khi gieo đồng thời 2 xúc xắc đó xuất hiện
+hai mặt có số chấm khác nhau?
+
+.4. Trong hộp có 12 viên bi vàng, 10 viên bi xanh và 6 viên bi đỏ cùng kích thước, khối
+tượng. Không nhìn vào hộp, cần lấy ra ít nhất bao nhiêu viên bi để chắc chắn trong
+số các viên bi lấy ra:
+
+a. Có đủ 3 màu?
+b. Ít nhất 4 viên bị đỏ?
+©. Ít nhất 7 viên bí cùng màu?
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. (*) John có một túi đựng các viên bi màu đỏ, vàng và xanh. Biết nếu tẩy ra 10 viên bị
+bất kỉ thì luôn có ít nhất 1 viên bỉ màu đỏ. Nếu lấy ra 11 viên bị bất kì luôn có ít nhất
+1 viên bị màu xanh và nếu lấy ra 12 viên bi bất kì thì luôn có ít nhất 1 viên bị màu.
+vàng. Hỏi túi có nhiều nhất bao nhiêu viên bỉ?
+
+6. (*) Trong hộp có 10 viên bi màu xanh và 8 viên bi màu đỏ. Bạn Bình lấy ngẫu nhiên
+1 viên bi trong hộp và không trả lại hộp, sau đó bạn An lấy tiếp 1 viên bi nữa. Tính.
+sổ cách để hai bạn lấy được viên bi cùng màu.
+
+1...
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+khái niệm phan số
+
+'Bài toán 1: Chia đều 1 cái bánh cho 2 người. Tìm phần bánh của mỗi người.
+Hướng dẫn
+
+Ta có thể làm như sau:
+
+Chia cái bảnh thành 2 phần bằng nhau. Lần lượt đưa cho mỗi người 1 phần,
+tức là : của cái bánh. Như vậy mỗi người được ; cái bánh.
+
+Bài toán 2: Mẹ có 2 cái bánh, chia mỗi cái bánh thành 4 phần bằng nhau. Mai.
+ăn 1 cái bánh và ¡ cái bánh. Viết phân số chỉ số phần cái bánh Mai đã ăn.
+
+Hướng dẫn
+
+Ta thấy:
+
+Ăn † cái bánh, tức tà ăn 4 phần hay ^ P 4 bánh ănthêm „ - Sói bánh nữa tức là
+ăn thêm 1 phần, như vậy Mai đã ăn tất cá 5 phần hay cái bánh.
+
+Kết luận:
+
+Phân số là số có dạng. h (e và b là số tự nhiên, b khác 0). Trong đó: a là tử số,
+b là mẫu số.
+
+Lưuý: `
+
++ Mọi số tự nhiên đều viết được dưới dạng phân số có mẫu số bằng 1.
+
+® Thương của phép chia một số tự nhiền cho một Số tự nhiên khác 0 có thế
+viết thành một phân số.
+
+Đ2  neebosoeeedfaedgmptheverG.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Nếu nhân (chia) cả tử số và mẫu số của một phân số cho một số tự nhiên khác 0.
+thì được một phân số mới bằng phân số đã cho.
+
+(b, n khác 0; a và b chia hết cho n)
+
+Ví dụ1
+
+hútson phan số
+
+: Rú Lê. 4,
+
+Bài toán 4: Rút gọn các phân số: 0; Tóc -
+
+Hưởng dẫn
+
+Ta thấy: và 10 đều chịa hốt cho 5 nên: =
+s
+
+“athấy: 4 và 126 đầu chía hết cho 2niên: TC = 12C
+
+27 _27:
+
+27 và 63 đều chia hết cho 9 nên:
+Kết luận: *
+
+* + _ Rútgon phân số là tìm phân số mới bằng phân số ban đầu nhưng có tử số và
+
+Ẹ mẫu số bé hơn.
++. Phân số có tử số và mẫu số không cùng chia hết cho một số tự nhiên nào lớn
+hơn 1 gọi là phân số tối giản. Khi rút gọn phân số ta phải rút gọn đến phân số
+tối giản.
+
+*ươyeiolecTesnalrephal— ĐỔ,
+htps://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+D =
+^
+Vidu2
+51, 1618.
+Do 4 2c)222e1leclempoevaroectsi xiolebe-krclelbiCrl vi E—
+Hướng dẫn
+
+81 51:3 17 1515 _1515:101 18 16:3 _
+
+577573 19 3939 3989:101 39 39:3 18.
+
+Quy dong máu số
+
+'Quy đồng mẫu số các phân số sau:
+LỆ V) Ca 0 35
+_ hạng táng
+
+Hướng dẫn
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+b.Ta =
+ˆ§ 5x8 306 6x5 30`
+
+Vậy quy đồng mẫu số hai phân số Š và 2 ta được hai phân số Só và
+3 3x3 9 5 5x2 10
+
+4 4x3 126 6x2. nC
+
+.©. Ta có:
+
+Vậy quy đồng mẫu số hai phân số Ý vỗ t9 được hai phân số +. Tản:
+
+Luyện tập
+Bài 19.
+1. Viết số thích hợp vào ô trống.
+SE ._1.e
+7 49 5 35
+
+4 12
+“TT 5 “TT 16
+
+2. Tìm số thích hợp rồi viết vào ô trống.
+
+466
+
+b. I3, -2 11
+IẾ| s
+54 18 “; 16
+
+.3. Tìm các phân số bằng nhau trong các phân số sau:
+.2,4, 8,8 ,10,12
+
+= ket rẽ tủa Enhlvdsvsicloubei Ì sao cho mỗi phân số có tử số là số lẻ bé
+hơn 10 (khôngtính +).
+
+Kê in lÊP
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. Viết tất cả các phân số bằng phân. số ạ 940 cho tổng của tử số và mẫu số bé
+hơn 100 (không tính sa"
+
+Bài 20.
+1. Khoanh vào các phân số tối giản trong các phân số sau.
+
+& .8.3.15 7 18 59 .12 8 9 25 14 1.
+32`5)24 5 20 80”
+3162 90 93 23 đd.
+47198” 2078” 140” 46` 48 120” T68` 8008” N5
+2. Rút gọn các phân số.
+3 6.35 49.8 TS” 86, 12 90, k2)
+128 32100 72
+Ci Ta, Min E Co; Set
+` 121 28 "169' 187
+3. Rút gọn phân số.
+1212 1212
+— Đế
+3636 4848
+s.255145 đ 123123-
+ú ` 130 130 369 369
+
+Gỗ) Í se5ss coi eod
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+` `
+^
+4. Tính.
+A~ 2x5x7 g« 3X5x7x9
+5x7x3 5x7x3x6
+c- 12%15x17 p- 11x16x24
+6x34x45 8x22x30
+~_ 21x35 @- -30x5x11x9.
+9x7x5x3 25x9x12x22
+„ 195 195x196. ¡< 202320 242 024
+195x196 196. 20 232 023x2024
+
+5. Viết tất cả các phân số tối giản (khác 0) có tổng của tử số và mẫu số là 20.
+
+Bài 21.
+1. Quy đồng mẫu số các phân số.
+
+a. Ê và3
+$
+
+Hướng dân học Toản4Tạphal - ĐZ.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+e.S; Š và 27
+921
+
+2. Quy đồng mẫu số các phân số.
+
+117
+“ra.
+824
+54 3.5
+s. ch  c
+Má 22C) 4'17
+
+135
+..
+
+ĐỒ, messeoseessevanegasptesode
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+~ Nếua<bthi Ê < Đ.,
+
+Wảu.S22,4<8
+
+f# W9 Đ%
+
+s _ So sánh hai phân số có mẫu số khác nhau: — và h (b, d khác 0)
+
+b
+
+Viết hai phân số trên dưới dạng hai phân số có mẫu số bằng nhau (quy đồng
+mẫu số| rồi so sánh hai phân số có cùng mẫu số.
+Ằ..ẻ
+Ví dụ: So sánh Š và Ê.
+í đụ: So sánh Š và
+
+Tacó: $~3x*5 _15, 4_ 4x7 28
+7? 7⁄5 3865 Bx7 356.
+
+~_ Nếu hai phân số có cùng mẫu số, phân số nào có tử số tớn hơn thì lớn hơn.
+~ _ Nốu hai phân số không cùng mẫu số thì quy đồng mẫu số rồi so sánh.
+
++ Mở rộng: ta có thể so sánh hai phân số có cùng tử số như sau:
+
+~_ Nếu hai phân số có cùng tử số, phân số nào có mẫu số lớn hơn thì bé hơn.
+~__ Nếu hai phân số không cùng tử số thì quy đồng tử số rồi so sánh.
+
+Vi dụ: So sánh ì và H bằng cách quy đồng tử số.
+
+# 3x4 12.4 4x3 1 :
+Tacó: T==  =.¡==
+7 7x4
+
+32 <2 nàn <4,
+28)197..7 5
+
+5 5x3
+
+k.engsănhọc oán |rạphai — ĐỘ
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+® So sánh với 1
+
+~_ Các phân số lớn hơn 1 (tử lớn hơn mẫu) tuôn tớn hơn phân số bé hơn 1 (tứ.
+bé hơn mẫu).
+
+Vidụ:So sánh TC và T27
+
+104. 101”
+
+103 127 103 127
+— nh
+S717 1021611ˆ024225YT7 Air;
+
+«So sánh với phân số trung gian
+
+2013, 2014
+Vi du: So sánh 2513 và 2914,
+đu S0 sánh và ng
+
+ĐC Cán
+2016 2018 2015”
+
++ _ So sánh phần hơn: Phân số có phần hơn lớn hơn thì lớn hơn
+Lái
+
+Ví dụ: So sánh 22 và
+21 20
+
+2 1. ải
+“=1. WM
+Tacó 1+2. Và
+
+s_ So sánh phần bù: Phân số có phần bù lớn hơn thì bé hơn.
+
+Vi dụ: So sánh 2924 vạ 2925 ,
+2025 2026
+
+2024 1 2025 1
+Ta có: CC =1~—— và TC =1-——.
+2025 2025 2026 2026
+
+1 1 2024 „ 2025
+> ==.
+
+suy ra :
+2025 ˆ 2026 2025 2026
+
+Ví dụ1
+
+So sánh hai phân số Š và Ê,
+5.9
+
+ĐỒ neessosenesersopaotrevona
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+`
+^
+Vidụ2
+2 $
+So sánh hai phân số -— và ~.
+48. 17
+Hướng dẫn.
+
+G6 X3 6 3 3SA (Ó
+ka.áess222-2JC-ƑTTE-tc7AMET=- TR-TE
+
+2023, 2024
+So sánh hai số —— và ——.
+o sán| phân vì
+
+Hướng dẫn.
+
+Víidụ4
+
+Vídụ5
+So sánh hai phân số
+Hướng dẫn
+
+k⁄ợdictocTeanalfgphal ÔT
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+
+Bài 22.
+
+1. Cho các phân số Š;_^., 9, Ê, 34, 35,
+6”1714°12' 2145
+Tìm các phân số:
+
+a. Bé hơn 1.
+
+b. Lớn hơn 1.
+
+©. Bằng 1
+
+2. Viết tất cả các phân số bé hơn 1 có tổng của tử số và mẫu số là 10.
+
+3. Sắp xếp các phân số sau theo thứ tự từ bé đến lớn.
+4.3/75 27, 18, 31, 34
+= Sa} b, 27, 18. 31, 34
+
+9999 _45' 45” 45” 45
+
+DI ni
+-18' 23) 18” 27
+
+2 mmassonestendgmptheeod
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+4. So sánh hai phân số (giải thích cách làm).
+
+5 11 7A5
+R. và b. và S
+LÔ 30 8 9
+e.và T1 ba cán
+185 45 9 6
+
+5. So sánh hai phân số (giải thích cách làm).
+
+2vw$ b.cÊ và
+7 9 17 10
+18/236
+18 25
+
+Bài 23.
+
+1. So sánh hai phân số (giải thích cách làm).
+
+s2 TS
+18 1e)
+
+tướng dânhocToánd|Tập hai — Ô.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+c9 ( 12 TT
+2024 11 8 9
+
+2. So sánh hai phân số (giải thích cách làm).
+
+10 9 40 41
+.——-và— b. — và —
+
+21 23 46 45
+cu s
+
+73 74 2024 2023
+
+3. So sánh hai phân số (giải thích cách làm).
+
+100 101 215. 213
+—.và— —.Vw—
+99 100 213 211
+_ 2028 /ạ 2027 “8a
+2023. 2024 47 58
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. So sánh hai phân số (giải thích cách tàm).
+
+Ä{.„ 38 103. 91
+&.— Và — và
+14 16 107 95
+99 97 205 2023
+6. và ST Về To
+100 `” 9g 207 ` 2025
+5. So sánh hai phân số (giải thích cách làm).
+ni TẢ ca
+* 42.38 248g
+2008 ,„ 2024 1008. 2023
+e và —— ——v——
+2010 2028 1010 2027
+' Bài 24.
+1. So sánh hai phân số (giải thích cách làm).
+v.v 209 s.
+175 201 19 16
+
+“89g dẫn học Toản 4 Tập hại
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+`
+^
+c.29 và 27 l TQ Tà,
+217 11 133 1313
+2. Sắp xếp các phân số sau: theo thứ tự từ lớn đến bó.
+3. Sắp xếp các phân số sau: Š, 11, 16, 14, 21 Ã theo thứ tựtử bề đến lớn.
+
+4. Viết ba phân số khác nhau có cùng mẫu số mà mỗi phân số đó:
+
+a. Lớn hơn ˆ. b. Bé hơn ˆ. e. Lớn hơn ~ và bé hơn ˆ.
+5 4 5 4
+
+ĐỒ, nesseeestenogeotnevone
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+a. Viết các phân số có tử số là 3 và nằm giữa hai phân số h và T
+
+b. Viết các phân số có tử số là 4 và nằm giữa hai phân số h và H
+“ he nh 655.5.
+
+e. Viết 5 phân số khác nhau nằm giữa hai phân số. 3 và ý ˆ
+
+d. Viết 4 phân số khác nhau nằm giữa hai phân số ì và &
+
+c 3,
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+(8) Phép tính phân số
+
+Phép cộng, phép trừ phân số
+
++ Phép cộng
+
+'Cùng mẫu số: Muốn cộng hai phân số cùng mẫu số, ta cộng hai tử số với
+nhau và giữ nguyên mẫu số,
+-—. `.
+mm m
+Khác mẫu số: Muốn cộng hai phân số khác mẫu số, ta quy đồng mẫu số hai
+
+phân số, rồi cộng hai phân số đó.
+«Phép trừ
+Cùng mẫu số: Muốn trữ hai phần số cùng mẫu số, ta trừ tử số của phân số
+thứ nhất cho tử số của phân số thứ hai và giữ nguyên mẫu số.
+S — S* — nhuếc 0)
+mm m
+
+Khác mẫu số: Muốn trừ hai phân số khác mẫu số, ta quy đồng mẫu số hai
+phân số, rồi trừ hai phân số đó.
+
+Phép nhân phân số
+
+Muốn nhân hai phân số, ta lấy tử số nhân với tử số, mẫu số nhân với mẫu số.
+
+8e xe
+Rin PT day
+(bnép chị phân số
+Muốn chia hai phân số, ta lấy phân số thứ nhất nhân với phân số đảo ngược của.
+phân số thử hai.
+TẾ IS LỆ Ch )
+Sa Kẻ Exe (5ödMáo0)
+k Ví dụ 1 Ẻ
+Tính.
+sa ae S-(-2]+4 G5) s....
+4 5 10 3 3 3/ 5 62 S27 7
+
+ĐỒ ngànsemeresdmonesee
+htps://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+` `
+^
+Hướng dẫn
+AxŠ? BH. Ac p4
+20 3 5 2
+
+học số tính chất
+
+Vidu2
+Tính bằng cách thuận tiện..
+5.248 „5_(8_3
+lb# 1-8 FE] Dhết LM § BÌ
+ng họ Ho lo Á 4 .3 son 2
+°*S*11*S*T1 "81 —....ẽ
+Hướng dẫn b
+N.
+35135
+“(š-3)* s.
+33) (5”s
+=31+2=5
+: : 84.68 8 2
+ST ST? ST 9 11 “1G Ì11 8111 1611,
+Hi 8 '(H In 11.11
+` ca
+111111) 9778 188 TT 027)
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Ví dụ3
+Tính.
+lý 1
+
+*—+——:
+2x3 3x4 4x5
+Hướng dẫn
+
+3-2,4-3 5-4 20~19
+2x3 3x4 4x5 19x20
+No UÊU si XỆ CÀI
+
+Tính.
+. . ni
+2 4 8 16 32 64 128
+Hướng dẫn
+Cách 1
+Hiện VU, :a
+
+Tac6:2xB=1+2+14 14-1 +
+
+2148 16 32 64
+
+ng co
+
+2 4'8 16 32 64 128
+2xB~-B=1~-—T,
+128
+
+127
+raB=s=,
+S23 2)
+
+“(-3*4-3)42:34-86-3)46-4)(4¬4)
+
+14/0140 1, 1 9 v4. Ý
+
+““—*—~
+
+88 18 16
+
+32 64 64 128
+
+LÍ GIẾ CÓ) 37__ 39
+” 2x4 3x4 4x5 8x19 19x20
+
+TŨ me sesonseledgapmesoo
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+k `
+Hưởng dẫn
+Di h2 háo Bo a. TP VÀ LÔ
+2x3 3x4 4x5 ” 19x20
+J1) J1 1) (19 Si ¡0h lế (U10)
+“s2J'b 2)*(á*zˆ~*{s nh Đi)
+)"1"`.ẻẽ.71. "56. sẻ...
+2143 4'°4'°5 '18Ì19 19 20 2 20 20
+
+Ví dụ6
+
+Một người đi xe máy từ A đến B dài 120 km. Trong 1 giờ đầu, người đó đi được ~
+
+quãng đường. Trong 1 giờ tiếp theo, người đó đi được quãng đường bằng một nửa.
+quãng đường đi được trong 1 giờ đầu. Hỏi người đó còn phải đi bao nhiêu ki-ô-mét
+nữa để đến B2
+
+Hướng dẫn
+Trong giờ đầu, người đó đi được quãng đường là: 120: 3 = 40 (km).
+Trong 1 giờ tiếp theo, người đó đi được quãng đường à: 40 : 2= 20 (km).
+Người đó còn phải đi là: 120 -40 ~20 = 60 (km).
+Đáp số: 60 km.
+Ví dụ7
+Tìm một phân số, biết phân số đó chia cho ¡ rồi nhân với : thì được kết quả là }
+
+Hướng dẫn
+Phân số cần tìm là: Š;Š„ 1 - _Ê..
+424 40
+tuyện tập
+Bài 25.
+1. Tính.
+AT 2 00-1 CS Dài
+111 S "54 z 3”
+
+';ưỡng nhọc Toàn 4| Tập hai
+
+71
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+n
+s. v3/ï
+6 8 9 156 3
+2. Tính.
+1? 5 11 5
+mỹ nự Q.13 18
+12 12 6 12 12 16
+` -18
+n
+
+3, Tính.
+1E LÝ
++.,
+2°3*8 Pin ý
+TU ni U
+8243 218 4
+
+2) aeboveonentandgeaotewol
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+Bài 26.
+
+1. Tính bằng cách thuận tiện.
+„2 13
+
+XS ca CC
+4545
+
+ae
+
+5 18 3
+
+hoc Toán 4| Tập hai
+
+73
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+` `
+^A
+2. Tính bằng cách thuận tiện.
+6,8 4 s 78 18 19.1 3 13
+A=+ttrt or tr B= +
+5 22 5 11 21 42 10021 324 21 32
+Bài 27.
+'1. Tính bằng cách thuận tiện..
+„25 18,24 3,5 2 0/9/3159, 1E
+1002332 4 23 8 20 9 4 5 3 20
+ính bằng cách thuận tiện.
+A„ 1515, „12122 g~124124,4 1813 2
+1818 “3638 3 T86186 5 6565 3
+
+TẢ, haesseeoseseteesgmson
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 28.
+
+1. Cô Hoa thu hoạch được h và dứa. Hôm qua, cô bán được 7 Ý tấn dứa, Hôm nay,
+cô bán được ít hơn hôm qua h tấn dứa. Hỏi sau hai Dạy Bi cô Hoa còn lại bao.
+
+nhiêu tấn dứa?
+
+2. Một ô tô đi từ Hà Nội đến Nghệ An. HN? giờ đầu, ô tô đi được £ + quãng đường.
+Trong 1 giờ tiếp theo, ô tô đi được h quãng đường. Hỏi Si 2 giờ, ð tô đi
+được bao nhiều phần quãng đường?
+
+3. Tìm một phân số, biết phân số đó cộng với ị rồi trừ đi ? thì được kết quả
+
+TS
+10
+
+Hưởng độn bọc Toàn4|Tậphai Z5.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+1
+4. Tìm một phân số, biết phân số đó cộng với 2 rồicôngvới H thì được kết quả là ;
+
+Bài 29.
+
+1. Tính.
+
+J,ANd ca TU hi So: MU. 1
+2x3 3x4 4x5 5x6 6x7 7x8 8x9 9x10
+
+351,21 2 2 2
+
+“3x8 Sx7 7x9 9x1l 11x18 18x18
+
+3. v8 3 3 3 3
+
+= + tô
+1x4 4x7 7x10 10x13 13x16 16x19
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+Svñ KƑ cử 201
+1x2 2x3 3x4 `” 100x101
+
+21x23
+, TS S47 (acc
+
+1x2 2x3 3x4 100x101
+
+4, 4. 4 4 4
+
+1x3 3x5 “6x7 ` ”””@9x101. 101x103
+
+lúc học Toán 4| Tập hai x04
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+Cần 2/RÊN)
+64 ` 128 ` 286
+Tà tuc
+3*ˆ8 1224 1536
+
+1Ú SMUAE, leiệS SỈ
+6 12 24 48 96 192
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+có
+2 6 18 54 162 486
+
+8. đụ 3 1
+5 28 128 625 3125
+
+1
+1458
+
+Hưởng dần hoc Toán 4 Tập hai
+
+79
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+Bài 30.
+3. Tính.
+nh Tê bế
+75 13"12
+c.1 4zo
+16 50
+-.9,28
+14 18
+jš ¡~10,20
+74 3 9
+
+Km
+
+1751
+
+25 75 389
+
+ĐỒ, aua=eee
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+18 8
+M=5:— N*Š:3
+ST ;
+
+2. Tính
+131
+Aslxa:T
+7134
+
+1
+
+2,10 3 DU S3) 4
+
+372172 1775 175
+
+Hương iehocoenalrepnal ĐT
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+Bài 31.
+
+1. Tìm các số tự nhiên x, biết:
+CN) 20,4 57 32 100.
+< <—
+
+—— b.—x =<x
+
+.. -
+16 16 2121 4.24 21 126
+
+3.3. W1
+
+<x<—x4
+8
+
+2. Tìm các số tự nhiên y, biết:
+3.7 Y2 5 1Ô g,.Ý.,16,16 _ 23.15 16
+
+a + ` =
+5911 7119 18 723 T18 7 11
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 32.
+1. Tính bằng cách thuận tiện.
+
+2 5
+-^ x12
+TN in
+
+J8 6 7. B3
+Ca
+
+18 9 9 15 9 15
+
+13.25 25 6
+
+Gm x=- xe
+
+7.8
+
+7 98
+16 24
+
+8.7
+
+25 14
+
+8 32
+
+Hướng dẫn học Toán 4| Tập hai
+
+83
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+2. Tính bằng cách thuận tiện.
+8 24
+
+24_ 4,24 727,27
+
+8
+
+1329 29 1329 2758 278
+c1 9 22 6 41 16 p-22 4 30.48 4
+12 19 24 19 12 19 23 5 23 5 46 5
+15x14 -~1 e-_222~x2044+1
+13x15+14 2022 x 2023 + 2023
+
+Bài 33.
+
+1. Một hình vuông có cạnh là : mm. Tính chu vi và diện tích hình vuông đó..
+
+ĐẦ nsasseosssraedgesntevede
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+2. Một tấm bìa hình chữ nhật có chiều rộng là R m, chiều dài gấp đôi chiều rộng.
+
+Tính chu vi và diện tích tấm bìa đó.
+
+13. Một cửa hàng có 20 tạ gạo. Hỏi sau khi bán š số gạo đó thì cửa hàng còn lại bao
+
+nhiêu kì-\ô-gam gạo?
+
+"Hướng dẫn học Toán #| Tập
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+(9) Một số bài toán về phân số
+
+nnm giá trị phân số của một số cho trước
+
+Bài toán 1: Mộttổtáo có 15 quả. Hỏi Š số táo trongrổ là bao nhiều quảtáø?
+
+Hướng dẫn
+
+Coi 15 quả táo trong rổ tíương ứng với 3 phần bằng nhau. Vậy 2 Số táo trong rố.
+chiếm 2 phần như thế. °
+
+- Số táo trong tổ là:15:3=5(quẢ)
+số táo trongrồ là: x 2x 10 (quà),
+
+'Đắp số: 10 quả táo.
+
+Nhận xét: Bài toán trên thuộc dạng toán Tìm giá trị phân số của một số cho
+trước. Ta có thế làm gộp các bước giải như sau:
+
+5 SỐtáo trong tổ là: t6xÃ “10 (quả)
+
+Kết luận: Muốn tìm ` của một số A cho trước, ta tính A x2
+n
+(Với m, n là các số tự nhiên, n khác 0).
+
+Ví dụ1
+
+Tìm Š của 140m.
+4
+
+Hướng dẫn
+3 của 140m là: 140x Š =105 (m)
+4 4
+
+Đáp số: 105 m.
+Vídu2
+Tổng thụ nhập trong 1 tháng của gia đình bạn An là 50 000 000 đồng, Biết gia đình An
+dành : tổng thu nhập cho giáo dục (học phi của hai con); ỹ tổng thu nhập cho chỉ
+
+phí sinh hoạt, còn lại là tiền tiết kiệm. Hỏi mỗi tháng gia đình An tiết kiệm được
+bao nhiêu tiền?
+
+ĐỒ ngeoosenesseedepnsvoed
+htps://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Hướng dẫn
+
+Cách 1
+Số tiền dành cho giáo dục mỗi tháng là:
+
+50 000000 x ~ = 12500000 (đồng)
+Số tiền dành cho chỉ phí sinh hoạt là:
+
+50000 000 Š =30000000 (đồng)
+Mỗi tháng gia đình An tiết kiệm được số tiền là:
+
+50 000 000 ~ 12 500 000 ~ 30 000 000 = 7 500 000 (đồng)
+Đáp số: 7 500 000 đồng.
+
+Cách2 ụ
+'Số tiền tiết kiệm chiểm số phần của tổng thu nhập là:
+
+lại 6
+“(+3*z (tống thu nhập).
+
+Mỗi tháng gia định An tiết kiệm được số tiền là:
+50000 000 x ¬ =7 500000 (đồng)
+'Đáp số: 7 500 000 đồng.
+
+(Đột sẽ bài toán khác
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Víidu3
+Tìm sốA, biết ì của A là 24.
+Hướng dẫn
+
+Số A là: 24: h =64.
+
+Đáp số: 4,
+
+Vidu4
+Minh có một số huy hiệu, Minh cho Lan ; số huy hiệu và cho Bình : số huy hiệu thì
+Minh còn lại 18 huy hiệu. Hỏi lúc đầu, Minh có bao nhiêu huy hiệu?
+Hướng dẫn ẫ
+
+18 huy hiệu còn tại chiếm số phần tổng số huy hiệu là:
+
+2\_18
+57)
+Số huy hiệu lúc đầu của Minh là:
+
+(tổng số huy hiệu)
+
+18: = = 38 (huy hiệu)
+
+Đáp số: 38 huy hiệu.
+
+Luyện tập
+Bài 34.
+3. Tính.
+a. của 91 Š của 82 ` của 488
+18 2 4
+b. Ê của 204 Š của 2 Ê của Š
+3 5
+
+ĐỒ, nasasossesemetandgmpmeso.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+2. Lớp 4A có 40 học sinh, trong đó có h số học sinh là nữ. Hỏi lớp 4A có bao nhiêu
+học sinh nữ?
+
+3. Một cuộn dây ruy bãng dài 25 m. Người ta cắt ra š cuộn dây đế trang trí. Hỏi cuộn
+
+dây đó còn lại bao nhiêu mét?
+
+TT NT vỰA ` l6 5 Suy ở
+4. Một hình chữ nhật ó chiều dài Š m, chiều rộng bằng — chiều dài. Tính chu vĩ và
+
+diện tích hình chữ nhật đó.
+
+Hưởng dẫn bọc oán 4 Tập hai
+
+89
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5, Một hình chữ nhật có chiều rộng là : m, chiều dài bằng ; chiều rộng. Tính chư
+vi và diện tích hình chữ nhật đó.
+
+Bài 38.
+
+1. Một mảnh đất hình chữ nhật có chiều dài \à 25 m, chiều rộng là 18 m. Người ta sử.
+dụng : diện tích mảnh đất để làm ao, phần còn lại để làm vườn. Tính diện tích
+phần để làm vườn.
+
+2. Hùng có một số tiền. Hùng mua sách hết 45 000 đồng. Số tiền còn lại đúng bằng
+
+h số tiền mua sách. Hỏi ban đầu Hùng có bao nhiêu tiền?
+
+ĐỒ, nghoseseemedsonaseu
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+3. Lớp 4C có 35 học sinh. Trong đó có H số học sinh chọn môn Bóng đá, H số học
+sinh chọn môn Cầu lông, số học sinh còn lại chọn môn Bóng rổ. Hỏi lớp 4C có
+bao nhiêu học sinh chọn môn Bóng rố? Biết rằng mỗi học sinh chỉ được chọn
+một môn.
+
+4. Một người bán hết 60 quả trứng trong ba lần. Lần thứ nhất, người đó bán được. ì
+số trứng. Lần thứ hai, bán được h số trứng còn lại sau lần thứ nhất. Hỏi lần thứ
+ba người đó bán được bao nhiêu quả trứng?
+
+5. Một bao chứa 16kg bột mì. Người ta đã bán được ì số bột mì trong bao. Số bột mì
+
+còn lại người ta chia đều vào các túi, mỗi túi chứa. § kg bột mì. Hỏi chia được tất
+
+cả bao nhiêu túi bột mì như vậy?
+
+"Hương n học Toân 4 Tập hai
+
+^
+
+91
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 36.
+
+1. Một cửa hàng nhập về một số quả dưa. Ngày sgk) cửa hàng bán được Š Šsố
+quả dưa đó. Ngày thứ hai, bán được số quả bằng 2 số quả bán được trong vn
+thứ nhất, Hỏi số quả đưa còn lại chiếm bao nhiêu. phần số quả dưa nhập về?
+
+2. Có một kho chứa xăng. Lần thứ nhất, người ta lấy ra 3 số xăng. Lần thứ hai, lấy
+ra số xăng bằng. h số xăng của lần thứ nhất. Hỏi số xăng còn lại chiếm bao nhiêu.
+phần số xăng ban đầu?
+
+3. Một người bán trứng lần thứ nhất được H số trứng, lần thứ hai bán được. : số
+
+trứng còn lại sau lần bán thứ nhất. Hỏi số trứng còn lại sau hai lần bán chiếm bảo
+nhiêu phần số trứng ban đầu?
+
+ĐỒ newoseesetrodeomasse
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Bác Hà có một tấm vải. Bác dùng ' tấm vải để may áo, dùng : số vải còn lại
+sau khi may áo để làm túi. Hỏi số vải bác đã dùng chiếm bao nhiêu phần số vải
+ban đầu?
+
+5. (*) Ba bạn An, Bình, Cường góp được 600 000 đồng để mua bóng. Biết số tiền An
+góp được bằng b tổng số tiền của hai bạn còn
+
+ố tiền Bình góp được bằng ị
+tổng số tiền của hai bạn còn lại. Hỏi bạn Cường góp bao nhiêu tiền?
+
+Bài 37.
+1. Tìm A, biết:
+LT. TẮN ^.
+sa 2 của A bằng 4S b. 2 của A bằng72 e.ễ củaA bằng195_,
+d. Ÿ cửa A bằng 54 e. 2 của A bằng S $ của A bằng Ấ
+8 7 bú tẢ 9
+
+tường sắn ọc toán d[Yephal Øổ.
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+2. Một lớp học có 24 bạn nam. Số bạn nam của lớp đó chiếm š số học sinh của cả
+tớp. Hỏi lớp đó có bao nhiêu bạn nữ?
+
+.3. Một hình chữ nhật có chiều rộng là 18 cm và bằng : chiều dài. Tính diện tích của
+
+hình chữ nhật đó.
+
+4. Nam có một số bị, Nam cho bạn. Ằ số bỉ của mình thì Nam còn tại 25 viên bi,
+
+Hỏi ban đầu, Nam có bao nhiêu viên bi?
+
+Đ mseoseestmedmsonevere
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+'5. Bình có một số hình dán, Bình cho em 96 hình dán thì còn lại ị số hình dán đó.
+Hỏi ban đầu, Bình có tất cả bao nhiều hình dán?
+
+Bài 38.
+1. Kết quê kiếm tra học kì của khối lớp Bốn như sau: 5 số học sinh đạt điểm giỏi, ;
+
+số học sinh đạt điểm khá, còn lại tà học sinh đạt điếm trung bình. Biết số học sinh.
+đạt điểm giỏi là 160 em. Hỏi khối lớp Bốn có bao nhiêu học sinh đạt điểm khá, bao.
+nhiêu học sinh đạt điểm trung bình?
+
+2. Bác An có một mảnh đất. Bác dùng H điên tích mảnh đốt đổ trồng cây ðn quả, z.-
+
+diện tích mảnh đất để trồng rau, phần còn lại có diện tích là 12 mề, Tính diện tích.
+mảnh đất đó.
+
+ương dân học Toán4|Tậphal ĐỒ,
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+3. Ba đội cùng tham gia trồng cây. Đội Một trồng ị tổng số cây, đội Hai trồng : tổng
+
+số cây, đội Ba trồng 40 cây. Hỏi cả ba đội trồng tất cả bao nhiêu cây? Đội Một và
+đội Hai, mỗi đội trồng bao nhiêu cây?
+
+4. Một người mang gà ra chợ bán, Lần thứ nhất người đó bán được H tổng số gà. Lần
+'thứ hai người đó bán được H tổng số gà thì còn lại 18 con. Hỏi mỗi lần, người đó.
+đã bán được bao nhiêu con gà?
+
+5. Hà, Nam, Bình góp tiền mua một quả bóng. Hà góp. H số tiền, Nam góp. H số tiền.
+Bình góp 120 000 đồng. Hỏi cả ba bạn góp bao nhiêu tiền? Nam góp nhiều hơn Hà
+
+bao nhiêu tiền?
+
+ĐỔ nasoesoeeeemddasotesee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 39.
+
+1. Một tổ công nhân trồng hết một số cây trong ba đợt. Đợt thứ nhất trồng được :
+số cây. Đợt thứ hai trồng được. ì số cây còn lại sau đợt thứ nhất, Đợt thứ ba tổ.
+trồng nốt 112 cây. Tính tổng số cây mà tổ công nhân đó phải trồng.
+
+2. Mai đọc xong một cuốn sách trong ba ngày. Ngày thứ nhất, Mai đọc được B
+số trang sách. Ngày thứ hai, Mai đọc được ì số trang sách còn lại sau ngày
+thứ nhất. Ngày thứ ba, Mai đọc nốt 35 trang còn lại. Hỏi cuốn sách đó dày bao
+
+nhiều trang?
+
+33. Một đội công nhân nhận sửa một đoạn đường trong ba ngày. Ngày thứ nhất, đội
+đồ sửa được ẵ đoạn đường. Ngày thứ hai, đội đó sửa được ; đoạn đường còn
+lại sau ngày thử nhất, Ngày thứ ba, đội đó sửa nốt 1120 m đường còn lại. Hỏi mỗi
+ngày, đội đó sửa được bao nhiêu mét đường?
+
+esng ắa học eana|Tạphai— Ở'
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Một tổ sản xuất làm hết một số sản phẩm trong ba ngày. Ngày thứ nhất, tố đó làm
+được ^. số sản phẩm. Ngày thứ hai, tổ đó làm được E số sản phẩm làm được
+trơng ngày thứ nhất. Ngày thứ ba họ, làm nốt 66 sản phẩm còn lại. Tính tổng số
+sản phẩm mà tổ đó đã làm được trong ba ngày.
+
+5. Một cửa hàng có một số táo. Buổi sáng, cửa hàng bán Ẵ số táo. Buổi chiều, cửa
+hàng bán : số táo bán được trong buổi sáng thì còn lại 78 kg táo. Hỏi mỗi buổi,
+cửa hàng bán được bao nhiêu ki-1ô-gam táo?
+
+ĐỒ, mxmoseesnrsemonswee
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 40.
+
+1. Một cửa hàng ngày thứ nhất bản được : số gạo, ngày thử hai bán được ã số
+gạo, tính ra ngày thứ nhất bán được nhiều hơn ngày thứ hai 72 kg gạo. Hỏi ban
+đầu, cửa hàng có bao nhiêu ki-lô-gam gạø?
+
+2. (*) Ba đội được giao vận Sư một số tấn hàng. Đội | vận chuyển được T-
+hàng, đội Il vận chuyến được 7 T số hàng, đội vận chuyển nốt số hàng m= lại.
+Tính ra đội ll vận chuyến được Nhơn đội II tà 11 tấn hàng. Hỏi ba đội đã vận chuyển.
+
+được tất cả bao nhiêu tấn hàng?
+
+3. (*) Một cửa hàng ĐẸ: về một số táo. Ngày thử nhất bán được S S số táo. Ngày
+thứ hai bán được š số táo còn lại sau khi bản ngày thử nhất Tính ra ngày
+thứ nhất bán nhiều hơn ngày thứ hai 100 kg tứo. Hỏi cửa hàng đã nhập về
+
+b 'bao nhiêu ki-\õ-gam táo? Ngày thứ nhất, ngày thứ hai, mỗi ngày bán được bao.
+
+nhiêu ki-lô-gam táo? * ¿
+
+ks»gsle học Toán4|Tậpbai — ĐỘ)
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+4. (*) An, Bình, Chí góp tiền mua một quả bóng. Số tiền An góp. bằng 5 ~ số tiền của
+hai bạn côn lại, số tiền Bình góp bằng 2 — số tiền của hai bạn Sâu lại, Chỉ góp
+125 000 đồng. Tính giá tiền quả bóng Bế”
+
+TÓŨ nxassoses
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+hài toán Tổng —r¡
+
+Bài toán 1; Hải và Tùng có tất cả 100 nhãn vở, biết số nhãn vở của Hải gấp 4 lần
+số nhãn vờ của Tùng. Tìm số nhãn vở của mỗi bạn.
+
+Hướng dẫn
+Tóm tắt bài toán bằng sơ đồ đoạn thẳng.
+
+Tổng số phần bằng nhau là:
+
+1+4 =5 (phần).
+Giá trị một phần hay số nhân vở của Tùng là:
+100: 5 =20 (nhãn với.
+Số nhãn vớ của Hải là:
+100~20 = 80 (nhãn vở).
+Đáp số: Tùng: 20 nhãn vở; Hải: 80 nhãn vở,
+Nhận xét:
+
+~. Bài toán trên được gọi là “Bài toán Tổng ~ Tỉ”.
+
+~_ Bài toán cho biết tống số nhãn vở của hai bạn và xác định được số phần.
+bằng nhau của mỗi bạn.
+
+~_ Qua sơ đồ đoạn thẳng, ta tính tổng số phần bằng nhau, giá trị mỗi .
+Sau đó tính được số nhãn vở của mỗi bạn.
+Kết luận: Các bước giải bài toán:
+. bi da bá 3 etrE up tot lún tị ie”
+« Vẽ sơ đồ đoạn thẳng.
++ Tìm tổng số phần bằng nhau.
++ Tìm giá trị một phần bằng cách lấy tổng số chia cho tổng số phầy,,
++ Tìm mỗi số bằng cách tấy giá trị một phần nhân với số phần của số cần tìm.
+
+sướng áchocTeána|tạphai - TT
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídụ1
+
+Tổng của hai số là 96, biết số bé bằng. R số lớn. Tìm hai số đó.
+
+Hướng dẫn.
+Ta có sơ đồ:
+
+| ị 98
+Số lớn: :
+
+?
+Tổng số phần bằng nhau là: 3 + 5 = 8 (phần).
+Số bé là: 96 : 8 x 3 = 36.
+Số Lớn là; 96 ~ 36 = 60.
+Đắp số: Số bé: 36; số lớn: 60..
+Vidu2
+Hiện nay tổng số tuối của hai mẹ con là 42 tuổi. Sau 3 nấm nữa, tuổi con bằng : tuổi
+mẹ. Tính tuổi mỗi người hiện nay.
+Hướng dẫn
+Sau 3 năm nữa, tổng số tuối của hai mẹ con là:
+42+3+3=48 (tuổi).
+
+Ta có sơ đồ sau 3 năm nữa:
++
+
+Tuổi con: +
+
+48 tuổi
+Tuổi mẹ:
+
+Tổng số phần bằng nhau là:
+1+§=6 (phần).
+Giả trị một phần hay tui con sau 3 năm nữa là:
+48:6x1=8 (tuổi).
+Tuổi con hiện nay là: :
+8~3=5 (tuổi)
+Tuổi mẹ hiện nay là:
+42~5= 37 (tuổi).
+Đáp số: Con: 5 tuổi; mẹ: 37 tuổi.
+102 s«
+
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Bài toán Hiệu - Tỉ
+
+Bài toán 2: Lớp 4A có số học sinh nữ ít hơn số học sinh nam 8 bạn, biết sổ học
+sinh nam bằng Ỹ Số học sinh nữ. Hỏi lớp 4A có bao nhiêu học sinh nam, bao.
+nhiêu học sinh nữ?
+
+Hướng dẫn
+
+Tôm tắt bài toán bằng sơ đồ đoạn thẳng.
+
+Số học sinh nam:
+
+Số học sinhnữ: mm,
+=
+
+Hiệu số phần bằng nhau là: 5~ 3 = 2 (phần).
+Giá trị một phần là: 8 : 2= 4 (bạn).
+Số học sinh nữ là: 4 x 3= 12 (bạn).
+Số học sinh nam là: 12+ 8= 20 (bạn).
+Đáp số: 12 học sinh nữ, 20 học sinh nam.
+Nhận xét:
+
+Tương tự bài toán Tổng - Tỉ, với bài toán cho biết hiệu hai số và số phần bằng.
+nhau của mỗi số ta tính được hiệu số phần bằng nhau. Sau đồ ta sẽ tính được
+giá trị 1 phần và tìm được mỗi số theo yêu cầu đề bãi.
+
+Ta cũng cỏ thể gộp các bước giải như sau:
+
+Hiệu số phần bằng nhau là: 5 - 3 = 2 (phần).
+
+Số học sinh nữ là: 8 : 2 x 3 = 12 (bạn).
+
+Số học sinh nam là: 12 + 8 = 20 (bạn).
+
+Kết luận: Các bước giải bài toán: Š
++_ Xác định hiệu, số lớn, số bé; số lớn gấp bao nhiêu lần số bé.
+
+s_ Vẽ sơ đồ đoạn thắng.
+
+s_ Tìm hiệu số phần bằng nhau.
+
++. Tìm giá trị một phần bằng cách tấy hiệu số chía cho hiệu số phần.
+
+b s Tìm niỗi số bằng cách lấy giá trị một phần nhân với số phần của số
+cần tìm.
+
+"“— ` `...
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídu3
+
+Hiệu của hai số là 58, biết số lớn bằng : số bề.
+
+im hai số đó.
+Hướng dẫn.
+Ta có sơ đồ:
+
+Hiệu số phần bằng nhaư là:
+
+Số bé là: 58: 2 x 5= 145.
+
+Số lớn là: 145 + 58 = 204.
+Đáp sổ: Số bé: 145; số lớn: 203.
+
+~5= 2 (phần).
+
+Vídụ4
+
+Hiện nay, mẹ hơn con 27 tuổi. Sau 3 năm nữa, tuổi mẹ gấp 4 lần tuổi con. Tính tuổi
+của mỗi người hiện nay.
+
+Hướng dẫn
+
+Hiệu số tuối của hai mẹ con luôn không đổi. Sau 3 năm nữa, mẹ vẫn hơn con
+27 tuổi.
+
+Ta có sơ đồ sau 3 năm nữa:
+
+Tuổi con:
+
+27 tuổi
+
+Hiệu số phần bằng nhau là: 4 - 1 = 3 (phần). *
+Tuổi con sau 3 năm nữa là: 27 ; 3 x 1 = 9 (tuổi).
+Tuổi con hiện nay là: 9~ 3 = 6 (tuổi).
+Tuổi mẹ hiện nay là: 6 + 27 = 33 (tuổi).
+5 Đáp số: Con: 6 tuổi: mẹ: 33 tuổi.
+
+đỒ n«as«eeetedgeoeesoie
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+Bài 41.
+
+1. Tổng của hai số là 215, biết số bé bằng 2 số lớn. Tìm hai số đó.
+
+2. Một sợi dây dài 35 m được cắt thành hai đoạn, đoạn thứ nhất dài gấp 6 lần đoạn
+thứ hai. Hỏi mỗi đoạn dài bao nhiêu mét?
+
+3. Trong một phép chia hết, tống của số bị chia và số chia bằng 288. Thương của phép
+chia tà 5. Tìm số bị chia và số chia trong phép chia này.
+
+ỠŸỠDmđduúdẦủúẩẨ..
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Tìm hai số có trung bình cộng là 75, biết số lớn giảm đi 4 lần thì được số bé.
+
+5. Một sân vận động dạng hình chữ nhật có chu vi là 500 m, chiều dài gấp 4 lần chiều
+rộng. Tính diện tích của sân vận động đó.
+
+Bài 42.
+
+4ì nà F 1
+: 1. Hiện nay, tổng số tuổi của hai mẹ con là 35 tuổi. Sau 5 năm nữa, tuổi con bằng 7
+tuối mẹ. Tính tuổi hiện nay của mỗi người.
+
+2. Hiện nay, tổng số tuổi của hai chị em là 28 tuổi, biết rằng
+
+".
+tuối chị bằng — tuổi
+uối chị bằng 2 tiối
+
+em. Tính tuổi tmỗi người hiện nay.
+
+106 mkoseemdeedeosevene
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+3. Tổng của hai số là 396. Nếu viết thêm chữ số 0 vào bên phải số thứ nhất thì được
+số thứ hai. Tìm hai số đỏ.
+
+4. Tìm hai số có tổng bằng 252, biết nếu lấy số lớn hơn chia cho số bé được thương.
+bằng 12 và số dư là 5.
+
+5. (*) Hai bao gạo chứa tất cá 85 kg gạo. Nếu chuyển 5 kg gạo từ bao ! sang.
+bao II thì số gạo ở bao | sẽ bằng H số gạo ở bao II. Hỏi mỗi bao chữa bao nhiêu.
+
+ki-tô-gam gạo?
+
+"bưởng sản học Toán 4 Tập hai 107
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 43.
+
+1. Số thứ nhất hơn số thứ hai 136 đơn vị, biết số thứ nhất bằng. sổ thứ hai.
+Tim hai số đó.
+
+2. Em kém chị 6 tuổi. Năm nay, tuổi em bằng ^ tuổi chị. Tính tuổi mỗi người
+hiện nay. s
+
+13. Hiện nay, anh hơn em 8 tuổi, Cách đây 2 năm, tuổi anh gấp 3 lần tuổi em. Tính tuổi
+của mỗi người hiện nay.
+
+TOỔ neessenmeteneếesetnesend
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+ˆ^
+
+4. Tìm một số, biết nếu xoá chữ số 0 ở tận cùng bên phải của số đó thì số đó giảm đi
+2115 đơn vị,
+
+5. Tìm một số có hai chữ số, biết nếu viết thêm chữ số 3 vào bên trái số đó thì ta
+được số mới gấp 5 lần số cần tìm.
+
+Bài 44.
+
+1. Bạn An xếp sách vào hai ngăn, ngẫn trên nhiều hơn ngăn dưới 24 quyền. Biết 3
+số sách ngăn trên bằng. ã số sách ngăn dưới. Hỏi An xếp mỗi ngăn bao nhiêu.
+quyền sách?
+
++ươngelohocteanalrapbal TỐ
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Lớp 4C có š số học sinh nam bằng ; số học sinh nữ. Biết số nữ ít hơn số nam
+15 bạn, Hỏi lớp 4C có bao nhiêu học sinh?
+
+3. (*) Hiệu hai số là 244. Nếu cùng bớt đi 15 đơn vị ở mỗi số thì số lớn bằng. H Số bé.
+
+Tim hai số ban đầu.
+
+4. (*) Đầu năm học, một lớp học có số bạn nam nhiều hơn số bạn nữ lã 4 bạn.
+'Cuối học kì I, lớp học có thêm 2 bạn nam và 2 bạn nữ (không có bạn nào chuyển đi)
+
+nên lúc này số bạn nữ bằng 5 số bạn nam. Hỏi đầu năm học, lớp học đó có bao
+
+nhiêu bạn nam, bao nhiêu bạn nữ ? :
+
+TÍÔ nxeo=enesteegasonesosd
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+§. (*) Một hình chữ nhật có chu ví 120 cm. Nếu tâng chiều dài thêm 1 cm và bớt
+chiều rộng đi 1 cm thì được hình chữ nhật mới có chiều dài gấp rưỡi chiều ộng.
+Tính chiều dài và chiều rộng của hình chữ nhật ban đầu..
+
+*uengsinnocTeanaaehal Ì TT
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Chịu trách nhiệm xuất bản:
+'Chủ tịch Hội đồng thành viên Tổng Giám đốc NGUYỄN TIẾN THANH
+
+'Chịu trách nhiệm nội dung: —_„
+“Tổng biên tập PHẠM VĨNH THÁI
+
+“Tổ chức và chịu trách nhiệm bán thảo:
+'Phỏ Tổng biên tập TRẦN QUANG VINH
+'Giám đốc Công ty CP Dịch vụ xuất bản Giáo dục Hà Nội PHẠM THỊ HỒNG.
+
+Biên tập nội dung: BÙI THỦ TRANG
+
+“Thiết kế sách: HOÀNG ANH TUẦN
+
+“Trình bày bìa: ĐĂNG THANH HƯƠNG.
+
+“Sửa bán ln; TẠ THỊ HƯỜNG.
+
+.Chế bản: CÔNG TY CỔ PHẦN DỊCH VỤ XUẤT BẢN GIÁO DỤC HÀ NỘI.
+
+"Bản quyền thuộc Nhà xuất bản Giáo đục Việt Nam,
+'Công ty Cổ phần Dịch vụ xuất bản Giáo dục Hà Nội và Công ty Cổ phần Giáo dục Sputnit.
+Tất cá các phần của nội dung cuốn sách này đầu không được sao chốn,
+
+.UAu trữ; chuyển thể dưới bất kìhình thức nào khi chưa có sự cho phép bằng văn bản của.
+“Nhà xuất bản Giáo dục Việt Nam, Công ty Cổ phần Dịch vụ xuất bản Giáo dục Hà Nội
+
+và Công ty Cổ phần Giáo dục Sputik.
+
+HƯỚNG DẪN HỌC TOÁN 4 - TẬP HAI
+
+Mã số sách: G0LH4T002H24.
+
+In 2.000 bản (QĐ: 16/STK), khổ; 19 x26,5 em..
+
+'Đơn v|in: Công ty cổ phần thương mại và địch vụ Ìn Toàn Cầu,
+
+.Địa chỉ: Số 10 ngô 32 Phố An Dương, Phường Yên Phụ, Quận Tây Hồ, Thành phố Hã Nội
+4 'Số ĐKXB; 3779-2024/CXBIPH/22-1972/GD.
+“Số QĐXB; 4407/QĐ-GD-HN ngày 19 thắng 12 năm 2024.
+In xong và nộp lưu chiều tháng 12 nêm 2024.
+Mã số ISBN: Tập một: 978-604-0-45027-2
+
+Tập hai; 678-604-0-45028-9
+
+1Í2. massenssieedeorsved
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+r
+
+CÁCH SỬ: H
+DỤNG HIỆU QUẢ. ^ b:
+É] Học sinh -
+
+* _ Đọc kỹ phần lý thuyết và làm các ví dụ
+từ dễ đến khó trước khi chuyển qua
+phần bài tập tự luyện;
+
++ _ Sau khi hoàn thành các bài tập, kiểm tra
+đáp án bằng cách quét mã QR bên cạnh.
+
+'E Thầy cô và Cha mẹ học sinh
++ _ Khihướng dẫn học sinh, cần đọc kĩ phần.
+
+hướng dẫn trong các ví dụ, thảo luận
+cùng các em để đảm bảo các em hiểu rõ
+cách giải;
++ ˆ Khuyến khích học sinh trình bày các bước
+giải ngắn gọn, rõ ràng và kiểm tra đáp án
+sau khi hoàn thành.
+
+MỘT SỐ LƯU Ý QUAN TRỌNG.
+
+Học sinh cần thành thạo bốn phép tính cơ bản (cộng, trừ
+nhân, chia) với số tự nhiên, phân số, và số thập phân. Đây là
+nền táng thiết yếu cho những năm học tiếp the
+
+Đối với học sinh thuộc Hệ thống Archimede:
+
+nhà trường sẽ bố trí thời gian để các em có thể tiếp t
+
+iệc với tài tiệu mị n hiệu qui
+
+Duy trì thói quen học toán đặn hàng ngày, kết hợp giữa học
+
+trên lớp và làm bài tập về nhà sẽ giúp học sinh tự tin hơn và
+
+yêu thích môn học này
+
+Chúc thầy cô và các em học sinh có những giờ học thật thú vị và
+bổ ích với bộ sách này!
+
+Trân trọng,
+Nhóm biên soạn Archimedes SchooL

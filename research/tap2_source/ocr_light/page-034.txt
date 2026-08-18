@@ -1,0 +1,48 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+: —=
+^
+Ví dụ1
+May 4 cái áo như nhau hết8 m vải. Hỏi may 24 cái áo như thế cần bao nhiêu mét vải?
+Hướng dẫn
+
+1 cải áo cần số mét vải là: 8 : 4 = 2 (m).
+24 cái áo như thế cần số mét vải là: 2 x 24 = 48 (m).
+,Đắp số: 48 m.
+Vídụ2
+Một nhà may làm được 360 bộ quần áo trong 9 ngày. Hỏi trong 4 ngày nhà may.
+tàm được bao nhiều bộ quần áo? Biết năng suất làm việc mỗi ngày là như nhau.
+Hướng dẫn
+Trong 4 ngày nhà may làm được số bộ quần áo là: 360 ; 9 x 4 = 160 (bộ).
+,Đáp số: 160 bộ.
+
+Đài toán về các đại tượng cùng tăng/giảm số lần như nhau
+
+'Bài toán 3: Có 6 hộp bánh như nhau đựng được 72 cái bánh. Hỏi 18 hộp bánh.
+như thế đựng được bao nhiêu cái bánh?
+
+Hướng dẫn
+
+Bài toán trên có đú yếu tố “như nhau”, “như thế” để giải bằng cách rút về đơn vị.
+1 hộp có số bánh tà: 72: 6= 12 (cái).
+
+18 hộp có số bánh là: 12 x 18 = 216 (cái).
+
+Nhận xét:
+
+Dễ thấy, giá trị của 1 đơn vị (số 12) chính là “cỡ” của hộp bánh, nó là số cố định,
+cho trước bởi giả thiết 6 hộp bánh như nhau đựng được 72 cái bánh.
+
+'Do đó, ta có thế làm gộp bằng phép tính: 72 : 6 x 18 = 216 (cái). vị
+
+Ngoài ra, áp dụng tính chất của phép tính nhân, chia ta có thể tính: 8 : 6 = 3,
+sau đó nhân 72 với 3 đế được 216.
+
+Xét số hộp bánh và số cái bánh liên hệ với nhau bởi công thức:
+Số cái bánh = số hộp bánh x số bánh trong mỗi hộp.
+
++ Nhận thấy, số cái bánh luôn gấp số hộp bánh một số lần nhất định (chính là số.
+'bánh trong mỗi hộp). Do đó, số hộp bánh gấp lên (giảm đi) bao nhiêu lần thì số.
+cái bánh cũng gấp tên (giảm đi) bấy nhiêu lần. * Z
+
+SE Ben

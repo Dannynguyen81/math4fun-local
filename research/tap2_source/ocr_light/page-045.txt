@@ -1,0 +1,45 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+`
+Ví dụ2
+Biểu đồ dưới đây cho biết số quyền vở khối lớp 4 của một trường tiểu học đã quyên
+góp cho các bạn vùng cao.
+Số quyền vở quyên góp của khối lớp 4
+(Quyến)
+100 2
+Bá
+s0
+96
+60
+°= 49
+40
+20
+0
+4A 48 4C 4D 4E 4G lLớp)
+
+Quan sát biểu đồ trên và trả lời câu hỏi:
+.a. Trung bình mỗi tớp quyên góp được bao nhiều quyển vở?
+'b. Có bao nhiêu lớp quyên góp trên 60 quyển vở?
+Hướng dẫn
+a. Tổng số vở khối lớp 4 quyên góp là:
+46 + 66 + 84 + 49 + 72 + 98 = 414 (quyền vớ)
+Trung bình mỗi lớp quyên góp được số quyền vở là: 414 : 6 = 69 (quyến vớ).
+'b. Các lớp quyên góp trên 60 quyển vớ là: 4B, 4C, 4E, 4G.
+Vậy có 4 lớp quyên góp trõn 60 quyến vớ.
+Đáp số: a. 69 quyền vở; b. 4 lớp.
+
+'Số lần xuất hiện của một sự kiện.
+
+'Gieo một xúc xắc cân đối đồng chất nhiều lần, quan sát số chấm ở mặt trên của
+xúc xắc đó và ghỉ lại kết quả nhận được vào bảng dưới đây.
+
+. mmmmn
+|Số tần xuấthiện |_ 4 RSIE| Sa 4 TẾ [VN g5: !|'9579:1|)*/28
+
+_ Xúc xắc được gieo: 4 +5 + 4+ 6+ 5 + 6= 30 (lần).
+
+'Có 6 sự kiện có thế xảy ra là gieo được mặt có 1 chấm, 2 chấm, 3 chấm, 4 chấm,
+5 chấm, 6 chấm. Số lần xuất hiện của các sự kiện nây có thế khác nhau với mỗi
+tần gieo.
+
+ .A-

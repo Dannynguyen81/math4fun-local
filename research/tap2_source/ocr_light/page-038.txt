@@ -1,0 +1,39 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Ví dụS
+
+Một đội công nhân gồm 24 người hoàn thành một công việc trong 5 ngày. Nếu đội có.
+16 công nhân thì hoàn thành công việc như thế trong thời gian bao Lâu? (Năng suất
+(ao động của mỗi người như nhau).
+Hướng dẫn
+Giải chỉ tiết:
+Một công nhân hoàn thành công việc đó trong thời gian là: 24 x 5 = 120 (ngày).
+15 công nhân hoàn thành công việc trong thời gian là: 120 : 15 = 8 (ngây).
+
+.Đáp số: B ngày.
+Giải vấn tắt:
+24 5
+5 Ầ_—
+18 ?a2AxTs=24xa n8
+Vidụ6
+
+Một đội gồm 2 người hoàn thành một công việc trong giờ. Hỏi có thêm 4 người tham
+gia công việc đó thì đội sẽ hoàn thành công việc trong bao lâu? (Năng suất lao động.
+của mỗi người tà như nhau).
+Hướng dẫn
+
+Giải chỉ tiết:
+
+Một công nhân hoàn thành công việc đó trong thời gian là: 2 x 6 = 12 (giờ).
+
+Thêm 4 người nữa thì số công nhân là: 2 + 4 “ 6 (người).
+
+'6 công nhân hoàn thành công việc trong thời gian là: 12 : 6 = 2 (giờ).
+
+Đáp số: 2 giờ. .
+Giải vần tắt:
+2 6
+' *2+4=6 ?=2x5=2
+
+38 _
+V3Ổ nasseeerespmonesee

@@ -91,3 +91,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Mọi màn hình ngoài bản đồ phải có một route fragment hoặc evidence trail nhìn thấy được để duy trì cảm giác một hành trình liên tục.
 - Locked guardian vẫn là một mẫu vật field-guide có niêm phong, taxonomy và dấu vết tiến độ; không dùng ô trống hoặc thẻ xám vô danh.
 - Marigold Compass chỉ xuất hiện ở thao tác tiếp theo, route đang hoạt động, XP/bằng chứng tiến độ và phản hồi “aha”; các chi tiết trang trí dùng giấy, Indigo Trail, Leaf Green hoặc Coral Spark thay thế.
+- Trạng thái chưa có hồ sơ vẫn phải là một cảnh thám hiểm hoàn chỉnh: hiển thị route fragment, mốc khóa hoặc mẫu guardian niêm phong; không chỉ hiển thị CTA tạo hồ sơ.
+- Mỗi khu vực dùng artifact chính khác nhau — bản đồ route, phiếu nhiệm vụ, specimen seal, dossier đấu trường hoặc báo cáo bằng chứng — trong khi vẫn nối vào cùng route thread.
+- Route thread và mốc học luôn tổ chức màn hình; điều hướng chỉ đóng vai trò chỉ mục phụ, không thay thế trải nghiệm hành trình.

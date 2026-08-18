@@ -1,0 +1,35 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+hài toán Tổng —r¡
+
+Bài toán 1; Hải và Tùng có tất cả 100 nhãn vở, biết số nhãn vở của Hải gấp 4 lần
+số nhãn vờ của Tùng. Tìm số nhãn vở của mỗi bạn.
+
+Hướng dẫn
+Tóm tắt bài toán bằng sơ đồ đoạn thẳng.
+
+Tổng số phần bằng nhau là:
+
+1+4 =5 (phần).
+Giá trị một phần hay số nhân vở của Tùng là:
+100: 5 =20 (nhãn với.
+Số nhãn vớ của Hải là:
+100~20 = 80 (nhãn vở).
+Đáp số: Tùng: 20 nhãn vở; Hải: 80 nhãn vở,
+Nhận xét:
+
+~. Bài toán trên được gọi là “Bài toán Tổng ~ Tỉ”.
+
+~_ Bài toán cho biết tống số nhãn vở của hai bạn và xác định được số phần.
+bằng nhau của mỗi bạn.
+
+~_ Qua sơ đồ đoạn thẳng, ta tính tổng số phần bằng nhau, giá trị mỗi .
+Sau đó tính được số nhãn vở của mỗi bạn.
+Kết luận: Các bước giải bài toán:
+. bi da bá 3 etrE up tot lún tị ie”
+« Vẽ sơ đồ đoạn thẳng.
++ Tìm tổng số phần bằng nhau.
++ Tìm giá trị một phần bằng cách lấy tổng số chia cho tổng số phầy,,
++ Tìm mỗi số bằng cách tấy giá trị một phần nhân với số phần của số cần tìm.
+
+sướng áchocTeána|tạphai - TT

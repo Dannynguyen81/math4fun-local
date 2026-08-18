@@ -1,0 +1,17 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+^
+
+$3. Họ sinh khối Bốn của trường chuẩn bị đi dã ngoại. Nếu mỗi xe chở 30 học sinh thì
+có 4 ghế trống. Nếu mỗi xe chờ 32 học sinh thì có 18 ghế trống. Hỏi có bao nhiêu.
+xe, có bao nhiêu học sinh đi dã ngoại?
+
+4. Hai công nhân được giao dệt một sổ khăn mặt bằng nhau. Mỗi ngày người thứ
+nhất dệt được 20 cái, người thứ hai dệt được 30 cái. Sau khi dệt một số ngày như:
+nhau tính ra người thứ nhất còn phải dệt thêm 60 cái, người thứ hai phải dệt thêm.
+'30 cái mới đủ số tượng quy định. Hỏi sổ khăn cần dệt của mỗi người là bao nhiêu?
+
+5, Ở một lớp học, nếu xếp mỗi bàn 3 bạn thì 6 bạn không có chỗ ngồi, nếu xếp mỗi
+bàn 4 bạn thì thừa 1 bàn. Hỏi lớp học đó có bao nhiêu học sinh và bao nhiêu bàn?
+
+3 neeoeessrendpsotesoed

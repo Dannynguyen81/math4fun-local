@@ -1,0 +1,41 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+(4) Bài toán rút về đơn vị
+
+Giai bài toán bắng cách rút về đơn vị
+
+Bài toán 1; Có 240 kg táo được đựng đều vào 8 thùng. Hỏi 10 thùng như thế có
+tất cá bao nhiêu ki-1Ô-gam táo?
+Hướng dẫn
+Một thùng đựng được số táo là: 240 : 8 = 30 (kg).
+10 thùng có số ki-ô-gam táo tà: 30 x 10 = 300 (kg).
+Đáp số: 300 kg.
+
+Cách giải trên được gọi là “rút về đơn vị”. Bằng cách tính khối lượng của † thùng
+táo ~ta gọi là 1 đơn vị rồi từ đó tính giá trị của nhiều đơn vị theo yêu cầu đề bài.
+
+Bài toán 2: May 5 bộ quần áo như nhau hết 15 m vải. Hỏi có 240 m vải thì may
+được bao nhiêu bộ quần áo như thế?
+Hướng dẫn
+Một bộ quần áo dùng hết số vải là: 15: 5= 3 (m).
+Số bộ quần áo may được là: 240 : 3 = 80 (bộ).
+.Đáp số: B0 bộ.
+Kết luận: Các bước giải bài toán rút về đơn vị:
+Bước 1: Tìm giá trị † phần - rút về đơn vị (thực hiện phép chia).
+
+'Bước 2: Tuỳ theo yêu cầu bài toán mà người ta tìm giá trị của số đơn vị cần tính.
+hoặc số đơn vị cần tính.
+
+Bài toán chỉ được giải bằng cách rút về đơn vị khi đề bài thể hiện yếu tố “như
+nhau” hoặc “đều nhau” và các câu hỏi có yếu tố “như thế”, “giống thế”.
+
+Từ đó ta có thế làm gộp các bước giải. Cụ thể có thể tính như sau:
+Bài toán 1:
+
+10 thùng có số ki-ô-gam táo là: 240 : 8 x 10 = 300 (kg).
+
+Bài toán 2: ì
+
+Số bộ quần áo may được là: 240 : (15 : 5) = 80 (bộ).
+
+Hường dân học Toánd|Tạpha 3)

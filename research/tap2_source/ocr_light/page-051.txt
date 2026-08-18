@@ -1,0 +1,12 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+5. (*) John có một túi đựng các viên bi màu đỏ, vàng và xanh. Biết nếu tẩy ra 10 viên bị
+bất kỉ thì luôn có ít nhất 1 viên bỉ màu đỏ. Nếu lấy ra 11 viên bị bất kì luôn có ít nhất
+1 viên bị màu xanh và nếu lấy ra 12 viên bi bất kì thì luôn có ít nhất 1 viên bị màu.
+vàng. Hỏi túi có nhiều nhất bao nhiêu viên bỉ?
+
+6. (*) Trong hộp có 10 viên bi màu xanh và 8 viên bi màu đỏ. Bạn Bình lấy ngẫu nhiên
+1 viên bi trong hộp và không trả lại hộp, sau đó bạn An lấy tiếp 1 viên bi nữa. Tính.
+sổ cách để hai bạn lấy được viên bi cùng màu.
+
+1...

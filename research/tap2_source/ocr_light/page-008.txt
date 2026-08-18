@@ -1,0 +1,45 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+bong sơ đồ đoạn thẳng giải toán trung bình cộng.
+
+Bài toán 3; Nam chạy bộ mỗi ngày. Ngày thứ nhất, Nam chạy 30 phút. Ngày thứ:
+hai, Nam chạy 40 phút. Ngày thứ ba, Nam chạy số phút bằng trung bình cộng,
+của cả ba ngày. Hồi trong ngày thứ ba Nam chạy bộ bao nhiêu phút?
+
+Tổng số phút Nam chạy trong ngày thứ nhất và ngày thứ hai là: 30 +40 =70 (phút)
+ứng với 2 phần.
+
+Ngày thử ba Nam chạy số phút là: 70 : 2 = 35 (phút).
+Đáp số: 35 phút.
+
+Trong bài toán, số phút của ngày thứ ba bằng trung bình cộng của cả ba ngày.
+nên ta chưa thể tính trung bình cộng bằng cách tính tổng của ba ngày rồi chia.
+cho 3.
+
+Ta sử dụng sơ đồ biếu diễn trung bình cộng là 1 phần thì tổng là 3 phần như trên.
+
+Số phút của ngày thứ ba bằng số trung bình cộng (1 phần), suy ra tổng số phút.
+chạy của hai ngày đầu là: 3~ 1 = 2 (phần). Thời gian chạy của hai ngày đầu đã.
+biết nên ta tính được giá trị 1 phần hay trung bình cộng.
+
+Kết tuộn:
+
+'Nếu một số hạng bằng trung bình cộng của tất cả các số hạng trong dãy thì số
+hạng đó cũng bằng trung bình cộng của các số hạng còn lại.
+
+'Các bước giải bài toán trung bình cộng bằng sơ đồ đoạn thắng:
+
+'Bước 1: Xác định được các đại lượng đã biết, đại tượng chưa biết và mối quan
+hệ của chủng với trung bình cộng. *
+Bước 2: Vẽ sơ đồ biểu diễn các đại lượng theo trung bình cộng tử đó tìm ra trung.
+bình công.
+
+Bước 3: Dựa vào trung bình cộng tìm các đại tượng được yêu cầu..
+
+Víidu8
+
+Tổ Một được thưởng 24 ngôi sao, tổ Hai được thưởng 28 ngôi sao. Tổ Ba được thưởng.
+số ngôi sao bằng trung bình cộng số ngôi sao của ba tổ. Hỏi tổ Ba được thưởng bao
+nhiêu ngôi sao?
+
+SỔ Beseeseomswlenogmepthevond

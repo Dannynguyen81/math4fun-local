@@ -1,0 +1,18 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+^
+
+2. Tìm trung bình cộng của các số lẻ bé hơn 1000.
+
+3. Trung bình cộng của ba số tự nhiên liên tiếp bằng 128. Tìm ba số đó..
+
+4. Tổng của ba số chẵn liên tiếp bằng 444. Tìm ba số đó.
+
+5. Tổng của nắm số lẻ liên tiếp bằng 975. Tìm năm số đó.
+
+200. Hà đã xoá đi ba số tự nhiên tiên
+
+6. Cho dãy số tự nhiên liên tiếp: 1; 2; 3;
+tiếp thì tống của các số còn lại là 19 848. Tìm ba số mà Hà đã xoá.
+
+TỔ aessboscnesefsadgraspmewode

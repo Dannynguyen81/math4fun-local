@@ -1,0 +1,328 @@
+|
+F2 x
+HƯỚNG DAN HỌC +
+TẬP HAI
+nc nn ) [ nann.,
+UW. LIL Kí 1.1 AG
+~ a”
+WU LIU Ao uC Ll AL
+@® NHA XUAT BAN GIAO DUC VIET NAM
+Cece CI)
+noe
+Ga * or
+: Taine
+GomNhom.com
+ˆ—. — -¬_.“._ ` te
+NGUYỄN THUÝ HÃNG
+Hướng dẫn học
+TOÁN
+Tập hai
+DI
+GomNhom.com
+NHÀ XUẤT BẢN GIÁO DỤC VIỆT NAM :
+————=————ềễềễề————ễễ
+ì `
+A
+LỜI GIỚI THIỆU
+Các em học sinh yêu quý!
+Sách Hướng dẫn học Toán 4 được biên soạn dành riêng cho
+học sinh thuộc hệ thống Archimedes School. Cuốn sách nhằm
+hỗ trợ các em hệ thống hoá, mở rộng và nâng cao kiến thức
+cũng như kĩ năng tư duy légic. Với những ví dụ minh hoạ sống động
+và gần gũi, cuốn sách không chỉ giúp học sinh nắm vững kiến thức
+mà còn khơi dậy niềm đam mê với toán học.
+Sách Hướng dẫn học Toán 4 được thiết kế khoa học, dễ hiểu.
+Các ví dụ gần gũi được tựa chọn kĩ tưởng nhằm tạo động lực, kích
+thích sự hứng thú, từ đó giúp các em ghi nhớ kiến thức dễ dàng
+và làm quen với toán học một cách tự nhiên, hiệu quả.
+Nội dung của cuốn sách bao gồm:
+8 Các chuyên đề đa dạng từ cơ bản đến nâng cao gắn liền
+thực tiễn, phù hợp với lứa tuổi giúp kích thích khả năng suy
+: Luận lôgic và rèn luyện tư duy nhạy bén của học sinh.
+8 Phương pháp giải toán hiệu quả: Cung cấp các bước giải
+toán giúp các em hoc sinh có thể giải quyết các bài toán
+một cách hiệu quả và nhanh chóng.
+Bài tập phong phú và đa dạng: Bao gồm nhiều bài tập thực
+hành từ dễ đến khó, được chọn lọc kĩ lưỡng để phù hợp với
+khả năng và nhu cầu học tập của các em học sinh.
+Chúng tôi tin rằng, sách Hướng dẫn học Toán 4 của hệ thống
+Archimedes School không chỉ là người bạn đồng hành mà còn
+la nguồn động lực giúp các em học sinh tự tin khám phá và phát _.
+triển tư duy légic, sáng tạo. Chúc các em có những giờ học toán
+thật thú vị và bổ ích!
+: Nguyễn Thuý Hằng
+Hướng dắn học Toán 4 ~ Tập hai
+Coit DỊ
+acer
+GomNhom.com
+CC ốÔốẽ mm ===— —————__ —_-—_- -——
+| : ;
+MUC LUC (Table of Contents)
+bm Trung bình cộng 5
+rÐ Bài toán tính ngược 18
+kŠ Bài toán thừa và thiếu 25
+LỄ Bài toán rút về đơn vị 33
+-Š Thống kê - Xác suất 44
+C3 Phân số 52
+vm So sánh phân số 59
+:Š Phép tính phân số 68
+EB Một số bài toán về phân số 86
+El) Giải bài toán bằng sơ đồ đoạn thẳng 101
+4 Rise above oneself and grasp the wortd
+—
+aunts
+lấn Cá
+ae
+NE eed
+GomNhom.com
+ì `
+1) Trung bình cộng
+@ Khai niệm về trúng bình cộng
+Bài toán 1: Sau hai bài kiểm tra toán, An được điểm 6 và điểm 10, Bình được.
+điểm 8 và điểm 10. Hỏi ai trong số hai bạn được xếp hạng cao hơn?
+Để giải quyết vấn đề trên, người ta chọn một “điểm” thay cho các điểm của
+mỗi bạn. Điểm này gọi la điểm “trung bình”.
+Điểm trung bình của An là: (6 + 10) ; 2 = 8.
+Diém trung bình của Bình tà: (8 + 10) : 2 = 9.
+Vậy: Bình được xếp hạng cao hơn.
+Trung bình cộng của hai hay nhiều số là tổng của các số đó chia cho số các
+số hạng.
+Kết luận: Các bước tìm số trung bình cộng:
+Bước 1: Xác định số các số hạng. Tính tổng các số.
+Bước 2: Trung bình cộng = Tổng : Số các số hạng.
+x Ví dụ 1
+Gia đình bác An phải trả 1 550 000 đồng cho hoá đơn tiền điện tháng Bảy này.
+Hỏi trung bình mỗi ngày trong tháng đó, gia đình bác An phải trả bao nhiêu tiền điện?
+Hướng dẫn
+Tháng Bảy có 31 ngày. Trung bình mỗi ngày gia đình bác An phải trả số tiền điện là:
+1 550 000 : 31 = 50 000 (đồng)
+Đáp số: 50 000 đồng.
+Ví dụ 2
+Bác Hoà gánh hai thing quả ra chợ bán. Thúng thứ nhất đựng 13 kg. Thúng thứ hai
+đựng 19 kg. Hỏi bác Hoà phải chuyển bớt bao nhiêu ki-l6-gam từ thing nào sang
+thúng nào để khối lượng quả của hai thúng bằng nhau cho tiện việc chuyển hàng
+của bác?
+' Hướng dẫn
+Tổng khối lượng của hai thúng la: 13 + 19 = 32 (kg).
+° Khi khố lượng quả của hai thúng bằng nhau thì mỗi thúng có khối lượng tà:
+x 32:2 = 16 (kg)
+Khối lượng quá bác cần chuyển từ thing thứ hai sang thúng thứ nhất tà:
+19~ 16 = 3 (kg)
+Đáp số: 3 kg.
+sướng din học Toán 4 | Tập hai 5
+Eas
+ize ee
+; ig Ci '
+i a aif
+DA»?
+GomNhom.com
+^
+
+Đài toán tim số hang chưa biết khí cho trước trung bình cộng
+: Ví dụ 3
+
+Trung bình cộng số cây của ba lớp 4A, 4B và 4C trồng được là 68 cây. Biết lớp 4A
+
+trồng được 62 cây, lớp 4B trồng được 70 cây. Hỏi tớp 4C trồng được bao nhiêu cây?
+
+Hướng dẫn
+
+Tổng số cây ba lớp trồng được là:
+68 x 3 = 204 (cây)
+Lớp 4C trồng được số cây la:
+204 - 62 ~ 70 = 72 (cây)
+Đáp số: 72 cây. .
+
+Ví dụ4
+E Trung bình cộng của hai số là 1024. Biết số thứ nhất là 957. Tìm số thứ hai.
+
+Hướng dẫn
+* Tổng Hai số là: 1024 x 2 = 2048. a.
+
+3 Số thứ hai là: 2048 - 957 = 1091.
+Đáp số:1091. — + ‘ .
+À2)” Rise above oneseif and greap the world
+EiDSS.eE
+GomNhom.com
+https://vnstorage.com — Trang tải tài liệu miễn phí
+* _)
+^
+Trung bình cộng của các số trong một dãy số cách đều
+Ví dụ5
+- Cho dãy số 2; 4; 6; 8; 10; 12. Tìm trung bình cộng của các số trong dãy số đó.
+Hướng dẫn
+Dãy số trên có 6 số hạng.
+Trung bình cộng của các số trong dãy số là:
+7 (2+4+6+8+10+12):6=7
+Đáp số: 7.
+Mặt khác: 7 = (2 + 12) : 2 và dãy số đã cho là dãy số cách đều 2 đơn vị.
+Nhận xét:
+Trung bình cộng của các số trong một dãy số cách đều bang trung bình cộng của
+số đầu dãy và số cuối dãy.
+Ví dụ6
+Tìm trung bình cộng của các số trong dãy số: 2013; 2015; 2017; 2019; 2021;
+2023; 2025.
+Š Hướng dẫn
+Vì dãy số trên là dãy số cách đều nên trung bình cộng của các số trong dãy
+số là:
+(2013 + 2025) : 2 = 2019
+Đáp số: 2019.
+Nhận xét khác: Dãy số trên là dãy số cách đều có lẻ số hạng (7 số) nên trung bình
+cộng của các số trong dãy số bằng số hạng ở chính giữa là 2019.
+Ví dụ 7
+Biết tổng của ba số chan liên tiếp bang 216. Tìm ba số đó. a
+Hướng dẫn
+ẽ Trung bình cộng của ba số là:
+216:3=72
+2 Ba số chẩn liên tiếp tạo thành dãy số cách đều nên trung bình cộng của ba số đó
+` bằng số ở chính giữa. Do đó, số ở chính giữa là 72.
+Ba số cần tìm là: 70; 72; 74. Ệ 5
+Đáp số: 70; 72; 74.
+Hường nhọc Toán4Tập hai”
+https://vnstorage.com — Trang tải tài liệu miễn phi
+————ễễễễễễễễễễ
+3, *
+A
+
+Dùng sơ đồ đoạn thẳng giải toán trung bình cộng
+
+Bài toán 3: Nam chạy bộ mỗi ngày. Ngày thứ nhất, Nam chạy 30 phút. Ngày thứ
+- hai, Nam chạy 40 phút. Ngày thứ ba, Nam chạy số phút bằng trung bình cộng
+của cả ba ngày. Hỏi trong ngày thứ ba Nam chạy bộ bao nhiêu phút?
+Hướng dẫn
+Ta có sơ đồ:
+Trung bình cộng
+thứba: r=— —
+pn TT TT] MyĐứnhếtôngbyb0hAi
+Tổng số phút Nam chạy trong ngày thứ nhất và ngày thứ hai la: 30 + 40 = 70 (phút)
+ứng với 2 phần.
+Ngày thứ ba Nam chạy số phút là: 70 : 2 = 35 (phút).
+Đáp số: 35 phút.
+Trong bài toán, số phút của ngày thứ ba bằng trung bình cộng của cả ba ngày
+nên ta chưa thể tính trung bình cộng bằng cách tính tổng của ba ngày rồi chia
+cho 3.
+Ta sử dụng sơ đồ biểu diễn trung bình cộng là 1 phần thì tống là 3 phần như trên.
+Số phút của ngày thứ ba bằng số trung bình cộng (1 phần), suy ra tổng số phút
+chạy của hai ngày đầu là: 3 - 1 = 2 (phần). Thời gian chạy của hai ngày đầu đã
+biết nên ta tính được giá trị 1 phần hay trung bình cộng.
+Kết luận:
+Nếu một số hạng bằng trung bình cộng của tất cả các số hạng trong dãy thì số
+hạng đó cũng bằng trung bình cộng của các số hạng còn lại.
+Các bước giải bài toán trung bình cộng bằng sơ đồ đoạn thẳng:
+Bước 1: Xác định được các đại lượng đã biết, đại lượng chưa biết và mối quan
+hệ của chúng với trung bình cộng. bs
+. Bước 2: Vẽ sơ đồ biếu diễn các đại lượng theo trung bình cộng từ đó tìm ra trung
+bình cộng.
+ì Bước 3: Dựa vào trung bình cộng tìm các đại lượng được yêu cầu.
+: Vidus ° a
+
+Tổ Một được thưởng 24 ngôi sao, tổ Hai được thưởng 28 ngôi sao. Tổ Ba được thưởng
+
+số ngôi sao bằng trung bình cộng số ngôi sao của ba tổ. Hỏi tổ Ba được thưởng bao .
+
+nhiêu ngôi sao?
+
+8. Rise above onesølf and grasp the world
+https://vnstorage.com — Trang tải tài liệu miễn phí
+———ễEE=====
+` "`
+^
+Hướng dẫn
+Ta có sơ đồ;
+M bình cộng
+Tổ Ba: = —
+‘ i Tổ Một và tổ Hai
+Tống: jee ——
+Tống số ngôi sao của tổ Một và tố Hai là: 24 + 28 = 52 (ngôi sao) ứng với 2 phần.
+Số ngôi sao của tổ Ba là: 52 : 2 = 26 (ngôi sao).
+. Đáp số: 26 ngôi sao.
+Ví dụ9
+An đọc xong một quyển truyện trong ba ngày. Ngày thứ nhất An đọc 39 trang, ngày
+thứ hai An đọc 41 trang, ngày thứ ba An đọc nhiều hơn trung bình cộng của cả ba
+ngày là 8 trang. Hỏi quyển truyện đó dày bao nhiêu trang?
+Hướng dẫn
+Ta có sơ đồ:
+Trungbìnhoông 8
+Ngày thứ ba i | Ngày thứ nhất và ngày thứ hai
+Tổng: i iol acne fle
+: Hai phần tương ứng với số trang là: 39 + 41 + 8 = 88 (trang).
+Trung bình công số trang An đọc trong cả ba ngày là: 88 : 2 = 44 (trang).
+Quyến truyện đó có số trang là: 44 x 3 = 132 (trang).
+Đáp số: 132 trang.
+Ví dụ 10
+Đầu năm học nhà trường kiểm tra sức khoẻ của học sinh. Bạn Hà nặng 36 kg, bạn
+Nam nặng 34 kg. Bạn Cường có số cân nặng kém trung bình cộng số cân nặng của
+ba bạn là 4 kg. Hỏi bạn Cường nặng bao nhiêu ki-lô-gam?
+Hướng dẫn :
+Ta có sơ đồ:
+Trung SEN DỤ HE
+: care san
+Téng: ae acne ng
+2 Hai phần tương ứng với: 36 + 34 - 4 = 66 (kg). :
+` Trung bình cộng số cân nặng của ba bạn là: 66 : 2 = 33 (kg).
+Cân nặng của Cường tà: 33 - 4 = 29 (kg). A i -
+Đáp số: 29 kg.
+Hướng dẫn hoc Toán 4 | Tập hai 48,
+https://vnstorage.com — Trang tải tài liệu miễn phi
+NN
+| -
+A
+Bài 1.
+: 1. Tìm trung bình cộng của các số trong dãy số sau:
+a. 12; 16; 20 b. 7; 15; 23; 35
+c. 41; 45; 42; 44 d. 92; 98; 67; 81; 52
+2. Bảng dưới đây ghi lại nhiệt độ các ngày trong tuần đầu tháng 10 của Hà Nội:
+[| tứHai| Thứ sa | ThưTư | ThưNăm | Thứ Sáu | Thứ Bảy | Chủ nhật|
+[Nhetee| ze | aac | arc | axe | anc | ave | aoc |
+Tính nhiệt độ trung bình các ngày trong tuần đầu tháng 10 của Hà Nội.
+|
+ae | H—— kh án ch t————
+l de ss | E—=
+' 3. Điểm kiểm tra môn Toán tháng 9 của lớp 4C (thang điểm 15) được cho trong bảng sau:
+Pe
+a. Hỏi lớp 4C có bao nhiêu học sinh?
+b. Tính trung bình cộng điểm kiểm tra môn Toán tháng 9 của lớp 4C.
+ce) E: 7TM !4 T T kH #5 Bị > T | ee (ý a LđẤN ( cz i 1z |
+| | |
+| | | | |
+4. Cho dãy số liệu về điểm thi môn Toán cuối học kì | của các bạn tổ Một của lớp 4A
+‘ nhu sau: 7; 8; 9; 9; 10; 10; 10; 8; 9; 10.
+a. Tính trung bình cộng điểm thi môn Toán cuối học kì | của các bạn trong tổ Một.
+b. Hỏi có bao nhiêu bạn trong tổ Một có số điểm thỉ.nhỏ hơn trung bình cộng điểm
+: : thi môn Toán cuối học ki | của các bạn tổ Một?
+Srey Meme E8 gỤ seam Wear rett i ARBRE d4 gân,
+10 Rise abave oneselt and grasp the world
+https://vnstorage.com — Trang tải tài liệu miễn phí
+——————ễễ'ờ..——
+| `
+A
+5. Một người di xe máy trong 3 giờ đầu, mỗi gid di được 45 km và trong 2 giờ sau,
+mỗi giờ đi được 50 km. Hỏi trung bình mỗi giờ người đó đi được bao nhiêu
+ki-l6-mét?
+6. Detox là một loại nước uống giúp giảm cân bằng việc sử dung những thực
+phẩm giúp thanh lọc cơ thể. Chị Hoa pha nước detox hoa nhài và chanh để
+giảm cân trong một tuần. Mỗi ngày, chị Hoa uống 210 ml nước detox. Từ ngày
+thứ năm kể từ khi bắt đầu uống thì chị Hoa tăng lượng uống thêm 70 mi mỗi
+ngày. Hỏi trung bình mỗi ngày của tuần đó, chị Hoa đã uống bao nhiêu mi-li-lít
+nước detox?
+7. Black Friday ~ ngày vàng mua sắm là thứ Sáu lần thứ tư của tháng 11 hằng năm.
+Vào ngày đó, do chính sách giảm giá lớn nên lượng sản phẩm của các cửa hàng
+được bán ra rất nhiều. Tại một cửa hàng, trong tháng 11, lượng hàng bán ra trong
+ngày Black Friday cao gấp 10 tần số lượng hang bán ra trung bình cả tháng. Biết số
+lượng hàng bán ra của tháng đó là 3000 sản phẩm. Hỏi ngày thứ Sáu đó cửa hang
+đã bán ra bao nhiêu sản phẩm?
+'Hướng dẫn học Toán 4 | Tập hai SH,
+| _
+https://vnstorage.com — Trang tải tài liệu miễn phí
+* .`
+^
+Bài 2.
+1. Trung bình cộng của ba số là 273, biết số thứ nhất là 253, số thứ nhất hơn số thứ
+hai 53 đơn vị. Tìm số thứ ba.
+2. Trung bình cộng của năm số là 245. Nếu bớt đi số thứ năm thì trung bình cộng của
+bốn số là 230. Tìm số thứ năm.
+3. Trung bình cộng của bốn số là 3500. Hỏi nếu thêm số thứ năm là 2800 thì trung
+bình cộng của năm số là bao nhiêu?
+4. Hiện nay, trung bình số tuổi của bố, mẹ và Hoa là 30 tuổi. Nếu không tính tuổi bố
+thì trung bình số tuổi của mẹ và Hoa là 24 tuổi. Tính tudi bố hiện nay.
+3 2ã Rise above onesel! and grasp the wortd

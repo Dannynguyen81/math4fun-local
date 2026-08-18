@@ -1,0 +1,23 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Luyện tập
+
+Bài 16.
+1. Cho dãy số liệu về điểm thi môn Toán học kì | của một nhóm học sinh:
+8; 10; 8; 9; 9; 10; 9; 9; 8; 10.
+a, Hỏi nhóm có bao nhiêu học sinh?
+b. Tính trung bình cộng điểm thi của nhóm.
+
+2. Cho dãy số liệu về số lượt khách tham quan của một khu du lịch từ thứ Hai đến
+'Chủ nhật của một tuần nào đó theo thứ tự là: 432; 567; 689; 512; 568; 799; 801.
+Hỏi trung bình mỗi ngày có bao nhiêu lượt khách tham quan khu du lịch đó?
+
+3. Dãy số liệu về chiều cao (đơn vị là cm) của một nhóm học sinh là: 132; 137; 134; 132;
+135; 140; 138; 140. Tính trung bình cộng chiều cao của các học sinh trong nhóm.
+
+4. Cho dãy số liệu về sổ quyển truyện tranh các tớp khối Bốn quyên góp cho các bạn.
+vùng cao là: 35; 34; 23; 48; 56; 87; 32; 45; 31; 49.
+a. Tính trung bình cộng số truyện tranh của các lớp đã quyên góp.
+b. Có bao nhiêu tớp quyên góp nhiều hơn trung bình cộng số sách của khối?
+
+ÁỔ na osoneereersecsesea

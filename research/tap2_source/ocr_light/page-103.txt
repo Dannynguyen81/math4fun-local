@@ -1,0 +1,49 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2. Bài toán Hiệu - Tỉ
+
+Bài toán 2: Lớp 4A có số học sinh nữ ít hơn số học sinh nam 8 bạn, biết sổ học
+sinh nam bằng Ỹ Số học sinh nữ. Hỏi lớp 4A có bao nhiêu học sinh nam, bao.
+nhiêu học sinh nữ?
+
+Hướng dẫn
+
+Tôm tắt bài toán bằng sơ đồ đoạn thẳng.
+
+Số học sinh nam:
+
+Số học sinhnữ: mm,
+=
+
+Hiệu số phần bằng nhau là: 5~ 3 = 2 (phần).
+Giá trị một phần là: 8 : 2= 4 (bạn).
+Số học sinh nữ là: 4 x 3= 12 (bạn).
+Số học sinh nam là: 12+ 8= 20 (bạn).
+Đáp số: 12 học sinh nữ, 20 học sinh nam.
+Nhận xét:
+
+Tương tự bài toán Tổng - Tỉ, với bài toán cho biết hiệu hai số và số phần bằng.
+nhau của mỗi số ta tính được hiệu số phần bằng nhau. Sau đồ ta sẽ tính được
+giá trị 1 phần và tìm được mỗi số theo yêu cầu đề bãi.
+
+Ta cũng cỏ thể gộp các bước giải như sau:
+
+Hiệu số phần bằng nhau là: 5 - 3 = 2 (phần).
+
+Số học sinh nữ là: 8 : 2 x 3 = 12 (bạn).
+
+Số học sinh nam là: 12 + 8 = 20 (bạn).
+
+Kết luận: Các bước giải bài toán: Š
++_ Xác định hiệu, số lớn, số bé; số lớn gấp bao nhiêu lần số bé.
+
+s_ Vẽ sơ đồ đoạn thắng.
+
+s_ Tìm hiệu số phần bằng nhau.
+
++. Tìm giá trị một phần bằng cách tấy hiệu số chía cho hiệu số phần.
+
+b s Tìm niỗi số bằng cách lấy giá trị một phần nhân với số phần của số
+cần tìm.
+
+"“— ` `...

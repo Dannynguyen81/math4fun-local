@@ -1,0 +1,14 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. (*) Trong một đợt trồng cây, một trường chia số cây cho các lớp đế trồng như sau:
+
+1
+~ Lớp thứ nhất trồng 9 cây và 8 số cây còn lại..
+~ Lớp thứ hai trồng 18 cây và ẹ số cây còn lại.
+
+~ Lớp thứ ba trồng 27 cây và h sổ cây còn lại.
+
+Nếu chia như vậy thì số cây chia vừa hốt và số cây ở các lớp bằng nhau. Hỏi có mấy
+(ớp tham gia trồng cây và có bao nhiêu cây được trồng?
+
+ẢO saanoacsesuteogeaoneuoss

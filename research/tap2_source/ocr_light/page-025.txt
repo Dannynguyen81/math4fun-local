@@ -1,0 +1,44 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài toán: Chị chia táo cho các em, nếu chia cho mỗi em 3 quả thì thửa 2 quả,
+nếu chia cho mỗi em 4 quả thì thiếu 3 quả. Hỏi có bao nhiều quả táo và bao
+
+nhiêu em được chia táo?
+Hướng dẫn
+
+Giải bằng sơ đồ
+
+Tạ có sơ đồ:
+
+Số quả táo ban đầu:
+Số quả táo chia 3quả@m: ——————— !
+
+Số quả táo chia 4 quảem:
+
+Mỗi em 4 quá nhiều hơn mỗi em 3 quả là:
+
+4~3=1 (quả),
+Nhìn vào sơ đồ ta thấy chẽnh lệch số táo giữa hai cách chia là:
+
+3+2=8 (quả).
+Sự chênh lệch trên là do mỗi em đã được tăng thêm 1 quả.
+Từ đó suy ra:
+Số em được chia táo là:
+
+5:1=5 (em).
+Số quả táo là:
+
+5x3+2= 17 (quả).
+Đắp số: 5 em và 17 quả táo.
+
+Nhận xét:
+
+Số quả táo và số em được cha táo được cố định ban đầu.
+Số quả táo được chia theo hai cách nên xuất hiện trường hợp số táo ban đầu.
+khi chia bị “thừa” hoặc “thiếu” tuỳ theo cách chia. Chênh lệch giữa hai cách
++ chia (Hiệu 1) chính là sự chênh lệch giữa số lượng được chia (Hiệu 2) nhân số
+`... người được chia,
+Từ đó ta có: Số người = (Hiệu 1) : (Hiệu 2) (gọi là bài toán thừa và thiếu hay bài
+toán hai hiệu số).
+
+tưởng dăn học Toán4|Tipbal 2

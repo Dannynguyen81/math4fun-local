@@ -22,3 +22,13 @@
 - [x] Làm các khu vực Bản đồ học, Bộ sưu tập, Trạm học và Đấu Boss có thể truy cập.
 - [x] Thêm gameplay hoàn chỉnh: XP, streak, unlock guardian, tiến độ và combat turn.
 - [x] Kiểm thử điều hướng, luồng học, local persistence và responsive; lưu checkpoint.
+
+## Nâng cấp theo phản hồi chơi thử
+
+- [x] Đối chiếu PDF Toán 4 Tập 2 và lập lộ trình 20 chủ đề nhỏ thuộc các chủ đề lớn.
+- [x] Thiết kế ngân hàng câu hỏi E–M–H, thứ tự xáo trộn và chống lặp câu hỏi khi chơi lại.
+- [x] Tăng yêu cầu mastery lên tối thiểu 10 câu/trạm, lưu điểm sai/dở dang để không thể thoát–vào làm lại từ đầu.
+- [x] Xây Boss 5 câu khó không trùng câu thu phục; cân bằng sát thương hai chiều và phép thuật nguyên tố.
+- [x] Thêm tạo hồ sơ local, chọn nhân vật, đội guardian dùng để chiến đấu và giới hạn mở hai chủ đề mỗi tuần.
+- [x] Thêm hiệu ứng âm thanh, dashboard thống kê học tập local và kiểm thử cân bằng toàn bộ game.
+- [ ] Tiếp tục đối chiếu và bổ sung tối thiểu 10 câu E–M–H cho từng chủ đề 4–20 trước khi cho phép mở toàn bộ lộ trình.

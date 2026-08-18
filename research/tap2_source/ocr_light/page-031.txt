@@ -1,0 +1,18 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+4. Một đơn vị bộ đội dùng một số chiếc thuyền đế sang sông. Nếu mỗi thuyền chở.
+†6 người thì có 36 người chưa được sang sông. Nếu mỗi thuyền chớ thêm 5 người
+thì có 10 người chưa được sang sông. Hỏi có bao nhiêu chiếc thuyền và đơn vị bộ
+đội đó có bao nhiêu người (không kể người lái)?
+
+Bài 11.
+
+1. Bạn Nhi sưu tầm được một số thẻ bài và xếp các thẻ bài đó vào các hộp. Nếu mỗi
+hộp có 20 thẻ bài thì thiếu 5 thẻ bài. Nếu mỗi hộp có 25 thẻ bài thì thiếu 30 thẻ bài..
+Hỏi bạn Nhỉ đã sưu tăm được bao nhiêu thẻ bài?
+
+2. Cô Hoa xếp một số chiếc bánh rán vào một số chiếc hộp. Nếu cô xếp vào mỗi
+hộp 8 chiếc bánh thì thiếu 3 chiếc, còn nếu cô xếp vào mỗi hộp 10 chiếc thì thiếu
+9 chiếc. Hỏi cô Hoa có bao nhiêu chiếc bánh?
+
+tsưỡng dân học Toán 4 Tập hai

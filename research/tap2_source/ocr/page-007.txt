@@ -1,0 +1,35 @@
+https://vnstorage.com — Trang tải tài liệu miễn phí
+* _)
+^
+Trung bình cộng của các số trong một dãy số cách đều
+Ví dụ5
+- Cho dãy số 2; 4; 6; 8; 10; 12. Tìm trung bình cộng của các số trong dãy số đó.
+Hướng dẫn
+Dãy số trên có 6 số hạng.
+Trung bình cộng của các số trong dãy số là:
+7 (2+4+6+8+10+12):6=7
+Đáp số: 7.
+Mặt khác: 7 = (2 + 12) : 2 và dãy số đã cho là dãy số cách đều 2 đơn vị.
+Nhận xét:
+Trung bình cộng của các số trong một dãy số cách đều bang trung bình cộng của
+số đầu dãy và số cuối dãy.
+Ví dụ6
+Tìm trung bình cộng của các số trong dãy số: 2013; 2015; 2017; 2019; 2021;
+2023; 2025.
+Š Hướng dẫn
+Vì dãy số trên là dãy số cách đều nên trung bình cộng của các số trong dãy
+số là:
+(2013 + 2025) : 2 = 2019
+Đáp số: 2019.
+Nhận xét khác: Dãy số trên là dãy số cách đều có lẻ số hạng (7 số) nên trung bình
+cộng của các số trong dãy số bằng số hạng ở chính giữa là 2019.
+Ví dụ 7
+Biết tổng của ba số chan liên tiếp bang 216. Tìm ba số đó. a
+Hướng dẫn
+ẽ Trung bình cộng của ba số là:
+216:3=72
+2 Ba số chẩn liên tiếp tạo thành dãy số cách đều nên trung bình cộng của ba số đó
+` bằng số ở chính giữa. Do đó, số ở chính giữa là 72.
+Ba số cần tìm là: 70; 72; 74. Ệ 5
+Đáp số: 70; 72; 74.
+Hường nhọc Toán4Tập hai”

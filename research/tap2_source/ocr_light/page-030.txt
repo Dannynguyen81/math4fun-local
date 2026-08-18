@@ -1,0 +1,17 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Bài 10.
+
+1. Một đội trồng rừng được giao nhiệm vụ trồng một số cây. Nếu mỗi người trồng
+5 cây thì còn 3 cây chưa trồng, nếu mỗi người trồng 4 cây thì còn 12 cầy chưa trồng..
+Hỏi đội trồng rừng đó có bao nhiêu người và cần trồng bao nhiều cây?
+
+2. Cô giáo phát một số tờ giấy màu cho một số học sinh để làm thiệp trang trí.
+Nếu mỗi học sinh được phát 3 tờ thì thừa 24 tờ. Nếu mỗi học sinh được phát 5 tờ.
+thì thừa 4 tờ, Hỏi cô giáo phát bao nhiêu tờ giấy màu?
+
+3. Ở một phòng họp, nếu mỗi bàn ngồi 3 người thì có 15 người chưa có chỗ ngồi, nếu
+mỗi bàn ngồi 4 người thì có 3 người chưa có chỗ ngồi. Hỏi có bao nhiêu người dự
+họp và bao nhiêu bàn?
+
+SDẺ 121100100155

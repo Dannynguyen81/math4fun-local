@@ -1,0 +1,17 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+ˆ^
+
+4. Tìm một số, biết nếu xoá chữ số 0 ở tận cùng bên phải của số đó thì số đó giảm đi
+2115 đơn vị,
+
+5. Tìm một số có hai chữ số, biết nếu viết thêm chữ số 3 vào bên trái số đó thì ta
+được số mới gấp 5 lần số cần tìm.
+
+Bài 44.
+
+1. Bạn An xếp sách vào hai ngăn, ngẫn trên nhiều hơn ngăn dưới 24 quyền. Biết 3
+số sách ngăn trên bằng. ã số sách ngăn dưới. Hỏi An xếp mỗi ngăn bao nhiêu.
+quyền sách?
+
++ươngelohocteanalrapbal TỐ

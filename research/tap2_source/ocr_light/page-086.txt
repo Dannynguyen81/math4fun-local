@@ -1,0 +1,45 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+(9) Một số bài toán về phân số
+
+nnm giá trị phân số của một số cho trước
+
+Bài toán 1: Mộttổtáo có 15 quả. Hỏi Š số táo trongrổ là bao nhiều quảtáø?
+
+Hướng dẫn
+
+Coi 15 quả táo trong rổ tíương ứng với 3 phần bằng nhau. Vậy 2 Số táo trong rố.
+chiếm 2 phần như thế. °
+
+- Số táo trong tổ là:15:3=5(quẢ)
+số táo trongrồ là: x 2x 10 (quà),
+
+'Đắp số: 10 quả táo.
+
+Nhận xét: Bài toán trên thuộc dạng toán Tìm giá trị phân số của một số cho
+trước. Ta có thế làm gộp các bước giải như sau:
+
+5 SỐtáo trong tổ là: t6xÃ “10 (quả)
+
+Kết luận: Muốn tìm ` của một số A cho trước, ta tính A x2
+n
+(Với m, n là các số tự nhiên, n khác 0).
+
+Ví dụ1
+
+Tìm Š của 140m.
+4
+
+Hướng dẫn
+3 của 140m là: 140x Š =105 (m)
+4 4
+
+Đáp số: 105 m.
+Vídu2
+Tổng thụ nhập trong 1 tháng của gia đình bạn An là 50 000 000 đồng, Biết gia đình An
+dành : tổng thu nhập cho giáo dục (học phi của hai con); ỹ tổng thu nhập cho chỉ
+
+phí sinh hoạt, còn lại là tiền tiết kiệm. Hỏi mỗi tháng gia đình An tiết kiệm được
+bao nhiêu tiền?
+
+ĐỒ ngeoosenesseedepnsvoed

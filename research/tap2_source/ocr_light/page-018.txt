@@ -1,0 +1,43 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+2) Bài toán tính ngược
+
+Dùng sơ đồ đoạn thẳng giải bài toán tính ngược
+
+Bàitoần: Mẹ có mộtgiô trứng. Mỹ đã dùng ~ số trửng và 5 quả nữa thì trong giỏ.
+còn lại 13 quả trứng. Hỏi lúc đầu, giỏ trứng đó có bao nhiêu quả? ,
+
+Hướng dẫn.
+Ta có sơ đồ: Squê _8quá
+Số trứng trong giỏ: ——>==—————==—
+Ba phần tương ứng với số trứng là: 13 + 6 = 18 (quá).
+Một phần tương ứng với số trứng là: 18 : 3 = 6 (quả).
+Lúc đầu, trong giỏ có số trứng là: 8 x 4 = 24 (quả).
+Đáp số: 24 quả trửng.
+'Cách giải trên được gọi là phương pháp dùng “sơ đồ đoạn thẳng”.
+
+'Bằng cách xác định được số trứng ban đầu được chia làm 4 phần bằng nhau,
+sau khi sử dụng một phần và thêm 5 quả thì số trứng còn lại tà 13 quả..
+
+'Từ sơ đồ, 13 quả trứng còn lại công thêm 5 quả thì tương ứng với 3 phần bằng.
+nhau, tìm giá trị 1 phần rồi từ đó tính giá trị của 4 phần.
+
+Khí dùng sơ đồ đoạn thẳng giải bài toán tính ngược, cần lưu ý vẽ các đoạn thẳng.
+'bằng nhau để biểu thị các phần “bằng nhau”.
+
+Kết tuận: Các bước giải bài toán tính ngược sử dụng sơ đồ đoạn thẳng:
+
+Bước 1; Xác định được các đại lượng đã biết, đại lượng chưa biết và mối quan
+hệ của chúng với nhau. *
+
+Bước 2: Vẽ sơ đồ biếu diễn các đại lượng theo các phần bằng nhau, đánh dấu.
+các điểm trên đường thẳng tương ứng với các giá trị của đại lượng đã cho.
+
+'Bước 3: Tìm giá trị 1 phần và tìm ra giá trị các đại lượng được yêu cầu..
+
+Ví dụ1
+
+Lan có một số viên kẹo. Lan cho Hà š số kẹo đó và thêm 4 viên nữa thì Lan còn tại
+18 viên kẹo. Hỏi lúc đầu, Lan có bao nhiêu viên kẹo?
+
+TỔ naaeseemwandpsspnswede

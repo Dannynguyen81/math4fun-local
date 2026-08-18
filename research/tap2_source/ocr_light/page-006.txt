@@ -1,0 +1,21 @@
+Đài toán tm số hàng chưa biết khí cho trước trung bình cộng.
+
+Vidu3.
+
+Trung bình cộng số cây của ba lớp 4A, 4B và 4C trồng được tà 68 cây. Biết lớp 4A.
+
+Hưởng dẫn
+Tống số cây ba lớp trồng được là:
+68 x 3= 204 (cây)
+Lớp 4C trồng được số cây tà:
+'204~62~70 = 72 (cây)
+Đáp số: 72 cây.
+
+Vidu4.
+Trung bình cộng của hai số là 1024. Biết số thứ nhất là 957. Tìm số thứ hai..
+
+Hướng dẫn
+Tổng Hai số là: 1024 x 2 = 2048,
+Số thứ hai là: 2048 = 987 = 1091.
+Đáp số: 1091.
+

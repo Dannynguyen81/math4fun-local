@@ -1,0 +1,45 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Thống kê - Xác suất
+
+Dãy số liệu thống kê
+
+'Bảng thống kê: Dùng để ghi chép, biểu diễn các số liệu thống kê.
+“Các dạng toán liên quan đến dãy số liệu thống kẽ:
+
+® Đọc số liệu trong dãy số liệu hoặc bảng thống kẽ cho trước.
+«So sánh, tính toán với các số liệu.
+
+s_ Hoàn thành bảng thống kê hoặc dây số liệu.
+
+Ví dụ 1
+
+Cho dãy số liệu về cân nặng (đơn vị là kg) của 8 bạn học sinh lớp 4 trong một buổi
+kiểm tra sức khoẻ như sau: 40; 43; 45; 48; 44; 45; 39; 40.
+
+.a. Tính trung bình cộng cân nặng của 8 bạn.
+b. Tính trung bình cộng căn nặng của ba bạn nặng nhất trong nhóm.
+
+Hướng dẫn
+.a. Tổng cân nặng của 8 bạn là: 40 + 43 + 45 + 4B + 44 + 45 + 39 + 40 = 344 (kg).
+Trung bình cộng cân nặng của các bạn là: 344 : 8 = 43 (kg).
+b, Ba bạn nặng nhất có cân nặng là: 45 kg, 45 kg, 48 kg.
+Trung bình cộng cân nặng của ba bạn nặng nhất là: (45 + 48 + 45) : 3 = 46 (kg).
+
+Đáp số: a. 43 kg; b. 46 kg.
+
+Biểu đồ
+
+Biểu đồ là một cách biểu diễn số liệu thống kê dưới dạng các hình vẽ. .
+
+'Biếu đồ cột bao gồm: Tên biểu đồ, tên các đối tượng thống kê được viết phía
+dưới của mỗi cột, chiều cao của cột biếu thị số liệu thống kê.
+
+Các dạng bài tập liên quan:
++ Đọc và mô tả được các số liệu, nhận xét được các giá trị trong biếu đồ,
+* Tínñ được giá trị trung bình của các số liệu trong bảng hay biểu đồ.
+
++ Làm quen với việc phát hiện vấn đề hoặc quy luật đơn giản dựa trên quan sát
+các số liệu từ biểu đồ. ` z
+
+ẢT neesononeetsnopaspbesoed

@@ -1,0 +1,17 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí.
+
+3. Biểu đồ dưới đây cho biết số cốc trà sữa của một cửa hàng bán ra trong một tuần.
+Biết Chủ nhật bán nhiều hơn thử Ba 180 cốc. Tính số cốc trà sữa cửa hàng bán
+được trong ngày thứ Bảy.
+
+Số cốc trà sữa bán ra trong một tuần
+
+ThỨHai ThứBa ThửTư ThứNäm ThứSáu ThứBáy Chủnhật
+
+1. Một hộp kín có 10 viên bi gồm 2 viên bi màu đỏ, 3 viên bí màu vàng và 8 viên bi
+màu xanh cùng kích thước, khối lượng. Lấy ra ngẫu nhiên 1 viên bi từ hộp đó.
+
+a. Viết các khả năng về màu của viên bí được tấy ra từ hộp.
+b. Viên bi màu nào có khả năng được lấy ra nhiều hơn các viên bi còn lại?
+
+`. 7.

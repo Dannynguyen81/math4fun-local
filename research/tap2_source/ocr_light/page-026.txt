@@ -1,0 +1,38 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídụ1
+
+Minh có một số viên bi và một số túi. Nếu Minh bỏ vào mỗi túi 10 viên thì còn thừa
+| 16 viên. Nếu Minh bỏ vào mỗi túi 12 viên thì còn thừa 4 viên. Hỏi Minh có bao nhiều
+viên bi và bao nhiêu túi bi?
+
+| Hướng dẫn
+Ta có sơ đồ:
+
+Số viên bi ban đầu: +
+300i se i0 CC
+Số viên biolle12viänftdi:L———————Ì
+'Nhìn vào sơ đồ ta thấy hiệu số viên bi giữa hai cách chía là:
+
+16~4= 12 (viên)
+Mỗi túi 12 viên nhiều hơn mỗi túi 10 viên là:
+12~10=2 (viên)
+Số túi bị là:
+12:2= 6 (túi)
+Số viên bi là:
+6x 10+ 16 =76 (viên)
+Đáp số: 76 viên bi và 6 túi bi.
+Giải vẫn tắt
+10 viên/túi: thừa 16 viên
+12 viên/túi: thừa 4 viên
+Số túi là: $
+(16~4): (1210) = 6 (túi)
+Số viên bi là:
+8x 10+16=76 (viên)
++ Vidu2 * :
+
+Một cứa hàng đóng gói một số chiếc áo vào một số thùng. Nếu mỗi thùng đóng
+20 chiếc thì thiếu 5 chiếc. Nếu mỗi thùng đóng 25 chiếc thì thiếu 40 chiếc. Hỏi cửa
+hàng dự định đóng gói bao nhiêu chiếc áo?
+
+đổ. meeeseimmeee

@@ -1,0 +1,35 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+khái niệm phan số
+
+'Bài toán 1: Chia đều 1 cái bánh cho 2 người. Tìm phần bánh của mỗi người.
+Hướng dẫn
+
+Ta có thể làm như sau:
+
+Chia cái bảnh thành 2 phần bằng nhau. Lần lượt đưa cho mỗi người 1 phần,
+tức là : của cái bánh. Như vậy mỗi người được ; cái bánh.
+
+Bài toán 2: Mẹ có 2 cái bánh, chia mỗi cái bánh thành 4 phần bằng nhau. Mai.
+ăn 1 cái bánh và ¡ cái bánh. Viết phân số chỉ số phần cái bánh Mai đã ăn.
+
+Hướng dẫn
+
+Ta thấy:
+
+Ăn † cái bánh, tức tà ăn 4 phần hay ^ P 4 bánh ănthêm „ - Sói bánh nữa tức là
+ăn thêm 1 phần, như vậy Mai đã ăn tất cá 5 phần hay cái bánh.
+
+Kết luận:
+
+Phân số là số có dạng. h (e và b là số tự nhiên, b khác 0). Trong đó: a là tử số,
+b là mẫu số.
+
+Lưuý: `
+
++ Mọi số tự nhiên đều viết được dưới dạng phân số có mẫu số bằng 1.
+
+® Thương của phép chia một số tự nhiền cho một Số tự nhiên khác 0 có thế
+viết thành một phân số.
+
+Đ2  neebosoeeedfaedgmptheverG.

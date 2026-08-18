@@ -1,0 +1,45 @@
+https//vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Nhận thấy, số phần công việc là một tích, không đổi nên số người gấp lên
+(giảm đi) bao nhiêu lần thì số ngày làm việc giảm đĩ (gấp lên) bấy nhiêu lần và
+
+ngược lại.
+Kết luận:
+
+Hai đại lượng A và B được liên hệ với nhau bởi công thức A x B = k. Trong đó,
+k có thể là một số cụ thế cho trước hoặc một số không đổi.
+
+Khi đó gấp A lên bao nhiêu lần thì B giảm đi bấy nhiêu lần và ngược lại..
+Ta nói: A tăng, B giảm số lần như nhau.
+
+Cách nhận biết bài toán một đại lượng tăng, một đại lượng giảm số lần
+như nhau
+
+Một đội công nhân gồm 10 người hoàn thành một công việc trong 30 ngày. Nếu
+đội có 20 công nhân thì hoàn thành công việc như thế trong thời gian bao (âu?
+Biết năng suất làm việc của mỗi người là như nhau.
+
+Yếu tố không đổi: năng suất ~ sức làm việc như nhau, công việc như thế.
+Công thức: Số phần côngviệc = số người x số ngày làm việc.
+Giải chỉ tiết:
+
+Khối lượng công việc không thay đối, khi số công nhân tầng lên (giảm đi) bao
+nhiều lần thì thời gian hoàn thành sẽ giảm đi (tăng lên) bấy nhiều lần,
+
+Cách1
+20 công nhân gấp 10 công nhân số lần là: 20 : 10 = 2 (tần).
+'20 công nhân hoàn thành công việc trong thời gian là: 30 : 2 = 15 (ngày).
+
+Đáp số: 15 ngày.
+Cách2
+Một công nhân hoàn thành công việc đó trong thời gian là:
+10 x 30 = 300 (ngày). :
+20 công nhân hoàn thành công việc trong thời gian là: 300 : 20 = 15 (ngày).
+Đáp số: 15 ngày.
+ì Giải vắn tắt:
+Ẫ „_ SốngưỡI Số ngày.
+$ 10 30
+10 Tung
+20 ?=30x22 = 80x =1
+
+kươngsinnocTeinalYiphal 7

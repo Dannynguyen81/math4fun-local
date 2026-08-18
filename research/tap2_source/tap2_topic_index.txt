@@ -1,0 +1,72 @@
+70:Bài toán tính ngược. 18
+71:Bài toán thừa và thiếu. 25
+72:Bài toán rút về đơn vị 3
+74:Phân số 52
+84:Bài toán 1: Sau hai bài kiểm tra toán, An được điểm 6 và điểm 10, Bình được
+198:Bài toán 3; Nam chạy bộ mỗi ngày. Ngày thứ nhất, Nam chạy 30 phút. Ngày thứ:
+284:Bài 1.
+340:Bài 2.
+373:Bài 3.
+400:Bài 4.
+449:Bài 5.
+547:Bài 6.
+558:Bài 7.
+593:Bài 8.
+629:Bài toán: Chị chia táo cho các em, nếu chia cho mỗi em 3 quả thì thửa 2 quả,
+747:Bài 9.
+778:Bài 10.
+800:Bài 11.
+834:Bài toán 1; Có 240 kg táo được đựng đều vào 8 thùng. Hỏi 10 thùng như thế có
+844:Bài toán 2: May 5 bộ quần áo như nhau hết 15 m vải. Hỏi có 240 m vải thì may
+856:Bài toán chỉ được giải bằng cách rút về đơn vị khi đề bài thể hiện yếu tố “như
+860:Bài toán 1:
+864:Bài toán 2: ì
+894:Bài toán trên có đú yếu tố “như nhau”, “như thế” để giải bằng cách rút về đơn vị.
+958:Bài toán 4: Một đội công nhân gồm 10 người hoàn thành một công việc trong
+962:Bài toán trên có đú yếu tố “như nhau", “như thế” để giái bằng cách rút về đơn vị.
+1068:Bài 12.
+1095:Bài 13.
+1120:Bài 14.
+1145:Bài 15.
+1265:Bài 16.
+1292:Tính trung bình cộng điếm kiếm tra cuối học kì l môn Toán của lớp 4C.
+1294:Bài 17.
+1403:Bài toán 2: Mẹ có 2 cái bánh, chia mỗi cái bánh thành 4 phần bằng nhau. Mai.
+1415:Phân số là số có dạng. h (e và b là số tự nhiên, b khác 0). Trong đó: a là tử số,
+1439:Bài toán 4: Rút gọn các phân số: 0; Tóc -
+1497:Bài 19.
+1525:Bài 20.
+1561:Bài 21.
+1712:Bài 22.
+1753:Bài 23.
+1847:phân số, rồi cộng hai phân số đó.
+1855:phân số, rồi trừ hai phân số đó.
+1865:phân số thử hai.
+1980:Phân số cần tìm là: Š;Š„ 1 - _Ê..
+1983:Bài 25.
+2013:Bài 26.
+2036:Bài 27.
+2048:Bài 28.
+2070:Bài 29.
+2127:Bài 30.
+2166:Bài 31.
+2190:Bài 32.
+2235:Bài 33.
+2259:Bài toán 1: Mộttổtáo có 15 quả. Hỏi Š số táo trongrổ là bao nhiều quảtáø?
+2329:Tìm sốA, biết ì của A là 24.
+2354:Bài 34.
+2374:diện tích hình chữ nhật đó.
+2384:Bài 38.
+2419:Bài 36.
+2447:Bài 37.
+2462:hình chữ nhật đó.
+2474:Bài 38.
+2483:diện tích mảnh đất để trồng rau, phần còn lại có diện tích là 12 mề, Tính diện tích.
+2506:Bài 39.
+2539:Bài 40.
+2571:Bài toán 1; Hải và Tùng có tất cả 100 nhãn vở, biết số nhãn vở của Hải gấp 4 lần
+2649:Bài toán 2: Lớp 4A có số học sinh nữ ít hơn số học sinh nam 8 bạn, biết sổ học
+2739:Bài 41.
+2757:Bài 42.
+2788:Bài 43.
+2810:Bài 44.

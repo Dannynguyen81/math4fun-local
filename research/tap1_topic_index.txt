@@ -1,0 +1,195 @@
+317:Bài 1.
+323:Bài 2.
+327:Bài 3.
+333:Bài 5.
+336:Bài 6.
+339:Bài 7. ›
+354:Bài 10.
+357:Bài 11.
+360:Bài 12.
+368:Bài 13.
+373:Bài 14.
+379:Bài 15.
+566:Bài 16.
+571:Bài 17.
+573:Bài 18.
+575:Bài 19.
+577:Bài 20. j
+581:Bài 21.
+585:Bài 23. . :
+597:Bài 25.
+601:Bài 26.
+603:Tính tổng của các số đó.
+604:Bài 27.
+607:Bài 28.
+609:Tính tổng của các số đó.
+610:Bài 29.
+614:Bài 30.
+621:Bài 31. (*)
+628:Bài 32. (*)
+633:Bài 33. (*)
+640:Bài 34. „ :
+642:Bài 35. (*)
+729:Bài 36.
+733:Bài 37. >
+744:Bài 39.
+747:Bài 40.
+752:Bài 41.
+755:Bài 42.
+758:Bài 43.
+762:Bài 44.
+937:Bài 46.
+954:Bài 49.
+961:Bài 50.
+972:Bài 51.
+979:Bài 52.
+984:Bài 53.
+987:Bài 54.
+990:Bài 55.
+1004:Diện tích hình vuông là: S = a x a.
+1006:hình chữ nhật
+1010:Diện tích hình chữ nhật là: S = a x b. a
+1021:Diện tích hình chữ nhật là: 20 x 12 = 240 (cm?).
+1043:Diện tích hình A là: 2 x 4 = 8 (cm?).
+1047:Diện tích hình mũi tên là: 8 + 4 = 12 (cm?).
+1050:Diện tích hình mũi tên bằng diện tích hình chữ nhật
+1071:Diện tích hình A là:
+1073:Diện tích hình B là: -
+1075:Diện tích hình C là: 8h Sạn .
+1082:Diện tích hình cần tính bằng diện tích hình chữ nhật lớn trừ đi diện tích hình chữ
+1091:Diện tích hình chữ nhật ton là: 5cm
+1093:Diện tích hình chữ nhật nhỏ là: 9cm 9cm
+1095:Diện tích hình cần tính là:
+1098:Bài 56.
+1101:Bài 57.
+1103:diện tích 81 dm?. Biết một cạnh hình chữ nhật ta 4 dm.
+1104:Bài 58.
+1110:Bài 60.
+1113:Bài 61.
+1116:Bài 62. `
+1132:Bài 64.
+1137:Bài 65. 3 cm
+1143:Bài 66.
+1149:Bài 67. 2cm
+1152:hình vuông nhỏ cạnh 2 cm (như hình bên). Tính L]
+1169:Bài 69.
+1173:Bài 70. 8cm
+1177:Bài 71. (*)
+1181:Bài 72.
+1184:Bài 73.
+1185:Hình bên chia thành 16 ô vuông bằng nhau. Mỗi 6 vuông
+1194:Bài 74.
+1197:Bài 75. =~
+1224:Tìm số hạng thứ 15 của dãy số: 2; 4; 6; 8;...
+1289:Bài 76.
+1296:Bài 77.
+1297:Tìm số số hạng của các dãy số sau.
+1303:Bài 78.
+1316:Bài 79.
+1322:Bài 80.
+1328:Bài 81.
+1334:Bài 82.
+1339:Bài 83. Ĩ
+1358:Bài 85.
+1361:Bài 86.
+1366:Bài 87. (*)
+1370:Bài 88. (*)
+1391:Bài 92.
+1395:Bài 93. (*)
+1403:Bài 94. (*)
+1410:Bài 95. (*)
+1536:Bài 96.
+1540:Bài 97.
+1544:Bài 98.
+1547:Bài 99.
+1551:Bài 100.
+1556:Bài 101.
+1560:Bài 102.
+1564:Bài 103.
+1568:Bài 104.
+1584:Bài 106.
+1592:Bài 108.
+1595:Bài 109.
+1599:Bài 110.
+1603:Bài 111.
+1608:Bài 112. (*)
+1612:Bài 113. (*)
+1635:Bài toán
+1670:Bài toán liên quan đến thêm, bớt, cho, nhận
+1731:Tìm hai số có tổng là 246, biết giữa chúng có đúng 2 số chan.
+1770:Bài 116.
+1773:Bài 117.
+1777:Bài 118.
+1780:Bài 119.
+1792:Bài 121. ’
+1795:Bài 122.
+1798:Bài 123.
+1801:Bài 124.
+1804:Bài 125.
+1807:Bài 126.
+1810:Bài 127.
+1814:Bài 128. (*) Một bên đoạn phố có 20 số nhà lẻ liên tiếp. Biết tổng của 20 số nhà ở
+1817:Bài 129.
+1819:Bài 130.
+1821:Bài 131.
+1823:Bài 132. (*)
+1825:Bài 133. (*)
+1827:Bài 134. (*)
+1831:Bài 135. (*) ˆ .
+1930:Bài 136.
+1938:Bài 137.
+1960:Bài 139.
+1972:Bài 141.
+1975:Bài 142.
+1978:Bài 143. x
+1982:Bài 144.
+1985:Bài 145. `
+2000:Bài 148.
+2009:Bài 149.
+2015:Bài 151.
+2019:Bài 152.
+2025:Bài 154.
+2055:Tìm số dư trong mỗi trường hợp sau:
+2088:Bài 156.
+2093:Bài 157.
+2098:Bài 158.
+2110:Tìm số dư trong các phép chia sau.
+2117:Bài 161.
+2120:Bài 162.
+2122:Bài 163.
+2124:Bài 164.
+2126:Bài 165.
+2128:Bài 166.
+2131:Bài 167.
+2136:Bài 168. x
+2140:Bài 169. (*)
+2141:Tìm số bé nhất có hai chữ số thoả mãn: š
+2144:Bài 170. (*) ì h
+2264:Bài 171.
+2268:Bài 172.
+2269:Tìm số tự nhiên, biết:
+2272:Bài 173.
+2273:Tìm số tự nhiên, biết:
+2276:Bài 174.
+2277:Tìm số tự nhiên, biết nếu viết thêm chữ số 5 vào bên phải của số đỏ thì được số mới
+2280:Tìm số tự nhiên, biết nếu viết thêm vào bên phải số đó một chữ số thì được số mới
+2282:Bài 176.
+2283:Tìm số tự nhiên có hai chữ số, biết nếu viết thêm hai chữ số nữa vào bên phải số đó
+2285:Bài 177.
+2289:Bài 178.
+2301:Bài 180.
+2302:Tìm số tự nhiên có bốn chữ số, biết:
+2306:Bài 181.
+2307:Tìm số tự nhiên có ba chữ số, biết nếu thay chữ số 1 ở hàng tram của số đó bằng chữ
+2309:Bài 182.
+2310:Tìm số tự nhiên có hai chữ số, biết nếu viết thêm chữ số 3 ở cả bên trái và bên phải
+2312:Bài 183.
+2317:Bài 185.
+2319:Bài 186.
+2320:Tìm số tự nhiên có hai chữ số, biết nếu viết thêm số 12 xen giữa hai chữ số của số đó
+2322:Bài 187.
+2323:Tìm số tự nhiên có hai chữ số, biết số đó gấp 9 lần tổng các chữ số của nó.
+2324:Bài 188.
+2326:Bài 189.
+2327:Tìm số có hai chữ số biết chữ số hàng chục Lớn hơn chữ số hàng đơn vị. Nếu lấy số
+2329:Bài 190. (*)

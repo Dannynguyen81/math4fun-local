@@ -1,0 +1,43 @@
+https://vnstorage.com ~ Trang tải tài liệu miễn phí
+
+Vídụ4
+
+Đổ đặt ống nước, 5 công nhân đào trong2 ngày được 20 m đường. Hỏi 10 công nhân đào.
+trong 4 ngày được bao nhiều mét đường? (Biết năng suất mỗi công nhân là như nhau).
+
+Hướng dẫn
+† người trong 2 ngày hoàn thành được số mét đường là: 20 : 5 = 4 (m).
+0 người trong 2 ngày hoàn thành được số mét đường là: 4 x 10 = 40 (m).
+10 người trong 4 ngày hoàn thănh được số mét đường là: 40 x (4 : 2) = 80 (m).
+.Đắp số: 80 m.
+Giải vần tắt
+
+5 2
+
+10 4
+
+hài toán một dại tượng tăng, một đại tượng giảm số tần như nhau
+
+Bài toán 4: Một đội công nhân gồm 10 người hoàn thành một công việc trong
+30 ngày. Nếu đội có 20 công nhân thì hoàn thành công việc như thế trong thời
+gian bao lâu? Biết năng suất làm việc của mỗi người là như nhau.
+Hướng dẫn
+Bài toán trên có đú yếu tố “như nhau", “như thế” để giái bằng cách rút về đơn vị.
+Đơn vị được quy về là lượng công việc 1 người làm trong 1 ngày.
+Gọi lượng công việc 1 người làm trong 1 ngày là 1 phần công việc.
+Do đó, 10 người, 1 ngày được 10 phần công việc;
+
+“10 người, 30 ngày được 300 phần công việc (chính là † công việc “như thế”).
+'Với 300 phần công việc và 20 người tàm thì số ngày cần để hoàn thành là:
+
+.300:20 = 15 (ngày)
+
+Nhận xót:
+
+Dễ thấy, giá trị của công việc (số 300) chính tà “cỡ"của công việc, nó là số cố
+định, cho trước bởi giả thiết 10 người (sức như nhau) làm trong 30 ngày.
+
+Xót số nhân lực (số người) và số ngày làm việc tiên hệ với nhau bởi công thức:
+Số phần công việc = số người x số ngy làm việc.
+
+đỔ nmgosonsetmddpmomavene
