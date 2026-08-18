@@ -39,3 +39,10 @@
 - [x] Thêm hoạt ảnh guardian chủ động tung phép, đòn bay, va chạm và phản công trong trận Boss.
 - [x] Tạo đoạn minh họa Manim ngắn cho kỹ năng Sấm sét và tích hợp như tư liệu luyện phép local.
 - [x] Kiểm tra màn hình Boss, hiệu năng hoạt ảnh và lưu checkpoint.
+
+## Video phép nguyên tố
+
+- [x] Viết phân cảnh Manim không lời cho phép hệ Lửa, Nước và Độc theo từng guardian.
+- [x] Render và kiểm tra trực quan ba clip minh họa phép thuật.
+- [x] Tích hợp clip đúng theo guardian được chọn trong đấu trường Boss.
+- [x] Kiểm thử màn hình Boss, lưu checkpoint và bàn giao bản nâng cấp.
