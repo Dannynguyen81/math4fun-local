@@ -76,6 +76,12 @@ export type MagicMedia = {
   note: string;
 };
 
+export type ElementMatchup = {
+  strongAgainst: ElementName;
+  weakAgainst: ElementName;
+  fieldNote: string;
+};
+
 const sprite = (id: number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 export const GUARDIANS: Guardian[] = [
@@ -110,6 +116,16 @@ export const MAGIC_MEDIA: Record<ElementName, MagicMedia> = {
   "độc": { title: "Độc Ấn Quy Luật", shortLabel: "ĐỘC ẤN", src: "/manus-storage/VenomSeal_c53ae165.mp4", note: "Chuỗi dấu tím nối lại theo một quy luật kín đáo." },
   "gió": { title: "Gió Ấn Mở Đường", shortLabel: "GIÓ ẤN", src: "/manus-storage/WindGlyph_954183b6.mp4", note: "Những bước suy luận tạo thành đường gió mở tuyến mới." },
   "đất": { title: "Địa Ấn Cân Bằng", shortLabel: "ĐỊA ẤN", src: "/manus-storage/EarthSeal_bc898ab9.mp4", note: "Các dấu số dựng thành nền đất bền vững." },
+};
+
+/** Quy ước chiến thuật riêng của Math4Fun; dùng để đọc Sổ Phép, chưa thay đổi điểm Toán. */
+export const ELEMENTAL_MATCHUPS: Record<ElementName, ElementMatchup> = {
+  "sấm": { strongAgainst: "nước", weakAgainst: "đất", fieldNote: "Tia chớp xuyên qua dòng nước, nhưng bị nền đất dẫn xuống an toàn." },
+  "lửa": { strongAgainst: "gió", weakAgainst: "nước", fieldNote: "Hỏa ấn đốt tan lớp sương gió, nhưng dịu đi trước thủy triều." },
+  "nước": { strongAgainst: "lửa", weakAgainst: "sấm", fieldNote: "Làn nước dập lửa, nhưng cần né những tia sấm đang nạp điện." },
+  "độc": { strongAgainst: "đất", weakAgainst: "gió", fieldNote: "Độc ấn len vào khe đất, nhưng bị luồng gió phân tán." },
+  "gió": { strongAgainst: "độc", weakAgainst: "lửa", fieldNote: "Phong ấn cuốn đi mây độc, nhưng phải giữ khoảng cách với hỏa ấn." },
+  "đất": { strongAgainst: "sấm", weakAgainst: "độc", fieldNote: "Thạch ấn tiếp đất an toàn, nhưng cần che kín các mạch đất trước độc ấn." },
 };
 
 export const STATIONS: Station[] = [

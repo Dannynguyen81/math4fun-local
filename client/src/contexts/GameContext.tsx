@@ -4,7 +4,7 @@
  * unfinished attempts persist, and a Boss run always uses a separate hard-question pool.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { BOSS_QUESTION_IDS, Difficulty, getGuardian, getReadyStations, getStation, QUESTIONS_BY_ID, STATIONS } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, Difficulty, ElementName, getGuardian, getReadyStations, getStation, QUESTIONS_BY_ID, SPELLS, STATIONS } from "@/game/gameData";
 
 export type AvatarId = "compass" | "ember" | "tide" | "leaf";
 export type StudentProfile = {
@@ -25,6 +25,8 @@ export type StudentProfile = {
   attempts: Record<number, StationAttempt>;
   battle: BattleState;
   bossQuestionHistory: string[];
+  magicBookWatchedElements: ElementName[];
+  magicUsage: Partial<Record<ElementName, number>>;
   metrics: LearningMetrics;
 };
 
@@ -85,6 +87,10 @@ type GameContextValue = {
   startBattle: () => boolean;
   resolveBattleAnswer: (answer: number, spellId: string) => BattleAnswerResult | null;
   advanceBattle: () => void;
+  markMagicVideoWatched: (element: ElementName) => void;
+  magicBookWatchedCount: number;
+  hasMagicBookAchievement: boolean;
+  mostUsedMagicElement: ElementName | null;
   toggleTeamGuardian: (guardianId: string) => void;
   setAudioEnabled: (enabled: boolean) => void;
   resetActiveProfile: () => void;
@@ -95,6 +101,7 @@ const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], quest
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
 const DEFAULT_STORE: GameStore = { version: 3, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
+const ELEMENT_ORDER: ElementName[] = ["sấm", "lửa", "nước", "độc", "gió", "đất"];
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
 function weekKey() {
@@ -129,6 +136,8 @@ function createProfileRecord(name: string, avatar: AvatarId): StudentProfile {
     attempts: {},
     battle: emptyBattle(),
     bossQuestionHistory: [],
+    magicBookWatchedElements: [],
+    magicUsage: {},
     metrics: emptyMetrics(),
   };
 }
@@ -158,6 +167,8 @@ function readStore(): GameStore {
         attempts: profile.attempts && typeof profile.attempts === "object" ? profile.attempts : {},
         battle: profile.battle?.status ? profile.battle : emptyBattle(),
         bossQuestionHistory: Array.isArray(profile.bossQuestionHistory) ? profile.bossQuestionHistory : [],
+        magicBookWatchedElements: Array.isArray(profile.magicBookWatchedElements) ? profile.magicBookWatchedElements.filter((element): element is ElementName => ELEMENT_ORDER.includes(element as ElementName)) : [],
+        magicUsage: profile.magicUsage && typeof profile.magicUsage === "object" ? profile.magicUsage : {},
         metrics: { ...emptyMetrics(), ...profile.metrics },
       })),
     };
@@ -278,20 +289,26 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const questionId = profile.battle.questionIds[profile.battle.questionIndex];
     const question = QUESTIONS_BY_ID[questionId];
     if (!question) return null;
-    const spell = { thunder: [24, 10], flame: [30, 14], tide: [18, 6], gust: [21, 8], venom: [26, 12] }[spellId] ?? [21, 10];
+    const selectedSpell = SPELLS.find((item) => item.id === spellId) ?? SPELLS[0];
+    const spell = [selectedSpell.damage, selectedSpell.counterDamage];
+    const magicElement = selectedSpell.element.toLocaleLowerCase("vi-VN") as ElementName;
     const correct = answer === question.answer;
     const bossDamage = correct ? spell[0] : 0;
     const playerDamage = correct ? spell[1] : 34;
     const bossHp = Math.max(0, profile.battle.bossHp - bossDamage);
     const playerHp = Math.max(0, profile.battle.playerHp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
-    updateProfile(profile.id, (current) => ({ ...current, battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } }, xp: current.xp + (correct ? 30 : 0), metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() }, collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds }));
+    updateProfile(profile.id, (current) => ({ ...current, battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } }, xp: current.xp + (correct ? 30 : 0), magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 }, metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() }, collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds }));
     return { correct, playerDamage, bossDamage, ended };
   }, [profile, updateProfile]);
   const advanceBattle = useCallback(() => {
     if (!profile || profile.battle.status !== "active") return;
     const nextIndex = profile.battle.questionIndex + 1;
     updateProfile(profile.id, (current) => ({ ...current, battle: nextIndex >= current.battle.questionIds.length ? { ...current.battle, status: "defeat" } : { ...current.battle, questionIndex: nextIndex, lastResult: undefined } }));
+  }, [profile, updateProfile]);
+  const markMagicVideoWatched = useCallback((element: ElementName) => {
+    if (!profile || !profile.collectedGuardianIds.some((guardianId) => getGuardian(guardianId)?.element === element)) return;
+    updateProfile(profile.id, (current) => current.magicBookWatchedElements.includes(element) ? current : { ...current, magicBookWatchedElements: [...current.magicBookWatchedElements, element] });
   }, [profile, updateProfile]);
   const toggleTeamGuardian = useCallback((guardianId: string) => {
     if (!profile || !profile.collectedGuardianIds.includes(guardianId) || guardianId === "atlas") return;
@@ -305,7 +322,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const level = Math.floor((profile?.xp ?? 0) / 250) + 1;
   const levelProgress = (profile?.xp ?? 0) % 250;
-  const value = useMemo<GameContextValue>(() => ({ profile, profiles: store.profiles, hasProfile: Boolean(profile), audioEnabled: store.audioEnabled, siteVisitCount: store.siteVisitCount, lastSiteVisitAt: store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, toggleTeamGuardian, setAudioEnabled, resetActiveProfile }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
+  const magicBookWatchedCount = profile?.magicBookWatchedElements.length ?? 0;
+  const hasMagicBookAchievement = magicBookWatchedCount === ELEMENT_ORDER.length;
+  const mostUsedMagicElement = useMemo<ElementName | null>(() => {
+    if (!profile) return null;
+    return ELEMENT_ORDER.reduce<ElementName | null>((leader, element) => (profile.magicUsage[element] ?? 0) > (leader ? profile.magicUsage[leader] ?? 0 : 0) ? element : leader, null);
+  }, [profile]);
+  const value = useMemo<GameContextValue>(() => ({ profile, profiles: store.profiles, hasProfile: Boolean(profile), audioEnabled: store.audioEnabled, siteVisitCount: store.siteVisitCount, lastSiteVisitAt: store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, toggleTeamGuardian, setAudioEnabled, resetActiveProfile }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

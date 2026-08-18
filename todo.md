@@ -53,3 +53,10 @@
 - [x] Tạo hiệu ứng âm thanh riêng cho sáu nguyên tố: Sấm sét, Lửa, Nước, Độc, Gió và Đất.
 - [x] Xây trang Sổ Phép để học sinh xem lại video/âm thanh của các guardian đã thu phục.
 - [x] Tích hợp hiệu ứng âm thanh vào combat, kiểm thử và lưu checkpoint.
+
+## Thành tựu và phân tích ma thuật
+
+- [x] Lưu lịch sử xem clip nguyên tố và mở huy hiệu khi xem đủ sáu hệ.
+- [x] Theo dõi số lần dùng từng phép và hiển thị hệ phép được dùng nhiều nhất trong Thống kê.
+- [x] Thêm bảng tương khắc mạnh/yếu của sáu nguyên tố vào Sổ Phép.
+- [x] Kiểm thử quyền mở, dữ liệu local và lưu checkpoint.
