@@ -67,6 +67,15 @@ export type Spell = {
   note: string;
 };
 
+export type ElementName = Guardian["element"];
+
+export type MagicMedia = {
+  title: string;
+  shortLabel: string;
+  src: string;
+  note: string;
+};
+
 const sprite = (id: number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 export const GUARDIANS: Guardian[] = [
@@ -92,6 +101,16 @@ export const GUARDIANS: Guardian[] = [
   { id: "nexa", name: "Nexa", type: "MIXED / ARCHIVE", element: "gió", description: "Người ghi chép cuối tuyến cho bài toán tổng hợp.", stationId: 20, sprite: sprite(196), tone: "bg-indigo-600" },
   { id: "atlas", name: "Atlas", type: "BOSS / ARCHIVE", element: "độc", description: "Người giữ kho lưu trữ. Atlas phản công ở mọi lượt, kể cả khi em trả lời đúng.", stationId: "boss", sprite: sprite(143), tone: "bg-indigo-700" },
 ];
+
+/** Field Journal Quest: a shared local-only catalog for the Boss study reel and Magic Book gallery. */
+export const MAGIC_MEDIA: Record<ElementName, MagicMedia> = {
+  "sấm": { title: "Tia Chớp Số Học", shortLabel: "SẤM ẤN", src: "/manus-storage/thunder-number-spell_ea927287.mp4", note: "Tia chớp nạp từ một phép tính đúng." },
+  "lửa": { title: "Hỏa Ấn Số Học", shortLabel: "HỎA ẤN", src: "/manus-storage/FlameSeal_5f0136e4.mp4", note: "Dấu số ghép thành ngọn lửa quyết tâm." },
+  "nước": { title: "Thủy Triều Số Học", shortLabel: "THỦY ẤN", src: "/manus-storage/TideSeal_750f204b.mp4", note: "Con số được cân bằng như những làn sóng." },
+  "độc": { title: "Độc Ấn Quy Luật", shortLabel: "ĐỘC ẤN", src: "/manus-storage/VenomSeal_c53ae165.mp4", note: "Chuỗi dấu tím nối lại theo một quy luật kín đáo." },
+  "gió": { title: "Gió Ấn Mở Đường", shortLabel: "GIÓ ẤN", src: "/manus-storage/WindGlyph_954183b6.mp4", note: "Những bước suy luận tạo thành đường gió mở tuyến mới." },
+  "đất": { title: "Địa Ấn Cân Bằng", shortLabel: "ĐỊA ẤN", src: "/manus-storage/EarthSeal_bc898ab9.mp4", note: "Các dấu số dựng thành nền đất bền vững." },
+};
 
 export const STATIONS: Station[] = [
   { id: 1, code: "T1.01", title: "Dãy số & quy luật", brief: "Đếm số hạng, dự đoán quy luật và tính tổng bằng những bước nhảy có ghi chép.", group: "Số và quy luật", book: "Tập 1", guardianId: "pipra", accent: "bg-emerald-500", questionIds: ["B80a", "B80b", "B81a", "B82a", "B87b", "B83a-count", "B83a-term50", "B83a-sum", "B86a", "B86b"], masteryTarget: 10, status: "ready" },

@@ -4,19 +4,14 @@ import type { CSSProperties } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Crown, Lock, ShieldAlert, Sparkles, Swords, Volume2, X } from "lucide-react";
-import { ARENA_IMAGE, BATTLE_AUDIO, BOSS_QUESTION_IDS, getGuardian, getSpellForGuardian, GUARDIANS, QUESTIONS_BY_ID } from "@/game/gameData";
+import { ARENA_IMAGE, BATTLE_AUDIO, BOSS_QUESTION_IDS, getGuardian, getSpellForGuardian, GUARDIANS, MAGIC_MEDIA, QUESTIONS_BY_ID } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
+import { playElementSound } from "@/lib/magicAudio";
 
 type Feedback = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean };
 
 const elementIcon: Record<string, string> = { "sấm": "ϟ", "lửa": "✦", "nước": "≈", "gió": "≋", "độc": "☾", "đất": "◆" };
 const elementColor: Record<string, string> = { "sấm": "#f6b73c", "lửa": "#ee6b4e", "nước": "#55a9dd", "gió": "#3e9b7a", "độc": "#8e69ad", "đất": "#b17a3d" };
-const ELEMENTAL_STUDY_REELS: Record<string, { title: string; src: string }> = {
-  "sấm": { title: "Tia Chớp Số Học", src: "/manus-storage/thunder-number-spell_ea927287.mp4" },
-  "lửa": { title: "Hỏa Ấn Số Học", src: "/manus-storage/FlameSeal_5f0136e4.mp4" },
-  "nước": { title: "Thủy Triều Số Học", src: "/manus-storage/TideSeal_750f204b.mp4" },
-  "độc": { title: "Độc Ấn Quy Luật", src: "/manus-storage/VenomSeal_c53ae165.mp4" },
-};
 
 function shuffle(answers: number[]) {
   return [...answers].sort(() => Math.random() - 0.5);
@@ -57,7 +52,7 @@ export default function BossPage() {
   const team = useMemo(() => profile?.teamGuardianIds ?? [], [profile?.teamGuardianIds]);
   const selectedGuardian = getGuardian(selectedGuardianId ?? team[0] ?? "") ?? GUARDIANS.find((guardian) => guardian.id === "dexo")!;
   const spell = getSpellForGuardian(selectedGuardian);
-  const studyReel = ELEMENTAL_STUDY_REELS[selectedGuardian.element];
+  const studyReel = MAGIC_MEDIA[selectedGuardian.element];
   const unusedBossQuestions = useMemo(
     () => (profile ? BOSS_QUESTION_IDS.filter((id) => !profile.bossQuestionHistory.includes(id)).length : 0),
     [profile],
@@ -85,24 +80,9 @@ export default function BossPage() {
     else audio.pause();
   }, [audioEnabled, status]);
 
-  function pulse(frequency: number) {
-    if (!audioEnabled || typeof window === "undefined") return;
-    const context = new AudioContext();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.frequency.value = frequency;
-    oscillator.type = "triangle";
-    gain.gain.setValueAtTime(0.055, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.22);
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.22);
-  }
-
   function begin() {
     if (startBattle()) {
-      pulse(520);
+      playElementSound(selectedGuardian.element, audioEnabled, "ready");
       audioRef.current?.play().catch(() => undefined);
     }
   }
@@ -113,7 +93,7 @@ export default function BossPage() {
     if (!result) return;
     setSelectedAnswer(answer);
     setFeedback(result);
-    pulse(result.correct ? 760 : 180);
+    playElementSound(selectedGuardian.element, audioEnabled, result.correct ? "cast" : "counter");
   }
 
   function next() {
@@ -121,7 +101,42 @@ export default function BossPage() {
   }
 
   if (!profile) {
-    return <section className="evidence-card border-2 border-[#172a48] bg-[#fffdf6] p-6 shadow-[5px_5px_0_#172a48]"><h1 className="font-display text-4xl font-black">Đấu trường chưa có người thách đấu</h1><Link href="/start" className="mt-5 inline-flex border-2 border-[#172a48] bg-[#f6b73c] px-4 py-2.5 font-bold shadow-[2px_2px_0_#172a48]">Tạo hồ sơ</Link></section>;
+    return (
+      <section className="boss-unopened-dossier">
+        <header className="boss-dossier-cover">
+          <div>
+            <span className="field-tag border-white/30 bg-white/10 text-white"><ShieldAlert size={13} /> ARENA DOSSIER · NIÊM PHONG</span>
+            <h1>Hồ sơ đấu trường Atlas</h1>
+            <p>Đấu trường chưa gọi tên người thách đấu. Hãy lập hồ sơ, thu thập bằng chứng học tập và mở khóa niêm phong cuối tuyến.</p>
+          </div>
+          <div className="boss-seal-stamp"><Lock size={20} /><b>KHÓA</b><small>5 CÂU H</small></div>
+        </header>
+        <div className="boss-dossier-body">
+          <div className="boss-route-evidence">
+            <p className="section-kicker">LỘ TRÌNH MỞ NIÊM PHONG</p>
+            {[
+              ["01", "Lập hồ sơ thám hiểm", "Chọn tên và guardian đầu tiên."],
+              ["02", "Ghi đủ 20 bằng chứng", "Hoàn thành 2 trạm mastery, mỗi trạm 10 câu."],
+              ["03", "Gọi Atlas ra đấu trường", "Chọn guardian và dùng đúng phép hệ."],
+            ].map(([step, title, note], index) => (
+              <div className="boss-evidence-step" key={step}>
+                <b>{step}</b><span aria-hidden="true" /><div><strong>{title}</strong><small>{note}</small></div>{index < 2 && <i aria-hidden="true" />}
+              </div>
+            ))}
+          </div>
+          <aside className="boss-reward-specimen">
+            <span className="field-tag"><Crown size={13} /> PHẦN THƯỞNG CUỐI TUYẾN</span>
+            <img src={GUARDIANS.find((guardian) => guardian.id === "atlas")?.sprite} alt="Bóng niêm phong của Atlas" />
+            <b>Atlas đang giữ 5 câu H</b>
+            <p>Mỗi lượt có phản công. Guardian và Sổ Phép sẽ là bằng chứng em mang vào đấu trường.</p>
+          </aside>
+        </div>
+        <footer className="boss-dossier-footer">
+          <span>Điểm xuất phát được đánh dấu bằng la bàn Marigold.</span>
+          <Link href="/start" className="boss-dossier-cta"><Swords size={16} /> Mở hồ sơ thám hiểm</Link>
+        </footer>
+      </section>
+    );
   }
 
   if (!isBossUnlocked) {

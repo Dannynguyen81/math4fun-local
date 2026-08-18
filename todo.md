@@ -46,3 +46,10 @@
 - [x] Render và kiểm tra trực quan ba clip minh họa phép thuật.
 - [x] Tích hợp clip đúng theo guardian được chọn trong đấu trường Boss.
 - [x] Kiểm thử màn hình Boss, lưu checkpoint và bàn giao bản nâng cấp.
+
+## Hoàn thiện hệ ma thuật
+
+- [x] Tạo clip Manim không lời cho phép hệ Gió và Đất, đồng bộ với phong cách Sổ Phép hiện có.
+- [x] Tạo hiệu ứng âm thanh riêng cho sáu nguyên tố: Sấm sét, Lửa, Nước, Độc, Gió và Đất.
+- [x] Xây trang Sổ Phép để học sinh xem lại video/âm thanh của các guardian đã thu phục.
+- [x] Tích hợp hiệu ứng âm thanh vào combat, kiểm thử và lưu checkpoint.

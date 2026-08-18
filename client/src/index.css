@@ -153,6 +153,60 @@
   .spell-study-reel h2 { margin: 9px 0 5px; color: #172a48; font: 900 20px/1.08 "Fraunces", Georgia, serif; }
   .spell-study-reel p { max-width: 38ch; color: #58708b; font-size: 12px; line-height: 1.55; }
   .spell-study-reel video { width: 100%; aspect-ratio: 16 / 9; border: 2px solid #172a48; background: #172a48; object-fit: cover; }
+  /* Field Journal Quest — Magic Book: specimen-seal gallery, not a generic media grid. */
+  .magic-book-cover { display: flex; align-items: end; justify-content: space-between; gap: 1rem; overflow: hidden; border: 2px solid #172a48; padding: clamp(1.25rem, 3vw, 2rem); background: linear-gradient(105deg, #172a48 0 72%, #f6b73c 72%); color: #fffdf6; box-shadow: 6px 6px 0 #172a48; }
+  .magic-book-cover h1 { margin-top: .35rem; }
+  .magic-book-cover p:not(.section-kicker) { max-width: 42rem; margin-top: .55rem; color: #d5dfed; font-size: .9rem; line-height: 1.65; }
+  .magic-book-count { display: grid; min-width: 7rem; justify-items: center; border: 2px solid #172a48; background: #fff8da; color: #172a48; padding: .8rem; box-shadow: 3px 3px 0 #172a48; transform: rotate(2deg); }
+  .magic-book-count span { font-family: "Fraunces", Georgia, serif; font-size: 2.5rem; font-weight: 900; line-height: 1; }
+  .magic-book-count small { margin-top: .25rem; font-family: "DM Mono", ui-monospace, monospace; font-size: .63rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .magic-sigil-grid { display: grid; gap: .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; }
+  .magic-sigil-card { display: flex; min-height: 7.25rem; align-items: center; gap: .7rem; border: 2px solid #172a48; background: #fffdf6; padding: .75rem; text-align: left; box-shadow: 3px 3px 0 #172a48; transition: transform .16s cubic-bezier(.23,1,.32,1), background .16s cubic-bezier(.23,1,.32,1); }
+  .magic-sigil-card:enabled:hover { background: #fff0b6; transform: translate(-1px, -1px) rotate(-.5deg); }
+  .magic-sigil-card:enabled:active { transform: scale(.97); }
+  .magic-sigil-card.is-selected { outline: 3px solid var(--magic-color); outline-offset: 3px; }
+  .magic-sigil-card.is-locked { cursor: not-allowed; opacity: .58; filter: grayscale(.65); }
+  .magic-sigil-mark { display: grid; width: 3.3rem; height: 3.3rem; flex: 0 0 auto; place-items: center; border: 2px solid #172a48; border-radius: 50%; background: color-mix(in srgb, var(--magic-color) 28%, #fffdf6); color: var(--magic-color); font-family: "Fraunces", Georgia, serif; font-size: 2rem; font-weight: 900; }
+  .magic-sigil-copy { display: grid; min-width: 0; gap: .25rem; flex: 1; }
+  .magic-sigil-copy b { font-family: "DM Mono", ui-monospace, monospace; font-size: .72rem; letter-spacing: .09em; }
+  .magic-sigil-copy small { color: #58708b; font-size: .72rem; line-height: 1.35; }
+  .magic-book-viewer { overflow: hidden; border: 2px solid #172a48; background: #fffdf6; box-shadow: 5px 5px 0 #172a48; }
+  .magic-viewer-heading { border-bottom: 2px dashed #d7d0bf; padding: 1.1rem 1.1rem .85rem; }
+  .magic-viewer-heading h2, .magic-locked-viewer h2 { margin-top: .6rem; font-family: "Fraunces", Georgia, serif; font-size: 1.7rem; font-weight: 900; }
+  .magic-viewer-heading p, .magic-locked-viewer p { margin-top: .45rem; color: #58708b; font-size: .82rem; line-height: 1.55; }
+  .magic-book-viewer video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #172a48; object-fit: cover; }
+  .magic-sound-button { display: inline-flex; align-items: center; gap: .5rem; margin: 1rem; border: 2px solid #172a48; background: var(--magic-color, #f6b73c); padding: .7rem .9rem; color: #172a48; font-size: .82rem; font-weight: 800; box-shadow: 2px 2px 0 #172a48; }
+  .magic-sound-button:active { transform: scale(.97); }
+  .magic-locked-viewer { display: grid; min-height: 23rem; place-items: center; padding: 2rem; text-align: center; background: repeating-linear-gradient(-45deg, #fffdf6, #fffdf6 12px, #f5efdf 12px, #f5efdf 24px); }
+  .magic-locked-viewer > svg { color: #58708b; }
+  .magic-locked-viewer .magic-sound-button { margin: 1.2rem 0 0; }
+  /* Field Journal Quest — Boss: a locked arena is an evidence dossier, not an empty account prompt. */
+  .boss-unopened-dossier { overflow: hidden; border: 2px solid #172a48; background: #fffdf6; box-shadow: 7px 7px 0 #172a48; }
+  .boss-dossier-cover { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; min-height: 13rem; padding: clamp(1.4rem, 4vw, 2.8rem); background: linear-gradient(112deg, #172a48 0 73%, #f6b73c 73%); color: #fffdf6; }
+  .boss-dossier-cover h1 { max-width: 40rem; margin-top: .65rem; font-family: "Fraunces", Georgia, serif; font-size: clamp(2.2rem, 5vw, 4.3rem); font-weight: 900; letter-spacing: -.04em; line-height: .94; }
+  .boss-dossier-cover p { max-width: 37rem; margin-top: .85rem; color: #d5dfed; font-size: .88rem; line-height: 1.65; }
+  .boss-seal-stamp { display: grid; width: 7rem; height: 7rem; flex: 0 0 auto; place-items: center; align-content: center; border: 2px dashed #172a48; border-radius: 50%; background: #fff8da; color: #172a48; box-shadow: 3px 3px 0 #172a48; transform: rotate(5deg); }
+  .boss-seal-stamp b { margin-top: .18rem; font-family: "DM Mono", ui-monospace, monospace; font-size: .76rem; letter-spacing: .13em; }
+  .boss-seal-stamp small { font-size: .6rem; font-weight: 800; letter-spacing: .08em; }
+  .boss-dossier-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(14rem, .6fr); gap: 1rem; padding: clamp(1rem, 3vw, 1.65rem); }
+  .boss-route-evidence { position: relative; padding: .45rem .25rem .15rem; }
+  .boss-evidence-step { position: relative; display: grid; grid-template-columns: 2rem 1.15rem minmax(0, 1fr); gap: .65rem; align-items: start; min-height: 4.9rem; }
+  .boss-evidence-step > b { display: grid; width: 2rem; height: 2rem; place-items: center; border: 2px solid #172a48; border-radius: 50%; background: #f6b73c; color: #172a48; font-family: "DM Mono", ui-monospace, monospace; font-size: .64rem; }
+  .boss-evidence-step > span { width: .75rem; height: .75rem; margin-top: .63rem; border: 2px solid #172a48; border-radius: 50%; background: #fffdf6; }
+  .boss-evidence-step:nth-of-type(3) > span { background: #f6b73c; }
+  .boss-evidence-step div { display: grid; gap: .22rem; padding-top: .25rem; }
+  .boss-evidence-step strong { font-family: "Fraunces", Georgia, serif; font-size: 1.05rem; line-height: 1.1; }
+  .boss-evidence-step small { color: #58708b; font-size: .74rem; line-height: 1.45; }
+  .boss-evidence-step i { position: absolute; top: 1.55rem; bottom: -.2rem; left: 2.85rem; border-left: 2px dotted #2b6f69; }
+  .boss-reward-specimen { position: relative; display: grid; align-content: start; justify-items: start; min-height: 16rem; overflow: hidden; border: 2px solid #172a48; background: #f5efdf; padding: 1rem; box-shadow: 3px 3px 0 #f6b73c; }
+  .boss-reward-specimen::before { position: absolute; inset: .4rem; border: 1px dashed #b9ac8c; content: ""; pointer-events: none; }
+  .boss-reward-specimen img { position: relative; z-index: 1; width: 6.5rem; height: 6.5rem; margin: .8rem auto .3rem; object-fit: contain; filter: grayscale(.65) sepia(.2); opacity: .77; }
+  .boss-reward-specimen > b { position: relative; z-index: 1; font-family: "Fraunces", Georgia, serif; font-size: 1.05rem; }
+  .boss-reward-specimen p { position: relative; z-index: 1; margin-top: .35rem; color: #58708b; font-size: .72rem; line-height: 1.5; }
+  .boss-dossier-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 2px dashed #d7d0bf; padding: 1rem clamp(1rem, 3vw, 1.65rem); background: #fff8da; color: #58708b; font-size: .74rem; }
+  .boss-dossier-cta { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .5rem; border: 2px solid #172a48; background: #f6b73c; padding: .72rem .95rem; color: #172a48; font-weight: 900; box-shadow: 3px 3px 0 #172a48; transition: transform .16s cubic-bezier(.23,1,.32,1); }
+  .boss-dossier-cta:hover { transform: translate(-1px, -1px) rotate(-.5deg); }
+  .boss-dossier-cta:active { transform: scale(.97); }
   @media (min-width: 640px) {
     .spell-study-reel { grid-template-columns: minmax(0, 1fr) 260px; align-items: center; }
     .map-canvas { display: block; min-height: 550px; }
@@ -172,6 +226,13 @@
   @media (max-width: 640px) {
     .journey-strip-proof { display: none; }
     .journey-thread i { margin-right: 8%; }
+    .magic-book-cover { align-items: start; flex-direction: column; background: linear-gradient(160deg, #172a48 0 72%, #f6b73c 72%); }
+    .magic-book-count { align-self: end; }
+    .magic-sigil-grid { grid-template-columns: 1fr; }
+    .boss-dossier-cover { align-items: start; flex-direction: column; background: linear-gradient(160deg, #172a48 0 72%, #f6b73c 72%); }
+    .boss-seal-stamp { align-self: end; }
+    .boss-dossier-body { grid-template-columns: 1fr; }
+    .boss-dossier-footer { align-items: start; flex-direction: column; }
   }
   @media (min-width: 640px) { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
   @media (min-width: 1024px) { .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; } }

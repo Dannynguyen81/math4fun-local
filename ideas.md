@@ -94,3 +94,5 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Trạng thái chưa có hồ sơ vẫn phải là một cảnh thám hiểm hoàn chỉnh: hiển thị route fragment, mốc khóa hoặc mẫu guardian niêm phong; không chỉ hiển thị CTA tạo hồ sơ.
 - Mỗi khu vực dùng artifact chính khác nhau — bản đồ route, phiếu nhiệm vụ, specimen seal, dossier đấu trường hoặc báo cáo bằng chứng — trong khi vẫn nối vào cùng route thread.
 - Route thread và mốc học luôn tổ chức màn hình; điều hướng chỉ đóng vai trò chỉ mục phụ, không thay thế trải nghiệm hành trình.
+- Trạng thái khóa Boss là **dossier đấu trường**: cần hiển thị chuỗi mở khóa, bằng chứng mastery, phần thưởng/guardian niêm phong và CTA mang động từ học trước khi yêu cầu lập hồ sơ.
+- Sổ Phép trình bày hệ nguyên tố như mẫu vật lưu trữ: taxonomy, dấu niêm phong, liên kết guardian và mốc route phải đi cùng mỗi video hoặc âm thanh đã mở.
