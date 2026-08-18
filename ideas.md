@@ -96,3 +96,5 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Route thread và mốc học luôn tổ chức màn hình; điều hướng chỉ đóng vai trò chỉ mục phụ, không thay thế trải nghiệm hành trình.
 - Trạng thái khóa Boss là **dossier đấu trường**: cần hiển thị chuỗi mở khóa, bằng chứng mastery, phần thưởng/guardian niêm phong và CTA mang động từ học trước khi yêu cầu lập hồ sơ.
 - Sổ Phép trình bày hệ nguyên tố như mẫu vật lưu trữ: taxonomy, dấu niêm phong, liên kết guardian và mốc route phải đi cùng mỗi video hoặc âm thanh đã mở.
+- Trạng thái trạm khi chưa có hồ sơ là một **phiếu nhiệm vụ hành trình**: luôn có route fragment, mốc khóa, một mẫu guardian niêm phong và lời dẫn giải thích bằng chứng sẽ được ghi sau khi ký tên.
+- Guardian trên mọi màn hình phải được trình bày như **tiêu bản Math4Fun**: khung tròn/tem mực, nhãn phân loại, trạng thái niêm phong và dấu vết tiến độ; không dùng portrait nhân vật đứng một mình.

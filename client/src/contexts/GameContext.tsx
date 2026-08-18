@@ -3,7 +3,7 @@
  * Gameplay rules live here, never in a page: mastery needs 10 distinct correct answers,
  * Boss runs use a non-repeating hard-question pool, and magic progression stays local-only.
  */
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId = "compass" | "ember" | "tide" | "leaf";
@@ -68,10 +68,12 @@ export type LearningMetrics = {
   lastActiveAt?: string;
 };
 
-type GameStore = { version: 4; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string };
+export type ElementLevelUp = { element: ElementName; previousLevel: number; nextLevel: number; totalXp: number };
+type ParentPinRecord = { salt: string; hash: string; createdAt: string };
+type GameStore = { version: 5; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
-export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean };
+export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp };
 
 type GameContextValue = {
   profile: StudentProfile | null;
@@ -104,7 +106,9 @@ type GameContextValue = {
   elementLevel: (element: ElementName) => number;
   weeklyMagicQuest: WeeklyMagicQuest | null;
   createProfileBackup: () => string | null;
-  restoreProfileBackup: (raw: string) => { ok: boolean; message: string };
+  hasParentPin: boolean;
+  setParentPin: (pin: string) => Promise<{ ok: boolean; message: string }>;
+  restoreProfileBackup: (raw: string, pin: string) => Promise<{ ok: boolean; message: string }>;
   toggleTeamGuardian: (guardianId: string) => void;
   setAudioEnabled: (enabled: boolean) => void;
   resetActiveProfile: () => void;
@@ -114,10 +118,23 @@ type GameContextValue = {
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const DEFAULT_STORE: GameStore = { version: 4, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 5, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
+function isParentPin(pin: string) { return /^\d{4,8}$/.test(pin); }
+function bytesToHex(bytes: Uint8Array) { return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join(""); }
+function createParentPinSalt() {
+  const bytes = new Uint8Array(16);
+  window.crypto.getRandomValues(bytes);
+  return bytesToHex(bytes);
+}
+async function hashParentPin(pin: string, salt: string) {
+  if (typeof window === "undefined" || !window.crypto?.subtle) return null;
+  const encoded = new TextEncoder().encode(`${salt}:${pin}`);
+  const digest = await window.crypto.subtle.digest("SHA-256", encoded);
+  return bytesToHex(new Uint8Array(digest));
+}
 function weekKey() {
   const date = new Date();
   const day = date.getDay() || 7;
@@ -201,11 +218,12 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 4,
+      version: 5,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
       lastSiteVisitAt: typeof parsed.lastSiteVisitAt === "string" ? parsed.lastSiteVisitAt : undefined,
+      parentPin: parsed.parentPin && typeof parsed.parentPin === "object" && typeof parsed.parentPin.salt === "string" && typeof parsed.parentPin.hash === "string" ? parsed.parentPin : undefined,
       profiles: parsed.profiles.map((profile) => hydrateProfile(profile)),
     };
   } catch {
@@ -215,7 +233,9 @@ function readStore(): GameStore {
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<GameStore>(readStore);
+  const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
   useEffect(() => { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }, [store]);
+  useEffect(() => { parentPinRef.current = store.parentPin; }, [store.parentPin]);
   useEffect(() => { setStore((previous) => ({ ...previous, siteVisitCount: previous.siteVisitCount + 1, lastSiteVisitAt: new Date().toISOString() })); }, []);
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
@@ -331,24 +351,29 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const bossHp = Math.max(0, profile.battle.bossHp - bossDamage);
     const playerHp = Math.max(0, profile.battle.playerHp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
+    const currentQuest = profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest();
+    const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
+    const questJustCompleted = nextUsedCount >= currentQuest.target && !currentQuest.rewardClaimed;
+    const questReward = questJustCompleted ? currentQuest.rewardXp : 0;
+    const elementGain = (correct ? 18 : 5) + (magicElement === currentQuest.element ? questReward : 0);
+    const previousElementXp = profile.elementXp[magicElement] ?? 0;
+    const previousLevel = Math.floor(previousElementXp / ELEMENT_XP_PER_LEVEL) + 1;
+    const totalElementXp = previousElementXp + elementGain;
+    const nextElementLevel = Math.floor(totalElementXp / ELEMENT_XP_PER_LEVEL) + 1;
+    const levelUp = nextElementLevel > previousLevel ? { element: magicElement, previousLevel, nextLevel: nextElementLevel, totalXp: totalElementXp } : undefined;
     updateProfile(profile.id, (current) => {
-      const currentQuest = current.weeklyMagicQuest.week === weekKey() ? current.weeklyMagicQuest : getWeeklyMagicQuest();
-      const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
-      const questJustCompleted = nextUsedCount >= currentQuest.target && !currentQuest.rewardClaimed;
-      const questReward = questJustCompleted ? currentQuest.rewardXp : 0;
-      const elementGain = correct ? 18 : 5;
       return {
         ...current,
         battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } },
         xp: current.xp + (correct ? 30 : 0) + questReward,
         magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
-        elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain + (magicElement === currentQuest.element ? questReward : 0) },
+        elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain },
         weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
         metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() },
         collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
       };
     });
-    return { correct, playerDamage, bossDamage, ended };
+    return { correct, playerDamage, bossDamage, ended, levelUp };
   }, [profile, updateProfile]);
   const advanceBattle = useCallback(() => {
     if (!profile || profile.battle.status !== "active") return;
@@ -380,8 +405,24 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const weeklyMagicQuest = useMemo(() => profile ? (profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest()) : null, [profile]);
   const elementLevel = useCallback((element: ElementName) => Math.floor((profile?.elementXp[element] ?? 0) / ELEMENT_XP_PER_LEVEL) + 1, [profile]);
   const createProfileBackup = useCallback(() => profile ? JSON.stringify({ format: "math4fun-profile-backup", version: 1, exportedAt: new Date().toISOString(), profile }, null, 2) : null, [profile]);
-  const restoreProfileBackup = useCallback((raw: string) => {
+  const hasParentPin = Boolean(store.parentPin);
+  const setParentPin = useCallback(async (pin: string) => {
+    if (!isParentPin(pin)) return { ok: false, message: "PIN cần gồm 4–8 chữ số." };
+    if (typeof window === "undefined" || !window.crypto?.subtle) return { ok: false, message: "Trình duyệt này chưa hỗ trợ tạo PIN an toàn." };
+    const salt = createParentPinSalt();
+    const hash = await hashParentPin(pin, salt);
+    if (!hash) return { ok: false, message: "Không thể tạo PIN trên trình duyệt này." };
+    const parentPin = { salt, hash, createdAt: new Date().toISOString() };
+    parentPinRef.current = parentPin;
+    setStore((previous) => ({ ...previous, parentPin }));
+    return { ok: true, message: "Đã thiết lập PIN phụ huynh trên thiết bị này." };
+  }, []);
+  const restoreProfileBackup = useCallback(async (raw: string, pin: string) => {
     if (raw.length > 500_000) return { ok: false, message: "Tệp sao lưu quá lớn để khôi phục an toàn." };
+    const savedPin = parentPinRef.current;
+    if (!savedPin) return { ok: false, message: "Phụ huynh cần thiết lập PIN trước khi khôi phục hồ sơ." };
+    const enteredHash = await hashParentPin(pin, savedPin.salt);
+    if (!enteredHash || enteredHash !== savedPin.hash) return { ok: false, message: "PIN phụ huynh chưa chính xác. Hồ sơ chưa được thay đổi." };
     try {
       const parsed = JSON.parse(raw) as { format?: string; profile?: Partial<StudentProfile> };
       if (parsed.format !== "math4fun-profile-backup" || !parsed.profile || typeof parsed.profile.name !== "string") return { ok: false, message: "Đây không phải tệp sao lưu Math4Fun hợp lệ." };
@@ -423,11 +464,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     elementLevel,
     weeklyMagicQuest,
     createProfileBackup,
+    hasParentPin,
+    setParentPin,
     restoreProfileBackup,
     toggleTeamGuardian,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, restoreProfileBackup, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, setParentPin, restoreProfileBackup, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

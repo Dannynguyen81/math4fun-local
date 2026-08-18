@@ -52,3 +52,35 @@ export function playElementSound(element: ElementName, enabled: boolean, mode: M
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), (length + 0.18) * 1000);
 }
+
+/** A short, local-only three-note fanfare for a newly reached elemental level. */
+export function playElementLevelUpSound(element: ElementName, enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const root = Math.max(220, Math.min(440, TONES[element].accent * 0.56));
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.09, now + 0.035);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.88);
+  master.connect(context.destination);
+  [1, 1.25, 1.5].forEach((interval, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.16;
+    oscillator.type = index === 2 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(root * interval, start);
+    oscillator.frequency.exponentialRampToValueAtTime(root * interval * 1.04, start + 0.28);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(index === 2 ? 0.85 : 0.55, start + 0.025);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.34);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.38);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 1150);
+}

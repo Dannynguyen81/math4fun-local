@@ -63,8 +63,16 @@
 
 ## Tiến độ và sao lưu ma thuật
 
-- [ ] Thêm XP, cấp độ và mốc mở riêng cho từng nguyên tố.
-- [ ] Tạo nhiệm vụ tuần yêu cầu dùng đúng phép nguyên tố trong Boss combat.
-- [ ] Hiển thị tiến độ XP nguyên tố và nhiệm vụ tuần trong Sổ Phép/Thống kê.
-- [ ] Thêm xuất và nhập hồ sơ học sinh JSON có kiểm tra dữ liệu an toàn.
+- [x] Thêm XP, cấp độ và mốc mở riêng cho từng nguyên tố.
+- [x] Tạo nhiệm vụ tuần yêu cầu dùng đúng phép nguyên tố trong Boss combat.
+- [x] Hiển thị tiến độ XP nguyên tố và nhiệm vụ tuần trong Sổ Phép/Thống kê.
+- [x] Thêm xuất và nhập hồ sơ học sinh JSON có kiểm tra dữ liệu an toàn.
 - [ ] Kiểm thử local persistence, khôi phục JSON và lưu checkpoint.
+
+## Phần thưởng, bảo vệ phụ huynh và trạm niêm phong
+
+- [x] Thiết kế và tích hợp lễ chúc mừng hình ảnh/âm thanh khi một nguyên tố tăng bậc.
+- [x] Thêm thiết lập PIN phụ huynh trong hồ sơ local và yêu cầu PIN trước khi khôi phục JSON.
+- [x] Rà soát tài liệu Archimede đã đối chiếu để chọn câu hỏi chính xác cho hai trạm được mở trong đợt này.
+- [x] Bổ sung hai bộ 10 thử thách E–M–H, giữ xáo trộn và chống lặp, cho T2.03 và T1.08.
+- [x] Kiểm tra TypeScript, build và giao diện của luồng mới; cần chơi thử thủ công thêm với hồ sơ thật và tệp JSON thực tế.
