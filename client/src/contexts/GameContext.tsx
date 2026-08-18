@@ -4,7 +4,7 @@
  * Boss runs use a non-repeating hard-question pool, and magic progression stays local-only.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId =
   | "compass" | "ember" | "tide" | "leaf"
@@ -38,6 +38,8 @@ export type StudentProfile = {
   weeklyMagicQuest: WeeklyMagicQuest;
   gold: number;
   inventory: Record<ShopItem["id"], number>;
+  equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
+  studyDays: number[];
   guardianHealth: Record<string, GuardianHealth>;
   guardianLosses: string[];
   metrics: LearningMetrics;
@@ -85,6 +87,7 @@ export type LearningMetrics = {
 export type ElementLevelUp = { element: ElementName; previousLevel: number; nextLevel: number; totalXp: number };
 export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
+export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
 type GameStore = { version: 7; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
@@ -140,6 +143,12 @@ type GameContextValue = {
   guardianHp: (guardianId: string) => number;
   purchaseItem: (itemId: ShopItem["id"]) => { ok: boolean; message: string };
   useHealingItem: (itemId: ShopItem["id"], guardianId: string) => { ok: boolean; message: string };
+  equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
+  equipCosmetic: (itemId: ShopItem["id"]) => { ok: boolean; message: string };
+  studyDays: number[];
+  studyReminder: StudyReminder | null;
+  setStudyDays: (days: number[]) => void;
+  requestStudyNotifications: () => Promise<{ ok: boolean; message: string }>;
   setAudioEnabled: (enabled: boolean) => void;
   resetActiveProfile: () => void;
 };
@@ -148,13 +157,18 @@ type GameContextValue = {
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0 });
+const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
 const DEFAULT_STORE: GameStore = { version: 7, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
+const DEFAULT_STUDY_DAYS = [1, 2, 3, 4, 5];
+const VIETNAMESE_DAYS = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+function normalizeStudyDays(candidate: unknown) {
+  return Array.isArray(candidate) ? Array.from(new Set(candidate.filter((day): day is number => typeof day === "number" && Number.isInteger(day) && day >= 0 && day <= 6))).sort((left, right) => left - right) : DEFAULT_STUDY_DAYS;
+}
 function isConsecutiveStudyDay(previous: string | undefined, today: string) {
   if (!previous) return false;
   const [previousYear, previousMonth, previousDay] = previous.split("-").map(Number);
@@ -230,6 +244,8 @@ function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<Stud
     weeklyMagicQuest: getWeeklyMagicQuest(),
     gold: 0,
     inventory: emptyInventory(),
+    equippedCosmetics: {},
+    studyDays: DEFAULT_STUDY_DAYS,
     guardianHealth: {},
     guardianLosses: [],
     metrics: emptyMetrics(),
@@ -268,6 +284,8 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     weeklyMagicQuest: { ...currentQuest, ...validQuest, usedCount: Math.min(currentQuest.target, Math.max(0, Number(validQuest.usedCount) || 0)), rewardClaimed: Boolean(validQuest.rewardClaimed) },
     gold: typeof candidate.gold === "number" && Number.isFinite(candidate.gold) ? Math.max(0, Math.floor(candidate.gold)) : 0,
     inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
+    equippedCosmetics: candidate.equippedCosmetics && typeof candidate.equippedCosmetics === "object" ? candidate.equippedCosmetics : {},
+    studyDays: normalizeStudyDays(candidate.studyDays),
     guardianHealth: candidate.guardianHealth && typeof candidate.guardianHealth === "object" ? candidate.guardianHealth : {},
     guardianLosses: Array.isArray(candidate.guardianLosses) ? candidate.guardianLosses.filter((id): id is string => typeof id === "string") : [],
     metrics: { ...emptyMetrics(), ...(candidate.metrics && typeof candidate.metrics === "object" ? candidate.metrics : {}) },
@@ -521,6 +539,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (!profile) return { ok: false, message: "Hãy vào một hồ sơ trước khi ghé Shop." };
     const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
     if (!item) return { ok: false, message: "Vật phẩm này chưa có trong sổ hàng." };
+    if (item.kind === "cosmetic" && profile.inventory[itemId] > 0) return { ok: false, message: `${item.label} đã có trong Kho đồ; em chỉ cần trang bị.` };
     if (profile.gold < item.price) return { ok: false, message: `Cần thêm ${item.price - profile.gold} Gold để mua ${item.label}.` };
     updateProfile(profile.id, (current) => ({ ...current, gold: current.gold - item.price, inventory: { ...current.inventory, [itemId]: current.inventory[itemId] + 1 } }));
     return { ok: true, message: `Đã thêm ${item.label} vào Kho đồ.` };
@@ -530,11 +549,24 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (profile.battle.status === "active") return { ok: false, message: "Không thể dùng bình hồi phục trong lúc Atlas đang phản công." };
     if (!profile.collectedGuardianIds.includes(guardianId)) return { ok: false, message: "Guardian này chưa có trong Bộ sưu tập." };
     const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
-    if (!item || !profile.inventory[itemId]) return { ok: false, message: "Kho đồ chưa có bình hồi phục này." };
+    if (!item || item.kind !== "healing" || typeof item.heal !== "number" || !profile.inventory[itemId]) return { ok: false, message: "Kho đồ chưa có bình hồi phục này." };
+    const healAmount = item.heal;
     const health = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
     if (health.hp >= GUARDIAN_MAX_HP) return { ok: false, message: "Guardian này đã đầy sinh lực." };
-    updateProfile(profile.id, (current) => ({ ...current, inventory: { ...current.inventory, [itemId]: Math.max(0, current.inventory[itemId] - 1) }, guardianHealth: { ...current.guardianHealth, [guardianId]: { hp: Math.min(GUARDIAN_MAX_HP, health.hp + item.heal), updatedAt: new Date().toISOString() } } }));
+    updateProfile(profile.id, (current) => ({ ...current, inventory: { ...current.inventory, [itemId]: Math.max(0, current.inventory[itemId] - 1) }, guardianHealth: { ...current.guardianHealth, [guardianId]: { hp: Math.min(GUARDIAN_MAX_HP, health.hp + healAmount), updatedAt: new Date().toISOString() } } }));
     return { ok: true, message: `${item.label} đã hồi sinh lực cho guardian.` };
+  }, [profile, updateProfile]);
+  const equipCosmetic = useCallback((itemId: ShopItem["id"]) => {
+    if (!profile) return { ok: false, message: "Hãy vào một hồ sơ trước khi trang bị." };
+    const item = SHOP_ITEMS.find((entry) => entry.id === itemId);
+    if (!item || item.kind !== "cosmetic" || !item.slot) return { ok: false, message: "Vật phẩm này không phải trang phục hoặc trang trí." };
+    if (!profile.inventory[itemId]) return { ok: false, message: "Em cần mua vật phẩm này trước khi trang bị." };
+    updateProfile(profile.id, (current) => ({ ...current, equippedCosmetics: { ...current.equippedCosmetics, [item.slot!]: current.equippedCosmetics[item.slot!] === itemId ? undefined : itemId } }));
+    return { ok: true, message: profile.equippedCosmetics[item.slot] === itemId ? `Đã cất ${item.label} vào Kho đồ.` : `Đã trang bị ${item.label}.` };
+  }, [profile, updateProfile]);
+  const setStudyDays = useCallback((days: number[]) => {
+    if (!profile) return;
+    updateProfile(profile.id, (current) => ({ ...current, studyDays: normalizeStudyDays(days) }));
   }, [profile, updateProfile]);
   const resetActiveProfile = useCallback(() => { if (profile) updateProfile(profile.id, (current) => createProfileRecord(current.name, current.avatar)); }, [profile, updateProfile]);
 
@@ -547,6 +579,20 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     return ELEMENT_ORDER.reduce<ElementName | null>((leader, element) => (profile.magicUsage[element] ?? 0) > (leader ? profile.magicUsage[leader] ?? 0 : 0) ? element : leader, null);
   }, [profile]);
   const weeklyMagicQuest = useMemo(() => profile ? (profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest()) : null, [profile]);
+  const studyReminder = useMemo<StudyReminder | null>(() => {
+    if (!profile) return null;
+    const scheduledDays = profile.studyDays;
+    if (!scheduledDays.length) return { state: "rest", label: "Chưa chọn ngày học. Hãy đánh dấu các ngày phù hợp trong Lịch học.", scheduledDays };
+    const today = new Date().getDay();
+    if (scheduledDays.includes(today) && profile.lastStudyDate !== localDate()) return { state: "today", label: "Hôm nay có hẹn với Sổ Hành Trình — làm ít nhất một câu để giữ chuỗi học.", scheduledDays };
+    const nextOffset = Array.from({ length: 7 }, (_, index) => index + 1).find((offset) => scheduledDays.includes((today + offset) % 7));
+    return { state: "tomorrow", label: nextOffset ? `Phiên học kế tiếp: ${VIETNAMESE_DAYS[(today + nextOffset) % 7]}. Chuẩn bị Gold và guardian nhé.` : "Hãy chọn một ngày học trong tuần.", scheduledDays };
+  }, [profile]);
+  const requestStudyNotifications = useCallback(async () => {
+    if (typeof window === "undefined" || !("Notification" in window)) return { ok: false, message: "Trình duyệt này chưa hỗ trợ thông báo." };
+    const permission = await window.Notification.requestPermission();
+    return permission === "granted" ? { ok: true, message: "Đã cho phép nhắc học khi Math4Fun đang mở." } : { ok: false, message: "Chưa được cấp quyền thông báo. Nhắc học vẫn hiện trong game." };
+  }, []);
   const elementLevel = useCallback((element: ElementName) => Math.floor((profile?.elementXp[element] ?? 0) / ELEMENT_XP_PER_LEVEL) + 1, [profile]);
   const createProfileBackup = useCallback(() => profile ? JSON.stringify({ format: "math4fun-profile-backup", version: 1, exportedAt: new Date().toISOString(), profile }, null, 2) : null, [profile]);
   const saveParentPin = useCallback(async (pin: string, securityQuestion: string, securityAnswer: string) => {
@@ -661,9 +707,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     guardianHp,
     purchaseItem,
     useHealingItem,
+    equippedCosmetics: profile?.equippedCosmetics ?? {},
+    equipCosmetic,
+    studyDays: profile?.studyDays ?? DEFAULT_STUDY_DAYS,
+    studyReminder,
+    setStudyDays,
+    requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

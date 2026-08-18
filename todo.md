@@ -104,3 +104,12 @@
 - [x] Tạo bảng xếp hạng local xếp theo thành tích học tập, huy hiệu, guardian thu phục và tiến độ tổng.
 - [x] Thêm trang/tuyến Bảng xếp hạng và diễn giải rõ phạm vi cạnh tranh trên cùng thiết bị.
 - [x] Kiểm tra TypeScript, build và trạng thái xếp hạng trống; cần thử thủ công đăng nhập sai và chuyển nhiều hồ sơ trước khi dùng trên thiết bị chung.
+
+## So sánh hồ sơ, trang trí và lịch học
+
+- [x] Rà soát dữ liệu thành tích để xác định chỉ số so sánh chi tiết giữa các hồ sơ local.
+- [x] Tạo màn hình so sánh tiến độ, huy hiệu, guardian, Gold và nhịp học giữa các hồ sơ trên thiết bị.
+- [x] Thêm vật phẩm trang phục/trang trí vào Shop, kho đồ và trạng thái trang bị cho companion.
+- [x] Thêm lịch học tuần, chọn ngày học và hiển thị mức độ duy trì chuỗi trong hồ sơ.
+- [x] Tạo nhắc học cục bộ khi mở game, có ngưỡng cảnh báo trước khi chuỗi bị đứt.
+- [x] Kiểm tra TypeScript, build và giao diện các màn chính; cần chơi thử thủ công mua/trang bị và kiểm tra nhắc chuỗi qua nhiều ngày.
