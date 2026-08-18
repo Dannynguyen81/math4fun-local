@@ -1,10 +1,10 @@
 /**
  * Math4Fun local state — Field Journal Quest keeps learning evidence across navigation.
- * Gameplay rules live here, never in a page: a station needs 10 distinct correct answers,
- * unfinished attempts persist, and a Boss run always uses a separate hard-question pool.
+ * Gameplay rules live here, never in a page: mastery needs 10 distinct correct answers,
+ * Boss runs use a non-repeating hard-question pool, and magic progression stays local-only.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { BOSS_QUESTION_IDS, Difficulty, ElementName, getGuardian, getReadyStations, getStation, QUESTIONS_BY_ID, SPELLS, STATIONS } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId = "compass" | "ember" | "tide" | "leaf";
 export type StudentProfile = {
@@ -27,7 +27,16 @@ export type StudentProfile = {
   bossQuestionHistory: string[];
   magicBookWatchedElements: ElementName[];
   magicUsage: Partial<Record<ElementName, number>>;
+  elementXp: Partial<Record<ElementName, number>>;
+  weeklyMagicQuest: WeeklyMagicQuest;
   metrics: LearningMetrics;
+};
+
+export type WeeklyMagicQuest = WeeklyMagicQuestDefinition & {
+  week: string;
+  usedCount: number;
+  rewardClaimed: boolean;
+  completedAt?: string;
 };
 
 export type StationAttempt = {
@@ -59,7 +68,7 @@ export type LearningMetrics = {
   lastActiveAt?: string;
 };
 
-type GameStore = { version: 3; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string };
+type GameStore = { version: 4; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
 export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean };
@@ -91,17 +100,22 @@ type GameContextValue = {
   magicBookWatchedCount: number;
   hasMagicBookAchievement: boolean;
   mostUsedMagicElement: ElementName | null;
+  elementXp: Partial<Record<ElementName, number>>;
+  elementLevel: (element: ElementName) => number;
+  weeklyMagicQuest: WeeklyMagicQuest | null;
+  createProfileBackup: () => string | null;
+  restoreProfileBackup: (raw: string) => { ok: boolean; message: string };
   toggleTeamGuardian: (guardianId: string) => void;
   setAudioEnabled: (enabled: boolean) => void;
   resetActiveProfile: () => void;
 };
 
+// Giữ khóa v3 để tự động nâng mọi hồ sơ đã lưu, không làm mất hành trình đang có.
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const DEFAULT_STORE: GameStore = { version: 3, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 4, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
-const ELEMENT_ORDER: ElementName[] = ["sấm", "lửa", "nước", "độc", "gió", "đất"];
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
 function weekKey() {
@@ -109,6 +123,11 @@ function weekKey() {
   const day = date.getDay() || 7;
   date.setDate(date.getDate() - day + 1);
   return date.toISOString().slice(0, 10);
+}
+function getWeeklyMagicQuest(seedWeek = weekKey()): WeeklyMagicQuest {
+  const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+  const questIndex = Math.abs(Math.floor(new Date(`${seedWeek}T00:00:00`).getTime() / msPerWeek)) % WEEKLY_MAGIC_QUESTS.length;
+  return { ...WEEKLY_MAGIC_QUESTS[questIndex], week: seedWeek, usedCount: 0, rewardClaimed: false };
 }
 function shuffle<T>(source: T[]) {
   const result = [...source];
@@ -138,7 +157,40 @@ function createProfileRecord(name: string, avatar: AvatarId): StudentProfile {
     bossQuestionHistory: [],
     magicBookWatchedElements: [],
     magicUsage: {},
+    elementXp: {},
+    weeklyMagicQuest: getWeeklyMagicQuest(),
     metrics: emptyMetrics(),
+  };
+}
+function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): StudentProfile {
+  const avatar: AvatarId = ["compass", "ember", "tide", "leaf"].includes(candidate.avatar as AvatarId) ? candidate.avatar as AvatarId : "compass";
+  const base = createProfileRecord(typeof candidate.name === "string" ? candidate.name : "Nhà thám hiểm", avatar);
+  const currentQuest = getWeeklyMagicQuest();
+  const storedQuest = candidate.weeklyMagicQuest;
+  const validQuest = storedQuest && storedQuest.week === currentQuest.week && ELEMENT_ORDER.includes(storedQuest.element) ? storedQuest : currentQuest;
+  return {
+    ...base,
+    ...candidate,
+    id: forcedId ?? (typeof candidate.id === "string" ? candidate.id : base.id),
+    avatar,
+    createdAt: typeof candidate.createdAt === "string" ? candidate.createdAt : base.createdAt,
+    xp: typeof candidate.xp === "number" && Number.isFinite(candidate.xp) ? Math.max(0, candidate.xp) : 0,
+    streak: typeof candidate.streak === "number" && Number.isFinite(candidate.streak) ? Math.max(0, candidate.streak) : 0,
+    unlockedStationIds: Array.isArray(candidate.unlockedStationIds) ? candidate.unlockedStationIds.filter((id): id is number => typeof id === "number") : [],
+    stationOpenedAt: candidate.stationOpenedAt && typeof candidate.stationOpenedAt === "object" ? candidate.stationOpenedAt : {},
+    correctQuestionIds: Array.isArray(candidate.correctQuestionIds) ? candidate.correctQuestionIds.filter((id): id is string => typeof id === "string") : [],
+    incorrectQuestionIds: Array.isArray(candidate.incorrectQuestionIds) ? candidate.incorrectQuestionIds.filter((id): id is string => typeof id === "string") : [],
+    completedStationIds: Array.isArray(candidate.completedStationIds) ? candidate.completedStationIds.filter((id): id is number => typeof id === "number") : [],
+    collectedGuardianIds: Array.isArray(candidate.collectedGuardianIds) ? candidate.collectedGuardianIds.filter((id): id is string => typeof id === "string") : [],
+    teamGuardianIds: Array.isArray(candidate.teamGuardianIds) ? candidate.teamGuardianIds.filter((id): id is string => typeof id === "string").slice(0, 3) : [],
+    attempts: candidate.attempts && typeof candidate.attempts === "object" ? candidate.attempts : {},
+    battle: candidate.battle?.status ? candidate.battle : emptyBattle(),
+    bossQuestionHistory: Array.isArray(candidate.bossQuestionHistory) ? candidate.bossQuestionHistory.filter((id): id is string => typeof id === "string") : [],
+    magicBookWatchedElements: Array.isArray(candidate.magicBookWatchedElements) ? candidate.magicBookWatchedElements.filter((element): element is ElementName => ELEMENT_ORDER.includes(element as ElementName)) : [],
+    magicUsage: candidate.magicUsage && typeof candidate.magicUsage === "object" ? candidate.magicUsage : {},
+    elementXp: candidate.elementXp && typeof candidate.elementXp === "object" ? candidate.elementXp : {},
+    weeklyMagicQuest: { ...currentQuest, ...validQuest, usedCount: Math.min(currentQuest.target, Math.max(0, Number(validQuest.usedCount) || 0)), rewardClaimed: Boolean(validQuest.rewardClaimed) },
+    metrics: { ...emptyMetrics(), ...(candidate.metrics && typeof candidate.metrics === "object" ? candidate.metrics : {}) },
   };
 }
 function readStore(): GameStore {
@@ -149,28 +201,12 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 3,
+      version: 4,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
       lastSiteVisitAt: typeof parsed.lastSiteVisitAt === "string" ? parsed.lastSiteVisitAt : undefined,
-      profiles: parsed.profiles.map((profile) => ({
-        ...createProfileRecord(typeof profile.name === "string" ? profile.name : "Nhà thám hiểm", (profile.avatar as AvatarId) || "compass"),
-        ...profile,
-        unlockedStationIds: Array.isArray(profile.unlockedStationIds) ? profile.unlockedStationIds : [],
-        stationOpenedAt: profile.stationOpenedAt && typeof profile.stationOpenedAt === "object" ? profile.stationOpenedAt : {},
-        correctQuestionIds: Array.isArray(profile.correctQuestionIds) ? profile.correctQuestionIds : [],
-        incorrectQuestionIds: Array.isArray(profile.incorrectQuestionIds) ? profile.incorrectQuestionIds : [],
-        completedStationIds: Array.isArray(profile.completedStationIds) ? profile.completedStationIds : [],
-        collectedGuardianIds: Array.isArray(profile.collectedGuardianIds) ? profile.collectedGuardianIds : [],
-        teamGuardianIds: Array.isArray(profile.teamGuardianIds) ? profile.teamGuardianIds : [],
-        attempts: profile.attempts && typeof profile.attempts === "object" ? profile.attempts : {},
-        battle: profile.battle?.status ? profile.battle : emptyBattle(),
-        bossQuestionHistory: Array.isArray(profile.bossQuestionHistory) ? profile.bossQuestionHistory : [],
-        magicBookWatchedElements: Array.isArray(profile.magicBookWatchedElements) ? profile.magicBookWatchedElements.filter((element): element is ElementName => ELEMENT_ORDER.includes(element as ElementName)) : [],
-        magicUsage: profile.magicUsage && typeof profile.magicUsage === "object" ? profile.magicUsage : {},
-        metrics: { ...emptyMetrics(), ...profile.metrics },
-      })),
+      profiles: parsed.profiles.map((profile) => hydrateProfile(profile)),
     };
   } catch {
     return DEFAULT_STORE;
@@ -228,10 +264,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (existing && !existing.completedAt) return existing;
     const pending = station.questionIds.filter((id) => !profile.correctQuestionIds.includes(id));
     if (!pending.length) return existing ?? null;
-    const attempt: StationAttempt = { id: `station-${stationId}-${Date.now()}`, stationId, questionIds: shuffle(pending), answeredQuestionIds: [], currentQuestionId: shuffle(pending)[0] ?? null, startedAt: new Date().toISOString() };
-    // Reuse exactly the same shuffled ordering for the displayed first question.
-    attempt.questionIds = shuffle(pending);
-    attempt.currentQuestionId = attempt.questionIds[0] ?? null;
+    const questionIds = shuffle(pending);
+    const attempt: StationAttempt = { id: `station-${stationId}-${Date.now()}`, stationId, questionIds, answeredQuestionIds: [], currentQuestionId: questionIds[0] ?? null, startedAt: new Date().toISOString() };
     updateProfile(profile.id, (current) => ({ ...current, attempts: { ...current.attempts, [stationId]: attempt }, metrics: { ...current.metrics, stationSessions: current.metrics.stationSessions + 1 } }));
     return attempt;
   }, [profile, updateProfile]);
@@ -290,15 +324,30 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const question = QUESTIONS_BY_ID[questionId];
     if (!question) return null;
     const selectedSpell = SPELLS.find((item) => item.id === spellId) ?? SPELLS[0];
-    const spell = [selectedSpell.damage, selectedSpell.counterDamage];
     const magicElement = selectedSpell.element.toLocaleLowerCase("vi-VN") as ElementName;
     const correct = answer === question.answer;
-    const bossDamage = correct ? spell[0] : 0;
-    const playerDamage = correct ? spell[1] : 34;
+    const bossDamage = correct ? selectedSpell.damage : 0;
+    const playerDamage = correct ? selectedSpell.counterDamage : 34;
     const bossHp = Math.max(0, profile.battle.bossHp - bossDamage);
     const playerHp = Math.max(0, profile.battle.playerHp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
-    updateProfile(profile.id, (current) => ({ ...current, battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } }, xp: current.xp + (correct ? 30 : 0), magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 }, metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() }, collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds }));
+    updateProfile(profile.id, (current) => {
+      const currentQuest = current.weeklyMagicQuest.week === weekKey() ? current.weeklyMagicQuest : getWeeklyMagicQuest();
+      const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
+      const questJustCompleted = nextUsedCount >= currentQuest.target && !currentQuest.rewardClaimed;
+      const questReward = questJustCompleted ? currentQuest.rewardXp : 0;
+      const elementGain = correct ? 18 : 5;
+      return {
+        ...current,
+        battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } },
+        xp: current.xp + (correct ? 30 : 0) + questReward,
+        magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
+        elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain + (magicElement === currentQuest.element ? questReward : 0) },
+        weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
+        metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() },
+        collectedGuardianIds: bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
+      };
+    });
     return { correct, playerDamage, bossDamage, ended };
   }, [profile, updateProfile]);
   const advanceBattle = useCallback(() => {
@@ -328,7 +377,57 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (!profile) return null;
     return ELEMENT_ORDER.reduce<ElementName | null>((leader, element) => (profile.magicUsage[element] ?? 0) > (leader ? profile.magicUsage[leader] ?? 0 : 0) ? element : leader, null);
   }, [profile]);
-  const value = useMemo<GameContextValue>(() => ({ profile, profiles: store.profiles, hasProfile: Boolean(profile), audioEnabled: store.audioEnabled, siteVisitCount: store.siteVisitCount, lastSiteVisitAt: store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, toggleTeamGuardian, setAudioEnabled, resetActiveProfile }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
+  const weeklyMagicQuest = useMemo(() => profile ? (profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest()) : null, [profile]);
+  const elementLevel = useCallback((element: ElementName) => Math.floor((profile?.elementXp[element] ?? 0) / ELEMENT_XP_PER_LEVEL) + 1, [profile]);
+  const createProfileBackup = useCallback(() => profile ? JSON.stringify({ format: "math4fun-profile-backup", version: 1, exportedAt: new Date().toISOString(), profile }, null, 2) : null, [profile]);
+  const restoreProfileBackup = useCallback((raw: string) => {
+    if (raw.length > 500_000) return { ok: false, message: "Tệp sao lưu quá lớn để khôi phục an toàn." };
+    try {
+      const parsed = JSON.parse(raw) as { format?: string; profile?: Partial<StudentProfile> };
+      if (parsed.format !== "math4fun-profile-backup" || !parsed.profile || typeof parsed.profile.name !== "string") return { ok: false, message: "Đây không phải tệp sao lưu Math4Fun hợp lệ." };
+      const restored = hydrateProfile(parsed.profile, `student-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`);
+      setStore((previous) => ({ ...previous, profiles: [...previous.profiles, restored], activeProfileId: restored.id }));
+      return { ok: true, message: `Đã khôi phục hồ sơ ${restored.name}.` };
+    } catch {
+      return { ok: false, message: "Không thể đọc tệp JSON. Vui lòng chọn tệp sao lưu chưa bị chỉnh sửa." };
+    }
+  }, []);
+  const value = useMemo<GameContextValue>(() => ({
+    profile,
+    profiles: store.profiles,
+    hasProfile: Boolean(profile),
+    audioEnabled: store.audioEnabled,
+    siteVisitCount: store.siteVisitCount,
+    lastSiteVisitAt: store.lastSiteVisitAt,
+    level,
+    levelProgress,
+    weeklyOpenCount,
+    createProfile,
+    selectProfile,
+    unlockStationForWeek,
+    isStationUnlocked,
+    isStationMastered,
+    stationProgress,
+    getStationAttempt,
+    startStationSession,
+    answerStationQuestion,
+    isBossUnlocked,
+    startBattle,
+    resolveBattleAnswer,
+    advanceBattle,
+    markMagicVideoWatched,
+    magicBookWatchedCount,
+    hasMagicBookAchievement,
+    mostUsedMagicElement,
+    elementXp: profile?.elementXp ?? {},
+    elementLevel,
+    weeklyMagicQuest,
+    createProfileBackup,
+    restoreProfileBackup,
+    toggleTeamGuardian,
+    setAudioEnabled,
+    resetActiveProfile,
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, restoreProfileBackup, toggleTeamGuardian, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

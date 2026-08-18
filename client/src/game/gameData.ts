@@ -82,6 +82,14 @@ export type ElementMatchup = {
   fieldNote: string;
 };
 
+export type WeeklyMagicQuestDefinition = {
+  element: ElementName;
+  target: number;
+  title: string;
+  note: string;
+  rewardXp: number;
+};
+
 const sprite = (id: number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 export const GUARDIANS: Guardian[] = [
@@ -127,6 +135,20 @@ export const ELEMENTAL_MATCHUPS: Record<ElementName, ElementMatchup> = {
   "gió": { strongAgainst: "độc", weakAgainst: "lửa", fieldNote: "Phong ấn cuốn đi mây độc, nhưng phải giữ khoảng cách với hỏa ấn." },
   "đất": { strongAgainst: "sấm", weakAgainst: "độc", fieldNote: "Thạch ấn tiếp đất an toàn, nhưng cần che kín các mạch đất trước độc ấn." },
 };
+
+/** Mốc tiến độ riêng theo hệ; mỗi 100 XP là một bậc luyện ấn mới. */
+export const ELEMENT_XP_PER_LEVEL = 100;
+export const ELEMENT_ORDER: ElementName[] = ["sấm", "lửa", "nước", "độc", "gió", "đất"];
+
+/** Nhiệm vụ luân phiên theo tuần ISO, tính cục bộ và chỉ tiến triển trong trận Boss. */
+export const WEEKLY_MAGIC_QUESTS: WeeklyMagicQuestDefinition[] = [
+  { element: "sấm", target: 3, title: "Ba tia chớp có chủ đích", note: "Kích hoạt Sấm ấn ba lượt trong trận Boss.", rewardXp: 45 },
+  { element: "lửa", target: 3, title: "Giữ lửa suy luận", note: "Kích hoạt Hỏa ấn ba lượt trong trận Boss.", rewardXp: 45 },
+  { element: "nước", target: 3, title: "Ba nhịp thủy triều", note: "Kích hoạt Thủy ấn ba lượt trong trận Boss.", rewardXp: 45 },
+  { element: "độc", target: 3, title: "Dấu tím kín đáo", note: "Kích hoạt Độc ấn ba lượt trong trận Boss.", rewardXp: 45 },
+  { element: "gió", target: 3, title: "Mở ba đường gió", note: "Kích hoạt Gió ấn ba lượt trong trận Boss.", rewardXp: 45 },
+  { element: "đất", target: 3, title: "Ba nền đất vững", note: "Kích hoạt Địa ấn ba lượt trong trận Boss.", rewardXp: 45 },
+];
 
 export const STATIONS: Station[] = [
   { id: 1, code: "T1.01", title: "Dãy số & quy luật", brief: "Đếm số hạng, dự đoán quy luật và tính tổng bằng những bước nhảy có ghi chép.", group: "Số và quy luật", book: "Tập 1", guardianId: "pipra", accent: "bg-emerald-500", questionIds: ["B80a", "B80b", "B81a", "B82a", "B87b", "B83a-count", "B83a-term50", "B83a-sum", "B86a", "B86b"], masteryTarget: 10, status: "ready" },

@@ -60,3 +60,11 @@
 - [x] Theo dõi số lần dùng từng phép và hiển thị hệ phép được dùng nhiều nhất trong Thống kê.
 - [x] Thêm bảng tương khắc mạnh/yếu của sáu nguyên tố vào Sổ Phép.
 - [x] Kiểm thử quyền mở, dữ liệu local và lưu checkpoint.
+
+## Tiến độ và sao lưu ma thuật
+
+- [ ] Thêm XP, cấp độ và mốc mở riêng cho từng nguyên tố.
+- [ ] Tạo nhiệm vụ tuần yêu cầu dùng đúng phép nguyên tố trong Boss combat.
+- [ ] Hiển thị tiến độ XP nguyên tố và nhiệm vụ tuần trong Sổ Phép/Thống kê.
+- [ ] Thêm xuất và nhập hồ sơ học sinh JSON có kiểm tra dữ liệu an toàn.
+- [ ] Kiểm thử local persistence, khôi phục JSON và lưu checkpoint.
