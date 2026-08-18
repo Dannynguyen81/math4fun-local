@@ -26,6 +26,18 @@
 | `ParentPinRecord` | Bổ sung mã câu hỏi, salt/hash câu trả lời an toàn bên cạnh salt/hash PIN hiện có. |
 | `ShopItem` | `id`, `label`, `price`, `heal`, `description`, để trang Shop và state không trùng luật. |
 
+## Mở rộng tài khoản và cạnh tranh tại thiết bị
+
+| Hệ thống | Quy tắc đã chọn |
+| --- | --- |
+| Tài khoản học sinh | Hồ sơ mới yêu cầu tên hiển thị, tên đăng nhập duy nhất trên thiết bị và mật khẩu tối thiểu 6 ký tự. Mật khẩu được lưu bằng SHA-256 kèm salt trong localStorage; đây là lớp phân biệt hồ sơ cục bộ, không phải tài khoản trực tuyến. |
+| Hồ sơ cũ | Hồ sơ tạo trước bản cập nhật không bị xóa. Lần đầu chọn hồ sơ cũ, phụ huynh/học sinh tạo mật khẩu để kích hoạt đăng nhập local. |
+| Đăng xuất | Đăng xuất chỉ bỏ chọn hồ sơ hoạt động; không xóa nhật ký, tài sản, guardian hay thứ hạng. |
+| Bảng xếp hạng | Chỉ so sánh hồ sơ đã lưu trong cùng trình duyệt/thiết bị. Điểm xếp hạng = XP + 250 điểm cho mỗi trạm hoàn thành + 175 điểm cho mỗi guardian + 300 điểm cho mỗi huy hiệu nguyên tố + thưởng chuỗi học. |
+| Chuỗi học | Một ngày lịch chỉ tăng tối đa một lần. Huy hiệu 7 ngày và 14 ngày được suy ra từ `streak`, không bị mất khi người chơi tiếp tục học. |
+| Cân bằng Gold | Trạm: đúng E/M/H nhận 5/7/10 Gold, sai nhận 1 Gold; Boss: đúng 12 Gold, sai nhận 0 Gold. Giá bình 25%/50%/100% lần lượt là 45/95/185 Gold để vật phẩm là quyết định chiến lược thay vì mua ngay sau vài câu. |
+| Thẻ nhân vật | Bộ chọn có 20 thẻ: 10 bé trai và 10 bé gái. Các minh họa còn thiếu dùng biểu tượng sổ tay màu riêng để vẫn có 20 lựa chọn rõ ràng trong khi dự án chờ bộ tài sản minh họa đầy đủ. |
+
 ## Nội dung học được mở
 
 | Trạm | Nội dung | Nguồn kiểm chứng | Số câu |

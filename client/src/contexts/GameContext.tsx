@@ -6,11 +6,18 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
-export type AvatarId = "compass" | "ember" | "tide" | "leaf";
+export type AvatarId =
+  | "compass" | "ember" | "tide" | "leaf"
+  | "b01" | "b02" | "b03" | "b04" | "b05" | "b06" | "b07" | "b08" | "b09" | "b10"
+  | "g01" | "g02" | "g03" | "g04" | "g05" | "g06" | "g07" | "g08" | "g09" | "g10";
+const AVATAR_IDS: AvatarId[] = ["compass", "ember", "tide", "leaf", "b01", "b02", "b03", "b04", "b05", "b06", "b07", "b08", "b09", "b10", "g01", "g02", "g03", "g04", "g05", "g06", "g07", "g08", "g09", "g10"];
 export type StudentProfile = {
   id: string;
   name: string;
   avatar: AvatarId;
+  username?: string;
+  passwordSalt?: string;
+  passwordHash?: string;
   createdAt: string;
   xp: number;
   streak: number;
@@ -76,8 +83,10 @@ export type LearningMetrics = {
 };
 
 export type ElementLevelUp = { element: ElementName; previousLevel: number; nextLevel: number; totalXp: number };
+export type LearningBadgeId = "streak-7" | "streak-14";
+export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 6; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
+type GameStore = { version: 7; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
 export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp };
@@ -92,8 +101,12 @@ type GameContextValue = {
   level: number;
   levelProgress: number;
   weeklyOpenCount: number;
-  createProfile: (name: string, avatar: AvatarId) => void;
+  createProfile: (name: string, avatar: AvatarId, username: string, password: string) => Promise<{ ok: boolean; message: string }>;
+  signIn: (profileId: string, password: string) => Promise<{ ok: boolean; message: string }>;
+  setLegacyProfilePassword: (profileId: string, username: string, password: string) => Promise<{ ok: boolean; message: string }>;
   selectProfile: (profileId: string) => void;
+  leaderboard: LeaderboardEntry[];
+  learningBadges: LearningBadgeId[];
   unlockStationForWeek: (stationId: number) => boolean;
   isStationUnlocked: (stationId: number) => boolean;
   isStationMastered: (stationId: number) => boolean;
@@ -138,11 +151,22 @@ const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 
 const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 6, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 7, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
+function isConsecutiveStudyDay(previous: string | undefined, today: string) {
+  if (!previous) return false;
+  const [previousYear, previousMonth, previousDay] = previous.split("-").map(Number);
+  const [todayYear, todayMonth, todayDay] = today.split("-").map(Number);
+  if (![previousYear, previousMonth, previousDay, todayYear, todayMonth, todayDay].every(Number.isFinite)) return false;
+  const previousUtc = Date.UTC(previousYear, previousMonth - 1, previousDay);
+  const todayUtc = Date.UTC(todayYear, todayMonth - 1, todayDay);
+  return todayUtc - previousUtc === 86_400_000;
+}
 function isParentPin(pin: string) { return /^\d{4,8}$/.test(pin); }
+function isStudentPassword(password: string) { return password.length >= 6 && password.length <= 64; }
+function normalizeUsername(username: string) { return username.trim().toLocaleLowerCase("vi-VN").replace(/\s+/g, ""); }
 function bytesToHex(bytes: Uint8Array) { return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join(""); }
 function createParentPinSalt() {
   const bytes = new Uint8Array(16);
@@ -181,11 +205,12 @@ function shuffle<T>(source: T[]) {
   }
   return result;
 }
-function createProfileRecord(name: string, avatar: AvatarId): StudentProfile {
+function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<StudentProfile, "username" | "passwordSalt" | "passwordHash">): StudentProfile {
   return {
     id: `student-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     name: name.trim().slice(0, 22),
     avatar,
+    ...account,
     createdAt: new Date().toISOString(),
     xp: 0,
     streak: 0,
@@ -211,7 +236,7 @@ function createProfileRecord(name: string, avatar: AvatarId): StudentProfile {
   };
 }
 function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): StudentProfile {
-  const avatar: AvatarId = ["compass", "ember", "tide", "leaf"].includes(candidate.avatar as AvatarId) ? candidate.avatar as AvatarId : "compass";
+  const avatar: AvatarId = AVATAR_IDS.includes(candidate.avatar as AvatarId) ? candidate.avatar as AvatarId : "compass";
   const base = createProfileRecord(typeof candidate.name === "string" ? candidate.name : "Nhà thám hiểm", avatar);
   const currentQuest = getWeeklyMagicQuest();
   const storedQuest = candidate.weeklyMagicQuest;
@@ -221,6 +246,9 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     ...candidate,
     id: forcedId ?? (typeof candidate.id === "string" ? candidate.id : base.id),
     avatar,
+    username: typeof candidate.username === "string" && normalizeUsername(candidate.username).length >= 3 ? normalizeUsername(candidate.username).slice(0, 18) : undefined,
+    passwordSalt: typeof candidate.passwordSalt === "string" && candidate.passwordSalt.length >= 16 ? candidate.passwordSalt : undefined,
+    passwordHash: typeof candidate.passwordHash === "string" && candidate.passwordHash.length >= 32 ? candidate.passwordHash : undefined,
     createdAt: typeof candidate.createdAt === "string" ? candidate.createdAt : base.createdAt,
     xp: typeof candidate.xp === "number" && Number.isFinite(candidate.xp) ? Math.max(0, candidate.xp) : 0,
     streak: typeof candidate.streak === "number" && Number.isFinite(candidate.streak) ? Math.max(0, candidate.streak) : 0,
@@ -253,7 +281,7 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 6,
+      version: 7,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
@@ -277,10 +305,44 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const updateProfile = useCallback((profileId: string, updater: (entry: StudentProfile) => StudentProfile) => {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => entry.id === profileId ? updater(entry) : entry) }));
   }, []);
-  const createProfile = useCallback((name: string, avatar: AvatarId) => {
-    const record = createProfileRecord(name || "Nhà thám hiểm", avatar);
+  const createProfile = useCallback(async (name: string, avatar: AvatarId, username: string, password: string) => {
+    const accountName = normalizeUsername(username);
+    if (name.trim().length < 2) return { ok: false, message: "Hãy nhập tên hiển thị gồm ít nhất 2 ký tự." };
+    if (accountName.length < 3 || accountName.length > 18) return { ok: false, message: "Tên đăng nhập cần từ 3–18 ký tự, không có khoảng trắng." };
+    if (!isStudentPassword(password)) return { ok: false, message: "Mật khẩu cần từ 6–64 ký tự." };
+    if (typeof window === "undefined" || !window.crypto?.subtle) return { ok: false, message: "Trình duyệt này chưa hỗ trợ tạo mật khẩu an toàn." };
+    if (store.profiles.some((entry) => entry.username === accountName)) return { ok: false, message: "Tên đăng nhập này đã có trên thiết bị." };
+    const passwordSalt = createParentPinSalt();
+    const passwordHash = await hashParentPin(password, passwordSalt);
+    if (!passwordHash) return { ok: false, message: "Không thể lưu mật khẩu trên trình duyệt này." };
+    const record = createProfileRecord(name || "Nhà thám hiểm", avatar, { username: accountName, passwordSalt, passwordHash });
     setStore((previous) => ({ ...previous, profiles: [...previous.profiles, record], activeProfileId: record.id }));
-  }, []);
+    return { ok: true, message: "Đã tạo nhật ký và đăng nhập trên thiết bị này." };
+  }, [store.profiles]);
+  const setLegacyProfilePassword = useCallback(async (profileId: string, username: string, password: string) => {
+    const accountName = normalizeUsername(username);
+    const existing = store.profiles.find((entry) => entry.id === profileId);
+    if (!existing) return { ok: false, message: "Không tìm thấy hồ sơ này." };
+    if (existing.passwordHash) return { ok: false, message: "Hồ sơ này đã có mật khẩu; hãy đăng nhập bình thường." };
+    if (accountName.length < 3 || accountName.length > 18) return { ok: false, message: "Tên đăng nhập cần từ 3–18 ký tự." };
+    if (!isStudentPassword(password)) return { ok: false, message: "Mật khẩu cần từ 6–64 ký tự." };
+    if (store.profiles.some((entry) => entry.id !== profileId && entry.username === accountName)) return { ok: false, message: "Tên đăng nhập này đã có trên thiết bị." };
+    const passwordSalt = createParentPinSalt();
+    const passwordHash = await hashParentPin(password, passwordSalt);
+    if (!passwordHash) return { ok: false, message: "Không thể tạo mật khẩu trên trình duyệt này." };
+    updateProfile(profileId, (current) => ({ ...current, username: accountName, passwordSalt, passwordHash }));
+    setStore((previous) => ({ ...previous, activeProfileId: profileId }));
+    return { ok: true, message: "Đã bảo vệ nhật ký cũ bằng tên đăng nhập và mật khẩu." };
+  }, [store.profiles, updateProfile]);
+  const signIn = useCallback(async (profileId: string, password: string) => {
+    const entry = store.profiles.find((profileEntry) => profileEntry.id === profileId);
+    if (!entry) return { ok: false, message: "Không tìm thấy nhật ký này trên thiết bị." };
+    if (!entry.passwordHash || !entry.passwordSalt) return { ok: false, message: "Nhật ký này cần thiết lập mật khẩu lần đầu." };
+    const enteredHash = await hashParentPin(password, entry.passwordSalt);
+    if (!enteredHash || enteredHash !== entry.passwordHash) return { ok: false, message: "Mật khẩu chưa chính xác." };
+    setStore((previous) => ({ ...previous, activeProfileId: profileId }));
+    return { ok: true, message: `Chào mừng ${entry.name} quay lại hành trình.` };
+  }, [store.profiles]);
   const selectProfile = useCallback((profileId: string) => setStore((previous) => previous.profiles.some((entry) => entry.id === profileId) ? { ...previous, activeProfileId: profileId } : previous), []);
   const exitGame = useCallback(() => setStore((previous) => ({ ...previous, activeProfileId: null })), []);
   const setAudioEnabled = useCallback((audioEnabled: boolean) => setStore((previous) => ({ ...previous, audioEnabled })), []);
@@ -348,11 +410,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       const team = masteredNow && !current.teamGuardianIds.includes(station.guardianId) && current.teamGuardianIds.length < 3 ? [...current.teamGuardianIds, station.guardianId] : current.teamGuardianIds;
       const recaptured = masteredNow && current.guardianLosses.includes(station.guardianId);
       const today = localDate();
-      const streak = current.lastStudyDate === today ? current.streak : current.lastStudyDate ? current.streak + 1 : 1;
+      const streak = current.lastStudyDate === today ? current.streak : isConsecutiveStudyDay(current.lastStudyDate, today) ? current.streak + 1 : 1;
       return {
         ...current,
         xp: current.xp + (correct && !alreadyCorrect ? ({ E: 25, M: 35, H: 50 } as Record<Difficulty, number>)[question.difficulty] : 0),
-        gold: current.gold + (correct ? ({ E: 12, M: 18, H: 25 } as Record<Difficulty, number>)[question.difficulty] : 4),
+        gold: current.gold + (correct ? ({ E: 4, M: 6, H: 9 } as Record<Difficulty, number>)[question.difficulty] : 1),
         streak,
         lastStudyDate: today,
         correctQuestionIds: correct && !alreadyCorrect ? [...current.correctQuestionIds, questionId] : current.correctQuestionIds,
@@ -417,7 +479,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         ...current,
         battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } },
         xp: current.xp + (correct ? 30 : 0) + questReward,
-        gold: current.gold + (correct ? 30 : 10),
+        gold: current.gold + (correct ? 10 : 0),
         magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
         elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain },
         weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
@@ -537,6 +599,19 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
   const elementBadges = useMemo(() => profile ? ELEMENT_ORDER.filter((element) => (profile.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2) : [], [profile]);
+  const learningBadges = useMemo<LearningBadgeId[]>(() => {
+    if (!profile) return [];
+    const badges: LearningBadgeId[] = [];
+    if (profile.streak >= 7) badges.push("streak-7");
+    if (profile.streak >= 14) badges.push("streak-14");
+    return badges;
+  }, [profile]);
+  const leaderboard = useMemo<LeaderboardEntry[]>(() => store.profiles.map((entry) => {
+    const elementCount = ELEMENT_ORDER.filter((element) => (entry.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2).length;
+    const streakBadgeCount = entry.streak >= 14 ? 2 : entry.streak >= 7 ? 1 : 0;
+    const score = entry.xp + entry.completedStationIds.length * 250 + entry.collectedGuardianIds.length * 175 + elementCount * 300 + streakBadgeCount * 200;
+    return { profileId: entry.id, name: entry.name, avatar: entry.avatar, score, level: Math.floor(entry.xp / 250) + 1, badges: elementCount + streakBadgeCount, guardians: entry.collectedGuardianIds.length, stations: entry.completedStationIds.length, streak: entry.streak };
+  }).sort((left, right) => right.score - left.score || right.level - left.level || left.name.localeCompare(right.name, "vi")), [store.profiles]);
   const value = useMemo<GameContextValue>(() => ({
     profile,
     profiles: store.profiles,
@@ -548,7 +623,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     levelProgress,
     weeklyOpenCount,
     createProfile,
+    signIn,
+    setLegacyProfilePassword,
     selectProfile,
+    leaderboard,
+    learningBadges,
     unlockStationForWeek,
     isStationUnlocked,
     isStationMastered,
@@ -584,7 +663,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     useHealingItem,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, selectProfile, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

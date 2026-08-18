@@ -101,3 +101,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Trang phụ như Shop và Thống kê phải tổ chức nội dung bằng một **chuỗi chuyển hóa nhìn thấy được** (lời giải → bằng chứng → Gold/ấn → guardian), không chỉ đặt route thread ở phần đầu.
 - Trạng thái chưa ký tên của mỗi trang phải có một **guardian/specimen riêng theo chức năng** (ví dụ Dexo cho tiếp tế, Atlas cho báo cáo Boss), kèm taxonomy và phần thưởng/mốc mở khóa liên quan.
 - Side navigation là chỉ mục ghi chú dã ngoại; artifact, route và evidence trong phần nội dung chính phải luôn chiếm ưu thế thị giác hơn điều hướng.
+- Bảng xếp hạng trống phải là một **phiếu điều hướng** hoàn chỉnh: có chuỗi mở khóa, tiêu bản guardian niêm phong, điều kiện ghi điểm và CTA học cụ thể; không dùng hộp “trống dữ liệu” chung chung.
+- Bộ companion dùng nhãn **specimen/field tag** riêng, ký hiệu taxonomy và dấu ghi chép thay vì chỉ lặp lại lưới thẻ avatar trung tính.
+- Bản prototype local có thể giữ ảnh guardian tham chiếu trong khung tiêu bản để phục vụ học thử; mọi guardian hiển thị đều phải có taxonomy, trạng thái niêm phong và dấu vết tiến độ Math4Fun, không được trình bày như portrait rời.

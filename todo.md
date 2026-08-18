@@ -87,3 +87,20 @@
 - [x] Thiết kế hồi máu theo thời gian, bình hồi phục 25%/50%/100% và luồng mua/dùng vật phẩm.
 - [x] Áp dụng luật guardian hết HP bị mất, gỡ khỏi đội và phải thu phục lại qua trạm.
 - [x] Kiểm tra TypeScript, build và các màn hình đại diện; cần chơi thử thủ công thêm chuỗi chiến đấu dài, mua/dùng bình và đặt lại PIN với dữ liệu thật.
+
+## Mở rộng nhân vật, nhịp học và hình học
+
+- [x] Đối chiếu PDF Archimede để chọn hai chủ đề hình học kế tiếp và ghi nguồn, đáp án, gợi ý cho 20 câu mới.
+- [x] Mở rộng danh mục thành 20 thẻ nhân vật, cân bằng 10 bé trai và 10 bé gái, có lựa chọn dễ nhận biết trong hồ sơ.
+- [x] Rà soát nhịp Gold trên từng đáp án và điều chỉnh giá ba bình hồi phục theo số câu học cần thiết.
+- [x] Thêm huy hiệu chuỗi học 7 ngày và 14 ngày, hiển thị rõ trong hồ sơ/thống kê.
+- [x] Mở hai trạm hình học đã đối chiếu và giữ luật Mastery 10 câu, xáo trộn, không lặp.
+- [x] Kiểm tra TypeScript, build và giao diện chính; cần chơi thử thủ công nhiều ngày để xác thực mốc chuỗi 7/14 ngày.
+
+## Tài khoản cục bộ và bảng xếp hạng
+
+- [x] Thêm tên đăng nhập và mật khẩu đã băm cho từng hồ sơ local, giữ tương thích các hồ sơ cũ.
+- [x] Thiết kế luồng đăng nhập, chuyển hồ sơ và đăng xuất rõ ràng trên thiết bị dùng chung.
+- [x] Tạo bảng xếp hạng local xếp theo thành tích học tập, huy hiệu, guardian thu phục và tiến độ tổng.
+- [x] Thêm trang/tuyến Bảng xếp hạng và diễn giải rõ phạm vi cạnh tranh trên cùng thiết bị.
+- [x] Kiểm tra TypeScript, build và trạng thái xếp hạng trống; cần thử thủ công đăng nhập sai và chuyển nhiều hồ sơ trước khi dùng trên thiết bị chung.

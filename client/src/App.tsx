@@ -16,6 +16,7 @@ import StartPage from "./pages/StartPage";
 import StationPage from "./pages/StationPage";
 import StatsPage from "./pages/StatsPage";
 import ShopPage from "./pages/ShopPage";
+import LeaderboardPage from "./pages/LeaderboardPage";
 
-function Router() { return <Switch><Route path="/" component={Home} /><Route path="/start" component={StartPage} /><Route path="/map" component={MapPage} /><Route path="/collection" component={CollectionPage} /><Route path="/magic-book" component={MagicBookPage} /><Route path="/shop" component={ShopPage} /><Route path="/station/:id" component={StationPage} /><Route path="/boss" component={BossPage} /><Route path="/stats" component={StatsPage} /><Route path="/404" component={NotFound} /><Route component={NotFound} /></Switch>; }
+function Router() { return <Switch><Route path="/" component={Home} /><Route path="/start" component={StartPage} /><Route path="/map" component={MapPage} /><Route path="/collection" component={CollectionPage} /><Route path="/magic-book" component={MagicBookPage} /><Route path="/shop" component={ShopPage} /><Route path="/leaderboard" component={LeaderboardPage} /><Route path="/station/:id" component={StationPage} /><Route path="/boss" component={BossPage} /><Route path="/stats" component={StatsPage} /><Route path="/404" component={NotFound} /><Route component={NotFound} /></Switch>; }
 export default function App() { return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><GameProvider><GameLayout><Router /></GameLayout></GameProvider></TooltipProvider></ThemeProvider></ErrorBoundary>; }
