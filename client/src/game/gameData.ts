@@ -101,6 +101,17 @@ export type ShopItem = {
   kind: "healing" | "cosmetic";
   heal?: number;
   slot?: CosmeticSlot;
+  setId?: "indigo" | "moss";
+};
+
+export type CosmeticSetDefinition = {
+  id: "indigo" | "moss";
+  label: string;
+  motif: string;
+  note: string;
+  itemIds: ShopItem["id"][];
+  bonusGold: number;
+  bonusXp: number;
 };
 
 const sprite = (id: number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
@@ -304,11 +315,16 @@ export const SHOP_ITEMS: ShopItem[] = [
   { id: "potion-25", label: "Bình Lộ Sáng 25%", kind: "healing", icon: "◒", heal: 25, price: 30, description: "Hồi 25 HP cho một guardian đang sở hữu.", tone: "bg-[#e4f3fb] border-[#55a9dd]" },
   { id: "potion-50", label: "Bình Lộ Sáng 50%", kind: "healing", icon: "◐", heal: 50, price: 60, description: "Hồi 50 HP cho một guardian đang sở hữu.", tone: "bg-[#e7f2e5] border-[#3e9b7a]" },
   { id: "potion-100", label: "Bình Lộ Sáng 100%", kind: "healing", icon: "◉", heal: 100, price: 120, description: "Hồi đầy 100 HP cho một guardian đang sở hữu.", tone: "bg-[#fff0b6] border-[#f6b73c]" },
-  { id: "outfit-indigo", label: "Áo Khoác Indigo", kind: "cosmetic", icon: "✦", slot: "outfit", price: 40, description: "Áo khoác mực chàm cho thám hiểm ban sớm.", tone: "bg-[#e9e8f7] border-[#57518d]" },
+  { id: "outfit-indigo", label: "Áo Khoác Indigo", kind: "cosmetic", icon: "✦", slot: "outfit", setId: "indigo", price: 40, description: "Áo khoác mực chàm cho thám hiểm ban sớm.", tone: "bg-[#e9e8f7] border-[#57518d]" },
   { id: "outfit-marigold", label: "Khăn Choàng Marigold", kind: "cosmetic", icon: "✹", slot: "outfit", price: 55, description: "Khăn choàng vàng la bàn, rực rỡ trên tuyến học.", tone: "bg-[#fff0b6] border-[#d99818]" },
-  { id: "outfit-moss", label: "Túi Mẫu Vật Moss", kind: "cosmetic", icon: "▣", slot: "outfit", price: 70, description: "Túi vải rêu để ghi lại bằng chứng của một hành trình dài.", tone: "bg-[#e6f0df] border-[#5f8a5e]" },
-  { id: "trail-stars", label: "Dấu Chân Sao", kind: "cosmetic", icon: "✧", slot: "trail", price: 45, description: "Đường đi có dấu sao nhỏ cho mỗi lần mở nhật ký.", tone: "bg-[#f3e8ff] border-[#9a77b8]" },
-  { id: "trail-leaves", label: "Dấu Lá Lộ Trình", kind: "cosmetic", icon: "❋", slot: "trail", price: 65, description: "Dấu lá ép hiện bên cạnh companion trong hồ sơ.", tone: "bg-[#e7f2e5] border-[#4d8b67]" },
+  { id: "outfit-moss", label: "Túi Mẫu Vật Moss", kind: "cosmetic", icon: "▣", slot: "outfit", setId: "moss", price: 70, description: "Túi vải rêu để ghi lại bằng chứng của một hành trình dài.", tone: "bg-[#e6f0df] border-[#5f8a5e]" },
+  { id: "trail-stars", label: "Dấu Chân Sao", kind: "cosmetic", icon: "✧", slot: "trail", setId: "indigo", price: 45, description: "Đường đi có dấu sao nhỏ cho mỗi lần mở nhật ký.", tone: "bg-[#f3e8ff] border-[#9a77b8]" },
+  { id: "trail-leaves", label: "Dấu Lá Lộ Trình", kind: "cosmetic", icon: "❋", slot: "trail", setId: "moss", price: 65, description: "Dấu lá ép hiện bên cạnh companion trong hồ sơ.", tone: "bg-[#e7f2e5] border-[#4d8b67]" },
+];
+
+export const COMPANION_COSMETIC_SETS: CosmeticSetDefinition[] = [
+  { id: "indigo", label: "Bộ Nhà Thám Hiểm Indigo", motif: "✦", note: "Mực chàm và sao dẫn đường.", itemIds: ["outfit-indigo", "trail-stars"], bonusGold: 35, bonusXp: 90 },
+  { id: "moss", label: "Bộ Người Giữ Rừng Moss", motif: "❋", note: "Rêu ép và dấu lá lộ trình.", itemIds: ["outfit-moss", "trail-leaves"], bonusGold: 50, bonusXp: 120 },
 ];
 
 export const QUESTIONS_BY_ID = Object.fromEntries(QUESTIONS.map((question) => [question.id, question])) as Record<string, VerifiedQuestion>;

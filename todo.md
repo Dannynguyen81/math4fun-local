@@ -121,3 +121,12 @@
 - [x] Thêm hiệu ứng hình ảnh khi companion trang bị đủ các vật phẩm thuộc cùng một bộ.
 - [x] Mở chi tiết hồ sơ từ bảng xếp hạng để xem companion, trang phục đang mặc và guardian đã thu phục.
 - [x] Kiểm tra TypeScript, build và toàn bộ thẻ nhân vật; cần chơi thử thủ công mua/trang bị đủ bộ và mở hồ sơ khi có nhiều người chơi local.
+
+## Hồ sơ hiện diện, Shop trực quan và phần thưởng bộ sưu tập
+
+- [ ] Hiển thị avatar đã chọn cạnh tên người chơi trong khung điều hướng và các trang sau đăng nhập.
+- [ ] Tạo minh họa trực quan cho bình hồi phục, trang phục và trang trí trong Shop.
+- [ ] Đặt preview companion/trang phục hiện hành trực tiếp trên bản đồ chính.
+- [ ] Thêm thưởng Gold và XP một lần khi hoàn tất đủ một bộ trang phục.
+- [ ] Thêm bộ lọc bảng xếp hạng theo thành tích tổng, chuỗi học và số guardian thu phục.
+- [ ] Kiểm tra TypeScript, build, trang có hồ sơ, Shop, preview bản đồ, thưởng bộ và bộ lọc; lưu checkpoint.

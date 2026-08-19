@@ -106,3 +106,7 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Bản prototype local có thể giữ ảnh guardian tham chiếu trong khung tiêu bản để phục vụ học thử; mọi guardian hiển thị đều phải có taxonomy, trạng thái niêm phong và dấu vết tiến độ Math4Fun, không được trình bày như portrait rời.
 - Trạng thái chưa ký tên của Lịch học và So sánh hồ sơ phải là **phiếu hành trình hoàn chỉnh**: có specimen/ấn chuỗi niêm phong, ba mốc hành động, dải bằng chứng và CTA dùng động từ học cụ thể.
 - Artifact chính của mỗi trang phụ phải khác vai trò: So sánh là phiếu đối chiếu hai nhật ký, Lịch học là tuyến bảy ngày, Shop là sổ tiếp tế và Xếp hạng là thiết bị ghi bằng chứng; không lặp một tấm panel viền indigo trống.
+- Bản đồ tuyệt đối không được trở thành danh sách trạm dọc: các mốc phải ghim trên route chỉ khâu lệch trục, có hướng di chuyển nhìn thấy và một mốc kế tiếp được nhấn bằng Marigold Compass.
+- Trang chủ là một trang sổ đang mở, luôn phải cho thấy một đoạn lộ trình hoặc bản nháp hành trình bên dưới lời dẫn; không để hero card trôi trên nền giấy trống.
+- Side navigation duy trì vai trò chỉ mục phụ; từng trang phải có một artifact trung tâm lớn hơn, giàu tính tường thuật hơn và dễ nhớ hơn điều hướng.
+- Guardian trước hết là mẫu vật Math4Fun: tem mực, taxonomy, trạng thái niêm phong và bằng chứng tiến độ phải bao quanh portrait để định nghĩa asset.

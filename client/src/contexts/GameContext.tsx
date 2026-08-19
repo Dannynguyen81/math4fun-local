@@ -1,10 +1,11 @@
 /**
  * Math4Fun local state — Field Journal Quest keeps learning evidence across navigation.
  * Gameplay rules live here, never in a page: mastery needs 10 distinct correct answers,
- * Boss runs use a non-repeating hard-question pool, and magic progression stays local-only.
+ * Boss runs use a non-repeating hard-question pool, magic progression stays local-only,
+ * and collectible-set rewards are recorded once per companion profile.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId =
   | "compass" | "ember" | "tide" | "leaf"
@@ -39,6 +40,7 @@ export type StudentProfile = {
   gold: number;
   inventory: Record<ShopItem["id"], number>;
   equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
+  setRewardsClaimed: string[];
   studyDays: number[];
   guardianHealth: Record<string, GuardianHealth>;
   guardianLosses: string[];
@@ -89,10 +91,11 @@ export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 7; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
+type GameStore = { version: 8; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
 export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp };
+export type PurchaseResult = { ok: boolean; message: string; setReward?: CosmeticSetDefinition };
 
 type GameContextValue = {
   profile: StudentProfile | null;
@@ -141,7 +144,7 @@ type GameContextValue = {
   inventory: Record<ShopItem["id"], number>;
   elementBadges: ElementName[];
   guardianHp: (guardianId: string) => number;
-  purchaseItem: (itemId: ShopItem["id"]) => { ok: boolean; message: string };
+  purchaseItem: (itemId: ShopItem["id"]) => PurchaseResult;
   useHealingItem: (itemId: ShopItem["id"], guardianId: string) => { ok: boolean; message: string };
   equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
   equipCosmetic: (itemId: ShopItem["id"]) => { ok: boolean; message: string };
@@ -160,7 +163,7 @@ const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 
 const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 7, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 8, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -245,6 +248,7 @@ function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<Stud
     gold: 0,
     inventory: emptyInventory(),
     equippedCosmetics: {},
+    setRewardsClaimed: [],
     studyDays: DEFAULT_STUDY_DAYS,
     guardianHealth: {},
     guardianLosses: [],
@@ -285,6 +289,7 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     gold: typeof candidate.gold === "number" && Number.isFinite(candidate.gold) ? Math.max(0, Math.floor(candidate.gold)) : 0,
     inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
     equippedCosmetics: candidate.equippedCosmetics && typeof candidate.equippedCosmetics === "object" ? candidate.equippedCosmetics : {},
+    setRewardsClaimed: Array.isArray(candidate.setRewardsClaimed) ? Array.from(new Set(candidate.setRewardsClaimed.filter((setId): setId is string => typeof setId === "string" && COMPANION_COSMETIC_SETS.some((set) => set.id === setId)))) : [],
     studyDays: normalizeStudyDays(candidate.studyDays),
     guardianHealth: candidate.guardianHealth && typeof candidate.guardianHealth === "object" ? candidate.guardianHealth : {},
     guardianLosses: Array.isArray(candidate.guardianLosses) ? candidate.guardianLosses.filter((id): id is string => typeof id === "string") : [],
@@ -299,7 +304,7 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 7,
+      version: 8,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
@@ -541,8 +546,18 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (!item) return { ok: false, message: "Vật phẩm này chưa có trong sổ hàng." };
     if (item.kind === "cosmetic" && profile.inventory[itemId] > 0) return { ok: false, message: `${item.label} đã có trong Kho đồ; em chỉ cần trang bị.` };
     if (profile.gold < item.price) return { ok: false, message: `Cần thêm ${item.price - profile.gold} Gold để mua ${item.label}.` };
-    updateProfile(profile.id, (current) => ({ ...current, gold: current.gold - item.price, inventory: { ...current.inventory, [itemId]: current.inventory[itemId] + 1 } }));
-    return { ok: true, message: `Đã thêm ${item.label} vào Kho đồ.` };
+    const inventoryAfterPurchase = { ...profile.inventory, [itemId]: profile.inventory[itemId] + 1 };
+    const setReward = item.kind === "cosmetic" ? COMPANION_COSMETIC_SETS.find((set) => !profile.setRewardsClaimed.includes(set.id) && set.itemIds.every((setItemId) => inventoryAfterPurchase[setItemId] > 0)) : undefined;
+    updateProfile(profile.id, (current) => {
+      const nextInventory = { ...current.inventory, [itemId]: current.inventory[itemId] + 1 };
+      const completedSets = item.kind === "cosmetic" ? COMPANION_COSMETIC_SETS.filter((set) => !current.setRewardsClaimed.includes(set.id) && set.itemIds.every((setItemId) => nextInventory[setItemId] > 0)) : [];
+      const bonusGold = completedSets.reduce((total, set) => total + set.bonusGold, 0);
+      const bonusXp = completedSets.reduce((total, set) => total + set.bonusXp, 0);
+      return { ...current, gold: current.gold - item.price + bonusGold, xp: current.xp + bonusXp, inventory: nextInventory, setRewardsClaimed: [...current.setRewardsClaimed, ...completedSets.map((set) => set.id)] };
+    });
+    return setReward
+      ? { ok: true, message: `Đã hoàn tất ${setReward.label}: nhận thêm ${setReward.bonusGold} Gold và ${setReward.bonusXp} XP!`, setReward }
+      : { ok: true, message: `Đã thêm ${item.label} vào Kho đồ.` };
   }, [profile, updateProfile]);
   const useHealingItem = useCallback((itemId: ShopItem["id"], guardianId: string) => {
     if (!profile) return { ok: false, message: "Hãy vào một hồ sơ trước khi dùng vật phẩm." };
