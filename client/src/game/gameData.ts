@@ -18,6 +18,7 @@ export type Difficulty = "E" | "M" | "H";
 export type Book = "Tập 1" | "Tập 2";
 export type MapId = 1 | 2;
 export type TopicStatus = "ready" | "survey";
+export type TrainingDifficultyId = "scout" | "pathfinder" | "champion";
 
 /** Field Journal Quest: each lesson records four Easy, three Medium, and three Hard clues. */
 export const STATION_DIFFICULTY_MIX: Record<Difficulty, number> = { E: 4, M: 3, H: 3 };
@@ -30,6 +31,24 @@ export const TRAINING_TECHNIQUES = [
   { level: 4, name: "Mật Lệnh Guardian", bonusDamage: 12 },
 ] as const;
 export const getTrainingTechnique = (level: number) => [...TRAINING_TECHNIQUES].reverse().find((technique) => level >= technique.level) ?? TRAINING_TECHNIQUES[0];
+export const TRAINING_DIFFICULTIES: Record<TrainingDifficultyId, {
+  id: TrainingDifficultyId;
+  label: string;
+  fieldNote: string;
+  questionCount: number;
+  allowedDifficulties: Difficulty[];
+  playerHp: number;
+  opponentHp: number;
+  opponentDamageMultiplier: number;
+  playerDamageMultiplier: number;
+  xpCorrect: number;
+  xpIncorrect: number;
+}> = {
+  scout: { id: "scout", label: "Trinh sát", fieldNote: "4 câu dễ/trung bình để đọc thói quen của đối thủ.", questionCount: 4, allowedDifficulties: ["E", "M"], playerHp: 120, opponentHp: 90, opponentDamageMultiplier: 0.75, playerDamageMultiplier: 1.1, xpCorrect: 15, xpIncorrect: 3 },
+  pathfinder: { id: "pathfinder", label: "Dẫn đường", fieldNote: "5 câu đủ ba mức độ, dành cho một trận luyện cân bằng.", questionCount: 5, allowedDifficulties: ["E", "M", "H"], playerHp: 100, opponentHp: 120, opponentDamageMultiplier: 1, playerDamageMultiplier: 1, xpCorrect: 20, xpIncorrect: 5 },
+  champion: { id: "champion", label: "Thử thách", fieldNote: "6 câu trung bình/khó, đối thủ phản công mạnh hơn.", questionCount: 6, allowedDifficulties: ["M", "H"], playerHp: 90, opponentHp: 155, opponentDamageMultiplier: 1.2, playerDamageMultiplier: 0.95, xpCorrect: 30, xpIncorrect: 8 },
+};
+export const getTrainingDifficulty = (id?: TrainingDifficultyId) => TRAINING_DIFFICULTIES[id ?? "pathfinder"];
 export const MAPS: Record<MapId, { id: MapId; label: string; book: Book; title: string; note: string }> = {
   1: { id: 1, label: "MAP 1", book: "Tập 1", title: "Nhật ký Mực Chàm", note: "Mười chủ đề của Toán 4 Tập 1 và trận tổng hợp cuối map." },
   2: { id: 2, label: "MAP 2", book: "Tập 2", title: "Nhật ký La Bàn Vàng", note: "Mở sau khi thắng Boss Map 1." },
@@ -344,6 +363,14 @@ export const COMPANION_COSMETIC_SETS: CosmeticSetDefinition[] = [
   { id: "indigo", label: "Bộ Nhà Thám Hiểm Indigo", motif: "✦", note: "Mực chàm và sao dẫn đường.", itemIds: ["outfit-indigo", "trail-stars"], bonusGold: 35, bonusXp: 90 },
   { id: "moss", label: "Bộ Người Giữ Rừng Moss", motif: "❋", note: "Rêu ép và dấu lá lộ trình.", itemIds: ["outfit-moss", "trail-leaves"], bonusGold: 50, bonusXp: 120 },
 ];
+
+/** Câu mẫu nội bộ để thử nhịp Boss Map 1; tách nhãn rõ với câu đã đối chiếu từ sách. */
+QUESTIONS.push(
+  { id: "MAP1-SAMPLE-SEQ", stationId: 1, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · dãy số", prompt: "Dãy số 15; 20; 25; 30; … có số hạng thứ 40 là bao nhiêu?", choices: [205, 210, 215, 220], answer: 210, hint: "Từ số đầu đi 39 bước, mỗi bước tăng 5.", explanation: "15 + 39 × 5 = 210.", difficulty: "M", pool: "boss" },
+  { id: "MAP1-SAMPLE-AREA", stationId: 6, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · hình chữ nhật", prompt: "Một hình chữ nhật có chu vi 72 cm, chiều dài hơn chiều rộng 8 cm. Diện tích hình chữ nhật là bao nhiêu cm²?", choices: [288, 308, 328, 348], answer: 308, hint: "Nửa chu vi là 36 cm. Tìm hai số có tổng 36 và hiệu 8.", explanation: "Chiều rộng là (36 − 8) : 2 = 14 cm, chiều dài là 22 cm. Diện tích là 22 × 14 = 308 cm².", difficulty: "H", pool: "boss" },
+  { id: "MAP1-SAMPLE-SUMDIFF", stationId: 11, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · tổng–hiệu", prompt: "Tổng của hai số là 452, hiệu của chúng là 78. Số bé là bao nhiêu?", choices: [177, 187, 197, 207], answer: 187, hint: "Số bé bằng (tổng − hiệu) : 2.", explanation: "(452 − 78) : 2 = 187.", difficulty: "H", pool: "boss" },
+  { id: "MAP1-SAMPLE-MULTI", stationId: 12, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · nhân và chia", prompt: "Có 8 hộp, mỗi hộp 24 thẻ học. Chia đều tất cả thẻ vào 6 túi. Mỗi túi có bao nhiêu thẻ?", choices: [28, 30, 32, 34], answer: 32, hint: "Tính tổng số thẻ trước, rồi chia đều cho 6 túi.", explanation: "8 × 24 = 192 thẻ; 192 : 6 = 32 thẻ mỗi túi.", difficulty: "M", pool: "boss" },
+);
 
 QUESTIONS.push(...AI_PRACTICE_QUESTIONS);
 export const QUESTIONS_BY_ID = Object.fromEntries(QUESTIONS.map((question) => [question.id, question])) as Record<string, VerifiedQuestion>;

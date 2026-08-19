@@ -113,6 +113,15 @@
   .answer-choice:hover { transform: translateY(-2px) rotate(-.2deg); }
   .route-stop { text-decoration: none; }
   .route-stop:focus-visible { outline: 3px solid #f6b73c; outline-offset: 3px; }
+  /* Field Journal Quest map: the stitched route is the primary object; each station is a pinned annotation, not a list row. */
+  .route-artifact::before { content: ""; position: absolute; inset: 7px; border: 1px dashed rgba(23,42,72,.24); pointer-events: none; }
+  .route-pinned-note::before { content: ""; position: absolute; z-index: 2; top: -7px; left: 24px; width: 15px; height: 15px; border: 2px solid #172a48; border-radius: 50%; background: #e8f0e4; box-shadow: 1px 1px 0 #172a48; }
+  .route-pinned-note:nth-child(even)::before { right: 24px; left: auto; }
+  .route-pinned-note:nth-child(3n) { transform: rotate(-.55deg); }
+  .route-pinned-note:nth-child(3n + 2) { transform: rotate(.45deg); }
+  .route-annotation { position: absolute; z-index: 1; border: 1px dashed rgba(23,42,72,.6); background: rgba(255,253,246,.84); padding: 3px 5px; color: #476275; font: 800 8px/1.2 "DM Mono", ui-monospace, monospace; letter-spacing: .09em; transform: rotate(-3deg); }
+  .route-annotation-start { left: 8%; top: 10%; }
+  .route-annotation-end { right: 7%; bottom: 4%; transform: rotate(2deg); }
   .journey-strip { display: flex; align-items: center; gap: .65rem; min-height: 30px; color: #58708b; font: 800 9px/1.1 "DM Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
   .journey-strip-label { display: inline-flex; align-items: center; gap: .32rem; flex: 0 1 auto; white-space: nowrap; }
   .journey-thread { display: flex; flex: 1 1 auto; align-items: center; min-width: 72px; height: 12px; background-image: radial-gradient(circle, #172a48 1.15px, transparent 1.3px); background-size: 9px 2px; background-repeat: repeat-x; background-position: center; }
@@ -182,7 +191,7 @@
   .magic-locked-viewer .magic-sound-button { margin: 1.2rem 0 0; }
   /* Field Journal Quest — Boss: a locked arena is an evidence dossier, not an empty account prompt. */
   .boss-unopened-dossier { overflow: hidden; border: 2px solid #172a48; background: #fffdf6; box-shadow: 7px 7px 0 #172a48; }
-  .boss-dossier-cover { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; min-height: 13rem; padding: clamp(1.4rem, 4vw, 2.8rem); background: linear-gradient(112deg, #172a48 0 73%, #f6b73c 73%); color: #fffdf6; }
+  .boss-dossier-cover { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; min-height: 13rem; padding: clamp(1.4rem, 4vw, 2.8rem); background: linear-gradient(112deg, #172a48 0 80%, #e8f0e4 80%); color: #fffdf6; }
   .boss-dossier-cover h1 { max-width: 40rem; margin-top: .65rem; font-family: "Fraunces", Georgia, serif; font-size: clamp(2.2rem, 5vw, 4.3rem); font-weight: 900; letter-spacing: -.04em; line-height: .94; }
   .boss-dossier-cover p { max-width: 37rem; margin-top: .85rem; color: #d5dfed; font-size: .88rem; line-height: 1.65; }
   .boss-seal-stamp { display: grid; width: 7rem; height: 7rem; flex: 0 0 auto; place-items: center; align-content: center; border: 2px dashed #172a48; border-radius: 50%; background: #fff8da; color: #172a48; box-shadow: 3px 3px 0 #172a48; transform: rotate(5deg); }
@@ -203,6 +212,11 @@
   .boss-reward-specimen img { position: relative; z-index: 1; width: 6.5rem; height: 6.5rem; margin: .8rem auto .3rem; object-fit: contain; filter: grayscale(.65) sepia(.2); opacity: .77; }
   .boss-reward-specimen > b { position: relative; z-index: 1; font-family: "Fraunces", Georgia, serif; font-size: 1.05rem; }
   .boss-reward-specimen p { position: relative; z-index: 1; margin-top: .35rem; color: #58708b; font-size: .72rem; line-height: 1.5; }
+  /* Training and arena are distinct paper artifacts; Marigold marks only the action and progress evidence. */
+  .training-ticket { position: relative; background-image: linear-gradient(90deg, transparent 0 16px, rgba(23,42,72,.05) 16px 17px, transparent 17px); }
+  .training-ticket-cover::after { content: "SÂN LUYỆN · ROUTE 04"; position: absolute; right: 2.2rem; bottom: 1rem; color: rgba(23,42,72,.7); font: 800 8px/1 "DM Mono", ui-monospace, monospace; letter-spacing: .14em; transform: rotate(-5deg); }
+  .arena-dossier { position: relative; background-image: linear-gradient(90deg, transparent 0 16px, rgba(255,255,255,.08) 16px 17px, transparent 17px); }
+  .arena-dossier::after { content: "ARENA DOSSIER · MAP 1"; position: absolute; right: 1rem; bottom: .75rem; z-index: 1; border: 1px dashed rgba(255,255,255,.55); padding: 4px 6px; color: #d5dfed; font: 800 8px/1 "DM Mono", ui-monospace, monospace; letter-spacing: .12em; transform: rotate(2deg); }
   .boss-dossier-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 2px dashed #d7d0bf; padding: 1rem clamp(1rem, 3vw, 1.65rem); background: #fff8da; color: #58708b; font-size: .74rem; }
   .boss-dossier-cta { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .5rem; border: 2px solid #172a48; background: #f6b73c; padding: .72rem .95rem; color: #172a48; font-weight: 900; box-shadow: 3px 3px 0 #172a48; transition: transform .16s cubic-bezier(.23,1,.32,1); }
   .boss-dossier-cta:hover { transform: translate(-1px, -1px) rotate(-.5deg); }

@@ -144,3 +144,11 @@
 - [x] Bảo đảm mỗi trạm map rút ngẫu nhiên 4 câu dễ, 3 câu trung bình, 3 câu khó theo đúng chủ đề và luật không lặp.
 - [x] Thêm bong bóng thoại/hoạt ảnh tương tác cho companion trên bản đồ hành trình.
 - [x] Kiểm tra TypeScript, build, combat, khóa/mở Map 2, persistence và các trường hợp không đủ guardian; lưu checkpoint.
+
+## Chiến thuật Huấn luyện và kiểm thử Boss
+
+- [x] Bổ sung màn chọn guardian, pet đối thủ và cấp độ Huấn luyện trước khi vào võ đài.
+- [x] Cân bằng máu, sát thương, XP và số câu theo ba cấp độ Huấn luyện; vẫn không trao Gold.
+- [x] Thêm hiệu ứng hình ảnh, âm thanh và thông báo phần thưởng khi đạt đúng năm câu liên tiếp.
+- [x] Thêm các câu Boss Map 1 mẫu mức trung bình/khó có đáp án, gợi ý và nguồn/nhãn luyện rõ ràng.
+- [x] Kiểm thử TypeScript, build, lựa chọn đối thủ/độ khó, phản hồi chuỗi 5 và pool Boss Map 1; lưu checkpoint.
