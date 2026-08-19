@@ -113,3 +113,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Các mốc Map là nhãn field-guide ghim lệch trục trên đường chỉ khâu: không dùng hàng card toàn chiều ngang; Marigold chỉ đánh dấu rõ một điểm đến kế tiếp.
 - Huấn luyện Pet là phiếu sân luyện riêng: kể cả khi khóa phải có route fragment, tiêu bản guardian niêm phong, ba mốc mở khóa, phần thưởng kỹ thuật và CTA dùng động từ hành trình.
 - Các CTA khởi đầu dùng lời mời cụ thể như “Ký nhật ký”, “Mở mốc” và “Ghi bằng chứng”, tránh nhãn điều hướng chung chung.
+- Huấn luyện Pet luôn mở bằng **phiếu sân luyện/field training permit**: lộ trình liên tục nối ký nhật ký, hoàn tất trạm, đánh thức guardian và bằng chứng XP.
+- Guardian trong Huấn luyện là **specimen dossier**, không chỉ là ảnh: taxonomy, dấu niêm phong, bằng chứng trận và phần thưởng mở phép bao quanh asset.
+- Các mảng Indigo ở trang Huấn luyện/Boss phải có ít nhất một vật liệu nhật ký hữu hình như giấy ghim, nhãn route, dấu mực hoặc mảnh bản đồ; Marigold chỉ đánh dấu hành động, XP và khoảnh khắc mở khóa.

@@ -197,6 +197,21 @@ export const ELEMENTAL_MATCHUPS: Record<ElementName, ElementMatchup> = {
   "đất": { strongAgainst: "sấm", weakAgainst: "độc", fieldNote: "Thạch ấn tiếp đất an toàn, nhưng cần che kín các mạch đất trước độc ấn." },
 };
 
+export type ElementalAdvantage = {
+  multiplier: number;
+  state: "strong" | "weak" | "neutral";
+  label: string;
+  fieldNote: string;
+};
+
+/** Chỉ dùng trong Huấn luyện Pet: một luật cho chọn kèo và sát thương phép. */
+export function getElementalAdvantage(attacker: ElementName, defender: ElementName): ElementalAdvantage {
+  const matchup = ELEMENTAL_MATCHUPS[attacker];
+  if (matchup.strongAgainst === defender) return { multiplier: 1.25, state: "strong", label: "Lợi thế nguyên tố", fieldNote: `${attacker} áp chế ${defender}: sát thương phép tăng 25%.` };
+  if (matchup.weakAgainst === defender) return { multiplier: 0.8, state: "weak", label: "Bất lợi nguyên tố", fieldNote: `${attacker} yếu hơn ${defender}: sát thương phép giảm 20%.` };
+  return { multiplier: 1, state: "neutral", label: "Thế cân bằng", fieldNote: `Không có khắc chế trực tiếp giữa ${attacker} và ${defender}.` };
+}
+
 /** Mốc tiến độ riêng theo hệ; mỗi 100 XP là một bậc luyện ấn mới. */
 export const ELEMENT_XP_PER_LEVEL = 100;
 export const ELEMENT_ORDER: ElementName[] = ["sấm", "lửa", "nước", "độc", "gió", "đất"];

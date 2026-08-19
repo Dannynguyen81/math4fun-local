@@ -152,3 +152,12 @@
 - [x] Thêm hiệu ứng hình ảnh, âm thanh và thông báo phần thưởng khi đạt đúng năm câu liên tiếp.
 - [x] Thêm các câu Boss Map 1 mẫu mức trung bình/khó có đáp án, gợi ý và nguồn/nhãn luyện rõ ràng.
 - [x] Kiểm thử TypeScript, build, lựa chọn đối thủ/độ khó, phản hồi chuỗi 5 và pool Boss Map 1; lưu checkpoint.
+
+## Tiến hóa Huấn luyện Pet
+
+- [x] Tạo lễ thăng cấp/mở phép có âm thanh, hoạt ảnh và lớp chúc mừng rõ ràng khi guardian đủ XP.
+- [x] Lưu lịch sử trận Huấn luyện theo guardian: đối thủ, cấp độ, kết quả, XP nhận, câu đúng/sai và thời điểm.
+- [x] Hiển thị biểu đồ tăng trưởng XP và bảng lịch sử trận trong khu vực Huấn luyện.
+- [x] Thêm hồ sơ nguyên tố đối thủ, nhãn mạnh/yếu và giải thích lựa chọn chiến thuật trước trận.
+- [x] Áp dụng hệ số sát thương khắc chế nguyên tố trong Huấn luyện Pet, minh bạch trong phản hồi giao chiến.
+- [x] Kiểm thử TypeScript, build, persistence lịch sử, lễ thăng cấp và khắc chế nguyên tố; lưu checkpoint.
