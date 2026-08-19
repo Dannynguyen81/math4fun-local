@@ -113,3 +113,11 @@
 - [x] Thêm lịch học tuần, chọn ngày học và hiển thị mức độ duy trì chuỗi trong hồ sơ.
 - [x] Tạo nhắc học cục bộ khi mở game, có ngưỡng cảnh báo trước khi chuỗi bị đứt.
 - [x] Kiểm tra TypeScript, build và giao diện các màn chính; cần chơi thử thủ công mua/trang bị và kiểm tra nhắc chuỗi qua nhiều ngày.
+
+## Avatar đầy đủ, bộ sưu tập và hồ sơ xếp hạng
+
+- [x] Kiểm kê và sửa liên kết minh họa để cả 20 thẻ nhân vật đều có ảnh hiển thị ổn định.
+- [x] Thiết kế các bộ trang phục/trang trí theo chủ đề, có nhãn bộ và điều kiện hoàn tất.
+- [x] Thêm hiệu ứng hình ảnh khi companion trang bị đủ các vật phẩm thuộc cùng một bộ.
+- [x] Mở chi tiết hồ sơ từ bảng xếp hạng để xem companion, trang phục đang mặc và guardian đã thu phục.
+- [x] Kiểm tra TypeScript, build và toàn bộ thẻ nhân vật; cần chơi thử thủ công mua/trang bị đủ bộ và mở hồ sơ khi có nhiều người chơi local.

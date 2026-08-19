@@ -10,9 +10,16 @@ const tones = ["bg-[#fff0b6]", "bg-[#dceef6]", "bg-[#f5dfd2]", "bg-[#e7f2e5]", "
 const notes = ["thích tìm quy luật", "đọc dấu bản đồ", "soi từng chi tiết", "ghi lời giải rõ ràng", "dẫn đường vững vàng", "chăm từng bước nhỏ", "đo đạc chính xác", "luôn tò mò khám phá", "giữ nhịp bình tĩnh", "không bỏ sót manh mối"];
 const boys = ["Minh La Bàn", "Tí Đỉnh Đồi", "Nam Kính Lúp", "Bảo Lông Vũ", "Khoa Cờ Mốc", "Sơn Rêu Xanh", "Huy Kim Chỉ", "Dũng Sao Băng", "Lâm Vỏ Sò", "Phúc Dấu Chân"];
 const girls = ["An Mây Nhỏ", "Linh Bản Đồ", "Vy Kính Lúp", "Mai Lông Vũ", "Nhi Cờ Mốc", "Hà Rêu Xanh", "Thư Kim Chỉ", "Lan Sao Băng", "Yến Vỏ Sò", "Chi Dấu Chân"];
+const avatarImages: Record<AvatarId, string> = {
+  b01: "/manus-storage/math4fun-avatar-b01_6f565763.png", b02: "/manus-storage/math4fun-avatar-b02_94a2f9b6.png", b03: "/manus-storage/math4fun-avatar-b03_de75ed1e.png", b04: "/manus-storage/math4fun-avatar-b04_89e025bd.png", b05: "/manus-storage/math4fun-avatar-b05_f12579a9.png",
+  b06: "/manus-storage/math4fun-avatar-b06_6d7df86d.png", b07: "/manus-storage/math4fun-avatar-b07_378f921a.png", b08: "/manus-storage/math4fun-avatar-b08_20f38f4b.png", b09: "/manus-storage/math4fun-avatar-b09_f0041bd7.png", b10: "/manus-storage/math4fun-avatar-b10_37db42f1.png",
+  g01: "/manus-storage/math4fun-avatar-g01_0c3aa29a.png", g02: "/manus-storage/math4fun-avatar-g02_4dfa425d.png", g03: "/manus-storage/math4fun-avatar-g03_efd04fca.png", g04: "/manus-storage/math4fun-avatar-g04_b6eb05c9.png", g05: "/manus-storage/math4fun-avatar-g05_e99e6afc.png",
+  g06: "/manus-storage/math4fun-avatar-g06_310e75f1.png", g07: "/manus-storage/math4fun-avatar-g07_000ffec0.png", g08: "/manus-storage/math4fun-avatar-g08_37fd713b.png", g09: "/manus-storage/math4fun-avatar-g09_c50a1331.png", g10: "/manus-storage/math4fun-avatar-g10_262e51c0.png",
+  compass: "/manus-storage/math4fun-avatar-compass_c1cebf77.png", ember: "/manus-storage/math4fun-avatar-ember_095098ee.png", tide: "/manus-storage/math4fun-avatar-tide_cc836336.png", leaf: "/manus-storage/math4fun-avatar-leaf_b35efd62.png",
+};
 const avatars: AvatarCard[] = [
-  ...boys.map((label, index) => ({ id: `b${String(index + 1).padStart(2, "0")}` as AvatarId, label, note: notes[index], gender: "Nam" as const, icon: iconSet[index], tint: tones[index], image: index === 0 ? "/manus-storage/math4fun-avatar-b01_27e7912a.png" : undefined })),
-  ...girls.map((label, index) => ({ id: `g${String(index + 1).padStart(2, "0")}` as AvatarId, label, note: notes[(index + 3) % notes.length], gender: "Nữ" as const, icon: iconSet[(index + 2) % iconSet.length], tint: tones[(index + 4) % tones.length] })),
+  ...boys.map((label, index) => { const id = `b${String(index + 1).padStart(2, "0")}` as AvatarId; return { id, label, note: notes[index], gender: "Nam" as const, icon: iconSet[index], tint: tones[index], image: avatarImages[id] }; }),
+  ...girls.map((label, index) => { const id = `g${String(index + 1).padStart(2, "0")}` as AvatarId; return { id, label, note: notes[(index + 3) % notes.length], gender: "Nữ" as const, icon: iconSet[(index + 2) % iconSet.length], tint: tones[(index + 4) % tones.length], image: avatarImages[id] }; }),
 ];
 const legacyAvatars: AvatarCard[] = [
   { id: "compass", label: "Mây La Bàn", note: "ham khám phá", gender: "Nữ", icon: Compass, tint: "bg-[#fff0b6]", image: "/manus-storage/math4fun-avatar-compass_c1cebf77.png" },
