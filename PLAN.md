@@ -24,3 +24,26 @@ Xây hồ sơ local cho mỗi học sinh với tên, hình nhân vật, đội t
 - **Assets needed:** Một nền tham chiếu cho arena, một sprite sheet biểu tượng nguyên tố và một badge hồ sơ/đội; tất cả sử dụng URL manus-storage.
 - **Verify:** Điều hướng rõ ràng; localStorage không lỗi migration; câu hỏi/đáp án có source; âm thanh không autoplay; giao diện mobile không tràn; không lỗi console khi qua trạm, đổi profile và vào Boss.
 
+## Mở rộng: Map 1, Map 2 và Huấn luyện Pet
+
+| Rủi ro | Cách xử lý | Tiêu chí đạt |
+| --- | --- | --- |
+| Hồ sơ cũ mất tiến độ | Nâng schema và hydrate các trường Map/XP mới với giá trị an toàn | Hồ sơ cũ tiếp tục mở được và giữ trạm/guardian |
+| Map 2 mở quá sớm | Chỉ state `map1BossDefeated` mới mở Map 2 | Cả CTA lẫn trạm Tập 2 đều niêm phong trước chiến thắng |
+| Tỉ lệ độ khó không đúng | Phiên trạm tạo theo rule 4 E + 3 M + 3 H | Mỗi lượt mới đủ 10 câu với đúng tỉ lệ |
+| Huấn luyện làm mất pet hoặc Gold | Battle mode riêng; HP chỉ là state phiên và không gọi hành động Gold | Rời Huấn luyện về 100% HP, Gold không đổi |
+| Nguồn bài toán bị mô tả sai | Nhãn tách `Archimede đã đối chiếu` và `Luyện tập mở rộng · Math4Fun` | Không câu mở rộng nào được khẳng định là trích sách |
+
+### Lát cắt thực hiện
+
+1. Gắn `mapId` vào trạm, chuẩn hóa Gold theo E/M/H và bonus chuỗi 5.
+2. Đưa Map 1/Map 2 vào Bản đồ; hoàn tất 10 trạm Map 1 mới hiện Boss Map 1.
+3. Tạo Boss Map 1 với 10 câu M/H và state mở Map 2 sau chiến thắng.
+4. Đổi route `/boss` thành Huấn luyện Pet PvP có XP/level/phép mới, không Gold.
+5. Bổ sung pool câu hỏi luyện tập theo từng trạm đã mở và companion dialogue.
+
+### Kiểm chứng bổ sung
+
+- Đúng E/M/H nhận lần lượt 2/3/4 Gold; sai nhận 1 Gold; câu đúng thứ 5 liên tiếp nhận thêm 5 Gold.
+- Boss Map 1 có 10 câu M/H, hiệu ứng chiến đấu và âm thanh sau tương tác của người chơi.
+- Huấn luyện chỉ chọn câu từ các trạm đã mở; không thưởng Gold và không gây mất guardian dài hạn.

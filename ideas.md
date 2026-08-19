@@ -110,3 +110,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Trang chủ là một trang sổ đang mở, luôn phải cho thấy một đoạn lộ trình hoặc bản nháp hành trình bên dưới lời dẫn; không để hero card trôi trên nền giấy trống.
 - Side navigation duy trì vai trò chỉ mục phụ; từng trang phải có một artifact trung tâm lớn hơn, giàu tính tường thuật hơn và dễ nhớ hơn điều hướng.
 - Guardian trước hết là mẫu vật Math4Fun: tem mực, taxonomy, trạng thái niêm phong và bằng chứng tiến độ phải bao quanh portrait để định nghĩa asset.
+- Các mốc Map là nhãn field-guide ghim lệch trục trên đường chỉ khâu: không dùng hàng card toàn chiều ngang; Marigold chỉ đánh dấu rõ một điểm đến kế tiếp.
+- Huấn luyện Pet là phiếu sân luyện riêng: kể cả khi khóa phải có route fragment, tiêu bản guardian niêm phong, ba mốc mở khóa, phần thưởng kỹ thuật và CTA dùng động từ hành trình.
+- Các CTA khởi đầu dùng lời mời cụ thể như “Ký nhật ký”, “Mở mốc” và “Ghi bằng chứng”, tránh nhãn điều hướng chung chung.

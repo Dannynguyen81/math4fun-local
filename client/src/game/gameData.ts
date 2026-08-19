@@ -3,6 +3,7 @@
  * Design note: all gameplay content is local-only. A question tagged as verified
  * has an Archimede source recorded in research/*_verification_notes.md.
  */
+import { AI_PRACTICE_QUESTIONS } from "./practiceBank";
 
 export const HERO_IMAGE = "/manus-storage/math4fun-hero-journey_c4c6745e.jpg";
 export const ARENA_IMAGE = "/manus-storage/math4fun-arcane-arena-reference_3e0f6085.jpg";
@@ -15,7 +16,24 @@ export const BATTLE_AUDIO = "/manus-storage/math4fun-battle-loop_053e734b.wav";
 
 export type Difficulty = "E" | "M" | "H";
 export type Book = "Tập 1" | "Tập 2";
+export type MapId = 1 | 2;
 export type TopicStatus = "ready" | "survey";
+
+/** Field Journal Quest: each lesson records four Easy, three Medium, and three Hard clues. */
+export const STATION_DIFFICULTY_MIX: Record<Difficulty, number> = { E: 4, M: 3, H: 3 };
+export const GOLD_BY_DIFFICULTY: Record<Difficulty, number> = { E: 2, M: 3, H: 4 };
+export const FIVE_CORRECT_STREAK_GOLD = 5;
+export const TRAINING_TECHNIQUES = [
+  { level: 1, name: "Đòn Cơ Bản", bonusDamage: 0 },
+  { level: 2, name: "Ấn Liên Hoàn", bonusDamage: 4 },
+  { level: 3, name: "La Bàn Bộc Phá", bonusDamage: 8 },
+  { level: 4, name: "Mật Lệnh Guardian", bonusDamage: 12 },
+] as const;
+export const getTrainingTechnique = (level: number) => [...TRAINING_TECHNIQUES].reverse().find((technique) => level >= technique.level) ?? TRAINING_TECHNIQUES[0];
+export const MAPS: Record<MapId, { id: MapId; label: string; book: Book; title: string; note: string }> = {
+  1: { id: 1, label: "MAP 1", book: "Tập 1", title: "Nhật ký Mực Chàm", note: "Mười chủ đề của Toán 4 Tập 1 và trận tổng hợp cuối map." },
+  2: { id: 2, label: "MAP 2", book: "Tập 2", title: "Nhật ký La Bàn Vàng", note: "Mở sau khi thắng Boss Map 1." },
+};
 
 export type Guardian = {
   id: string;
@@ -179,22 +197,22 @@ export const STATIONS: Station[] = [
   { id: 2, code: "T2.01", title: "Trung bình cộng", brief: "Dùng tổng và số phần để cân bằng dữ liệu, tuổi và những đại lượng chưa biết.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "mimo", accent: "bg-sky-500", questionIds: ["T2-B1a", "T2-B1b", "T2-B1c", "T2-B1d", "T2-B1.4a", "T2-B1.4b", "T2-B2.1", "T2-B2.2", "T2-B2.3", "T2-B2.4"], masteryTarget: 10, status: "ready" },
   { id: 3, code: "T2.02", title: "Rút về đơn vị", brief: "Tìm giá trị một đơn vị rồi mở rộng theo số lần như nhau.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "voltix", accent: "bg-amber-400", questionIds: ["T2-RVD-apple", "T2-RVD-cloth", "T2-RVD-1", "T2-RVD-2", "T2-RVD-3", "T2-RVD-candy", "T2-RVD-workers-m", "T2-RVD-workers-days", "T2-RVD-B12.1", "T2-RVD-B12.2", "T2-RVD-B12.3", "T2-RVD-B12.4"], masteryTarget: 10, status: "ready" },
   { id: 4, code: "T2.03", title: "Bài toán thừa–thiếu", brief: "Dùng hiệu của hai cách chia để lần ra số người và số vật.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "mossy", accent: "bg-lime-500", questionIds: ["T2-TT-apple-pupils", "T2-TT-apple-total", "T2-TT-marbles-bags", "T2-TT-marbles-total", "T2-TT-shirts-total", "T2-TT-notebooks-pupils", "T2-TT-notebooks-total", "T2-TT-mango-total", "T2-TT-candy-total", "T2-TT-trucks-count"], masteryTarget: 10, status: "ready" },
-  { id: 5, code: "T1.02", title: "Phân số", brief: "Nhận biết phần bằng nhau và so sánh phần của một đơn vị.", group: "Phân số", book: "Tập 1", guardianId: "coru", accent: "bg-rose-400", questionIds: [], masteryTarget: 10, status: "survey" },
+  { id: 5, code: "T1.02", title: "Phân số", brief: "Nhận biết phần bằng nhau và so sánh phần của một đơn vị.", group: "Phân số", book: "Tập 1", guardianId: "coru", accent: "bg-rose-400", questionIds: [], masteryTarget: 10, status: "ready" },
   { id: 6, code: "T1.03", title: "Diện tích hình chữ nhật", brief: "Dùng chu vi, chiều dài và chiều rộng để ghi nhận vùng đất qua đơn vị đo.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "aeris", accent: "bg-cyan-500", questionIds: ["T1-AREA-116-p", "T1-AREA-116-diff", "T1-AREA-116-length", "T1-AREA-116-width", "T1-AREA-116-area", "T1-AREA-117-p", "T1-AREA-117-square", "T1-AREA-117-length", "T1-AREA-117-width", "T1-AREA-117-area"], masteryTarget: 10, status: "ready" },
-  { id: 7, code: "T1.04", title: "Khối lượng", brief: "Đổi đơn vị và xử lý phép tính theo khối lượng.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "brix", accent: "bg-orange-500", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 8, code: "T1.05", title: "Thời gian", brief: "Đọc lịch, giờ và quãng thời gian chính xác.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "luma", accent: "bg-yellow-400", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 9, code: "T1.06", title: "Bảng số liệu", brief: "Tìm thông tin, tổng và hiệu qua bảng dữ liệu.", group: "Dữ liệu", book: "Tập 1", guardianId: "nori", accent: "bg-blue-500", questionIds: [], masteryTarget: 10, status: "survey" },
+  { id: 7, code: "T1.04", title: "Khối lượng", brief: "Đổi đơn vị và xử lý phép tính theo khối lượng.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "brix", accent: "bg-orange-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 8, code: "T1.05", title: "Thời gian", brief: "Đọc lịch, giờ và quãng thời gian chính xác.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "luma", accent: "bg-yellow-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 9, code: "T1.06", title: "Bảng số liệu", brief: "Tìm thông tin, tổng và hiệu qua bảng dữ liệu.", group: "Dữ liệu", book: "Tập 1", guardianId: "nori", accent: "bg-blue-500", questionIds: [], masteryTarget: 10, status: "ready" },
   { id: 10, code: "T1.G1", title: "Chu vi & diện tích", brief: "Tìm cạnh, chu vi và diện tích hình vuông, hình chữ nhật qua dấu mực hình học.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "pavo", accent: "bg-violet-500", questionIds: ["T1-G1-ex1-perimeter", "T1-G1-ex1-width", "T1-G1-ex1-area", "T1-G1-ex2-width", "T1-G1-ex2-length", "T1-G1-ex2-area", "T1-G1-b56-side", "T1-G1-b56-area", "T1-G1-b57-width", "T1-G1-b57-area"], masteryTarget: 10, status: "ready" },
   { id: 11, code: "T1.08", title: "Bài toán tổng–hiệu", brief: "Lần theo sơ đồ đoạn thẳng để tìm hai số qua tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 1", guardianId: "soli", accent: "bg-red-500", questionIds: ["T1-TH-118-first", "T1-TH-118-second", "T1-TH-119-first", "T1-TH-119-second", "T1-TH-120-box1", "T1-TH-120-box2", "T1-TH-121-lower", "T1-TH-122-thu", "T1-TH-123-older", "T1-TH-124-mother"], masteryTarget: 10, status: "ready" },
   { id: 12, code: "T1.09", title: "Nhân & chia", brief: "Củng cố quy tắc tính, tính chất phép toán và tìm ẩn số.", group: "Số và phép tính", book: "Tập 1", guardianId: "dexo", accent: "bg-amber-500", questionIds: ["T1-NC-136a", "T1-NC-136b", "T1-NC-136c", "T1-NC-136d", "T1-NC-137g", "T1-NC-138a", "T1-NC-138b", "T1-NC-138d", "T1-NC-140-first", "T1-NC-141-first"], masteryTarget: 10, status: "ready" },
-  { id: 13, code: "T2.06", title: "Chia có dư", brief: "Đọc thương và số dư trong mỗi tình huống thực tế.", group: "Số và phép tính", book: "Tập 2", guardianId: "maru", accent: "bg-teal-500", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 14, code: "T2.07", title: "Số thập phân", brief: "Đọc, viết và so sánh các phần mười, phần trăm.", group: "Số và phép tính", book: "Tập 2", guardianId: "sena", accent: "bg-slate-500", questionIds: [], masteryTarget: 10, status: "survey" },
+  { id: 13, code: "T2.06", title: "Chia có dư", brief: "Đọc thương và số dư trong mỗi tình huống thực tế.", group: "Số và phép tính", book: "Tập 2", guardianId: "maru", accent: "bg-teal-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 14, code: "T2.07", title: "Số thập phân", brief: "Đọc, viết và so sánh các phần mười, phần trăm.", group: "Số và phép tính", book: "Tập 2", guardianId: "sena", accent: "bg-slate-500", questionIds: [], masteryTarget: 10, status: "ready" },
   { id: 15, code: "T1.G2", title: "Hình ghép & mảnh cắt", brief: "Tách khung, phần lõm và mảnh cắt để tính diện tích qua các dấu lá.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "kora", accent: "bg-green-500", questionIds: ["T1-G2-ex3-area", "T1-G2-ex4-outer", "T1-G2-ex4-cutout", "T1-G2-ex4-area", "T1-G2-b60-width", "T1-G2-b60-length", "T1-G2-b60-area", "T1-G2-b61-length", "T1-G2-b61-area", "T1-G2-b67-area"], masteryTarget: 10, status: "ready" },
-  { id: 16, code: "T2.09", title: "Tổng–hiệu", brief: "Dùng sơ đồ đoạn thẳng để giải quan hệ tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "vexa", accent: "bg-fuchsia-500", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 17, code: "T2.10", title: "Tiền Việt Nam", brief: "Tính toán mua bán bằng các mệnh giá quen thuộc.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "runo", accent: "bg-orange-400", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 18, code: "T2.11", title: "Thống kê & xác suất", brief: "Ghi nhận bảng, biểu đồ và khả năng xảy ra của một việc.", group: "Dữ liệu", book: "Tập 2", guardianId: "tavi", accent: "bg-indigo-400", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 19, code: "T2.12", title: "Ôn tập số học", brief: "Kết nối dấu vết số học của cả năm thành một tuyến ôn tập.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "oryx", accent: "bg-yellow-500", questionIds: [], masteryTarget: 10, status: "survey" },
-  { id: 20, code: "T2.13", title: "Ôn tập tổng hợp", brief: "Tổng hợp các dạng bài trước khi chạm đến kho lưu trữ cuối tuyến.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "nexa", accent: "bg-indigo-600", questionIds: [], masteryTarget: 10, status: "survey" },
+  { id: 16, code: "T2.09", title: "Tổng–hiệu", brief: "Dùng sơ đồ đoạn thẳng để giải quan hệ tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "vexa", accent: "bg-fuchsia-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 17, code: "T2.10", title: "Tiền Việt Nam", brief: "Tính toán mua bán bằng các mệnh giá quen thuộc.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "runo", accent: "bg-orange-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 18, code: "T2.11", title: "Thống kê & xác suất", brief: "Ghi nhận bảng, biểu đồ và khả năng xảy ra của một việc.", group: "Dữ liệu", book: "Tập 2", guardianId: "tavi", accent: "bg-indigo-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 19, code: "T2.12", title: "Ôn tập số học", brief: "Kết nối dấu vết số học của cả năm thành một tuyến ôn tập.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "oryx", accent: "bg-yellow-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 20, code: "T2.13", title: "Ôn tập tổng hợp", brief: "Tổng hợp các dạng bài trước khi chạm đến kho lưu trữ cuối tuyến.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "nexa", accent: "bg-indigo-600", questionIds: [], masteryTarget: 10, status: "ready" },
 ];
 
 export const QUESTIONS: VerifiedQuestion[] = [
@@ -327,6 +345,7 @@ export const COMPANION_COSMETIC_SETS: CosmeticSetDefinition[] = [
   { id: "moss", label: "Bộ Người Giữ Rừng Moss", motif: "❋", note: "Rêu ép và dấu lá lộ trình.", itemIds: ["outfit-moss", "trail-leaves"], bonusGold: 50, bonusXp: 120 },
 ];
 
+QUESTIONS.push(...AI_PRACTICE_QUESTIONS);
 export const QUESTIONS_BY_ID = Object.fromEntries(QUESTIONS.map((question) => [question.id, question])) as Record<string, VerifiedQuestion>;
 export const BOSS_QUESTION_IDS = QUESTIONS.filter((question) => question.pool === "boss" && question.difficulty === "H").map((question) => question.id);
 export const getGuardian = (guardianId: string) => GUARDIANS.find((guardian) => guardian.id === guardianId);
@@ -334,3 +353,36 @@ export const getSpellForGuardian = (guardian?: Guardian) => SPELLS.find((spell) 
 export const getStation = (stationId: number) => STATIONS.find((station) => station.id === stationId);
 export const getStationQuestions = (stationId: number) => QUESTIONS.filter((question) => question.stationId === stationId && question.pool === "station");
 export const getReadyStations = () => STATIONS.filter((station) => station.status === "ready");
+export const getMapIdForStation = (station: Pick<Station, "book">): MapId => station.book === "Tập 1" ? 1 : 2;
+export const getMapStations = (mapId: MapId) => STATIONS.filter((station) => getMapIdForStation(station) === mapId);
+export const getMapQuestions = (mapId: MapId) => QUESTIONS.filter((question) => {
+  const station = getStation(question.stationId);
+  return station ? getMapIdForStation(station) === mapId : false;
+});
+export const MAP1_BOSS_QUESTION_IDS = getMapQuestions(1)
+  .filter((question) => question.difficulty !== "E")
+  .map((question) => question.id);
+
+function shuffled<T>(items: T[]) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const swap = Math.floor(Math.random() * (index + 1));
+    [result[index], result[swap]] = [result[swap], result[index]];
+  }
+  return result;
+}
+
+/**
+ * Selects a new field session in 4 Easy / 3 Medium / 3 Hard balance.
+ * Legacy stations with an incomplete practice bank temporarily fall back to
+ * unused questions of another level rather than duplicate a question.
+ */
+export const getStationSessionQuestionIds = (stationId: number, excludedIds: string[] = []) => {
+  const available = getStationQuestions(stationId).filter((question) => !excludedIds.includes(question.id));
+  const picked: string[] = [];
+  (Object.entries(STATION_DIFFICULTY_MIX) as [Difficulty, number][]).forEach(([difficulty, target]) => {
+    picked.push(...shuffled(available.filter((question) => question.difficulty === difficulty && !picked.includes(question.id))).slice(0, target).map((question) => question.id));
+  });
+  const remaining = shuffled(available.filter((question) => !picked.includes(question.id))).map((question) => question.id);
+  return shuffled([...picked, ...remaining]).slice(0, Math.min(10, available.length));
+};

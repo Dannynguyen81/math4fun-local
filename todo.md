@@ -124,9 +124,23 @@
 
 ## Hồ sơ hiện diện, Shop trực quan và phần thưởng bộ sưu tập
 
-- [ ] Hiển thị avatar đã chọn cạnh tên người chơi trong khung điều hướng và các trang sau đăng nhập.
-- [ ] Tạo minh họa trực quan cho bình hồi phục, trang phục và trang trí trong Shop.
-- [ ] Đặt preview companion/trang phục hiện hành trực tiếp trên bản đồ chính.
-- [ ] Thêm thưởng Gold và XP một lần khi hoàn tất đủ một bộ trang phục.
-- [ ] Thêm bộ lọc bảng xếp hạng theo thành tích tổng, chuỗi học và số guardian thu phục.
-- [ ] Kiểm tra TypeScript, build, trang có hồ sơ, Shop, preview bản đồ, thưởng bộ và bộ lọc; lưu checkpoint.
+- [x] Hiển thị avatar đã chọn cạnh tên người chơi trong khung điều hướng và các trang sau đăng nhập.
+- [x] Tạo minh họa trực quan cho bình hồi phục, trang phục và trang trí trong Shop.
+- [x] Đặt preview companion/trang phục hiện hành trực tiếp trên bản đồ chính.
+- [x] Thêm thưởng Gold và XP một lần khi hoàn tất đủ một bộ trang phục.
+- [x] Thêm bộ lọc bảng xếp hạng theo thành tích tổng, chuỗi học và số guardian thu phục.
+- [x] Kiểm tra TypeScript, build, trang có hồ sơ, Shop, preview bản đồ, thưởng bộ và bộ lọc; lưu checkpoint.
+
+## Hành trình hai bản đồ và Huấn luyện Pet
+
+- [x] Chuẩn hóa phần thưởng Gold: đúng E/M/H nhận 2/3/4 Gold, sai nhận 1 Gold và cộng 5 Gold ở mỗi chuỗi 5 câu đúng.
+- [x] Chia lộ trình thành Map 1 gồm 10 chủ đề Tập 1 và Map 2 gồm 10 chủ đề Tập 2, với Map 2 chỉ mở sau Boss Map 1.
+- [x] Tạo Boss Map 1 gồm 10 câu tổng hợp mức trung bình/khó từ các chủ đề đã hoàn tất của Tập 1.
+- [x] Đổi mục Boss trong nhật ký thành Huấn luyện Pet và xây PvP mở khi có ít nhất một guardian.
+- [x] Tạo combat Huấn luyện có XP không có Gold, HP chỉ tồn tại trong phiên, phản công theo đáp án sai và âm thanh/hiệu ứng phép.
+- [x] Gắn XP huấn luyện với cấp guardian và điều kiện mở phép mới.
+- [x] Lọc câu hỏi Huấn luyện theo các chủ đề Map đã mở; không đưa chủ đề bị niêm phong vào pool.
+- [x] Bổ sung khoảng 20 câu tạo bổ sung cho mỗi chủ đề, phân tầng E/M/H và tách rõ dữ liệu nguồn sách với dữ liệu luyện tập bổ sung.
+- [x] Bảo đảm mỗi trạm map rút ngẫu nhiên 4 câu dễ, 3 câu trung bình, 3 câu khó theo đúng chủ đề và luật không lặp.
+- [x] Thêm bong bóng thoại/hoạt ảnh tương tác cho companion trên bản đồ hành trình.
+- [x] Kiểm tra TypeScript, build, combat, khóa/mở Map 2, persistence và các trường hợp không đủ guardian; lưu checkpoint.

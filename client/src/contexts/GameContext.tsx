@@ -5,7 +5,7 @@
  * and collectible-set rewards are recorded once per companion profile.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, getGuardian, getStation, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId =
   | "compass" | "ember" | "tide" | "leaf"
@@ -41,6 +41,11 @@ export type StudentProfile = {
   inventory: Record<ShopItem["id"], number>;
   equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
   setRewardsClaimed: string[];
+  answerStreak: number;
+  map1BossDefeated: boolean;
+  map1BossQuestionHistory: string[];
+  trainingQuestionHistory: string[];
+  guardianTrainingXp: Record<string, number>;
   studyDays: number[];
   guardianHealth: Record<string, GuardianHealth>;
   guardianLosses: string[];
@@ -65,6 +70,7 @@ export type StationAttempt = {
 };
 
 export type BattleState = {
+  mode: "atlas" | "map1-boss" | "training";
   status: "idle" | "active" | "victory" | "defeat";
   questionIds: string[];
   questionIndex: number;
@@ -73,6 +79,7 @@ export type BattleState = {
   lastResult?: { correct: boolean; playerDamage: number; bossDamage: number; spellId: string };
   startedAt?: string;
   guardianId?: string;
+  opponentGuardianId?: string;
 };
 
 export type GuardianHealth = { hp: number; updatedAt: string };
@@ -91,10 +98,10 @@ export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 8; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
+type GameStore = { version: 9; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null };
-export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp };
+export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp; trainingLevelUp?: { guardianId: string; previousLevel: number; nextLevel: number; totalXp: number } };
 export type PurchaseResult = { ok: boolean; message: string; setReward?: CosmeticSetDefinition };
 
 type GameContextValue = {
@@ -122,6 +129,12 @@ type GameContextValue = {
   answerStationQuestion: (questionId: string, answer: number) => AnswerResult | null;
   isBossUnlocked: boolean;
   startBattle: (guardianId: string) => boolean;
+  isMapUnlocked: (mapId: MapId) => boolean;
+  isMap1BossUnlocked: boolean;
+  startMap1BossBattle: (guardianId: string) => boolean;
+  canTrainPets: boolean;
+  startTrainingBattle: (guardianId: string) => boolean;
+  guardianTrainingLevel: (guardianId: string) => number;
   resolveBattleAnswer: (answer: number, spellId: string) => BattleAnswerResult | null;
   advanceBattle: () => void;
   markMagicVideoWatched: (element: ElementName) => void;
@@ -158,12 +171,12 @@ type GameContextValue = {
 
 // Giữ khóa v3 để tự động nâng mọi hồ sơ đã lưu, không làm mất hành trình đang có.
 const STORAGE_KEY = "math4fun-field-journal-v3";
-const emptyBattle = (): BattleState => ({ status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
+const emptyBattle = (): BattleState => ({ mode: "atlas", status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
 const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 8, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 9, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -249,6 +262,11 @@ function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<Stud
     inventory: emptyInventory(),
     equippedCosmetics: {},
     setRewardsClaimed: [],
+    answerStreak: 0,
+    map1BossDefeated: false,
+    map1BossQuestionHistory: [],
+    trainingQuestionHistory: [],
+    guardianTrainingXp: {},
     studyDays: DEFAULT_STUDY_DAYS,
     guardianHealth: {},
     guardianLosses: [],
@@ -290,6 +308,14 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
     equippedCosmetics: candidate.equippedCosmetics && typeof candidate.equippedCosmetics === "object" ? candidate.equippedCosmetics : {},
     setRewardsClaimed: Array.isArray(candidate.setRewardsClaimed) ? Array.from(new Set(candidate.setRewardsClaimed.filter((setId): setId is string => typeof setId === "string" && COMPANION_COSMETIC_SETS.some((set) => set.id === setId)))) : [],
+    answerStreak: typeof candidate.answerStreak === "number" && Number.isFinite(candidate.answerStreak) ? Math.max(0, Math.floor(candidate.answerStreak)) : 0,
+    map1BossDefeated: Boolean(candidate.map1BossDefeated) || (Array.isArray(candidate.unlockedStationIds) && candidate.unlockedStationIds.some((id) => {
+      const station = getStation(id);
+      return station ? getMapIdForStation(station) === 2 : false;
+    })),
+    map1BossQuestionHistory: Array.isArray(candidate.map1BossQuestionHistory) ? candidate.map1BossQuestionHistory.filter((id): id is string => typeof id === "string") : [],
+    trainingQuestionHistory: Array.isArray(candidate.trainingQuestionHistory) ? candidate.trainingQuestionHistory.filter((id): id is string => typeof id === "string") : [],
+    guardianTrainingXp: candidate.guardianTrainingXp && typeof candidate.guardianTrainingXp === "object" ? candidate.guardianTrainingXp : {},
     studyDays: normalizeStudyDays(candidate.studyDays),
     guardianHealth: candidate.guardianHealth && typeof candidate.guardianHealth === "object" ? candidate.guardianHealth : {},
     guardianLosses: Array.isArray(candidate.guardianLosses) ? candidate.guardianLosses.filter((id): id is string => typeof id === "string") : [],
@@ -304,7 +330,7 @@ function readStore(): GameStore {
     const parsed = JSON.parse(raw) as Partial<GameStore>;
     if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
     return {
-      version: 8,
+      version: 9,
       activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
@@ -381,6 +407,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }, [profile]);
   const unlockStationForWeek = useCallback((stationId: number) => {
     if (!profile || !getStation(stationId)) return false;
+    const station = getStation(stationId);
+    if (!station || (getMapIdForStation(station) === 2 && !profile.map1BossDefeated)) return false;
     if (profile.unlockedStationIds.includes(stationId)) return true;
     if (weeklyOpenCount >= 2) return false;
     updateProfile(profile.id, (current) => ({ ...current, unlockedStationIds: [...current.unlockedStationIds, stationId], stationOpenedAt: { ...current.stationOpenedAt, [stationId]: new Date().toISOString() } }));
@@ -391,10 +419,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const stationProgress = useCallback((stationId: number): StationProgress => {
     const station = getStation(stationId);
     const attempt = profile?.attempts[stationId];
-    const correct = station ? station.questionIds.filter((id) => profile?.correctQuestionIds.includes(id)).length : 0;
+    const correct = station ? Object.values(QUESTIONS_BY_ID).filter((question) => question.stationId === stationId && profile?.correctQuestionIds.includes(question.id)).length : 0;
     const answered = attempt?.answeredQuestionIds.length ?? 0;
     const target = station?.masteryTarget ?? 10;
-    return { correct, answered, target, total: station?.questionIds.length ?? 0, accuracy: answered ? Math.round((correct / answered) * 100) : 0 };
+    const total = station ? Object.values(QUESTIONS_BY_ID).filter((question) => question.stationId === stationId && question.pool === "station").length : 0;
+    return { correct, answered, target, total, accuracy: answered ? Math.round((correct / answered) * 100) : 0 };
   }, [profile]);
   const getStationAttempt = useCallback((stationId: number) => profile?.attempts[stationId] ?? null, [profile]);
   const startStationSession = useCallback((stationId: number) => {
@@ -403,9 +432,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (!station || station.status !== "ready") return null;
     const existing = profile.attempts[stationId];
     if (existing && !existing.completedAt) return existing;
-    const pending = station.questionIds.filter((id) => !profile.correctQuestionIds.includes(id));
+    const pending = Object.values(QUESTIONS_BY_ID).filter((question) => question.stationId === stationId && question.pool === "station" && !profile.correctQuestionIds.includes(question.id));
     if (!pending.length) return existing ?? null;
-    const questionIds = shuffle(pending);
+    const questionIds = getStationSessionQuestionIds(stationId, profile.correctQuestionIds);
     const attempt: StationAttempt = { id: `station-${stationId}-${Date.now()}`, stationId, questionIds, answeredQuestionIds: [], currentQuestionId: questionIds[0] ?? null, startedAt: new Date().toISOString() };
     updateProfile(profile.id, (current) => ({ ...current, attempts: { ...current.attempts, [stationId]: attempt }, metrics: { ...current.metrics, stationSessions: current.metrics.stationSessions + 1 } }));
     return attempt;
@@ -422,7 +451,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const nextCorrectIds = correct && !alreadyCorrect ? [...profile.correctQuestionIds, questionId] : profile.correctQuestionIds;
     const nextAnswered = [...attempt.answeredQuestionIds, questionId];
     const nextQuestionId = attempt.questionIds.find((id) => !nextAnswered.includes(id)) ?? null;
-    const nextCorrectCount = station.questionIds.filter((id) => nextCorrectIds.includes(id)).length;
+    const nextCorrectCount = Object.values(QUESTIONS_BY_ID).filter((candidate) => candidate.stationId === station.id && candidate.pool === "station" && nextCorrectIds.includes(candidate.id)).length;
     const masteredNow = nextCorrectCount >= station.masteryTarget;
     updateProfile(profile.id, (current) => {
       const currentAttempt = current.attempts[question.stationId];
@@ -434,10 +463,14 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       const recaptured = masteredNow && current.guardianLosses.includes(station.guardianId);
       const today = localDate();
       const streak = current.lastStudyDate === today ? current.streak : isConsecutiveStudyDay(current.lastStudyDate, today) ? current.streak + 1 : 1;
+      const answerStreak = correct ? current.answerStreak + 1 : 0;
+      const streakBonus = correct && answerStreak % 5 === 0 ? FIVE_CORRECT_STREAK_GOLD : 0;
+      const goldEarned = correct ? GOLD_BY_DIFFICULTY[question.difficulty] + streakBonus : 1;
       return {
         ...current,
         xp: current.xp + (correct && !alreadyCorrect ? ({ E: 25, M: 35, H: 50 } as Record<Difficulty, number>)[question.difficulty] : 0),
-        gold: current.gold + (correct ? ({ E: 4, M: 6, H: 9 } as Record<Difficulty, number>)[question.difficulty] : 1),
+        gold: current.gold + goldEarned,
+        answerStreak,
         streak,
         lastStudyDate: today,
         correctQuestionIds: correct && !alreadyCorrect ? [...current.correctQuestionIds, questionId] : current.correctQuestionIds,
@@ -454,6 +487,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     return { correct, stationMastered: masteredNow, nextQuestionId };
   }, [profile, updateProfile]);
 
+  const isMapUnlocked = useCallback((mapId: MapId) => mapId === 1 || Boolean(profile?.map1BossDefeated), [profile?.map1BossDefeated]);
+  const map1ReadyStations = useMemo(() => getMapStations(1).filter((station) => station.status === "ready"), []);
+  const isMap1BossUnlocked = Boolean(profile && map1ReadyStations.length > 0 && map1ReadyStations.every((station) => profile.completedStationIds.includes(station.id)));
   const isBossUnlocked = Boolean(profile && profile.collectedGuardianIds.filter((id) => id !== "atlas").length >= 2);
   const startBattle = useCallback((guardianId: string) => {
     if (!profile || !isBossUnlocked) return false;
@@ -463,9 +499,45 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const unseen = BOSS_QUESTION_IDS.filter((id) => !profile.bossQuestionHistory.includes(id));
     if (unseen.length < 5) return false;
     const questionIds = shuffle(unseen).slice(0, 5);
-    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 150, guardianId, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
+    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { mode: "atlas", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 150, guardianId, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
     return true;
   }, [profile, isBossUnlocked, updateProfile]);
+  const startMap1BossBattle = useCallback((guardianId: string) => {
+    if (!profile || !isMap1BossUnlocked || profile.map1BossDefeated) return false;
+    if (!profile.teamGuardianIds.includes(guardianId) || !profile.collectedGuardianIds.includes(guardianId)) return false;
+    const health = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
+    if (health.hp <= 0) return false;
+    const unseen = MAP1_BOSS_QUESTION_IDS.filter((id) => !profile.map1BossQuestionHistory.includes(id));
+    const pool = unseen.length >= 10 ? unseen : MAP1_BOSS_QUESTION_IDS;
+    if (pool.length < 10) return false;
+    const questionIds = shuffle(pool).slice(0, 10);
+    updateProfile(profile.id, (current) => ({
+      ...current,
+      guardianHealth: { ...current.guardianHealth, [guardianId]: health },
+      battle: { mode: "map1-boss", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 260, guardianId, startedAt: new Date().toISOString() },
+      map1BossQuestionHistory: Array.from(new Set([...current.map1BossQuestionHistory, ...questionIds])),
+      metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 },
+    }));
+    return true;
+  }, [profile, isMap1BossUnlocked, updateProfile]);
+  const canTrainPets = Boolean(profile?.collectedGuardianIds.length);
+  const guardianTrainingLevel = useCallback((guardianId: string) => Math.floor((profile?.guardianTrainingXp[guardianId] ?? 0) / 100) + 1, [profile?.guardianTrainingXp]);
+  const startTrainingBattle = useCallback((guardianId: string) => {
+    if (!profile || !profile.collectedGuardianIds.includes(guardianId)) return false;
+    const unlockedQuestionPool = Object.values(QUESTIONS_BY_ID).filter((question) => profile.unlockedStationIds.includes(question.stationId) && question.pool === "station");
+    if (!unlockedQuestionPool.length) return false;
+    const unseen = unlockedQuestionPool.filter((question) => !profile.trainingQuestionHistory.includes(question.id));
+    const pool = unseen.length >= 5 ? unseen : unlockedQuestionPool;
+    const questionIds = shuffle(pool).slice(0, Math.min(5, pool.length)).map((question) => question.id);
+    if (questionIds.length < 1) return false;
+    const opponent = GUARDIANS.find((guardian) => guardian.id !== guardianId && guardian.id !== "atlas") ?? GUARDIANS[0];
+    updateProfile(profile.id, (current) => ({
+      ...current,
+      battle: { mode: "training", status: "active", questionIds, questionIndex: 0, playerHp: 100, bossHp: 120, guardianId, opponentGuardianId: opponent.id, startedAt: new Date().toISOString() },
+      trainingQuestionHistory: Array.from(new Set([...current.trainingQuestionHistory, ...questionIds])).slice(-120),
+    }));
+    return true;
+  }, [profile, updateProfile]);
   const resolveBattleAnswer = useCallback((answer: number, spellId: string): BattleAnswerResult | null => {
     if (!profile || profile.battle.status !== "active") return null;
     const questionId = profile.battle.questionIds[profile.battle.questionIndex];
@@ -473,14 +545,19 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (!question) return null;
     const selectedSpell = SPELLS.find((item) => item.id === spellId) ?? SPELLS[0];
     const magicElement = selectedSpell.element.toLocaleLowerCase("vi-VN") as ElementName;
+    const isMap1Boss = profile.battle.mode === "map1-boss";
+    const isTraining = profile.battle.mode === "training";
     const correct = answer === question.answer;
-    const bossDamage = correct ? selectedSpell.damage : 0;
+    const preBattleTrainingXp = profile.guardianTrainingXp[profile.battle.guardianId ?? profile.teamGuardianIds[0] ?? ""] ?? 0;
+    const trainingTechnique = getTrainingTechnique(Math.floor(preBattleTrainingXp / 100) + 1);
+    const bossDamage = correct ? selectedSpell.damage + (isTraining ? trainingTechnique.bonusDamage : 0) : 0;
     const playerDamage = correct ? selectedSpell.counterDamage : 34;
     const bossHp = Math.max(0, profile.battle.bossHp - bossDamage);
     const guardianId = profile.battle.guardianId ?? profile.teamGuardianIds[0];
     if (!guardianId) return null;
     const currentGuardianHealth = effectiveGuardianHealth(profile.guardianHealth[guardianId]);
-    const playerHp = Math.max(0, currentGuardianHealth.hp - playerDamage);
+    const startingPlayerHp = isTraining ? profile.battle.playerHp : currentGuardianHealth.hp;
+    const playerHp = Math.max(0, startingPlayerHp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
     const currentQuest = profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest();
     const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
@@ -492,24 +569,36 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const totalElementXp = previousElementXp + elementGain;
     const nextElementLevel = Math.floor(totalElementXp / ELEMENT_XP_PER_LEVEL) + 1;
     const levelUp = nextElementLevel > previousLevel ? { element: magicElement, previousLevel, nextLevel: nextElementLevel, totalXp: totalElementXp } : undefined;
+    const trainingGain = isTraining ? (correct ? 20 : 5) : 0;
+    const previousTrainingXp = profile.guardianTrainingXp[guardianId] ?? 0;
+    const previousTrainingLevel = Math.floor(previousTrainingXp / 100) + 1;
+    const totalTrainingXp = previousTrainingXp + trainingGain;
+    const nextTrainingLevel = Math.floor(totalTrainingXp / 100) + 1;
+    const trainingLevelUp = isTraining && nextTrainingLevel > previousTrainingLevel ? { guardianId, previousLevel: previousTrainingLevel, nextLevel: nextTrainingLevel, totalXp: totalTrainingXp } : undefined;
     updateProfile(profile.id, (current) => {
       const guardianStation = STATIONS.find((station) => station.guardianId === guardianId);
-      const guardianLost = playerHp === 0;
+      const guardianLost = !isTraining && playerHp === 0;
       const nextAttempts = { ...current.attempts };
       if (guardianLost && guardianStation) delete nextAttempts[guardianStation.id];
       const removedQuestionIds = guardianLost && guardianStation ? guardianStation.questionIds : [];
+      const answerStreak = correct ? current.answerStreak + 1 : 0;
+      const streakBonus = !isTraining && correct && answerStreak % 5 === 0 ? FIVE_CORRECT_STREAK_GOLD : 0;
+      const earnedGold = isTraining ? 0 : (correct ? GOLD_BY_DIFFICULTY[question.difficulty] + streakBonus : 1);
       return {
         ...current,
         battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", lastResult: { correct, bossDamage, playerDamage, spellId } },
-        xp: current.xp + (correct ? 30 : 0) + questReward,
-        gold: current.gold + (correct ? 10 : 0),
+        xp: current.xp + (isTraining ? trainingGain : (correct ? 30 : 0) + questReward),
+        gold: current.gold + earnedGold,
+        answerStreak,
+        guardianTrainingXp: isTraining ? { ...current.guardianTrainingXp, [guardianId]: (current.guardianTrainingXp[guardianId] ?? 0) + trainingGain } : current.guardianTrainingXp,
         magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
         elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain },
         weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
         metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() },
-        collectedGuardianIds: guardianLost ? current.collectedGuardianIds.filter((id) => id !== guardianId) : bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
+        map1BossDefeated: current.map1BossDefeated || (isMap1Boss && bossHp === 0),
+        collectedGuardianIds: guardianLost ? current.collectedGuardianIds.filter((id) => id !== guardianId) : !isMap1Boss && bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
         teamGuardianIds: guardianLost ? current.teamGuardianIds.filter((id) => id !== guardianId) : current.teamGuardianIds,
-        guardianHealth: guardianLost ? Object.fromEntries(Object.entries(current.guardianHealth).filter(([id]) => id !== guardianId)) : { ...current.guardianHealth, [guardianId]: { hp: playerHp, updatedAt: new Date().toISOString() } },
+        guardianHealth: isTraining ? current.guardianHealth : guardianLost ? Object.fromEntries(Object.entries(current.guardianHealth).filter(([id]) => id !== guardianId)) : { ...current.guardianHealth, [guardianId]: { hp: playerHp, updatedAt: new Date().toISOString() } },
         guardianLosses: guardianLost && !current.guardianLosses.includes(guardianId) ? [...current.guardianLosses, guardianId] : current.guardianLosses,
         correctQuestionIds: guardianLost ? current.correctQuestionIds.filter((id) => !removedQuestionIds.includes(id)) : current.correctQuestionIds,
         incorrectQuestionIds: guardianLost ? current.incorrectQuestionIds.filter((id) => !removedQuestionIds.includes(id)) : current.incorrectQuestionIds,
@@ -517,7 +606,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         attempts: nextAttempts,
       };
     });
-    return { correct, playerDamage, bossDamage, ended, levelUp };
+    return { correct, playerDamage, bossDamage, ended, levelUp, trainingLevelUp };
   }, [profile, updateProfile]);
   const advanceBattle = useCallback(() => {
     if (!profile || profile.battle.status !== "active") return;
@@ -698,6 +787,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     answerStationQuestion,
     isBossUnlocked,
     startBattle,
+    isMapUnlocked,
+    isMap1BossUnlocked,
+    startMap1BossBattle,
+    canTrainPets,
+    startTrainingBattle,
+    guardianTrainingLevel,
     resolveBattleAnswer,
     advanceBattle,
     markMagicVideoWatched,
@@ -730,7 +825,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, startMap1BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 
