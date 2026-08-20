@@ -125,3 +125,5 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Boss phải hiện như một hồ sơ cửa cuối vật lý: dây mở khóa, bằng chứng 10 mốc, thử thách 10 câu M/H và huy hiệu phần thưởng được nhìn thấy như cùng một case file.
 - Trang Thống kê phải mang silhouette **expedition report**: sổ quan sát, log bằng chứng và chuỗi dữ liệu lệch nhịp; Console quản trị phải mang silhouette **source-verification case file** với tem restricted, dòng giấy thẩm định và dấu xác thực nguồn.
 - Route/evidence trail trên các trang phụ ưu tiên cấu trúc ghim lệch, note và dấu chuyển hóa; không biến thành thanh onboarding ngang đều đặn.
+- Chọn companion là một tuyến tiêu bản ghim dọc route thread, có các thẻ lệch nhịp và một bằng chứng đang chọn lớn hơn rõ rệt; không để 20 lựa chọn có cùng trọng số như một catalog.
+- Ảnh avatar phải được đặt trên xử lý giấy/taxonomy trung tính; không dùng các trường nền tím hoặc hồng bão hòa làm nền thẻ mặc định.

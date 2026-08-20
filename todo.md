@@ -193,3 +193,12 @@
 - [x] Thử lại một lượt tạo ảnh AI g07–g09; giữ SVG fallback vì hạn mức tạo ảnh chưa cho phép thay thế.
 - [x] Kiểm tra TypeScript/build và giao diện desktop/mobile; route `/boss` tương thích liên kết cũ đã được xác nhận.
 - [ ] Chơi thử bằng hồ sơ admin: xác nhận trừ Gold/cancel hint, gửi-duyệt report, ledger và toàn bộ 10 lượt Boss trên thiết bị người dùng.
+
+## Tinh chỉnh chiến trường, report và avatar
+
+- [x] Đồng bộ Boss Map 1/2 theo bố cục chiến trường Võ đài, ẩn tư liệu phép trong lúc giao chiến để ưu tiên guardian, Boss, HP và câu hỏi.
+- [x] Ngăn nhạc ambient chồng với nhạc/âm thanh Huấn luyện và Boss; chỉ giữ một nguồn âm thanh theo ngữ cảnh.
+- [x] Thêm âm thanh phản công Boss và phản hồi rõ cho đáp án đúng/sai trong trận Boss.
+- [x] Cho admin duyệt report, nhập phản hồi gửi lại hồ sơ người chơi và lưu nhật ký xử lý cục bộ.
+- [x] Bỏ nền tím không phù hợp khỏi thẻ avatar, giữ ảnh chibi trên chất liệu parchment trung tính.
+- [x] Kiểm tra TypeScript/build, layout Boss/Huấn luyện, luồng report và ảnh avatar; lưu checkpoint.

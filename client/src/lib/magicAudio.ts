@@ -101,6 +101,29 @@ export function playTechniqueSound(element: ElementName, techniqueLevel: number,
   window.setTimeout(() => void context.close?.(), (duration + 0.2) * 1000);
 }
 
+/** Boss-only result cue: a compact confirmation or warning that sits above the battle loop. */
+export function playBossResultSound(correct: boolean, enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context(); const now = context.currentTime;
+  const master = context.createGain(); master.gain.setValueAtTime(0.0001, now); master.gain.exponentialRampToValueAtTime(0.052, now + 0.02); master.gain.exponentialRampToValueAtTime(0.0001, now + 0.32); master.connect(context.destination);
+  const notes = correct ? [523, 659] : [185, 139];
+  notes.forEach((frequency, index) => { const oscillator = context.createOscillator(); const envelope = context.createGain(); const start = now + index * 0.09; oscillator.type = correct ? "sine" : "triangle"; oscillator.frequency.setValueAtTime(frequency, start); oscillator.frequency.exponentialRampToValueAtTime(correct ? frequency * 1.06 : frequency * 0.78, start + 0.16); envelope.gain.setValueAtTime(0.0001, start); envelope.gain.exponentialRampToValueAtTime(index === 0 ? 0.82 : 0.58, start + 0.018); envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.2); oscillator.connect(envelope); envelope.connect(master); oscillator.start(start); oscillator.stop(start + 0.23); });
+  void context.resume?.(); window.setTimeout(() => void context.close?.(), 560);
+}
+
+/** A heavier, low-pitched counterstrike that signals the Boss attack without overpowering dialogue. */
+export function playBossAttackSound(element: ElementName, enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context(); const now = context.currentTime; const tone = TONES[element];
+  const master = context.createGain(); master.gain.setValueAtTime(0.0001, now); master.gain.exponentialRampToValueAtTime(0.07, now + 0.025); master.gain.exponentialRampToValueAtTime(0.0001, now + 0.38); master.connect(context.destination);
+  [tone.start * 0.48, tone.accent * 0.32].forEach((frequency, index) => { const oscillator = context.createOscillator(); const envelope = context.createGain(); const start = now + index * 0.055; oscillator.type = index === 0 ? "sawtooth" : "triangle"; oscillator.frequency.setValueAtTime(Math.max(40, frequency), start); oscillator.frequency.exponentialRampToValueAtTime(Math.max(32, frequency * 0.5), start + 0.28); envelope.gain.setValueAtTime(0.0001, start); envelope.gain.exponentialRampToValueAtTime(index === 0 ? 0.7 : 0.35, start + 0.02); envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.32); oscillator.connect(envelope); envelope.connect(master); oscillator.start(start); oscillator.stop(start + 0.35); });
+  void context.resume?.(); window.setTimeout(() => void context.close?.(), 620);
+}
+
 /** A short, local-only three-note fanfare for a newly reached elemental level. */
 export function playElementLevelUpSound(element: ElementName, enabled: boolean) {
   if (!enabled || typeof window === "undefined") return;

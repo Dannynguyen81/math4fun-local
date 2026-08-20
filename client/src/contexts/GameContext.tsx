@@ -124,6 +124,7 @@ export type GoldTransaction = {
   createdAt: string;
 };
 export type QuestionReportCategory = "answer" | "prompt" | "source" | "other";
+export type QuestionReportHandling = { at: string; by: string; status: "new" | "reviewing" | "resolved"; reply?: string };
 export type QuestionReport = {
   id: string;
   questionId: string;
@@ -133,6 +134,10 @@ export type QuestionReport = {
   status: "new" | "reviewing" | "resolved";
   reporterId: string;
   reporterName: string;
+  adminReply?: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  handlingHistory?: QuestionReportHandling[];
 };
 
 export type LearningMetrics = {
@@ -165,6 +170,7 @@ type GameContextValue = {
   questionReports: QuestionReport[];
   reportQuestion: (questionId: string, category: QuestionReportCategory, note: string) => { ok: boolean; message: string };
   updateQuestionReportStatus: (reportId: string, status: QuestionReport["status"]) => void;
+  respondToQuestionReport: (reportId: string, status: QuestionReport["status"], reply: string) => { ok: boolean; message: string };
   unlockQuestionHint: (questionId: string) => { ok: boolean; charged: boolean; message: string };
   saveQuestionOverride: (questionId: string, patch: QuestionOverride) => { ok: boolean; message: string };
   resetQuestionOverride: (questionId: string) => void;
@@ -431,7 +437,7 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     gold: typeof candidate.gold === "number" && Number.isFinite(candidate.gold) ? Math.max(0, Math.floor(candidate.gold)) : 0,
     goldHistory: Array.isArray(candidate.goldHistory) ? candidate.goldHistory.filter((entry): entry is GoldTransaction => Boolean(entry && typeof entry === "object" && typeof entry.id === "string" && typeof entry.amount === "number" && Number.isFinite(entry.amount) && ["answer", "hint", "station-open", "shop", "set-reward"].includes(entry.category as GoldTransactionCategory) && typeof entry.label === "string" && typeof entry.createdAt === "string")).slice(0, 150) : [],
     hintUsedQuestionIds: Array.isArray(candidate.hintUsedQuestionIds) ? Array.from(new Set(candidate.hintUsedQuestionIds.filter((id): id is string => typeof id === "string" && Boolean(QUESTIONS_BY_ID[id])))) : [],
-    questionReports: Array.isArray(candidate.questionReports) ? candidate.questionReports.filter((entry): entry is QuestionReport => Boolean(entry && typeof entry === "object" && typeof entry.id === "string" && typeof entry.questionId === "string" && Boolean(QUESTIONS_BY_ID[entry.questionId]) && ["answer", "prompt", "source", "other"].includes(entry.category as QuestionReportCategory) && typeof entry.note === "string" && typeof entry.createdAt === "string" && ["new", "reviewing", "resolved"].includes(entry.status as QuestionReport["status"]) && typeof entry.reporterId === "string" && typeof entry.reporterName === "string")).slice(0, 80) : [],
+    questionReports: Array.isArray(candidate.questionReports) ? candidate.questionReports.filter((entry): entry is QuestionReport => Boolean(entry && typeof entry === "object" && typeof entry.id === "string" && typeof entry.questionId === "string" && Boolean(QUESTIONS_BY_ID[entry.questionId]) && ["answer", "prompt", "source", "other"].includes(entry.category as QuestionReportCategory) && typeof entry.note === "string" && typeof entry.createdAt === "string" && ["new", "reviewing", "resolved"].includes(entry.status as QuestionReport["status"]) && typeof entry.reporterId === "string" && typeof entry.reporterName === "string")).map((entry) => ({ ...entry, adminReply: typeof entry.adminReply === "string" ? entry.adminReply : undefined, reviewedAt: typeof entry.reviewedAt === "string" ? entry.reviewedAt : undefined, reviewedBy: typeof entry.reviewedBy === "string" ? entry.reviewedBy : undefined, handlingHistory: Array.isArray(entry.handlingHistory) ? entry.handlingHistory.filter((item): item is QuestionReportHandling => Boolean(item && typeof item === "object" && typeof item.at === "string" && typeof item.by === "string" && ["new", "reviewing", "resolved"].includes(item.status as QuestionReport["status"]) && (item.reply === undefined || typeof item.reply === "string"))).slice(0, 12) : [] })).slice(0, 80) : [],
     inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
     equippedCosmetics: candidate.equippedCosmetics && typeof candidate.equippedCosmetics === "object" ? candidate.equippedCosmetics : {},
     setRewardsClaimed: Array.isArray(candidate.setRewardsClaimed) ? Array.from(new Set(candidate.setRewardsClaimed.filter((setId): setId is string => typeof setId === "string" && COMPANION_COSMETIC_SETS.some((set) => set.id === setId)))) : [],
@@ -552,8 +558,16 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }, [profile, updateProfile]);
   const updateQuestionReportStatus = useCallback((reportId: string, status: QuestionReport["status"]) => {
     if (!isAdmin) return;
-    setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => ({ ...entry, questionReports: entry.questionReports.map((report) => report.id === reportId ? { ...report, status } : report) })) }));
+    setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => ({ ...entry, questionReports: entry.questionReports.map((report) => report.id === reportId ? { ...report, status, handlingHistory: [{ at: new Date().toISOString(), by: profile?.name ?? "Quản trị viên", status }, ...(report.handlingHistory ?? [])].slice(0, 12) } : report) })) }));
   }, [isAdmin]);
+  const respondToQuestionReport = useCallback((reportId: string, status: QuestionReport["status"], reply: string) => {
+    if (!isAdmin || !profile) return { ok: false, message: "Chỉ hồ sơ quản trị mới có thể phản hồi phiếu báo lỗi." };
+    const cleanReply = reply.trim().slice(0, 500);
+    if (!cleanReply) return { ok: false, message: "Hãy ghi phản hồi trước khi đóng dấu xử lý." };
+    const reviewedAt = new Date().toISOString();
+    setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => ({ ...entry, questionReports: entry.questionReports.map((report) => report.id === reportId ? { ...report, status, adminReply: cleanReply, reviewedAt, reviewedBy: profile.name, handlingHistory: [{ at: reviewedAt, by: profile.name, status, reply: cleanReply }, ...(report.handlingHistory ?? [])].slice(0, 12) } : report) })) }));
+    return { ok: true, message: "Đã lưu phản hồi và đóng dấu vào phiếu của người học." };
+  }, [isAdmin, profile]);
   const unlockQuestionHint = useCallback((questionId: string) => {
     if (!profile || !QUESTIONS_BY_ID[questionId]) return { ok: false, charged: false, message: "Chưa có câu hỏi hợp lệ để mở gợi ý." };
     if (profile.hintUsedQuestionIds.includes(questionId)) return { ok: true, charged: false, message: "Gợi ý này đã được ghi trong nhật ký, không trừ Gold thêm." };
@@ -1061,6 +1075,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     questionReports,
     reportQuestion,
     updateQuestionReportStatus,
+    respondToQuestionReport,
     unlockQuestionHint,
     saveQuestionOverride,
     resetQuestionOverride,
@@ -1129,7 +1144,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

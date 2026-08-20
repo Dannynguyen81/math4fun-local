@@ -38,7 +38,8 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
   const soloStart = location === "/start";
   const activeBattle = profile?.battle?.status === "active";
   const activeStationAttempt = location.startsWith("/station/") && Object.values(profile?.attempts ?? {}).some((attempt) => Boolean(attempt.currentQuestionId));
-  const questionRoute = activeStationAttempt || (activeBattle && ["/map-boss", "/map2-boss", "/training"].includes(location));
+  // Field Journal Quest: ambient chỉ thuộc các trang hành trình; Võ đài luôn giữ soundscape chiến đấu riêng.
+  const questionRoute = activeStationAttempt || location === "/training" || (activeBattle && ["/boss", "/map-boss", "/map2-boss"].includes(location));
   const emptyArtifact = location.startsWith("/station/") ? ["Phiếu nhiệm vụ trống", "Tuyến này đang chờ nhà thám hiểm ký tên.", "STATION LOCK"] : ["Bản đồ chưa ký tên", "Đường chỉ khâu sẽ sáng theo lựa chọn của em.", "ROUTE DORMANT"];
   useEffect(() => {
     const audio = ambientRef.current;
