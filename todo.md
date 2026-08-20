@@ -161,3 +161,11 @@
 - [x] Thêm hồ sơ nguyên tố đối thủ, nhãn mạnh/yếu và giải thích lựa chọn chiến thuật trước trận.
 - [x] Áp dụng hệ số sát thương khắc chế nguyên tố trong Huấn luyện Pet, minh bạch trong phản hồi giao chiến.
 - [x] Kiểm thử TypeScript, build, persistence lịch sử, lễ thăng cấp và khắc chế nguyên tố; lưu checkpoint.
+
+## Quản trị cục bộ, hồ sơ và kỹ thuật Huấn luyện
+
+- [x] Bổ sung tài khoản quản trị cục bộ `admin` và phiên đăng nhập bền vững theo cookie/local storage; chỉ đăng nhập lại sau khi đăng xuất.
+- [x] Tạo menu tài khoản, hồ sơ cá nhân và console quản trị để duyệt/sửa/khôi phục ghi đè câu hỏi, kèm mở khóa toàn bộ nội dung thử nghiệm.
+- [x] Thay bộ chọn nhân vật bằng 20 avatar chibi toàn thân, có khuôn mặt, tóc và biểu cảm phân biệt.
+- [ ] Liên kết mỗi kỹ thuật Huấn luyện mở khóa với hiệu ứng phóng phép, va chạm và âm thanh riêng trong võ đài.
+- [ ] Kiểm tra TypeScript, build, quyền admin, persistence phiên, avatar mới và các kỹ thuật Huấn luyện; lưu checkpoint.

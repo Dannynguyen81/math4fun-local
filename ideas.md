@@ -116,3 +116,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Huấn luyện Pet luôn mở bằng **phiếu sân luyện/field training permit**: lộ trình liên tục nối ký nhật ký, hoàn tất trạm, đánh thức guardian và bằng chứng XP.
 - Guardian trong Huấn luyện là **specimen dossier**, không chỉ là ảnh: taxonomy, dấu niêm phong, bằng chứng trận và phần thưởng mở phép bao quanh asset.
 - Các mảng Indigo ở trang Huấn luyện/Boss phải có ít nhất một vật liệu nhật ký hữu hình như giấy ghim, nhãn route, dấu mực hoặc mảnh bản đồ; Marigold chỉ đánh dấu hành động, XP và khoảnh khắc mở khóa.
+- Trạng thái khóa hoặc chưa ký tên của Hồ sơ và Console quản trị là **artifact niêm phong hoàn chỉnh**: bắt buộc có route fragment, chứng cứ còn thiếu, dấu/mẫu vật hoặc case file và một hành động hành trình cụ thể; không được dùng thẻ đăng nhập trống căn giữa.
+- Chọn companion phải đọc như một **trải tiêu bản ghim dọc theo route thread**: dùng mốc 01–03, nhãn field tag và độ lệch nhẹ theo tuyến thay cho một lưới đồng đều không có nhịp.
+- Console quản trị kế thừa thế giới Math4Fun như một **expedition case file**: ngôn ngữ về niêm phong, bằng chứng, nguồn sách và dấu xác thực phải thay thế ngôn ngữ app permission chung chung.

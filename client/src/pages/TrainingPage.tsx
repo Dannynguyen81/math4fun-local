@@ -4,7 +4,7 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Check, Lock, MapPinned, ScrollText, Swords, Volume2, X, Zap } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
@@ -19,11 +19,12 @@ import {
   getSpellForGuardian,
   getTrainingDifficulty,
   getTrainingTechnique,
+  type ElementName,
   type TrainingDifficultyId,
 } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
-import { playElementLevelUpSound, playElementSound, playFiveStreakSound } from "@/lib/magicAudio";
+import { playElementLevelUpSound, playElementSound, playFiveStreakSound, playTechniqueSound } from "@/lib/magicAudio";
 
 const elementColor: Record<string, string> = { "sấm": "#f6b73c", "lửa": "#ee6b4e", "nước": "#55a9dd", "gió": "#3e9b7a", "độc": "#8e69ad", "đất": "#b17a3d" };
 const shuffle = <T,>(items: T[]) => [...items].sort(() => Math.random() - 0.5);
@@ -31,6 +32,40 @@ const shuffle = <T,>(items: T[]) => [...items].sort(() => Math.random() - 0.5);
 type BattleFeedback = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean };
 type LevelCelebration = { level: number; technique: string; bonusDamage: number };
 const xpChartConfig = { xp: { label: "XP Huấn luyện", color: "#4d8b67" } } satisfies ChartConfig;
+const elementalGlyph: Record<ElementName, string> = { "sấm": "ϟ", "lửa": "✦", "nước": "≈", "gió": "〰", "độc": "✥", "đất": "◆" };
+const techniqueVisual: Record<number, { fieldTag: string; particleCount: number; impactCount: number }> = {
+  1: { fieldTag: "DẤU KHỞI PHÁT", particleCount: 1, impactCount: 4 },
+  2: { fieldTag: "LIÊN HOÀN", particleCount: 3, impactCount: 6 },
+  3: { fieldTag: "LA BÀN BỘC PHÁ", particleCount: 4, impactCount: 8 },
+  4: { fieldTag: "MẬT LỆNH", particleCount: 5, impactCount: 12 },
+};
+const trailPosition = ["left-0 top-0", "-left-4 top-2", "left-2 -top-4", "left-4 top-6", "-left-6 -top-5"];
+const impactPosition = ["left-1/2 top-0", "right-0 top-1/2", "left-1/2 bottom-0", "left-0 top-1/2", "right-2 top-2", "right-2 bottom-2", "left-2 bottom-2", "left-2 top-2", "right-1 top-1/3", "left-1 top-1/3", "right-1 bottom-1/3", "left-1 bottom-1/3"];
+
+/** Field Journal Quest: paper-seal projectiles move only through transform and opacity. */
+function TrainingTechniqueEffect({ attacker, technique, correct, reducedMotion }: { attacker: { name: string; element: ElementName }; technique: typeof TRAINING_TECHNIQUES[number]; correct: boolean; reducedMotion: boolean | null }) {
+  const level = Math.min(4, Math.max(1, technique.level));
+  const visual = techniqueVisual[level];
+  const color = elementColor[attacker.element];
+  const travel = correct ? 420 : -420;
+  const duration = reducedMotion ? 0.01 : 0.7 + level * 0.06;
+  const targetClass = correct ? "right-[14%]" : "left-[14%]";
+  const originClass = correct ? "left-[18%]" : "right-[18%]";
+
+  return <>
+    <motion.div aria-label={`${attacker.name} kích hoạt ${technique.name}`} initial={{ opacity: 0, scale: 0.72, x: 0, y: 0 }} animate={{ opacity: [0, 1, 1, 0], scale: [0.72, 1, 1.12 + level * 0.04, 1.36], x: reducedMotion ? 0 : [0, travel], y: reducedMotion ? 0 : [0, -16, 5, 0] }} transition={{ duration, ease: [0.23, 1, 0.32, 1] }} className={`pointer-events-none absolute top-[57%] z-20 grid h-12 w-12 place-items-center ${originClass}`}>
+      {Array.from({ length: visual.particleCount }).map((_, index) => <span key={index} aria-hidden className={`absolute grid h-5 w-5 place-items-center rounded-full border border-white/80 bg-[#172a48]/85 text-xs font-black ${trailPosition[index]}`} style={{ color, boxShadow: `0 0 ${7 + level * 2}px ${color}` }}>{elementalGlyph[attacker.element]}</span>)}
+      <motion.span aria-hidden animate={reducedMotion ? { rotate: 0 } : { rotate: level >= 3 ? 360 : 0 }} transition={{ duration: level >= 3 ? 0.56 : 0.01, ease: "linear" }} className={`relative z-10 grid h-10 w-10 place-items-center border-2 border-white bg-[#172a48] font-display text-2xl font-black ${level >= 3 ? "rounded-full" : "rotate-45"}`} style={{ color, boxShadow: `0 0 ${14 + level * 5}px ${color}` }}><span className={level >= 3 ? "" : "-rotate-45"}>{elementalGlyph[attacker.element]}</span></motion.span>
+      {level >= 3 && <span aria-hidden className="absolute inset-[-9px] rounded-full border border-dashed border-white/80" />}
+      <span className="absolute -bottom-5 whitespace-nowrap border border-white/60 bg-[#172a48]/90 px-1.5 py-0.5 font-mono text-[8px] font-black tracking-[.12em] text-white">{visual.fieldTag}</span>
+    </motion.div>
+    <motion.div initial={{ opacity: 0, scale: 0.3 }} animate={{ opacity: [0, 0, 1, 0], scale: [0.3, 0.55, 1.42 + level * 0.12, 2.05] }} transition={{ duration: reducedMotion ? 0.01 : 0.38 + level * 0.05, delay: reducedMotion ? 0 : 0.39, ease: [0.23, 1, 0.32, 1] }} className={`pointer-events-none absolute top-[40%] z-20 grid h-24 w-24 place-items-center ${targetClass}`}>
+      <span aria-hidden className="absolute inset-3 rounded-full border-2 border-white/90" style={{ background: `radial-gradient(circle, ${color} 0%, ${color}99 28%, transparent 70%)`, boxShadow: `0 0 ${22 + level * 6}px ${color}` }} />
+      {Array.from({ length: visual.impactCount }).map((_, index) => <span key={index} aria-hidden className={`absolute h-5 w-[2px] origin-bottom bg-white ${impactPosition[index]}`} style={{ boxShadow: `0 0 7px ${color}`, transform: impactPosition[index].includes("top") ? "rotate(30deg)" : "rotate(-30deg)" }} />)}
+      <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border-2 border-white bg-[#172a48] font-display text-xl font-black" style={{ color }}>{elementalGlyph[attacker.element]}</span>
+    </motion.div>
+  </>;
+}
 
 function TrainingArchive({ guardianName, timeline, history }: { guardianName: string; timeline: { label: string; xp: number }[]; history: ReturnType<ReturnType<typeof useGame>["getGuardianTrainingHistory"]> }) {
   return <section className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_.85fr]">
@@ -105,6 +140,7 @@ export default function TrainingPage() {
   const [levelCelebration, setLevelCelebration] = useState<LevelCelebration | null>(null);
   const [streakBadge, setStreakBadge] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const reducedMotion = useReducedMotion();
 
   const battle = profile?.battle;
   const trainingActive = battle?.mode === "training" && battle.status === "active";
@@ -167,6 +203,7 @@ export default function TrainingPage() {
     setSelectedAnswer(answer);
     setFeedback(result);
     playElementSound(activeGuardian.element, audioEnabled, result.correct ? "cast" : "counter");
+    playTechniqueSound(result.correct ? activeGuardian.element : opponent.element, technique.level, audioEnabled);
     if (result.streakMilestone) { setStreakBadge(result.streakMilestone.streak); playFiveStreakSound(audioEnabled); }
     if (result.trainingLevelUp) {
       const unlocked = getTrainingTechnique(result.trainingLevelUp.nextLevel);
@@ -194,7 +231,7 @@ export default function TrainingPage() {
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-dashed border-white/40 pt-5"><p className="max-w-xl text-sm text-[#d5dfed]">{trainingRule.questionCount} câu từ các trạm đã mở. Không Gold, không mất guardian; rời võ đài là HP hồi đầy.</p><button onClick={begin} className="inline-flex items-center gap-2 border-2 border-[#172a48] bg-[#f6b73c] px-5 py-3 font-black text-[#172a48] shadow-[3px_3px_0_white]"><Swords size={17} /> Xác nhận kèo đấu</button></div>
       </div>
     </article> : <article className="overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] shadow-[6px_6px_0_#172a48]">
-      <div className="relative min-h-72 overflow-hidden bg-[#172a48] p-5"><img src={ARENA_IMAGE} alt="Trận Huấn luyện Pet" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-gradient-to-r from-[#172a48]/90 via-[#172a48]/30 to-[#172a48]/90" /><AnimatePresence>{feedback && <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-10 grid place-items-center text-7xl" style={{ color: elementColor[activeGuardian.element] }}>{feedback.correct ? "✦" : "✕"}</motion.div>}</AnimatePresence><div className="relative grid gap-6 sm:grid-cols-2"><motion.div animate={feedback?.playerDamage ? { x: [0, -8, 8, 0] } : { x: 0 }}><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">{activeGuardian.name.toUpperCase()} · HP {playerHp}/{trainingRule.playerHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(playerHp / trainingRule.playerHp) * 100}%` }} className="h-full bg-[#3e9b7a]" /></div><img src={activeGuardian.sprite} alt={activeGuardian.name} className="mt-4 h-32 w-32 object-contain" /></motion.div><motion.div animate={feedback?.bossDamage ? { x: [0, 9, -9, 0] } : { x: 0 }} className="text-right"><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">ĐỐI THỦ · {opponent.name.toUpperCase()} · HP {opponentHp}/{trainingRule.opponentHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(opponentHp / trainingRule.opponentHp) * 100}%` }} className="ml-auto h-full bg-[#ee6b4e]" /></div><img src={opponent.sprite} alt={opponent.name} className="ml-auto mt-4 h-32 w-32 object-contain" /></motion.div></div></div>
+      <div className="relative min-h-72 overflow-hidden bg-[#172a48] p-5"><img src={ARENA_IMAGE} alt="Trận Huấn luyện Pet" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-gradient-to-r from-[#172a48]/90 via-[#172a48]/30 to-[#172a48]/90" /><AnimatePresence>{feedback && <TrainingTechniqueEffect attacker={feedback.correct ? activeGuardian : opponent} technique={technique} correct={feedback.correct} reducedMotion={reducedMotion} />}{feedback && <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-10 grid place-items-center text-7xl" style={{ color: elementColor[feedback.correct ? activeGuardian.element : opponent.element] }}>{feedback.correct ? "✦" : "✕"}</motion.div>}</AnimatePresence><div className="relative grid gap-6 sm:grid-cols-2"><motion.div animate={feedback?.playerDamage ? { x: [0, -8, 8, 0] } : { x: 0 }}><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">{activeGuardian.name.toUpperCase()} · HP {playerHp}/{trainingRule.playerHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(playerHp / trainingRule.playerHp) * 100}%` }} className="h-full bg-[#3e9b7a]" /></div><img src={activeGuardian.sprite} alt={activeGuardian.name} className="mt-4 h-32 w-32 object-contain" /></motion.div><motion.div animate={feedback?.bossDamage ? { x: [0, 9, -9, 0] } : { x: 0 }} className="text-right"><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">ĐỐI THỦ · {opponent.name.toUpperCase()} · HP {opponentHp}/{trainingRule.opponentHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(opponentHp / trainingRule.opponentHp) * 100}%` }} className="ml-auto h-full bg-[#ee6b4e]" /></div><img src={opponent.sprite} alt={opponent.name} className="ml-auto mt-4 h-32 w-32 object-contain" /></motion.div></div></div>
       <div className="p-5"><div className="flex flex-wrap items-center justify-between gap-2"><p className="section-kicker">{trainingRule.label.toUpperCase()} · LƯỢT {(battle?.questionIndex ?? 0) + 1}/{battle?.questionIds.length ?? 5} · {question?.difficulty} · KHÔNG GOLD</p><span className="field-tag"><Volume2 size={13} /> {audioEnabled ? "hiệu ứng bật" : "hiệu ứng tắt"}</span></div><h2 className="mt-4 font-display text-3xl font-black">{question?.prompt}</h2><p className="mt-2 text-xs text-[#58708b]">Nguồn: {question?.source}</p><div className="mt-5 grid grid-cols-2 gap-3">{choices.map((answer, index) => { const isCorrect = answer === question?.answer; const isSelected = answer === selectedAnswer; const tone = feedback && isCorrect ? "border-[#235b45] bg-[#e7f2e5]" : feedback && isSelected ? "border-[#ee6b4e] bg-[#ffe4dc]" : "border-[#172a48] bg-white hover:bg-[#fff0b6]"; return <button key={answer} onClick={() => submit(answer)} disabled={Boolean(feedback)} className={`border-2 px-4 py-3 text-left font-display text-2xl font-black shadow-[2px_2px_0_#172a48] ${tone}`}>{String.fromCharCode(65 + index)}. {answer}</button>; })}</div>{feedback && <div className={`mt-4 flex flex-wrap items-center justify-between gap-3 border-2 p-4 text-sm font-bold ${feedback.correct ? "border-[#235b45] bg-[#e7f2e5] text-[#235b45]" : "border-[#a54539] bg-[#ffe4dc] text-[#9e3d2d]"}`}><span>{feedback.correct ? <><Check className="mr-1 inline" size={16} /> Đúng: {activeGuardian.name} tấn công, +{trainingRule.xpCorrect} XP Huấn luyện.</> : <><X className="mr-1 inline" size={16} /> Sai: {opponent.name} phản công, +{trainingRule.xpIncorrect} XP Huấn luyện.</>} <span className="font-normal">{question?.explanation}</span></span><button onClick={() => advanceBattle()} className="border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]">{feedback.ended ? "Kết thúc lượt luyện" : "Lượt tiếp"}</button></div>}</div>
     </article>}
     {!trainingActive && nextTechnique && <p className="mt-4 border-l-4 border-[#f6b73c] bg-[#fff8da] px-4 py-3 text-sm text-[#4f3d1e]">Mốc kỹ thuật kế tiếp: <b>Cấp {nextTechnique.level} — {nextTechnique.name}</b> ({nextTechnique.bonusDamage ? `+${nextTechnique.bonusDamage} sát thương trong Võ đài` : "kỹ thuật nền"}).</p>}

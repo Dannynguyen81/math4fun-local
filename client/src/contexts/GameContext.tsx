@@ -5,7 +5,7 @@
  * and collectible-set rewards are recorded once per companion profile.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 
 export type AvatarId =
   | "compass" | "ember" | "tide" | "leaf"
@@ -16,6 +16,7 @@ export type StudentProfile = {
   id: string;
   name: string;
   avatar: AvatarId;
+  role?: "student" | "admin";
   username?: string;
   passwordSalt?: string;
   passwordHash?: string;
@@ -102,6 +103,8 @@ export type TrainingBattleRecord = {
   endedAt: string;
 };
 
+export type QuestionOverride = Pick<VerifiedQuestion, "prompt" | "choices" | "answer" | "hint" | "explanation" | "difficulty" | "source" | "pool">;
+
 export type GuardianHealth = { hp: number; updatedAt: string };
 
 export type LearningMetrics = {
@@ -118,7 +121,7 @@ export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 10; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord };
+type GameStore = { version: 12; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type StreakMilestone = { streak: number; bonusGold: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null; streakMilestone?: StreakMilestone };
@@ -129,6 +132,11 @@ type GameContextValue = {
   profile: StudentProfile | null;
   profiles: StudentProfile[];
   hasProfile: boolean;
+  isAdmin: boolean;
+  questionBank: VerifiedQuestion[];
+  saveQuestionOverride: (questionId: string, patch: QuestionOverride) => { ok: boolean; message: string };
+  resetQuestionOverride: (questionId: string) => void;
+  adminUnlockAll: () => void;
   audioEnabled: boolean;
   siteVisitCount: number;
   lastSiteVisitAt?: string;
@@ -199,7 +207,7 @@ const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 
 const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 10, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0 };
+const DEFAULT_STORE: GameStore = { version: 12, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0, questionOverrides: {} };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -233,6 +241,49 @@ async function hashParentPin(pin: string, salt: string) {
   return bytesToHex(new Uint8Array(digest));
 }
 function normalizeSecurityAnswer(answer: string) { return answer.trim().toLocaleLowerCase("vi-VN"); }
+const ACTIVE_SESSION_COOKIE = "math4fun-active-profile";
+const ADMIN_PROFILE_ID = "math4fun-local-admin";
+const ADMIN_SALT = "math4fun-local-admin-v1";
+const ADMIN_PASSWORD_HASH = "285f4512c32212bf624e06e3dca2bf5ef9484f5c543546fc3b1402e46d3612fe";
+const QUESTION_BASELINES: Record<string, VerifiedQuestion> = Object.fromEntries(Object.values(QUESTIONS_BY_ID).map((question) => [question.id, { ...question, choices: [...question.choices] }]));
+function readSessionCookie() {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.split("; ").find((item) => item.startsWith(`${ACTIVE_SESSION_COOKIE}=`));
+  return match ? decodeURIComponent(match.slice(ACTIVE_SESSION_COOKIE.length + 1)) : null;
+}
+function writeSessionCookie(profileId: string | null) {
+  if (typeof document === "undefined") return;
+  if (!profileId) {
+    document.cookie = `${ACTIVE_SESSION_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax`;
+    return;
+  }
+  document.cookie = `${ACTIVE_SESSION_COOKIE}=${encodeURIComponent(profileId)}; Max-Age=${60 * 60 * 24 * 30}; Path=/; SameSite=Lax`;
+}
+function buildAdminProfile(): StudentProfile {
+  const record = createProfileRecord("Quản trị viên", "compass", { username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH });
+  return {
+    ...record,
+    id: ADMIN_PROFILE_ID,
+    role: "admin",
+    xp: 25_000,
+    gold: 50_000,
+    unlockedStationIds: STATIONS.map((station) => station.id),
+    stationOpenedAt: Object.fromEntries(STATIONS.map((station) => [station.id, record.createdAt])),
+    completedStationIds: STATIONS.map((station) => station.id),
+    collectedGuardianIds: GUARDIANS.map((guardian) => guardian.id),
+    teamGuardianIds: GUARDIANS.slice(0, 3).map((guardian) => guardian.id),
+    map1BossDefeated: true,
+    inventory: Object.fromEntries(SHOP_ITEMS.map((item) => [item.id, 10])) as Record<ShopItem["id"], number>,
+    guardianTrainingXp: Object.fromEntries(GUARDIANS.map((guardian) => [guardian.id, 900])),
+  };
+}
+function applyQuestionOverrides(overrides: Record<string, QuestionOverride>) {
+  Object.entries(overrides).forEach(([questionId, patch]) => {
+    const question = QUESTIONS_BY_ID[questionId];
+    const baseline = QUESTION_BASELINES[questionId];
+    if (question && baseline) Object.assign(question, { ...baseline, choices: [...baseline.choices] }, patch, { choices: [...patch.choices] });
+  });
+}
 function effectiveGuardianHealth(health?: GuardianHealth, now = Date.now()): GuardianHealth {
   if (!health) return { hp: GUARDIAN_MAX_HP, updatedAt: new Date(now).toISOString() };
   const lastUpdate = new Date(health.updatedAt).getTime();
@@ -351,20 +402,26 @@ function readStore(): GameStore {
   if (typeof window === "undefined") return DEFAULT_STORE;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_STORE;
+    if (!raw) return { ...DEFAULT_STORE, profiles: [buildAdminProfile()] };
     const parsed = JSON.parse(raw) as Partial<GameStore>;
-    if (!Array.isArray(parsed.profiles)) return DEFAULT_STORE;
+    if (!Array.isArray(parsed.profiles)) return { ...DEFAULT_STORE, profiles: [buildAdminProfile()] };
+    const questionOverrides = parsed.questionOverrides && typeof parsed.questionOverrides === "object" ? parsed.questionOverrides : {};
+    applyQuestionOverrides(questionOverrides);
+    const hydratedProfiles = parsed.profiles.map((candidate) => hydrateProfile(candidate));
+    const profiles = hydratedProfiles.some((candidate) => candidate.id === ADMIN_PROFILE_ID) ? hydratedProfiles.map((candidate) => candidate.id === ADMIN_PROFILE_ID ? { ...buildAdminProfile(), ...candidate, role: "admin" as const, username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH } : candidate) : [...hydratedProfiles, buildAdminProfile()];
+    const requestedActiveProfileId = readSessionCookie() ?? (typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null);
     return {
-      version: 10,
-      activeProfileId: typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null,
+      version: 12,
+      activeProfileId: profiles.some((candidate) => candidate.id === requestedActiveProfileId) ? requestedActiveProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
       lastSiteVisitAt: typeof parsed.lastSiteVisitAt === "string" ? parsed.lastSiteVisitAt : undefined,
       parentPin: parsed.parentPin && typeof parsed.parentPin === "object" && typeof parsed.parentPin.salt === "string" && typeof parsed.parentPin.hash === "string" ? parsed.parentPin : undefined,
-      profiles: parsed.profiles.map((profile) => hydrateProfile(profile)),
+      profiles,
+      questionOverrides,
     };
   } catch {
-    return DEFAULT_STORE;
+    return { ...DEFAULT_STORE, profiles: [buildAdminProfile()] };
   }
 }
 
@@ -372,10 +429,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<GameStore>(readStore);
   const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
   useEffect(() => { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }, [store]);
+  useEffect(() => { writeSessionCookie(store.activeProfileId); }, [store.activeProfileId]);
   useEffect(() => { parentPinRef.current = store.parentPin; }, [store.parentPin]);
   useEffect(() => { setStore((previous) => ({ ...previous, siteVisitCount: previous.siteVisitCount + 1, lastSiteVisitAt: new Date().toISOString() })); }, []);
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
+  const isAdmin = profile?.role === "admin" && profile.id === ADMIN_PROFILE_ID;
+  const questionBank = useMemo(() => Object.values(QUESTIONS_BY_ID).sort((left, right) => left.stationId - right.stationId || left.id.localeCompare(right.id)), [store.questionOverrides]);
   const updateProfile = useCallback((profileId: string, updater: (entry: StudentProfile) => StudentProfile) => {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => entry.id === profileId ? updater(entry) : entry) }));
   }, []);
@@ -826,6 +886,44 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       return { ok: false, message: "Không thể đọc tệp JSON. Vui lòng chọn tệp sao lưu chưa bị chỉnh sửa." };
     }
   }, []);
+  const saveQuestionOverride = useCallback((questionId: string, patch: QuestionOverride) => {
+    if (!isAdmin) return { ok: false, message: "Chỉ tài khoản quản trị mới có thể chỉnh sửa ngân hàng câu hỏi." };
+    if (!QUESTION_BASELINES[questionId]) return { ok: false, message: "Không tìm thấy câu hỏi để cập nhật." };
+    if (patch.choices.length !== 4 || !patch.choices.every((choice) => Number.isFinite(choice))) return { ok: false, message: "Câu hỏi cần đúng 4 đáp án số hợp lệ." };
+    if (!patch.choices.includes(patch.answer)) return { ok: false, message: "Đáp án đúng phải nằm trong bốn lựa chọn." };
+    const sanitized: QuestionOverride = { ...patch, prompt: patch.prompt.trim(), hint: patch.hint.trim(), explanation: patch.explanation.trim(), source: patch.source.trim(), choices: patch.choices.map((choice) => Math.round(choice)) };
+    setStore((previous) => {
+      const questionOverrides = { ...previous.questionOverrides, [questionId]: sanitized };
+      applyQuestionOverrides(questionOverrides);
+      return { ...previous, questionOverrides };
+    });
+    return { ok: true, message: "Đã cập nhật câu hỏi trên thiết bị này." };
+  }, [isAdmin]);
+  const resetQuestionOverride = useCallback((questionId: string) => {
+    if (!isAdmin || !QUESTION_BASELINES[questionId]) return;
+    setStore((previous) => {
+      const { [questionId]: _, ...questionOverrides } = previous.questionOverrides;
+      applyQuestionOverrides(questionOverrides);
+      const baseline = QUESTION_BASELINES[questionId];
+      Object.assign(QUESTIONS_BY_ID[questionId], { ...baseline, choices: [...baseline.choices] });
+      return { ...previous, questionOverrides };
+    });
+  }, [isAdmin]);
+  const adminUnlockAll = useCallback(() => {
+    if (!isAdmin || !profile) return;
+    updateProfile(profile.id, (current) => ({
+      ...current,
+      xp: Math.max(current.xp, 25_000),
+      gold: Math.max(current.gold, 50_000),
+      unlockedStationIds: STATIONS.map((station) => station.id),
+      stationOpenedAt: Object.fromEntries(STATIONS.map((station) => [station.id, current.stationOpenedAt[station.id] ?? current.createdAt])),
+      completedStationIds: STATIONS.map((station) => station.id),
+      collectedGuardianIds: GUARDIANS.map((guardian) => guardian.id),
+      teamGuardianIds: GUARDIANS.slice(0, 3).map((guardian) => guardian.id),
+      map1BossDefeated: true,
+      guardianTrainingXp: Object.fromEntries(GUARDIANS.map((guardian) => [guardian.id, Math.max(current.guardianTrainingXp[guardian.id] ?? 0, 900)])),
+    }));
+  }, [isAdmin, profile, updateProfile]);
   const elementBadges = useMemo(() => profile ? ELEMENT_ORDER.filter((element) => (profile.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2) : [], [profile]);
   const getGuardianTrainingHistory = useCallback((guardianId: string) => (profile?.trainingBattleHistory ?? []).filter((entry) => entry.guardianId === guardianId).sort((left, right) => new Date(right.endedAt).getTime() - new Date(left.endedAt).getTime()), [profile]);
   const getGuardianTrainingXpTimeline = useCallback((guardianId: string) => {
@@ -850,6 +948,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     profile,
     profiles: store.profiles,
     hasProfile: Boolean(profile),
+    isAdmin,
+    questionBank,
+    saveQuestionOverride,
+    resetQuestionOverride,
+    adminUnlockAll,
     audioEnabled: store.audioEnabled,
     siteVisitCount: store.siteVisitCount,
     lastSiteVisitAt: store.lastSiteVisitAt,
@@ -911,7 +1014,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, startMap1BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, startMap1BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

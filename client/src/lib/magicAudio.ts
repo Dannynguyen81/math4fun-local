@@ -53,6 +53,52 @@ export function playElementSound(element: ElementName, enabled: boolean, mode: M
   window.setTimeout(() => void context.close?.(), (length + 0.18) * 1000);
 }
 
+/**
+ * Local-only training-technique sound. Each unlocked level adds a short extra
+ * synthesized layer, so the audible result grows with the Guardian technique.
+ */
+export function playTechniqueSound(element: ElementName, techniqueLevel: number, enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const tone = TONES[element];
+  const level = Math.min(4, Math.max(1, Math.floor(techniqueLevel)));
+  const duration = 0.28 + level * 0.12;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.06 + level * 0.012, now + 0.025);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+  master.connect(context.destination);
+
+  const addPulse = (start: number, end: number, offset: number, type: OscillatorType, gain: number) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(Math.max(38, start), now + offset);
+    oscillator.frequency.exponentialRampToValueAtTime(Math.max(38, end), now + offset + Math.max(0.1, duration - offset - 0.04));
+    envelope.gain.setValueAtTime(0.0001, now + offset);
+    envelope.gain.exponentialRampToValueAtTime(gain, now + offset + 0.018);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, now + Math.min(duration, offset + 0.24));
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(now + offset);
+    oscillator.stop(now + duration + 0.04);
+  };
+
+  const intervals = [1, 1.16, 1.34, 1.56];
+  intervals.slice(0, level).forEach((interval, index) => {
+    const offset = index * 0.075;
+    const oscillator = index === 0 ? tone.primary : index === 3 ? "sine" : "triangle";
+    addPulse(tone.start * interval, tone.end * (1 + index * 0.06), offset, oscillator, index === 0 ? 0.92 : 0.36 + index * 0.08);
+  });
+  if (level >= 3) addPulse(tone.accent * 0.72, tone.accent * 1.22, 0.14, "sine", 0.3);
+  if (level === 4) addPulse(tone.accent * 1.08, tone.accent * 0.56, 0.24, "square", 0.34);
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), (duration + 0.2) * 1000);
+}
+
 /** A short, local-only three-note fanfare for a newly reached elemental level. */
 export function playElementLevelUpSound(element: ElementName, enabled: boolean) {
   if (!enabled || typeof window === "undefined") return;
