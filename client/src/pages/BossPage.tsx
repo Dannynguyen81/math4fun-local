@@ -4,10 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, Crown, Lock, ShieldAlert, Sparkles, Swords, Volume2, X } from "lucide-react";
-import { ARENA_IMAGE, BATTLE_AUDIO, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_ARCHIVES, getGuardian, getSpellForGuardian, GUARDIANS, MAGIC_MEDIA, QUESTIONS_BY_ID, type MapId } from "@/game/gameData";
+import { Check, Crown, Flag, Lightbulb, Lock, ShieldAlert, Sparkles, Swords, Volume2, X } from "lucide-react";
+import { ARENA_IMAGE, BATTLE_AUDIO, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_ARCHIVES, MAP_BOSS_RULES, getGuardian, getSpellForGuardian, GUARDIANS, MAGIC_MEDIA, QUESTIONS_BY_ID, type MapId } from "@/game/gameData";
 import { type ElementLevelUp, useGame } from "@/contexts/GameContext";
-import { playElementLevelUpSound, playElementSound, playFiveStreakSound } from "@/lib/magicAudio";
+import { playElementLevelUpSound, playElementSound, playFiveStreakSound, playTechniqueSound } from "@/lib/magicAudio";
 
 type Feedback = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean };
 
@@ -38,20 +38,40 @@ function GuardianCaster({ guardianId, active, isCasting }: { guardianId: string;
   );
 }
 
+/** Field Journal Quest: a directional battle stamp makes each Boss hit readable without moving layout. */
+function BossTechniqueEffect({ element, correct, power }: { element: string; correct: boolean; power: number }) {
+  const color = elementColor[element] ?? "#f6b73c";
+  const glyph = elementIcon[element] ?? "✦";
+  const travelFrom = correct ? "-165%" : "165%";
+  const travelTo = correct ? "145%" : "-145%";
+  const impactSide = correct ? "right-[10%]" : "left-[10%]";
+  const particleCount = Math.min(7, Math.max(3, power + 2));
+  return <AnimatePresence><motion.div className="pointer-events-none absolute inset-0 z-30 overflow-hidden" initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div initial={{ x: travelFrom, opacity: 0, scale: 0.42 }} animate={{ x: travelTo, opacity: [0, 1, 1, 0], scale: [0.42, 1, 1.08, 0.72] }} transition={{ duration: 0.6 + power * 0.035, ease: [0.23, 1, 0.32, 1] }} className="absolute left-1/2 top-[43%] grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-white" style={{ background: `radial-gradient(circle, #fff 0 9%, ${color} 22%, ${color}bb 48%, transparent 70%)`, boxShadow: `0 0 ${18 + power * 5}px ${color}` }}>
+      {Array.from({ length: particleCount }).map((_, index) => <span key={index} aria-hidden className="absolute h-1 w-6 rounded-full bg-white/90" style={{ transform: `rotate(${index * (360 / particleCount)}deg) translateX(${26 + power * 2}px)`, boxShadow: `0 0 6px ${color}` }} />)}
+      <b className="relative z-10 font-display text-3xl" style={{ color, textShadow: "0 1px 0 white" }}>{glyph}</b>
+    </motion.div>
+    <motion.div initial={{ opacity: 0, scale: 0.35 }} animate={{ opacity: [0, 0, 1, 0], scale: [0.35, 0.65, 1.45 + power * 0.08, 2] }} transition={{ duration: 0.5, delay: 0.35, ease: [0.23, 1, 0.32, 1] }} className={`absolute top-[43%] ${impactSide} grid h-24 w-24 -translate-y-1/2 place-items-center rounded-full border-2 border-white/90`} style={{ background: `radial-gradient(circle, #fff 0 7%, ${color}44 20%, ${color} 28%, transparent 72%)`, boxShadow: `0 0 ${25 + power * 5}px ${color}` }}>
+      <span className="font-display text-4xl text-white" style={{ textShadow: `0 0 12px ${color}` }}>{correct ? "✦" : "✕"}</span>
+    </motion.div>
+  </motion.div></AnimatePresence>;
+}
+
 export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
-  const { profile, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, resolveBattleAnswer, advanceBattle, audioEnabled, guardianHp } = useGame();
+  const { profile, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, resolveBattleAnswer, advanceBattle, audioEnabled, guardianHp, reportQuestion, unlockQuestionHint } = useGame();
   const boss = MAP_BOSS_ARCHIVES[mapId];
   const bossUnlocked = mapId === 1 ? isMap1BossUnlocked : isMap2BossUnlocked;
   const bossDefeated = mapId === 1 ? Boolean(profile?.map1BossDefeated) : Boolean(profile?.map2BossDefeated);
   const bossPool = mapId === 1 ? MAP1_BOSS_QUESTION_IDS : MAP2_BOSS_QUESTION_IDS;
   const bossHistory = mapId === 1 ? profile?.map1BossQuestionHistory ?? [] : profile?.map2BossQuestionHistory ?? [];
-  const bossMaxHp = mapId === 1 ? 260 : 300;
+  const bossMaxHp = MAP_BOSS_RULES[mapId].maxHp;
   const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [choices, setChoices] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [levelUp, setLevelUp] = useState<ElementLevelUp | null>(null);
   const [streakBadge, setStreakBadge] = useState<number | null>(null);
+  const [hintVisible, setHintVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const battle = profile?.battle;
@@ -75,6 +95,7 @@ export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
       setChoices(shuffle(question.choices));
       setSelectedAnswer(null);
       setFeedback(null);
+      setHintVisible(false);
     }
   }, [question?.id]);
 
@@ -112,6 +133,8 @@ export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
     setSelectedAnswer(answer);
     setFeedback(result);
     playElementSound(selectedGuardian.element, audioEnabled, result.correct ? "cast" : "counter");
+    const techniqueLevel = spell.damage >= 30 ? 4 : spell.damage >= 26 ? 3 : spell.damage >= 21 ? 2 : 1;
+    window.setTimeout(() => playTechniqueSound(result.correct ? selectedGuardian.element : boss.element, techniqueLevel, audioEnabled), result.correct ? 110 : 80);
     if (result.streakMilestone) { setStreakBadge(result.streakMilestone.streak); playFiveStreakSound(audioEnabled); }
     if (result.levelUp) {
       setLevelUp(result.levelUp);
@@ -121,6 +144,18 @@ export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
 
   function next() {
     if (status === "active" && !feedback?.ended) advanceBattle();
+  }
+  function revealHint() {
+    if (!question || !window.confirm("Mở gợi ý chiến thuật này sẽ trừ 1 Gold. Em có đồng ý không?")) return;
+    const result = unlockQuestionHint(question.id);
+    window.alert(result.message);
+    if (result.ok) setHintVisible(true);
+  }
+  function reportCurrentQuestion() {
+    if (!question) return;
+    const note = window.prompt("Ghi ngắn gọn lỗi em phát hiện về đề bài hoặc đáp án Boss:");
+    if (note === null) return;
+    window.alert(reportQuestion(question.id, "other", note).message);
   }
 
   if (!profile) {
@@ -180,15 +215,16 @@ export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
       {status !== "active" ? (
             <article className="arena-dossier overflow-hidden border-2 border-[#172a48] bg-[#172a48] text-white shadow-[6px_6px_0_#f6b73c]"><div className="relative h-56"><img src={ARENA_IMAGE} alt={`Đấu trường ma thuật ${boss.name}`} className="h-full w-full object-cover opacity-70" /><div className="absolute inset-0 bg-gradient-to-t from-[#172a48] via-[#172a48]/60 to-transparent" /><img src={boss.sprite} alt={boss.name} className="absolute bottom-2 right-6 h-48 w-48 object-contain drop-shadow-[0_7px_0_rgba(0,0,0,.45)]" /><div className="absolute inset-x-5 bottom-5"><span className="field-tag border-white/25 bg-white/10 text-white">{hasFreshRun ? <ShieldAlert size={13} className="text-[#f6b73c]" /> : <Lock size={13} className="text-[#f6b73c]" />} {hasFreshRun ? "10 CÂU M/H · KHÔNG LẶP" : "ARCHIVE ĐÃ HẾT CÂU MỚI"}</span><h2 className="mt-3 font-display text-4xl font-black">{status === "victory" ? `${boss.name} đã trao ${boss.badge}.` : status === "defeat" ? `${battleGuardian.name} đã gục ngã và trở về trạm.` : "Chọn guardian rồi bước vào."}</h2></div></div><div className="grid gap-5 p-6 lg:grid-cols-[1fr_auto]"><p className="max-w-2xl text-sm leading-relaxed text-[#d5dfed]">{!hasFreshRun ? `${boss.name} còn ${unusedBossQuestions} câu M/H chưa dùng — chưa đủ mười câu cho một trận mới.` : status === "victory" ? <><b className="text-[#f6b73c]">Huy hiệu đã đóng dấu: {boss.badge}.</b> {boss.reward}</> : status === "defeat" ? "Guardian đã rời Bộ sưu tập và dấu trạm tương ứng đã được mở lại. Hoàn thành lại 10 câu đúng để thu phục bạn ấy lần nữa." : `${selectedGuardian.name} đang có ${guardianHp(selectedGuardian.id)}/100 HP. Mỗi guardian có một phép riêng theo nguyên tố.`}</p><button onClick={begin} disabled={!hasFreshRun || !selectedGuardianId || bossDefeated} className="inline-flex h-fit items-center gap-2 border-2 border-[#172a48] bg-[#f6b73c] px-5 py-3 font-bold text-[#172a48] shadow-[3px_3px_0_white] disabled:cursor-not-allowed disabled:opacity-45"><Swords size={17} /> {bossDefeated ? "Đã hoàn tất cửa Boss" : status === "idle" ? "Bắt đầu trận 10 câu" : "Thách đấu lại"}</button></div></article>
       ) : (
-        <div className="overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] shadow-[6px_6px_0_#172a48]">
-          <div className="relative min-h-76 overflow-hidden bg-[#172a48] p-5 sm:min-h-92"><img src={ARENA_IMAGE} alt={`Đấu trường Boss ${boss.name}`} className="absolute inset-0 h-full w-full object-cover opacity-70" /><div className="absolute inset-0 bg-gradient-to-r from-[#172a48]/90 via-[#172a48]/35 to-[#172a48]/90" />
-            <AnimatePresence>{feedback && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={`spell-effect ${feedback.correct ? "is-hit" : "is-counter"}`} style={spellStyle(selectedGuardian.element)}><motion.span initial={{ x: "-135%", scale: 0.4, opacity: 0 }} animate={{ x: feedback.correct ? "135%" : "-5%", scale: [0.4, 1.4, 1], opacity: [0, 1, 0] }} transition={{ duration: 0.62, ease: "easeOut" }}>{elementIcon[selectedGuardian.element]}</motion.span></motion.div>}</AnimatePresence>
+        <div className="overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] shadow-[6px_6px_0_#172a48] lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,.8fr)]">
+          <div className="relative min-h-[340px] overflow-hidden bg-[#172a48] p-5 sm:min-h-[380px] lg:min-h-[540px]"><img src={ARENA_IMAGE} alt={`Đấu trường Boss ${boss.name}`} className="absolute inset-0 h-full w-full object-cover opacity-70" /><div className="absolute inset-0 bg-gradient-to-r from-[#172a48]/90 via-[#172a48]/35 to-[#172a48]/90" />
+            {feedback && <BossTechniqueEffect element={feedback.correct ? selectedGuardian.element : boss.element} correct={feedback.correct} power={spell.damage >= 30 ? 4 : spell.damage >= 26 ? 3 : spell.damage >= 21 ? 2 : 1} />}
             <AnimatePresence>{levelUp && <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.22, ease: "easeOut" }} className="absolute inset-3 z-20 grid place-items-center bg-[#172a48]/84 p-3 text-center backdrop-blur-[2px] sm:inset-6"><div className="relative w-full max-w-md overflow-hidden border-2 border-[#f6b73c] bg-[#fffdf6] p-5 text-[#172a48] shadow-[5px_5px_0_#f6b73c]"><motion.i aria-hidden="true" initial={{ scale: 0.55, rotate: -18, opacity: 0 }} animate={{ scale: [0.55, 1.2, 1], rotate: [-18, 8, 0], opacity: 1 }} transition={{ duration: 0.56, ease: "easeOut" }} className="absolute left-1/2 top-1/2 grid h-40 w-40 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-dashed opacity-20" style={{ borderColor: elementColor[levelUp.element] }}><span className="text-8xl" style={{ color: elementColor[levelUp.element] }}>{elementIcon[levelUp.element]}</span></motion.i><div className="relative"><div className="flex justify-center gap-3 text-2xl" style={{ color: elementColor[levelUp.element] }}>{[0, 1, 2, 3, 4].map((star) => <motion.span key={star} initial={{ y: -18, opacity: 0, rotate: -12 }} animate={{ y: [-18, 7, 0], opacity: 1, rotate: 0 }} transition={{ delay: star * 0.06, duration: 0.42 }}>✦</motion.span>)}</div><p className="mt-3 font-mono text-[10px] font-black tracking-[0.18em]">ẤN ĐÃ ĐƯỢC GHI VÀO NHẬT KÝ</p><h2 className="mt-2 font-display text-4xl font-black" style={{ color: elementColor[levelUp.element] }}>{MAGIC_MEDIA[levelUp.element].shortLabel} TĂNG BẬC</h2><p className="mt-2 text-sm font-bold">Bậc {levelUp.previousLevel} → Bậc {levelUp.nextLevel} · tổng {levelUp.totalXp} XP</p><p className="mt-3 text-sm leading-relaxed text-[#476275]">Guardian đã chuyển hóa phép tính vừa dùng thành một dấu ấn mới. Tiếp tục hành trình để chạm bậc tiếp theo.</p><button type="button" onClick={() => setLevelUp(null)} className="mt-4 border-2 border-[#172a48] bg-[#f6b73c] px-4 py-2 text-sm font-black shadow-[2px_2px_0_#172a48]">Ghi nhận dấu ấn</button></div></div></motion.div>}</AnimatePresence>
             <AnimatePresence>{streakBadge && <motion.div initial={{ opacity: 0, y: 16, scale: 0.92 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10 }} className="absolute left-1/2 top-5 z-30 w-[min(92%,360px)] -translate-x-1/2 border-2 border-[#f6b73c] bg-[#172a48]/95 p-4 text-center text-white shadow-[4px_4px_0_#f6b73c]"><div className="text-xl tracking-[.25em] text-[#f6b73c]">✦ ✦ ✦</div><b className="font-display text-2xl">Chuỗi {streakBadge} đòn chính xác!</b><p className="mt-1 text-xs text-[#fff0b6]">+5 Gold được đóng dấu vào nhật ký.</p></motion.div>}</AnimatePresence>
-            <div className="relative grid gap-6 sm:grid-cols-2"><motion.div animate={feedback?.playerDamage ? { x: [0, -7, 7, -4, 0] } : { x: 0 }} transition={{ duration: 0.28 }} className="pt-3"><p className="font-mono text-[10px] font-bold tracking-[0.16em] text-[#f6b73c]">{battleGuardian.name.toUpperCase()} · HP {playerHp}/100</p><div className="mt-2 h-3 overflow-hidden border border-white/50 bg-[#172a48]"><motion.div animate={{ width: `${playerHp}%` }} className="h-full bg-[#3e9b7a]" /></div><div className="mt-4 flex flex-wrap gap-3">{team.map((guardianId) => <button key={guardianId} disabled className="cursor-default text-left disabled:opacity-60"><GuardianCaster guardianId={guardianId} active={guardianId === battleGuardian.id} isCasting={Boolean(feedback) && guardianId === battleGuardian.id} /></button>)}</div></motion.div><motion.div animate={feedback?.bossDamage ? { x: [0, 10, -8, 0] } : { x: 0 }} transition={{ duration: 0.3 }} className="sm:text-right"><p className="font-mono text-[10px] font-bold tracking-[0.16em] text-[#f6b73c]">BOSS {boss.name.toUpperCase()} · HP {bossHp}/{bossMaxHp}</p><div className="mt-2 h-3 overflow-hidden border border-white/50 bg-[#172a48]"><motion.div animate={{ width: `${(bossHp / bossMaxHp) * 100}%` }} className="h-full bg-[#ee6b4e]" /></div><motion.img animate={{ y: [-3, 3, -3], rotate: feedback?.bossDamage ? [0, 4, -4, 0] : 0 }} transition={{ duration: feedback?.bossDamage ? 0.3 : 2.2, repeat: feedback?.bossDamage ? 0 : Infinity }} src={boss.sprite} alt={boss.name} className="ml-auto mt-3 h-28 w-28 object-contain drop-shadow-[0_6px_0_rgba(23,42,72,.65)]" /><div className="mt-1 inline-flex items-center gap-2 border-2 border-white/60 bg-[#172a48]/80 px-3 py-1.5 font-display text-xl font-black text-white"><Crown className="text-[#f6b73c]" /> {boss.name}</div></motion.div></div>
+            <div className="relative grid gap-6 sm:grid-cols-2"><motion.div animate={feedback?.playerDamage ? { x: [0, -7, 7, -4, 0] } : { x: 0 }} transition={{ duration: 0.28 }} className="pt-3"><p className="font-mono text-[10px] font-bold tracking-[0.16em] text-[#f6b73c]">{battleGuardian.name.toUpperCase()} · HP {playerHp}/100</p><div className="mt-2 h-3 overflow-hidden border border-white/50 bg-[#172a48]"><motion.div animate={{ width: `${playerHp}%` }} className="h-full bg-[#3e9b7a]" /></div><p className="mt-1 text-[10px] text-[#d5dfed]">Sai: −{MAP_BOSS_RULES[mapId].wrongAnswerDamage} HP · Đúng: vẫn chịu phản công phép.</p><div className="mt-4 flex flex-wrap gap-3">{team.map((guardianId) => <button key={guardianId} disabled className="cursor-default text-left disabled:opacity-60"><GuardianCaster guardianId={guardianId} active={guardianId === battleGuardian.id} isCasting={Boolean(feedback) && guardianId === battleGuardian.id} /></button>)}</div></motion.div><motion.div animate={feedback?.bossDamage ? { x: [0, 10, -8, 0] } : { x: 0 }} transition={{ duration: 0.3 }} className="sm:text-right"><p className="font-mono text-[10px] font-bold tracking-[0.16em] text-[#f6b73c]">BOSS {boss.name.toUpperCase()} · HP {bossHp}/{bossMaxHp}</p><div className="mt-2 h-3 overflow-hidden border border-white/50 bg-[#172a48]"><motion.div animate={{ width: `${(bossHp / bossMaxHp) * 100}%` }} className="h-full bg-[#ee6b4e]" /></div><motion.img animate={{ y: [-3, 3, -3], rotate: feedback?.bossDamage ? [0, 4, -4, 0] : 0 }} transition={{ duration: feedback?.bossDamage ? 0.3 : 2.2, repeat: feedback?.bossDamage ? 0 : Infinity }} src={boss.sprite} alt={boss.name} className="ml-auto mt-3 h-36 w-36 object-contain drop-shadow-[0_6px_0_rgba(23,42,72,.65)] sm:h-44 sm:w-44" /><div className="mt-1 inline-flex items-center gap-2 border-2 border-white/60 bg-[#172a48]/80 px-3 py-1.5 font-display text-xl font-black text-white"><Crown className="text-[#f6b73c]" /> {boss.name}</div></motion.div></div>
           </div>
-          <div className="p-5 sm:p-6"><div className="flex flex-wrap items-center justify-between gap-2"><p className="section-kicker">Boss Map {mapId} · pool {bossPool.length} câu M/H</p><span className="field-tag"><Volume2 size={14} /> {audioEnabled ? "nhạc battle bật" : "nhạc battle tắt"}</span></div><div className="mt-4 grid gap-4 lg:grid-cols-[1fr_auto]"><div><p className="font-display text-2xl font-black leading-tight sm:text-3xl">{question?.prompt}</p><p className="mt-2 text-xs font-semibold text-[#58708b]">Nguồn: {question?.source}</p></div><div className="spell-ready-card" style={spellStyle(selectedGuardian.element)}><img src={selectedGuardian.sprite} alt={selectedGuardian.name} /><div><span>{selectedGuardian.type}</span><b>{selectedGuardian.name} · {spell.name}</b><small>{spell.note} +{spell.damage} / phản công −{spell.counterDamage}</small></div></div></div>
+          <div className="border-t-2 border-[#172a48] bg-[#fffdf6] p-5 sm:p-6 lg:border-l-2 lg:border-t-0"><div className="flex flex-wrap items-center justify-between gap-2"><p className="section-kicker">Boss Map {mapId} · pool {bossPool.length} câu M/H</p><span className="field-tag"><Volume2 size={14} /> {audioEnabled ? "nhạc battle bật" : "nhạc battle tắt"}</span></div><div className="mt-4"><p className="font-display text-2xl font-black leading-tight sm:text-3xl">{question?.prompt}</p><div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-[#58708b]"><span>Nguồn: {question?.source}</span><button onClick={reportCurrentQuestion} className="inline-flex items-center gap-1 border-b border-dashed border-[#a54539] pb-0.5 font-bold text-[#a54539]"><Flag size={13} /> Báo lỗi</button></div></div><div className="mt-4 spell-ready-card" style={spellStyle(selectedGuardian.element)}><img src={selectedGuardian.sprite} alt={selectedGuardian.name} /><div><span>{selectedGuardian.type}</span><b>{selectedGuardian.name} · {spell.name}</b><small>{spell.note} +{spell.damage} / phản công −{spell.counterDamage}</small></div></div>
             {studyReel && <aside className="spell-study-reel" style={spellStyle(selectedGuardian.element)} aria-label={`Minh họa phép ${studyReel.title} của ${selectedGuardian.name}`}><div><span className="field-tag border-[#172a48]/35 bg-[#fffdf6]"><Sparkles size={13} style={{ color: elementColor[selectedGuardian.element] }} /> TƯ LIỆU PHÉP</span><h2>{selectedGuardian.name} · {studyReel.title}</h2><p>Clip minh họa {spell.name} được nạp từ phép tính đúng; chỉ gợi cảm hứng phép thuật, không tiết lộ đáp án Boss.</p></div><video src={studyReel.src} muted autoPlay loop playsInline preload="metadata" aria-label={`${selectedGuardian.name} dùng ${studyReel.title}`} /></aside>}
+            <div className="mt-4 border-2 border-dashed border-[#c9b88c] bg-[#fff8da] p-3 text-sm leading-relaxed text-[#476275]">{hintVisible ? <><b className="text-[#172a48]">Gợi ý đã mở:</b> {question?.hint}</> : <button onClick={revealHint} className="inline-flex items-center gap-1 font-bold text-[#172a48] underline decoration-2 underline-offset-4"><Lightbulb size={15} /> Mở gợi ý chiến thuật · 1 Gold</button>}</div>
             <p className="mt-4 font-mono text-[10px] font-bold tracking-[0.15em] text-[#58708b]">CHỌN GUARDIAN Ở ĐẤU TRƯỜNG · PHÉP TỰ ĐỘNG THEO HỆ</p>
             <div className="mt-5 grid grid-cols-2 gap-3">{choices.map((answer, index) => { const isCorrect = answer === question?.answer; const isSelected = answer === selectedAnswer; const tone = feedback && isCorrect ? "border-[#3e9b7a] bg-[#e7f2e5]" : feedback && isSelected ? "border-[#ee6b4e] bg-[#ffe4dc]" : "border-[#172a48] bg-white hover:bg-[#fff0b6]"; return <button key={`${question?.id}-${answer}`} onClick={() => submit(answer)} disabled={Boolean(feedback)} className={`answer-choice border-2 px-4 py-3 text-left font-display text-2xl font-black shadow-[2px_2px_0_#172a48] transition disabled:cursor-default ${tone}`}>{String.fromCharCode(65 + index)}. {answer}</button>; })}</div>
             <AnimatePresence>{feedback && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className={feedback.correct ? "mt-4 flex flex-wrap items-center justify-between gap-3 border-2 border-[#235b45] bg-[#e7f2e5] p-4 text-sm font-bold text-[#235b45]" : "mt-4 flex flex-wrap items-center justify-between gap-3 border-2 border-[#a54539] bg-[#ffe4dc] p-4 text-sm font-bold text-[#9e3d2d]"}><span>{feedback.correct ? <><Check className="mr-1 inline" size={17} /> {battleGuardian.name} dùng {spell.name}: {boss.name} −{feedback.bossDamage} HP; phản công −{feedback.playerDamage} HP.</> : <><X className="mr-1 inline" size={17} /> Sai đáp án: {boss.name} phản công mạnh −{feedback.playerDamage} HP.</>} <span className="font-normal">{question?.explanation}</span></span>{feedback.ended ? <span className="font-black">{playerHp === 0 ? `${battleGuardian.name} đã gục ngã — hãy thu phục lại tại trạm.` : `Trận đã kết thúc · ${boss.badge} đang chờ đóng dấu.`}</span> : <button onClick={next} className="whitespace-nowrap border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]">Lượt tiếp <Swords className="ml-1 inline" size={14} /></button>}</motion.div>}</AnimatePresence>

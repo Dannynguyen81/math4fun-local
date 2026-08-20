@@ -193,6 +193,12 @@ export const MAP_BOSS_ARCHIVES: Record<MapId, MapBossArchive> = {
   2: { mapId: 2, name: "Myrion", title: "Người Gác La Bàn Vàng", element: "sấm", sprite: sprite(150), note: "Myrion là cửa khảo nghiệm cuối, tổng hợp các dấu vết từ Tập 2.", badge: "Dũng sĩ diệt Boss cấp 2", reward: "Ghi danh hoàn tất hành trình Toán 4" },
 };
 
+/** Bảo đảm cả guardian hệ Nước vẫn có thể thắng nếu trả lời đúng đủ mười lượt; Map 2 phản công nhỉnh hơn. */
+export const MAP_BOSS_RULES: Record<MapId, { maxHp: number; wrongAnswerDamage: number; counterMultiplier: number }> = {
+  1: { maxHp: 168, wrongAnswerDamage: 28, counterMultiplier: 1 },
+  2: { maxHp: 180, wrongAnswerDamage: 31, counterMultiplier: 1.08 },
+};
+
 /** Field Journal Quest: a shared local-only catalog for the Boss study reel and Magic Book gallery. */
 export const MAGIC_MEDIA: Record<ElementName, MagicMedia> = {
   "sấm": { title: "Tia Chớp Số Học", shortLabel: "SẤM ẤN", src: "/manus-storage/thunder-number-spell_ea927287.mp4", note: "Tia chớp nạp từ một phép tính đúng." },

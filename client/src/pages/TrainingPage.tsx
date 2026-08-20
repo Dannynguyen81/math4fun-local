@@ -5,7 +5,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Check, Lock, MapPinned, ScrollText, Swords, Volume2, X, Zap } from "lucide-react";
+import { Check, Flag, Lightbulb, Lock, MapPinned, ScrollText, Swords, Volume2, X, Zap } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ARENA_IMAGE,
@@ -130,7 +130,7 @@ function TrainingSeal({ hasProfile }: { hasProfile: boolean }) {
 }
 
 export default function TrainingPage() {
-  const { profile, canTrainPets, startTrainingBattle, resolveBattleAnswer, advanceBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, audioEnabled } = useGame();
+  const { profile, canTrainPets, startTrainingBattle, resolveBattleAnswer, advanceBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, audioEnabled, reportQuestion, unlockQuestionHint } = useGame();
   const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(null);
   const [selectedOpponentId, setSelectedOpponentId] = useState<string | null>(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState<TrainingDifficultyId>("pathfinder");
@@ -139,6 +139,7 @@ export default function TrainingPage() {
   const [feedback, setFeedback] = useState<BattleFeedback | null>(null);
   const [levelCelebration, setLevelCelebration] = useState<LevelCelebration | null>(null);
   const [streakBadge, setStreakBadge] = useState<number | null>(null);
+  const [hintVisible, setHintVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const reducedMotion = useReducedMotion();
 
@@ -169,7 +170,7 @@ export default function TrainingPage() {
     if (!selectedOpponentId || selectedOpponentId === activeGuardian.id || !opponentCandidates.some((guardian) => guardian.id === selectedOpponentId)) setSelectedOpponentId(opponentCandidates[0]?.id ?? null);
   }, [activeGuardian.id, opponentCandidates, selectedOpponentId]);
   useEffect(() => {
-    if (question) { setChoices(shuffle(question.choices)); setSelectedAnswer(null); setFeedback(null); }
+    if (question) { setChoices(shuffle(question.choices)); setSelectedAnswer(null); setFeedback(null); setHintVisible(false); }
   }, [question?.id]);
   useEffect(() => {
     const audio = audioRef.current;
@@ -211,6 +212,18 @@ export default function TrainingPage() {
       playElementLevelUpSound(activeGuardian.element, audioEnabled);
     }
   }
+  function revealHint() {
+    if (!question || !window.confirm("Mở gợi ý này sẽ trừ 1 Gold. Em có đồng ý không?")) return;
+    const result = unlockQuestionHint(question.id);
+    window.alert(result.message);
+    if (result.ok) setHintVisible(true);
+  }
+  function reportCurrentQuestion() {
+    if (!question) return;
+    const note = window.prompt("Ghi ngắn gọn lỗi em phát hiện về đề bài hoặc đáp án luyện tập:");
+    if (note === null) return;
+    window.alert(reportQuestion(question.id, "other", note).message);
+  }
 
   return <section className="relative">
     <audio ref={audioRef} src={BATTLE_AUDIO} loop preload="auto" />
@@ -232,7 +245,7 @@ export default function TrainingPage() {
       </div>
     </article> : <article className="overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] shadow-[6px_6px_0_#172a48]">
       <div className="relative min-h-72 overflow-hidden bg-[#172a48] p-5"><img src={ARENA_IMAGE} alt="Trận Huấn luyện Pet" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-gradient-to-r from-[#172a48]/90 via-[#172a48]/30 to-[#172a48]/90" /><AnimatePresence>{feedback && <TrainingTechniqueEffect attacker={feedback.correct ? activeGuardian : opponent} technique={technique} correct={feedback.correct} reducedMotion={reducedMotion} />}{feedback && <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="pointer-events-none absolute inset-0 z-10 grid place-items-center text-7xl" style={{ color: elementColor[feedback.correct ? activeGuardian.element : opponent.element] }}>{feedback.correct ? "✦" : "✕"}</motion.div>}</AnimatePresence><div className="relative grid gap-6 sm:grid-cols-2"><motion.div animate={feedback?.playerDamage ? { x: [0, -8, 8, 0] } : { x: 0 }}><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">{activeGuardian.name.toUpperCase()} · HP {playerHp}/{trainingRule.playerHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(playerHp / trainingRule.playerHp) * 100}%` }} className="h-full bg-[#3e9b7a]" /></div><img src={activeGuardian.sprite} alt={activeGuardian.name} className="mt-4 h-32 w-32 object-contain" /></motion.div><motion.div animate={feedback?.bossDamage ? { x: [0, 9, -9, 0] } : { x: 0 }} className="text-right"><p className="font-mono text-[10px] font-bold tracking-[.14em] text-[#f6b73c]">ĐỐI THỦ · {opponent.name.toUpperCase()} · HP {opponentHp}/{trainingRule.opponentHp}</p><div className="mt-2 h-3 border border-white/60 bg-[#172a48]"><motion.div animate={{ width: `${(opponentHp / trainingRule.opponentHp) * 100}%` }} className="ml-auto h-full bg-[#ee6b4e]" /></div><img src={opponent.sprite} alt={opponent.name} className="ml-auto mt-4 h-32 w-32 object-contain" /></motion.div></div></div>
-      <div className="p-5"><div className="flex flex-wrap items-center justify-between gap-2"><p className="section-kicker">{trainingRule.label.toUpperCase()} · LƯỢT {(battle?.questionIndex ?? 0) + 1}/{battle?.questionIds.length ?? 5} · {question?.difficulty} · KHÔNG GOLD</p><span className="field-tag"><Volume2 size={13} /> {audioEnabled ? "hiệu ứng bật" : "hiệu ứng tắt"}</span></div><h2 className="mt-4 font-display text-3xl font-black">{question?.prompt}</h2><p className="mt-2 text-xs text-[#58708b]">Nguồn: {question?.source}</p><div className="mt-5 grid grid-cols-2 gap-3">{choices.map((answer, index) => { const isCorrect = answer === question?.answer; const isSelected = answer === selectedAnswer; const tone = feedback && isCorrect ? "border-[#235b45] bg-[#e7f2e5]" : feedback && isSelected ? "border-[#ee6b4e] bg-[#ffe4dc]" : "border-[#172a48] bg-white hover:bg-[#fff0b6]"; return <button key={answer} onClick={() => submit(answer)} disabled={Boolean(feedback)} className={`border-2 px-4 py-3 text-left font-display text-2xl font-black shadow-[2px_2px_0_#172a48] ${tone}`}>{String.fromCharCode(65 + index)}. {answer}</button>; })}</div>{feedback && <div className={`mt-4 flex flex-wrap items-center justify-between gap-3 border-2 p-4 text-sm font-bold ${feedback.correct ? "border-[#235b45] bg-[#e7f2e5] text-[#235b45]" : "border-[#a54539] bg-[#ffe4dc] text-[#9e3d2d]"}`}><span>{feedback.correct ? <><Check className="mr-1 inline" size={16} /> Đúng: {activeGuardian.name} tấn công, +{trainingRule.xpCorrect} XP Huấn luyện.</> : <><X className="mr-1 inline" size={16} /> Sai: {opponent.name} phản công, +{trainingRule.xpIncorrect} XP Huấn luyện.</>} <span className="font-normal">{question?.explanation}</span></span><button onClick={() => advanceBattle()} className="border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]">{feedback.ended ? "Kết thúc lượt luyện" : "Lượt tiếp"}</button></div>}</div>
+      <div className="p-5"><div className="flex flex-wrap items-center justify-between gap-2"><p className="section-kicker">{trainingRule.label.toUpperCase()} · LƯỢT {(battle?.questionIndex ?? 0) + 1}/{battle?.questionIds.length ?? 5} · {question?.difficulty} · XP ONLY</p><span className="field-tag"><Volume2 size={13} /> {audioEnabled ? "hiệu ứng bật" : "hiệu ứng tắt"}</span></div><h2 className="mt-4 font-display text-3xl font-black">{question?.prompt}</h2><div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-[#58708b]"><span>Nguồn: {question?.source}</span><button onClick={reportCurrentQuestion} className="inline-flex items-center gap-1 border-b border-dashed border-[#a54539] pb-0.5 font-bold text-[#a54539]"><Flag size={13} /> Báo lỗi</button></div><div className="mt-4 border-2 border-dashed border-[#c9b88c] bg-[#fff8da] p-3 text-sm text-[#476275]">{hintVisible ? <><b className="text-[#172a48]">Gợi ý đã mở:</b> {question?.hint}</> : <button onClick={revealHint} className="inline-flex items-center gap-1 font-bold text-[#172a48] underline decoration-2 underline-offset-4"><Lightbulb size={15} /> Mở gợi ý · 1 Gold</button>}</div><div className="mt-5 grid grid-cols-2 gap-3">{choices.map((answer, index) => { const isCorrect = answer === question?.answer; const isSelected = answer === selectedAnswer; const tone = feedback && isCorrect ? "border-[#235b45] bg-[#e7f2e5]" : feedback && isSelected ? "border-[#ee6b4e] bg-[#ffe4dc]" : "border-[#172a48] bg-white hover:bg-[#fff0b6]"; return <button key={answer} onClick={() => submit(answer)} disabled={Boolean(feedback)} className={`border-2 px-4 py-3 text-left font-display text-2xl font-black shadow-[2px_2px_0_#172a48] ${tone}`}>{String.fromCharCode(65 + index)}. {answer}</button>; })}</div>{feedback && <div className={`mt-4 flex flex-wrap items-center justify-between gap-3 border-2 p-4 text-sm font-bold ${feedback.correct ? "border-[#235b45] bg-[#e7f2e5] text-[#235b45]" : "border-[#a54539] bg-[#ffe4dc] text-[#9e3d2d]"}`}><span>{feedback.correct ? <><Check className="mr-1 inline" size={16} /> Đúng: {activeGuardian.name} tấn công, +{trainingRule.xpCorrect} XP Huấn luyện.</> : <><X className="mr-1 inline" size={16} /> Sai: {opponent.name} phản công, +{trainingRule.xpIncorrect} XP Huấn luyện.</>} <span className="font-normal">{question?.explanation}</span></span><button onClick={() => advanceBattle()} className="border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]">{feedback.ended ? "Kết thúc lượt luyện" : "Lượt tiếp"}</button></div>}</div>
     </article>}
     {!trainingActive && nextTechnique && <p className="mt-4 border-l-4 border-[#f6b73c] bg-[#fff8da] px-4 py-3 text-sm text-[#4f3d1e]">Mốc kỹ thuật kế tiếp: <b>Cấp {nextTechnique.level} — {nextTechnique.name}</b> ({nextTechnique.bonusDamage ? `+${nextTechnique.bonusDamage} sát thương trong Võ đài` : "kỹ thuật nền"}).</p>}
     {!trainingActive && <TrainingArchive guardianName={activeGuardian.name} timeline={guardianXpTimeline} history={guardianHistory} />}

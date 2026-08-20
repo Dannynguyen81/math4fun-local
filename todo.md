@@ -180,3 +180,16 @@
 - [x] Thêm bộ lọc nguồn và tập sách trong Console quản trị cùng kiểm thử dữ liệu câu hỏi.
 - [ ] Thay SVG dự phòng bằng ảnh chibi AI toàn thân g07, g08, g09 đồng nhất khi hạn mức tạo ảnh sẵn sàng.
 - [x] Kiểm tra TypeScript, build, luồng Gold, điều kiện Boss, huy hiệu, giao diện và lưu checkpoint.
+
+## Chất lượng câu hỏi, Boss và sổ Gold
+
+- [x] Lưu report cục bộ trên mỗi câu hỏi, gồm loại lỗi, ghi chú, thời điểm và trạng thái duyệt cho admin.
+- [x] Thêm nút report và gợi ý có xác nhận trừ 1 Gold trong Trạm, Boss Map 1/2 và Huấn luyện.
+- [x] Thêm Gold ledger gồm mở trạm trả phí, hint, Shop và phần thưởng; hiển thị lịch sử/bộ lọc trong Thống kê.
+- [x] Thêm hàng đợi report và bộ lọc trạng thái vào Console quản trị, giữ bộ lọc nguồn/tập sách.
+- [x] Tạo nhạc nền ambient nhẹ cho các trang không làm bài, tự dừng khi làm bài/battle và tôn trọng toggle audio.
+- [x] Tái bố cục Boss Map 1/2 để sân đấu và câu hỏi cùng thấy được; nâng projectile, va chạm, phản hồi HP và thông số cân bằng.
+- [x] Tăng guardian trên Map khoảng 2× và tái bố cục trang Trạm theo artifact Field Journal.
+- [x] Thử lại một lượt tạo ảnh AI g07–g09; giữ SVG fallback vì hạn mức tạo ảnh chưa cho phép thay thế.
+- [x] Kiểm tra TypeScript/build và giao diện desktop/mobile; route `/boss` tương thích liên kết cũ đã được xác nhận.
+- [ ] Chơi thử bằng hồ sơ admin: xác nhận trừ Gold/cancel hint, gửi-duyệt report, ledger và toàn bộ 10 lượt Boss trên thiết bị người dùng.

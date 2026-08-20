@@ -123,3 +123,5 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Trên Map, mỗi mốc luôn phải có ghim/pin hoặc dấu route gắn vào đường chỉ, vị trí lệch trục và một **điểm đến kế tiếp** Marigold rõ ràng; tuyệt đối không căn thành danh sách đều.
 - Dấu vật liệu (tem, note, pin, nhãn, seal) chỉ xuất hiện khi giải thích taxonomy, tiến độ, điều kiện mở hoặc hành động kế tiếp; không thêm trang trí không mang thông tin.
 - Boss phải hiện như một hồ sơ cửa cuối vật lý: dây mở khóa, bằng chứng 10 mốc, thử thách 10 câu M/H và huy hiệu phần thưởng được nhìn thấy như cùng một case file.
+- Trang Thống kê phải mang silhouette **expedition report**: sổ quan sát, log bằng chứng và chuỗi dữ liệu lệch nhịp; Console quản trị phải mang silhouette **source-verification case file** với tem restricted, dòng giấy thẩm định và dấu xác thực nguồn.
+- Route/evidence trail trên các trang phụ ưu tiên cấu trúc ghim lệch, note và dấu chuyển hóa; không biến thành thanh onboarding ngang đều đặn.
