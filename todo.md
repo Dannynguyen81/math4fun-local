@@ -210,3 +210,11 @@
 - [x] Thiết kế viền/stamp tương tác cho thẻ avatar trên nền parchment, có trạng thái chọn rõ ràng.
 - [x] Hiển thị hộp thư/thông báo trong game khi report của người chơi đã được admin duyệt và phản hồi.
 - [x] Kiểm tra TypeScript/build, audio toggle, hiệu ứng Boss, thẻ avatar và thông báo report; lưu checkpoint.
+
+## Cộng tác GitHub và dữ liệu Supabase
+
+- [ ] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.
+- [ ] Bổ sung tài liệu README/AGENTS cho quy trình cộng tác của nhiều AI Agent, nhánh, kiểm tra build và bảo vệ dữ liệu.
+- [ ] Đánh giá mô hình localStorage hiện tại và xác định schema Supabase tối thiểu cho hồ sơ, câu hỏi, report, Gold và leaderboard.
+- [ ] Xác nhận repository GitHub đích và dự án Supabase trước khi thực hiện các thao tác kết nối có tính thay đổi bên ngoài.
+- [ ] Xuất mã lên GitHub, thiết lập Supabase khi được xác nhận, rồi kiểm chứng quy trình phát triển đa tác nhân.
