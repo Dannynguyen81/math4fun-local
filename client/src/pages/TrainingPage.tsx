@@ -203,7 +203,7 @@ export default function TrainingPage() {
     setSelectedAnswer(answer);
     setFeedback(result);
     playElementSound(activeGuardian.element, audioEnabled, result.correct ? "cast" : "counter");
-    playTechniqueSound(result.correct ? activeGuardian.element : opponent.element, technique.level, audioEnabled);
+    window.setTimeout(() => playTechniqueSound(result.correct ? activeGuardian.element : opponent.element, technique.level, audioEnabled), result.correct ? 110 : 80);
     if (result.streakMilestone) { setStreakBadge(result.streakMilestone.streak); playFiveStreakSound(audioEnabled); }
     if (result.trainingLevelUp) {
       const unlocked = getTrainingTechnique(result.trainingLevelUp.nextLevel);

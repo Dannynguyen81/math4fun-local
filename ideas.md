@@ -119,3 +119,7 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Trạng thái khóa hoặc chưa ký tên của Hồ sơ và Console quản trị là **artifact niêm phong hoàn chỉnh**: bắt buộc có route fragment, chứng cứ còn thiếu, dấu/mẫu vật hoặc case file và một hành động hành trình cụ thể; không được dùng thẻ đăng nhập trống căn giữa.
 - Chọn companion phải đọc như một **trải tiêu bản ghim dọc theo route thread**: dùng mốc 01–03, nhãn field tag và độ lệch nhẹ theo tuyến thay cho một lưới đồng đều không có nhịp.
 - Console quản trị kế thừa thế giới Math4Fun như một **expedition case file**: ngôn ngữ về niêm phong, bằng chứng, nguồn sách và dấu xác thực phải thay thế ngôn ngữ app permission chung chung.
+- Mỗi trang chính dùng một **silhouette artifact** riêng: Map là route chỉ khâu ghim nhãn, So sánh là sổ đối chiếu đôi, Hồ sơ là sổ tiêu bản cá nhân, Console là case file xác thực nguồn và Boss là dossier đấu trường niêm phong.
+- Trên Map, mỗi mốc luôn phải có ghim/pin hoặc dấu route gắn vào đường chỉ, vị trí lệch trục và một **điểm đến kế tiếp** Marigold rõ ràng; tuyệt đối không căn thành danh sách đều.
+- Dấu vật liệu (tem, note, pin, nhãn, seal) chỉ xuất hiện khi giải thích taxonomy, tiến độ, điều kiện mở hoặc hành động kế tiếp; không thêm trang trí không mang thông tin.
+- Boss phải hiện như một hồ sơ cửa cuối vật lý: dây mở khóa, bằng chứng 10 mốc, thử thách 10 câu M/H và huy hiệu phần thưởng được nhìn thấy như cùng một case file.

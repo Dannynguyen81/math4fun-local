@@ -167,5 +167,16 @@
 - [x] Bổ sung tài khoản quản trị cục bộ `admin` và phiên đăng nhập bền vững theo cookie/local storage; chỉ đăng nhập lại sau khi đăng xuất.
 - [x] Tạo menu tài khoản, hồ sơ cá nhân và console quản trị để duyệt/sửa/khôi phục ghi đè câu hỏi, kèm mở khóa toàn bộ nội dung thử nghiệm.
 - [x] Thay bộ chọn nhân vật bằng 20 avatar chibi toàn thân, có khuôn mặt, tóc và biểu cảm phân biệt.
-- [ ] Liên kết mỗi kỹ thuật Huấn luyện mở khóa với hiệu ứng phóng phép, va chạm và âm thanh riêng trong võ đài.
-- [ ] Kiểm tra TypeScript, build, quyền admin, persistence phiên, avatar mới và các kỹ thuật Huấn luyện; lưu checkpoint.
+- [x] Liên kết mỗi kỹ thuật Huấn luyện mở khóa với hiệu ứng phóng phép, va chạm và âm thanh riêng trong võ đài.
+- [x] Kiểm tra TypeScript, build, quyền admin, persistence phiên, avatar mới và các kỹ thuật Huấn luyện; lưu checkpoint.
+
+## Nhịp mở chủ đề, Boss hai Map và trải nghiệm quản trị
+
+- [x] Chẩn đoán và sửa lỗi hiển thị trang So sánh hồ sơ trên desktop và mobile.
+- [x] Giữ hai lượt mở chủ đề miễn phí mỗi tuần; sau khi dùng hết, cho phép mở thêm chủ đề với giá 30 Gold và giải thích rõ quy tắc trong bản đồ.
+- [x] Khóa Map 2 cho đến khi Boss Map 1 bị đánh bại; đặt Boss Map 1 ở cửa cuối Map 1 và chỉ mở trận khi đủ 10 chủ đề Map 1 đã mở.
+- [x] Đặt Boss Map 2 ở cửa cuối Map 2 và chỉ mở trận khi đủ 10 chủ đề Map 2 đã mở; trao huy hiệu Dũng sĩ diệt Boss cấp 1/2 theo chiến thắng tương ứng.
+- [x] Tinh chỉnh nhịp độ, thời lượng và âm lượng âm thanh kỹ thuật trong Võ đài Huấn luyện để các lượt đánh rõ ràng nhưng không gắt.
+- [x] Thêm bộ lọc nguồn và tập sách trong Console quản trị cùng kiểm thử dữ liệu câu hỏi.
+- [ ] Thay SVG dự phòng bằng ảnh chibi AI toàn thân g07, g08, g09 đồng nhất khi hạn mức tạo ảnh sẵn sàng.
+- [x] Kiểm tra TypeScript, build, luồng Gold, điều kiện Boss, huy hiệu, giao diện và lưu checkpoint.

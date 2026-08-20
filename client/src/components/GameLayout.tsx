@@ -19,6 +19,7 @@ function routeLabel(path: string) {
   if (path === "/shop") return "Quầy tiếp tế trên tuyến đường";
   if (path === "/training") return "Võ đài luyện phép của guardian";
   if (path === "/map-boss") return "Cửa cuối Map 1 · Boss tổng hợp";
+  if (path === "/map2-boss") return "Cửa cuối Map 2 · Boss tổng hợp";
   if (path === "/leaderboard") return "Bảng chứng tích trên cùng thiết bị";
   if (path === "/compare") return "Phiếu đối chiếu của hai nhật ký";
   if (path === "/study-calendar") return "Lịch tuần bảo vệ chuỗi học";

@@ -65,6 +65,17 @@ export type Guardian = {
   tone: string;
 };
 
+export type MapBossArchive = {
+  mapId: MapId;
+  name: string;
+  title: string;
+  element: Guardian["element"];
+  sprite: string;
+  note: string;
+  badge: string;
+  reward: string;
+};
+
 export type Station = {
   id: number;
   code: string;
@@ -176,6 +187,11 @@ export const GUARDIANS: Guardian[] = [
   { id: "nexa", name: "Nexa", type: "MIXED / ARCHIVE", element: "gió", description: "Người ghi chép cuối tuyến cho bài toán tổng hợp.", stationId: 20, sprite: sprite(196), tone: "bg-indigo-600" },
   { id: "atlas", name: "Atlas", type: "BOSS / ARCHIVE", element: "độc", description: "Người giữ kho lưu trữ. Atlas phản công ở mọi lượt, kể cả khi em trả lời đúng.", stationId: "boss", sprite: sprite(143), tone: "bg-indigo-700" },
 ];
+
+export const MAP_BOSS_ARCHIVES: Record<MapId, MapBossArchive> = {
+  1: { mapId: 1, name: "Atlas", title: "Người Giữ Kho Mực Chàm", element: "độc", sprite: sprite(143), note: "Atlas phản công ở mỗi lượt của trận tổng hợp Tập 1.", badge: "Dũng sĩ diệt Boss cấp 1", reward: "Mở Map 2 · Nhật ký La Bàn Vàng" },
+  2: { mapId: 2, name: "Myrion", title: "Người Gác La Bàn Vàng", element: "sấm", sprite: sprite(150), note: "Myrion là cửa khảo nghiệm cuối, tổng hợp các dấu vết từ Tập 2.", badge: "Dũng sĩ diệt Boss cấp 2", reward: "Ghi danh hoàn tất hành trình Toán 4" },
+};
 
 /** Field Journal Quest: a shared local-only catalog for the Boss study reel and Magic Book gallery. */
 export const MAGIC_MEDIA: Record<ElementName, MagicMedia> = {
@@ -402,6 +418,9 @@ export const getMapQuestions = (mapId: MapId) => QUESTIONS.filter((question) => 
   return station ? getMapIdForStation(station) === mapId : false;
 });
 export const MAP1_BOSS_QUESTION_IDS = getMapQuestions(1)
+  .filter((question) => question.difficulty !== "E")
+  .map((question) => question.id);
+export const MAP2_BOSS_QUESTION_IDS = getMapQuestions(2)
   .filter((question) => question.difficulty !== "E")
   .map((question) => question.id);
 

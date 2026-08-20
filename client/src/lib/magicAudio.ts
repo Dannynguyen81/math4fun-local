@@ -65,10 +65,12 @@ export function playTechniqueSound(element: ElementName, techniqueLevel: number,
   const now = context.currentTime;
   const tone = TONES[element];
   const level = Math.min(4, Math.max(1, Math.floor(techniqueLevel)));
-  const duration = 0.28 + level * 0.12;
+  // Technique layers are intentionally softer and shorter than the main cast cue:
+  // cast → brief travel → technique impact, rather than two competing sounds.
+  const duration = 0.22 + level * 0.085;
   const master = context.createGain();
   master.gain.setValueAtTime(0.0001, now);
-  master.gain.exponentialRampToValueAtTime(0.06 + level * 0.012, now + 0.025);
+  master.gain.exponentialRampToValueAtTime(0.042 + level * 0.007, now + 0.03);
   master.gain.exponentialRampToValueAtTime(0.0001, now + duration);
   master.connect(context.destination);
 
@@ -79,8 +81,8 @@ export function playTechniqueSound(element: ElementName, techniqueLevel: number,
     oscillator.frequency.setValueAtTime(Math.max(38, start), now + offset);
     oscillator.frequency.exponentialRampToValueAtTime(Math.max(38, end), now + offset + Math.max(0.1, duration - offset - 0.04));
     envelope.gain.setValueAtTime(0.0001, now + offset);
-    envelope.gain.exponentialRampToValueAtTime(gain, now + offset + 0.018);
-    envelope.gain.exponentialRampToValueAtTime(0.0001, now + Math.min(duration, offset + 0.24));
+    envelope.gain.exponentialRampToValueAtTime(gain, now + offset + 0.024);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, now + Math.min(duration, offset + 0.2));
     oscillator.connect(envelope);
     envelope.connect(master);
     oscillator.start(now + offset);
@@ -89,12 +91,12 @@ export function playTechniqueSound(element: ElementName, techniqueLevel: number,
 
   const intervals = [1, 1.16, 1.34, 1.56];
   intervals.slice(0, level).forEach((interval, index) => {
-    const offset = index * 0.075;
+    const offset = index * 0.095;
     const oscillator = index === 0 ? tone.primary : index === 3 ? "sine" : "triangle";
-    addPulse(tone.start * interval, tone.end * (1 + index * 0.06), offset, oscillator, index === 0 ? 0.92 : 0.36 + index * 0.08);
+    addPulse(tone.start * interval, tone.end * (1 + index * 0.06), offset, oscillator, index === 0 ? 0.72 : 0.2 + index * 0.045);
   });
-  if (level >= 3) addPulse(tone.accent * 0.72, tone.accent * 1.22, 0.14, "sine", 0.3);
-  if (level === 4) addPulse(tone.accent * 1.08, tone.accent * 0.56, 0.24, "square", 0.34);
+  if (level >= 3) addPulse(tone.accent * 0.72, tone.accent * 1.22, 0.18, "sine", 0.18);
+  if (level === 4) addPulse(tone.accent * 1.08, tone.accent * 0.56, 0.3, "square", 0.2);
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), (duration + 0.2) * 1000);
 }
