@@ -44,6 +44,7 @@ export type StudentProfile = {
   goldHistory: GoldTransaction[];
   hintUsedQuestionIds: string[];
   questionReports: QuestionReport[];
+  readReportReplyIds: string[];
   inventory: Record<ShopItem["id"], number>;
   equippedCosmetics: Partial<Record<CosmeticSlot, ShopItem["id"]>>;
   setRewardsClaimed: string[];
@@ -154,7 +155,7 @@ export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 13; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
+type GameStore = { version: 14; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; ambientEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type StreakMilestone = { streak: number; bonusGold: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null; streakMilestone?: StreakMilestone };
@@ -171,11 +172,15 @@ type GameContextValue = {
   reportQuestion: (questionId: string, category: QuestionReportCategory, note: string) => { ok: boolean; message: string };
   updateQuestionReportStatus: (reportId: string, status: QuestionReport["status"]) => void;
   respondToQuestionReport: (reportId: string, status: QuestionReport["status"], reply: string) => { ok: boolean; message: string };
+  unreadReportReplies: QuestionReport[];
+  markReportReplyRead: (reportId: string) => void;
   unlockQuestionHint: (questionId: string) => { ok: boolean; charged: boolean; message: string };
   saveQuestionOverride: (questionId: string, patch: QuestionOverride) => { ok: boolean; message: string };
   resetQuestionOverride: (questionId: string) => void;
   adminUnlockAll: () => void;
   audioEnabled: boolean;
+  ambientEnabled: boolean;
+  setAmbientEnabled: (enabled: boolean) => void;
   siteVisitCount: number;
   lastSiteVisitAt?: string;
   level: number;
@@ -248,7 +253,7 @@ const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 
 const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 13, profiles: [], activeProfileId: null, audioEnabled: true, siteVisitCount: 0, questionOverrides: {} };
+const DEFAULT_STORE: GameStore = { version: 14, profiles: [], activeProfileId: null, audioEnabled: true, ambientEnabled: true, siteVisitCount: 0, questionOverrides: {} };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -385,6 +390,7 @@ function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<Stud
     goldHistory: [],
     hintUsedQuestionIds: [],
     questionReports: [],
+    readReportReplyIds: [],
     inventory: emptyInventory(),
     equippedCosmetics: {},
     setRewardsClaimed: [],
@@ -438,6 +444,7 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     goldHistory: Array.isArray(candidate.goldHistory) ? candidate.goldHistory.filter((entry): entry is GoldTransaction => Boolean(entry && typeof entry === "object" && typeof entry.id === "string" && typeof entry.amount === "number" && Number.isFinite(entry.amount) && ["answer", "hint", "station-open", "shop", "set-reward"].includes(entry.category as GoldTransactionCategory) && typeof entry.label === "string" && typeof entry.createdAt === "string")).slice(0, 150) : [],
     hintUsedQuestionIds: Array.isArray(candidate.hintUsedQuestionIds) ? Array.from(new Set(candidate.hintUsedQuestionIds.filter((id): id is string => typeof id === "string" && Boolean(QUESTIONS_BY_ID[id])))) : [],
     questionReports: Array.isArray(candidate.questionReports) ? candidate.questionReports.filter((entry): entry is QuestionReport => Boolean(entry && typeof entry === "object" && typeof entry.id === "string" && typeof entry.questionId === "string" && Boolean(QUESTIONS_BY_ID[entry.questionId]) && ["answer", "prompt", "source", "other"].includes(entry.category as QuestionReportCategory) && typeof entry.note === "string" && typeof entry.createdAt === "string" && ["new", "reviewing", "resolved"].includes(entry.status as QuestionReport["status"]) && typeof entry.reporterId === "string" && typeof entry.reporterName === "string")).map((entry) => ({ ...entry, adminReply: typeof entry.adminReply === "string" ? entry.adminReply : undefined, reviewedAt: typeof entry.reviewedAt === "string" ? entry.reviewedAt : undefined, reviewedBy: typeof entry.reviewedBy === "string" ? entry.reviewedBy : undefined, handlingHistory: Array.isArray(entry.handlingHistory) ? entry.handlingHistory.filter((item): item is QuestionReportHandling => Boolean(item && typeof item === "object" && typeof item.at === "string" && typeof item.by === "string" && ["new", "reviewing", "resolved"].includes(item.status as QuestionReport["status"]) && (item.reply === undefined || typeof item.reply === "string"))).slice(0, 12) : [] })).slice(0, 80) : [],
+    readReportReplyIds: Array.isArray(candidate.readReportReplyIds) ? Array.from(new Set(candidate.readReportReplyIds.filter((id): id is string => typeof id === "string"))).slice(0, 80) : [],
     inventory: { ...emptyInventory(), ...(candidate.inventory && typeof candidate.inventory === "object" ? candidate.inventory : {}) },
     equippedCosmetics: candidate.equippedCosmetics && typeof candidate.equippedCosmetics === "object" ? candidate.equippedCosmetics : {},
     setRewardsClaimed: Array.isArray(candidate.setRewardsClaimed) ? Array.from(new Set(candidate.setRewardsClaimed.filter((setId): setId is string => typeof setId === "string" && COMPANION_COSMETIC_SETS.some((set) => set.id === setId)))) : [],
@@ -472,9 +479,10 @@ function readStore(): GameStore {
     const profiles = hydratedProfiles.some((candidate) => candidate.id === ADMIN_PROFILE_ID) ? hydratedProfiles.map((candidate) => candidate.id === ADMIN_PROFILE_ID ? { ...buildAdminProfile(), ...candidate, role: "admin" as const, username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH } : candidate) : [...hydratedProfiles, buildAdminProfile()];
     const requestedActiveProfileId = readSessionCookie() ?? (typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null);
     return {
-      version: 13,
+      version: 14,
       activeProfileId: profiles.some((candidate) => candidate.id === requestedActiveProfileId) ? requestedActiveProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
+      ambientEnabled: typeof parsed.ambientEnabled === "boolean" ? parsed.ambientEnabled : true,
       siteVisitCount: typeof parsed.siteVisitCount === "number" && Number.isFinite(parsed.siteVisitCount) ? Math.max(0, parsed.siteVisitCount) : 0,
       lastSiteVisitAt: typeof parsed.lastSiteVisitAt === "string" ? parsed.lastSiteVisitAt : undefined,
       parentPin: parsed.parentPin && typeof parsed.parentPin === "object" && typeof parsed.parentPin.salt === "string" && typeof parsed.parentPin.hash === "string" ? parsed.parentPin : undefined,
@@ -568,6 +576,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => ({ ...entry, questionReports: entry.questionReports.map((report) => report.id === reportId ? { ...report, status, adminReply: cleanReply, reviewedAt, reviewedBy: profile.name, handlingHistory: [{ at: reviewedAt, by: profile.name, status, reply: cleanReply }, ...(report.handlingHistory ?? [])].slice(0, 12) } : report) })) }));
     return { ok: true, message: "Đã lưu phản hồi và đóng dấu vào phiếu của người học." };
   }, [isAdmin, profile]);
+  const unreadReportReplies = useMemo(() => !profile || isAdmin ? [] : profile.questionReports.filter((report) => Boolean(report.adminReply && report.reviewedAt) && !profile.readReportReplyIds.includes(report.id)).sort((left, right) => new Date(right.reviewedAt ?? 0).getTime() - new Date(left.reviewedAt ?? 0).getTime()), [isAdmin, profile]);
+  const markReportReplyRead = useCallback((reportId: string) => {
+    if (!profile) return;
+    updateProfile(profile.id, (current) => current.readReportReplyIds.includes(reportId) ? current : { ...current, readReportReplyIds: [reportId, ...current.readReportReplyIds].slice(0, 80) });
+  }, [profile, updateProfile]);
+  const setAmbientEnabled = useCallback((ambientEnabled: boolean) => setStore((previous) => ({ ...previous, ambientEnabled })), []);
   const unlockQuestionHint = useCallback((questionId: string) => {
     if (!profile || !QUESTIONS_BY_ID[questionId]) return { ok: false, charged: false, message: "Chưa có câu hỏi hợp lệ để mở gợi ý." };
     if (profile.hintUsedQuestionIds.includes(questionId)) return { ok: true, charged: false, message: "Gợi ý này đã được ghi trong nhật ký, không trừ Gold thêm." };
@@ -1076,11 +1090,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     reportQuestion,
     updateQuestionReportStatus,
     respondToQuestionReport,
+    unreadReportReplies,
+    markReportReplyRead,
     unlockQuestionHint,
     saveQuestionOverride,
     resetQuestionOverride,
     adminUnlockAll,
     audioEnabled: store.audioEnabled,
+    ambientEnabled: store.ambientEnabled,
+    setAmbientEnabled,
     siteVisitCount: store.siteVisitCount,
     lastSiteVisitAt: store.lastSiteVisitAt,
     level,
@@ -1144,7 +1162,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.ambientEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unreadReportReplies, markReportReplyRead, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, setAmbientEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

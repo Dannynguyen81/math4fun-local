@@ -202,3 +202,11 @@
 - [x] Cho admin duyệt report, nhập phản hồi gửi lại hồ sơ người chơi và lưu nhật ký xử lý cục bộ.
 - [x] Bỏ nền tím không phù hợp khỏi thẻ avatar, giữ ảnh chibi trên chất liệu parchment trung tính.
 - [x] Kiểm tra TypeScript/build, layout Boss/Huấn luyện, luồng report và ảnh avatar; lưu checkpoint.
+
+## Điều khiển âm thanh và phản hồi người chơi
+
+- [x] Thêm nút bật/tắt nhạc nền ở góc trên phải, lưu tùy chọn cục bộ và giữ âm hiệu ứng chiến đấu độc lập.
+- [x] Thêm rung lắc/chớp sáng GPU-friendly khi Boss phản công, đồng bộ với âm thanh nhưng tôn trọng giảm chuyển động.
+- [x] Thiết kế viền/stamp tương tác cho thẻ avatar trên nền parchment, có trạng thái chọn rõ ràng.
+- [x] Hiển thị hộp thư/thông báo trong game khi report của người chơi đã được admin duyệt và phản hồi.
+- [x] Kiểm tra TypeScript/build, audio toggle, hiệu ứng Boss, thẻ avatar và thông báo report; lưu checkpoint.
