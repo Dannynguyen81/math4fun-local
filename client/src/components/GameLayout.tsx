@@ -4,6 +4,7 @@ import { Link, useLocation } from "wouter";
 import { BarChart3, Bell, BookOpen, BookMarked, CalendarClock, ChevronDown, ClipboardPenLine, Cloud, CloudOff, CloudUpload, Compass, Flame, Gem, Home, LockKeyhole, LogOut, Map, Music2, Scale, ShieldCheck, ShoppingBag, Swords, TriangleAlert, Trophy, UserRound, Volume2, VolumeX } from "lucide-react";
 import { LOGO_IMAGE, MAGIC_MEDIA } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
+import { avatarImageById } from "@/components/PlayerAvatar";
 import { useAuthGate } from "@/components/AuthGate";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -125,8 +126,8 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2.5 rounded-lg border-2 border-[#172a48] bg-[#172a48] py-1.5 pl-1.5 pr-3 text-sm font-bold text-white shadow-[2px_2px_0_#f6b73c] transition hover:scale-[1.02]" aria-label="Mở menu tài khoản">
-                    <div className="grid h-9 w-9 place-items-center rounded-lg border-2 border-[#f6b73c] bg-[#fffdf6] overflow-hidden shadow-inner">
-                      <PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="md" />
+                    <div className="relative h-10 w-9 overflow-hidden rounded-md border-2 border-[#f6b73c] bg-[#fffdf6] shadow-inner flex items-end justify-center">
+                      <img src={avatarImageById[profile.avatar]} alt={profile.name} className="h-[94%] w-auto object-contain object-bottom drop-shadow" />
                     </div>
                     <span className="hidden max-w-32 truncate font-display font-black tracking-tight sm:block">{profile.name}</span>
                     <ChevronDown size={14} className="text-[#f6b73c]" />
