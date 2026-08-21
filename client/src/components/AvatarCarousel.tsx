@@ -64,7 +64,7 @@ export function AvatarCarousel({ open }: { open: boolean }) {
     playAvatarSelectSound(audioEnabled);
     setTimeout(() => {
       completeAvatarOnboarding(current.id);
-    }, 550);
+    }, 1200);
   };
 
   // Keyboard navigation & Enter to confirm
@@ -138,6 +138,15 @@ export function AvatarCarousel({ open }: { open: boolean }) {
       className="max-h-[calc(100dvh-1rem)] w-[min(94vw,860px)] max-w-none overflow-y-auto rounded-none border-2 border-[#172a48] bg-[#fffdf6] p-0 text-[#172a48] shadow-[7px_7px_0_#f6b73c] sm:shadow-[9px_9px_0_#f6b73c]"
     >
       <div className="relative overflow-hidden" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+        {isConfirming && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0 z-50 grid place-items-center bg-[#172a48]/85 backdrop-blur-sm">
+            <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.3, type: "spring" }} className="text-center text-white p-6">
+              <div className="text-5xl mb-3 animate-bounce">🎉✨🎆</div>
+              <h3 className="font-display text-2xl font-black text-[#f6b73c]">Chúc mừng Nhà thám hiểm!</h3>
+              <p className="mt-2 text-sm text-[#dceef6]">Đã triệu hồi {current.name} thành công. Đang ghi danh vào Sổ tay Toán học...</p>
+            </motion.div>
+          </motion.div>
+        )}
         <div className="paper-noise pointer-events-none absolute inset-0 opacity-40" />
         <div className="relative border-b-2 border-dashed border-[#c9b88c] px-4 pb-3 pt-4 sm:px-6 sm:pb-4 sm:pt-5">
           <div className="flex items-start justify-between gap-3">

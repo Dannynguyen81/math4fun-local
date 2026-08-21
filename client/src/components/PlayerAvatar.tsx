@@ -32,8 +32,8 @@ export function PlayerAvatar({ avatar, name = "Companion", outfitId, trailId, si
   const hasTrail = Boolean(trailId);
   return <span className={`relative inline-grid shrink-0 place-items-center ${sizeClass[size]} ${className}`}>
     {hasTrail && <span aria-hidden="true" className="absolute -bottom-1 -left-1 -right-1 h-2 rotate-[-3deg] border-y border-[#172a48] bg-[#f6b73c]/75"/>}
-    <span className={`relative grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-[#172a48] bg-[#fffdf6] ${hasOutfit ? "shadow-[3px_3px_0_#f6b73c]" : "shadow-[2px_2px_0_#172a48]"}`}>
-      <img src={avatarImageById[avatar]} alt={name} className="h-full w-full object-contain p-0.5" />
+    <span className={`relative grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-[#172a48] bg-[#fdfaf3] ${hasOutfit ? "shadow-[3px_3px_0_#f6b73c]" : "shadow-[2px_2px_0_#172a48]"}`}>
+      <img src={avatarImageById[avatar]} alt={name} className="h-full w-full object-cover object-top scale-[1.18] pt-1" />
       {hasOutfit && <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#172a48]/45 to-transparent"/>}
     </span>
     {!compact && hasOutfit && <span aria-hidden="true" className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full border border-[#172a48] bg-[#f6b73c] text-[9px] font-black">✦</span>}
