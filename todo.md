@@ -234,6 +234,9 @@
 - [x] Xây dựng onboarding chọn 10 avatar chibi (5 nam/5 nữ), preview nhân vật đầu tiên, điều hướng trước/sau vòng lặp, thẻ giới thiệu và xác nhận bắt đầu hành trình.
 - [x] Chuẩn bị nút Google Sign-in qua Supabase, callback/identity handling và tài liệu cấu hình OAuth; chỉ kích hoạt end-to-end khi owner đã cấu hình Google provider.
 - [x] Kiểm tra desktop/mobile, local auth/admin/cookie, offline-first/Supabase, keyboard/reduced motion, TypeScript/build và lưu checkpoint.
+- [ ] Hòa nền hoặc loại bỏ khung hình chữ nhật lộ ra ở ONB 01, ONB 04, ONG 01, ONG 02, ONG 03 và ONG 04.
+- [ ] Thu gọn carousel onboarding để nhìn bao quát trên màn hình chính ở desktop và mobile.
+- [ ] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
 
 ## Cộng tác GitHub và dữ liệu Supabase
 
@@ -251,3 +254,11 @@
 - [x] Tạo dự án Math4Fun ở khu vực Singapore phù hợp, rồi kiểm tra trạng thái sẵn sàng.
 - [x] Áp dụng schema có RLS cho dữ liệu người chơi, question bank, report, Gold ledger và leaderboard.
 - [x] Lưu cấu hình công khai an toàn, sinh TypeScript types, bật Anonymous sign-ins, kiểm tra RLS/leaderboard và cập nhật hướng dẫn GitHub/Supabase cho AI Agent.
+
+
+## Tinh chỉnh carousel chọn avatar — 2026-08-21
+
+- [x] Hòa nền hoặc loại bỏ khung hình chữ nhật lộ ra ở ONB 01, ONB 04, ONG 01, ONG 02, ONG 03 và ONG 04; ONG 02 dùng bản GrabCut giữ nguyên tóc và đạo cụ.
+- [x] Thu gọn carousel onboarding để nhìn bao quát trên màn hình chính ở desktop và mobile.
+- [x] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
+- [x] Chạy `pnpm check`, `pnpm build` và kiểm tra screenshot ở desktop 1280×720 và mobile 390×844.
