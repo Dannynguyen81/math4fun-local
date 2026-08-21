@@ -4,6 +4,7 @@ import { isSupabaseSyncEnabled, supabase } from "@/lib/supabase";
 import type { AvatarId, GoldTransaction, LeaderboardEntry, QuestionReport, StudentProfile } from "@/contexts/GameContext";
 
 export type SupabaseSyncResult = { ok: boolean; reason?: string };
+export type SupabaseLeaderboardResult = { ok: boolean; entries: LeaderboardEntry[]; reason?: string };
 type SupabaseWriteResponse = { error?: { message?: string } | null };
 
 function asJson(value: unknown): Json {
@@ -120,11 +121,11 @@ export async function syncProfileToSupabase(profile: StudentProfile, ownerId: st
   return { ok: true };
 }
 
-export async function fetchSupabaseLeaderboard(): Promise<LeaderboardEntry[]> {
-  if (!supabase) return [];
+export async function fetchSupabaseLeaderboardResult(): Promise<SupabaseLeaderboardResult> {
+  if (!supabase) return { ok: false, entries: [], reason: "Đồng bộ Supabase đang tắt." };
   const { data, error } = await supabase.from("leaderboard").select("profile_id, display_name, avatar, score, level, badges, guardians, stations, streak").order("score", { ascending: false }).order("streak", { ascending: false }).limit(100);
-  if (error || !data) return [];
-  return (data as Pick<CloudLeaderboardRow, "profile_id" | "display_name" | "avatar" | "score" | "level" | "badges" | "guardians" | "stations" | "streak">[]).map((row) => ({
+  if (error || !data) return { ok: false, entries: [], reason: error?.message ?? "Không thể đọc bảng xếp hạng Supabase." };
+  return { ok: true, entries: (data as Pick<CloudLeaderboardRow, "profile_id" | "display_name" | "avatar" | "score" | "level" | "badges" | "guardians" | "stations" | "streak">[]).map((row) => ({
     profileId: row.profile_id,
     name: row.display_name,
     avatar: row.avatar as AvatarId,
@@ -134,7 +135,11 @@ export async function fetchSupabaseLeaderboard(): Promise<LeaderboardEntry[]> {
     guardians: row.guardians,
     stations: row.stations,
     streak: row.streak,
-  }));
+  })) };
+}
+
+export async function fetchSupabaseLeaderboard(): Promise<LeaderboardEntry[]> {
+  return (await fetchSupabaseLeaderboardResult()).entries;
 }
 
 export function cloudLedgerToLocal(entry: { id: string; amount: number; category: string; label: string; created_at: string }): GoldTransaction | null {

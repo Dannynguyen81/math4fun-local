@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 /** Field Journal Quest: parchment dossier shell, stitched route, Marigold next actions, and companion identity remain visible throughout. */
-import { BarChart3, Bell, BookOpen, BookMarked, CalendarClock, ChevronDown, ClipboardPenLine, Coins, Compass, Flame, Gem, Home, LockKeyhole, LogOut, Map, Music2, Scale, ShieldCheck, ShoppingBag, Swords, Trophy, UserRound, Volume2, VolumeX } from "lucide-react";
+import { BarChart3, Bell, BookOpen, BookMarked, CalendarClock, ChevronDown, ClipboardPenLine, Cloud, CloudOff, CloudUpload, Coins, Compass, Flame, Gem, Home, LockKeyhole, LogOut, Map, Music2, Scale, ShieldCheck, ShoppingBag, Swords, TriangleAlert, Trophy, UserRound, Volume2, VolumeX } from "lucide-react";
 import { LOGO_IMAGE, MAGIC_MEDIA } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const AMBIENT_AUDIO = "/manus-storage/math4fun-field-journal-ambient_ab24706b.mp3";
 
@@ -42,7 +43,7 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
   const {
     profile, level, levelProgress, audioEnabled, setAudioEnabled, ambientEnabled, setAmbientEnabled,
     unreadReportReplies, markReportReplyRead, isBossUnlocked, gold, exitGame, elementBadges,
-    studyReminder, isAdmin,
+    studyReminder, isAdmin, syncStatus, syncStatusLabel,
   } = useGame();
   const ambientRef = useRef<HTMLAudioElement>(null);
   const soloStart = location === "/start";
@@ -51,6 +52,14 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
   const questionRoute = activeStationAttempt || location === "/training" || (activeBattle && ["/boss", "/map-boss", "/map2-boss"].includes(location));
   const progressPercent = Math.round((levelProgress / 250) * 100);
   const visibleNavItems = isAdmin ? [...navItems, { href: "/admin/questions", label: "Duyệt câu hỏi", icon: ClipboardPenLine }] : navItems;
+  const syncVisual = syncStatus === "synced"
+    ? { icon: Cloud, className: "bg-[#e7f2e5] text-[#27735a]" }
+    : syncStatus === "syncing"
+      ? { icon: CloudUpload, className: "bg-[#dbe5ff] text-[#294f86]" }
+      : syncStatus === "offline" || syncStatus === "disabled"
+        ? { icon: CloudOff, className: "bg-[#f1eee3] text-[#66778a]" }
+        : { icon: TriangleAlert, className: "bg-[#fff0b6] text-[#a4493e]" };
+  const SyncIcon = syncVisual.icon;
 
   useEffect(() => {
     const audio = ambientRef.current;
@@ -71,6 +80,14 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
             <span className="leading-none"><span className="block font-display text-xl font-black tracking-tight">Math4Fun</span><span className="block font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#58708b]">field journal</span></span>
           </Link>
           <div className="flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span tabIndex={0} role="status" aria-live="polite" aria-label={syncStatusLabel} className={`grid h-9 w-9 place-items-center border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] ${syncVisual.className}`}>
+                  <SyncIcon size={17} aria-hidden="true" />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-64 border-2 border-[#172a48] bg-[#172a48] text-center text-xs text-white">{syncStatusLabel}</TooltipContent>
+            </Tooltip>
             {profile && <span className="hidden items-center gap-1 border-2 border-[#172a48] bg-[#fff0b6] px-2 py-1.5 text-xs font-black shadow-[2px_2px_0_#172a48] sm:flex"><Coins size={14} />{gold}</span>}
             {profile && unreadReportReplies.length > 0 && (
               <DropdownMenu>

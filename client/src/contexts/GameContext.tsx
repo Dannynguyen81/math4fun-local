@@ -7,7 +7,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 import { isSupabaseSyncEnabled } from "@/lib/supabase";
-import { fetchSupabaseLeaderboard, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
+import { fetchSupabaseLeaderboardResult, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
 
 export const EXTRA_STATION_OPEN_GOLD = 30;
 
@@ -156,6 +156,7 @@ export type ElementLevelUp = { element: ElementName; previousLevel: number; next
 export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
+export type SupabaseSyncStatus = "disabled" | "syncing" | "synced" | "offline" | "error";
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
 type GameStore = { version: 14; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; ambientEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
@@ -169,6 +170,8 @@ type GameContextValue = {
   profiles: StudentProfile[];
   hasProfile: boolean;
   isAdmin: boolean;
+  syncStatus: SupabaseSyncStatus;
+  syncStatusLabel: string;
   questionBank: VerifiedQuestion[];
   questionReports: QuestionReport[];
   reportQuestion: (questionId: string, category: QuestionReportCategory, note: string) => { ok: boolean; message: string };
@@ -499,6 +502,8 @@ function readStore(): GameStore {
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<GameStore>(readStore);
   const [cloudLeaderboard, setCloudLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [syncStatus, setSyncStatus] = useState<SupabaseSyncStatus>(() => !isSupabaseSyncEnabled ? "disabled" : (typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "syncing"));
+  const [syncRetry, setSyncRetry] = useState(0);
   const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
   const syncOwnerRef = useRef<string | null>(null);
   const lastSyncedProfileRef = useRef<Record<string, string>>({});
@@ -509,35 +514,61 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
   const isAdmin = profile?.role === "admin" && profile.id === ADMIN_PROFILE_ID;
+  const markSyncFailure = useCallback(() => setSyncStatus(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "error"), []);
+  const syncStatusLabel = useMemo(() => {
+    if (syncStatus === "synced") return "Đã đồng bộ Supabase";
+    if (syncStatus === "syncing") return "Đang đồng bộ Supabase";
+    if (syncStatus === "offline") return "Ngoại tuyến · tiến độ vẫn lưu trên thiết bị";
+    if (syncStatus === "error") return "Chưa thể đồng bộ · tiến độ vẫn lưu trên thiết bị";
+    return "Đồng bộ Supabase đang tắt";
+  }, [syncStatus]);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) { setSyncStatus("disabled"); return; }
+    const handleOnline = () => { setSyncStatus("syncing"); setSyncRetry((value) => value + 1); };
+    const handleOffline = () => setSyncStatus("offline");
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => { window.removeEventListener("online", handleOnline); window.removeEventListener("offline", handleOffline); };
+  }, []);
   useEffect(() => {
     if (!isSupabaseSyncEnabled) return;
     let disposed = false;
     const startSync = async () => {
+      if (typeof navigator !== "undefined" && !navigator.onLine) { setSyncStatus("offline"); return; }
+      setSyncStatus("syncing");
       const ownerId = await getSupabaseOwnerId();
-      if (disposed || !ownerId) return;
+      if (disposed) return;
+      if (!ownerId) { markSyncFailure(); return; }
       syncOwnerRef.current = ownerId;
       const profilesToSync = store.profiles.filter((entry) => entry.role !== "admin");
-      await Promise.all(profilesToSync.map(async (entry) => {
+      const writes = await Promise.all(profilesToSync.map(async (entry) => {
         const result = await syncProfileToSupabase(entry, ownerId);
         if (result.ok) lastSyncedProfileRef.current[entry.id] = JSON.stringify(entry);
+        return result;
       }));
-      const remote = await fetchSupabaseLeaderboard();
-      if (!disposed) setCloudLeaderboard(remote);
+      const remote = await fetchSupabaseLeaderboardResult();
+      if (disposed) return;
+      if (remote.ok) setCloudLeaderboard(remote.entries);
+      if (writes.every((result) => result.ok) && remote.ok) setSyncStatus("synced");
+      else markSyncFailure();
     };
     void startSync();
     return () => { disposed = true; };
-  }, []);
+  }, [markSyncFailure, syncRetry]);
   useEffect(() => {
     if (!isSupabaseSyncEnabled) return;
     let disposed = false;
     const refresh = async () => {
-      const remote = await fetchSupabaseLeaderboard();
-      if (!disposed) setCloudLeaderboard(remote);
+      if (typeof navigator !== "undefined" && !navigator.onLine) { if (!disposed) setSyncStatus("offline"); return; }
+      const remote = await fetchSupabaseLeaderboardResult();
+      if (disposed) return;
+      if (remote.ok) { setCloudLeaderboard(remote.entries); setSyncStatus("synced"); }
+      else markSyncFailure();
     };
     void refresh();
     const refreshId = window.setInterval(() => { void refresh(); }, 60_000);
     return () => { disposed = true; window.clearInterval(refreshId); };
-  }, []);
+  }, [markSyncFailure]);
   useEffect(() => {
     if (!isSupabaseSyncEnabled) return;
     const ownerId = syncOwnerRef.current;
@@ -548,13 +579,21 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       .filter(({ profile: entry, snapshot }) => lastSyncedProfileRef.current[entry.id] !== snapshot);
     if (!pendingProfiles.length) return;
     const syncId = window.setTimeout(() => {
+      if (typeof navigator !== "undefined" && !navigator.onLine) { setSyncStatus("offline"); return; }
+      setSyncStatus("syncing");
       void Promise.all(pendingProfiles.map(async ({ profile: entry, snapshot }) => {
         const result = await syncProfileToSupabase(entry, ownerId);
         if (result.ok) lastSyncedProfileRef.current[entry.id] = snapshot;
-      })).then(() => { void fetchSupabaseLeaderboard().then(setCloudLeaderboard); });
+        return result;
+      })).then(async (writes) => {
+        const remote = await fetchSupabaseLeaderboardResult();
+        if (remote.ok) setCloudLeaderboard(remote.entries);
+        if (writes.every((result) => result.ok) && remote.ok) setSyncStatus("synced");
+        else markSyncFailure();
+      });
     }, 900);
     return () => window.clearTimeout(syncId);
-  }, [store.profiles]);
+  }, [markSyncFailure, store.profiles]);
   const questionBank = useMemo(() => Object.values(QUESTIONS_BY_ID).sort((left, right) => left.stationId - right.stationId || left.id.localeCompare(right.id)), [store.questionOverrides]);
   const updateProfile = useCallback((profileId: string, updater: (entry: StudentProfile) => StudentProfile) => {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => entry.id === profileId ? updater(entry) : entry) }));
@@ -1136,6 +1175,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     profiles: store.profiles,
     hasProfile: Boolean(profile),
     isAdmin,
+    syncStatus,
+    syncStatusLabel,
     questionBank,
     questionReports,
     reportQuestion,
@@ -1213,7 +1254,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.ambientEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unreadReportReplies, markReportReplyRead, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, setAmbientEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.ambientEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, syncStatus, syncStatusLabel, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unreadReportReplies, markReportReplyRead, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, setAmbientEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 
