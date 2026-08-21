@@ -1,31 +1,45 @@
 /**
  * Field Journal Quest onboarding: one full-body chibi specimen at a time, framed as a deliberate companion choice.
- * Enhanced with touch swipe, keyboard shortcuts (ArrowLeft/ArrowRight/Enter), specimen highlight ring, and confirmed animation pulse.
+ * Enhanced with touch swipe, keyboard shortcuts, specimen stats panel, and audio feedback.
  */
 import { useEffect, useState, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle2, Compass, LoaderCircle, Sparkles, Wand2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Compass, LoaderCircle, Shield, Sparkles, Swords, Wand2, Zap } from "lucide-react";
 import type { AvatarId } from "@/contexts/GameContext";
 import { useGame } from "@/contexts/GameContext";
 import { avatarImageById } from "@/components/PlayerAvatar";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { playAvatarSlideSound, playAvatarSelectSound } from "@/lib/magicAudio";
 
-type AvatarSpecimen = { id: AvatarId; name: string; role: string; trait: string; motto: string; tone: string; detail: string };
+type AvatarSpecimen = {
+  id: AvatarId;
+  name: string;
+  role: string;
+  trait: string;
+  motto: string;
+  tone: string;
+  detail: string;
+  power: number;
+  speed: number;
+  wisdom: number;
+  element: string;
+};
+
 const AVATARS: AvatarSpecimen[] = [
-  { id: "onb01", name: "Minh La Bàn", role: "Người đọc tuyến đường", trait: "Bình tĩnh · quan sát", motto: "Mỗi con số đều có một hướng đi.", tone: "bg-[#dbe5ff]", detail: "Luôn ghi mốc nhỏ trước khi giải bài lớn." },
-  { id: "onb02", name: "Tí Đỉnh Đồi", role: "Kẻ săn quy luật", trait: "Nhanh nhẹn · dí dỏm", motto: "Thử thêm một cách nữa nhé!", tone: "bg-[#e7f2e5]", detail: "Thích tìm quy luật trong những dãy số bí mật." },
-  { id: "onb03", name: "Nam Kính Lúp", role: "Nhà quan sát hình học", trait: "Tỉ mỉ · tò mò", motto: "Nhìn kỹ là thấy lời giải.", tone: "bg-[#fff0b6]", detail: "Không bỏ qua một góc, một cạnh hay một dấu chấm nào." },
-  { id: "onb04", name: "Bảo Lông Vũ", role: "Người ghi chép phép tính", trait: "Sáng tạo · chắc chắn", motto: "Lời giải đẹp cần từng nét rõ ràng.", tone: "bg-[#f9eadf]", detail: "Biến những phép tính dài thành đường đi thật gọn." },
-  { id: "onb05", name: "Khoa Cờ Mốc", role: "Đội trưởng tuyến học", trait: "Can đảm · tử tế", motto: "Cùng tiến lên từng trạm một!", tone: "bg-[#eef1fb]", detail: "Luôn nhắc bạn đồng hành nghỉ một nhịp rồi thử lại." },
-  { id: "ong01", name: "An Mây Nhỏ", role: "Người kể chuyện con số", trait: "Ấm áp · thông minh", motto: "Toán cũng có chuyện để kể.", tone: "bg-[#ffe4dc]", detail: "Gợi ý cách biến đề bài thành một câu chuyện dễ nhớ." },
-  { id: "ong02", name: "Linh Bản Đồ", role: "Nhà vẽ lối tắt", trait: "Tinh tế · quyết đoán", motto: "Đặt dấu mốc, rồi đường sẽ hiện ra.", tone: "bg-[#dceef6]", detail: "Thích chia bài toán thành các chặng vừa sức." },
-  { id: "ong03", name: "Vy Kính Lúp", role: "Thợ săn manh mối", trait: "Tinh nghịch · sắc sảo", motto: "Manh mối đang trốn ở đâu nhỉ?", tone: "bg-[#eff4e9]", detail: "Luôn tìm được dữ kiện quan trọng trong đề bài." },
-  { id: "ong04", name: "Mai Lông Vũ", role: "Pháp sư đo lường", trait: "Nhẹ nhàng · chính xác", motto: "Đo đúng một lần, tự tin cả chặng.", tone: "bg-[#fff3df]", detail: "Giỏi đổi đơn vị và ghi phép tính thật ngay ngắn." },
-  { id: "ong05", name: "Nhi Cờ Mốc", role: "Người giữ nhịp hành trình", trait: "Bền bỉ · vui vẻ", motto: "Thêm một câu đúng, thêm một vì sao.", tone: "bg-[#f9eeee]", detail: "Mang năng lượng tích cực cho những thử thách khó." },
+  { id: "onb01", name: "Minh La Bàn", role: "Người đọc tuyến đường", trait: "Bình tĩnh · quan sát", motto: "Mỗi con số đều có một hướng đi.", tone: "bg-[#dbe5ff]", detail: "Luôn ghi mốc nhỏ trước khi giải bài lớn.", power: 75, speed: 80, wisdom: 85, element: "sấm" },
+  { id: "onb02", name: "Tí Đỉnh Đồi", role: "Kẻ săn quy luật", trait: "Nhanh nhẹn · dí dỏm", motto: "Thử thêm một cách nữa nhé!", tone: "bg-[#e7f2e5]", detail: "Thích tìm quy luật trong những dãy số bí mật.", power: 70, speed: 95, wisdom: 75, element: "gió" },
+  { id: "onb03", name: "Nam Kính Lúp", role: "Nhà quan sát hình học", trait: "Tỉ mỉ · tò mò", motto: "Nhìn kỹ là thấy lời giải.", tone: "bg-[#fff0b6]", detail: "Không bỏ qua một góc, một cạnh hay một dấu chấm nào.", power: 80, speed: 70, wisdom: 90, element: "đất" },
+  { id: "onb04", name: "Bảo Lông Vũ", role: "Người ghi chép phép tính", trait: "Sáng tạo · chắc chắn", motto: "Lời giải đẹp cần từng nét rõ ràng.", tone: "bg-[#f9eadf]", detail: "Biến những phép tính dài thành đường đi thật gọn.", power: 85, speed: 75, wisdom: 80, element: "lửa" },
+  { id: "onb05", name: "Khoa Cờ Mốc", role: "Đội trưởng tuyến học", trait: "Can đảm · tử tế", motto: "Cùng tiến lên từng trạm một!", tone: "bg-[#eef1fb]", detail: "Luôn nhắc bạn đồng hành nghỉ một nhịp rồi thử lại.", power: 90, speed: 65, wisdom: 85, element: "nước" },
+  { id: "ong01", name: "An Mây Nhỏ", role: "Người kể chuyện con số", trait: "Ấm áp · thông minh", motto: "Toán cũng có chuyện để kể.", tone: "bg-[#ffe4dc]", detail: "Gợi ý cách biến đề bài thành một câu chuyện dễ nhớ.", power: 75, speed: 85, wisdom: 90, element: "gió" },
+  { id: "ong02", name: "Linh Bản Đồ", role: "Nhà vẽ lối tắt", trait: "Tinh tế · quyết đoán", motto: "Đặt dấu mốc, rồi đường sẽ hiện ra.", tone: "bg-[#dceef6]", detail: "Thích chia bài toán thành các chặng vừa sức.", power: 80, speed: 85, wisdom: 85, element: "đất" },
+  { id: "ong03", name: "Vy Kính Lúp", role: "Thợ săn manh mối", trait: "Tinh nghịch · sắc sảo", motto: "Manh mối đang trốn ở đâu nhỉ?", tone: "bg-[#eff4e9]", detail: "Luôn tìm được dữ kiện quan trọng trong đề bài.", power: 75, speed: 90, wisdom: 85, element: "độc" },
+  { id: "ong04", name: "Mai Lông Vũ", role: "Pháp sư đo lường", trait: "Nhẹ nhàng · chính xác", motto: "Đo đúng một lần, tự tin cả chặng.", tone: "bg-[#fff3df]", detail: "Giỏi đổi đơn vị và ghi phép tính thật ngay ngắn.", power: 85, speed: 75, wisdom: 90, element: "nước" },
+  { id: "ong05", name: "Nhi Cờ Mốc", role: "Người giữ nhịp hành trình", trait: "Bền bỉ · vui vẻ", motto: "Thêm một câu đúng, thêm một vì sao.", tone: "bg-[#f9eeee]", detail: "Mang năng lượng tích cực cho những thử thách khó.", power: 80, speed: 80, wisdom: 85, element: "lửa" },
 ];
 
 export function AvatarCarousel({ open }: { open: boolean }) {
-  const { completeAvatarOnboarding } = useGame();
+  const { completeAvatarOnboarding, audioEnabled } = useGame();
   const [index, setIndex] = useState(0);
   const [imageStatus, setImageStatus] = useState<"loading" | "ready" | "error">("loading");
   const [isConfirming, setIsConfirming] = useState(false);
@@ -37,15 +51,20 @@ export function AvatarCarousel({ open }: { open: boolean }) {
 
   const step = useCallback((direction: 1 | -1) => {
     setImageStatus("loading");
-    setIndex((value) => (value + direction + AVATARS.length) % AVATARS.length);
-  }, []);
+    setIndex((value) => {
+      const next = (value + direction + AVATARS.length) % AVATARS.length;
+      playAvatarSlideSound(audioEnabled);
+      return next;
+    });
+  }, [audioEnabled]);
 
   const handleSelect = () => {
     if (isConfirming) return;
     setIsConfirming(true);
+    playAvatarSelectSound(audioEnabled);
     setTimeout(() => {
       completeAvatarOnboarding(current.id);
-    }, 450);
+    }, 550);
   };
 
   // Keyboard navigation & Enter to confirm
@@ -107,10 +126,8 @@ export function AvatarCarousel({ open }: { open: boolean }) {
   const onTouchEnd = () => {
     if (!touchStartRef.current || !touchEndRef.current) return;
     const distance = touchStartRef.current - touchEndRef.current;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    if (isLeftSwipe) step(1);
-    if (isRightSwipe) step(-1);
+    if (distance > 50) step(1);
+    if (distance < -50) step(-1);
   };
 
   return <Dialog open={open}>
@@ -118,7 +135,7 @@ export function AvatarCarousel({ open }: { open: boolean }) {
       showCloseButton={false}
       onEscapeKeyDown={(event) => event.preventDefault()}
       onPointerDownOutside={(event) => event.preventDefault()}
-      className="max-h-[calc(100dvh-1rem)] w-[min(94vw,820px)] max-w-none overflow-y-auto rounded-none border-2 border-[#172a48] bg-[#fffdf6] p-0 text-[#172a48] shadow-[7px_7px_0_#f6b73c] sm:shadow-[9px_9px_0_#f6b73c]"
+      className="max-h-[calc(100dvh-1rem)] w-[min(94vw,860px)] max-w-none overflow-y-auto rounded-none border-2 border-[#172a48] bg-[#fffdf6] p-0 text-[#172a48] shadow-[7px_7px_0_#f6b73c] sm:shadow-[9px_9px_0_#f6b73c]"
     >
       <div className="relative overflow-hidden" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
         <div className="paper-noise pointer-events-none absolute inset-0 opacity-40" />
@@ -127,14 +144,14 @@ export function AvatarCarousel({ open }: { open: boolean }) {
             <div>
               <span className="inline-flex items-center gap-2 border border-[#172a48] bg-[#fff0b6] px-2 py-1 font-mono text-[8px] font-black tracking-[.13em] sm:text-[9px] sm:tracking-[.15em]"><Compass size={12} /> COMPANION SELECTION · 01</span>
               <DialogTitle className="mt-2.5 font-display text-2xl font-black leading-tight sm:mt-3 sm:text-3xl">Ai sẽ cùng em<br />ghi dấu trên bản đồ?</DialogTitle>
-              <DialogDescription className="mt-1.5 max-w-xl text-xs leading-relaxed text-[#476275] sm:text-sm">Vuốt trái/phải hoặc dùng phím mũi tên để xem; nhấn nút chọn bên dưới để xác nhận.</DialogDescription>
+              <DialogDescription className="mt-1.5 max-w-xl text-xs leading-relaxed text-[#476275] sm:text-sm">Vuốt hoặc dùng phím mũi tên để lướt qua lại giữa các nhân vật; quan sát chỉ số sức mạnh và bấm xác nhận.</DialogDescription>
             </div>
             <span className="hidden border-2 border-[#172a48] bg-[#172a48] px-2 py-1.5 font-mono text-[9px] font-black tracking-[.14em] text-[#f6b73c] sm:block">{String(index + 1).padStart(2, "0")} / 10</span>
           </div>
         </div>
 
-        <div className="relative grid gap-4 p-4 sm:gap-5 sm:p-5 md:grid-cols-[.95fr_1.05fr] md:gap-6 md:p-6">
-          <div aria-busy={imageStatus === "loading"} className={`relative h-[clamp(260px,36dvh,380px)] overflow-hidden rounded-xl border-3 border-[#172a48] ${current.tone} shadow-[5px_5px_0_#172a48] ring-4 ring-[#f6b73c]/60 sm:h-[clamp(300px,40dvh,410px)]`}>
+        <div className="relative grid gap-4 p-4 sm:gap-5 sm:p-5 md:grid-cols-[.92fr_1.08fr] md:gap-6 md:p-6">
+          <div aria-busy={imageStatus === "loading"} className={`relative h-[clamp(260px,36dvh,380px)] overflow-hidden rounded-xl border-3 border-[#172a48] ${current.tone} shadow-[5px_5px_0_#172a48] ring-4 ring-[#f6b73c]/70 sm:h-[clamp(300px,40dvh,410px)]`}>
             <span className="absolute left-3 top-3 z-10 border border-[#172a48] bg-[#fffdf6]/95 px-2 py-1 font-mono text-[8px] font-black tracking-[.14em] shadow-[1px_1px_0_#172a48] sm:left-4 sm:top-4 sm:text-[9px]">SPECIMEN {current.id.toUpperCase()}</span>
             <span className="absolute bottom-3 right-3 z-10 grid h-10 w-10 place-items-center rounded-full border-2 border-[#172a48] bg-[#f6b73c] shadow-[2px_2px_0_#172a48] sm:bottom-4 sm:right-4 sm:h-11 sm:w-11"><Wand2 size={17} /></span>
             <div aria-hidden className="absolute inset-x-6 bottom-5 h-10 rounded-[50%] border-2 border-[#172a48]/20 bg-white/50 blur-[1px] sm:inset-x-8 sm:bottom-7 sm:h-14" />
@@ -150,21 +167,34 @@ export function AvatarCarousel({ open }: { open: boolean }) {
 
           <div className="flex min-w-0 flex-col justify-between">
             <div>
-              <p className="font-mono text-[9px] font-black tracking-[.16em] text-[#58708b] sm:text-[10px]">{current.role.toUpperCase()}</p>
+              <div className="flex items-center justify-between gap-2">
+                <p className="font-mono text-[9px] font-black tracking-[.16em] text-[#58708b] sm:text-[10px]">{current.role.toUpperCase()}</p>
+                <span className="border border-[#172a48] bg-[#fff0b6] px-2 py-0.5 font-mono text-[9px] font-black uppercase tracking-wider">Hệ {current.element}</span>
+              </div>
               <AnimatePresence mode="wait">
                 <motion.div key={`${current.id}-copy`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .2 }}>
                   <h3 className="mt-1.5 font-display text-3xl font-black leading-none sm:mt-2 sm:text-4xl">{current.name}</h3>
-                  <p className="mt-2 inline-block border-y-2 border-dashed border-[#c9b88c] py-1.5 font-display text-base font-black sm:mt-2.5 sm:py-2 sm:text-lg">“{current.motto}”</p>
-                  <p className="mt-2.5 text-xs leading-relaxed text-[#476275] sm:mt-3 sm:text-sm">{current.detail}</p>
-                  <span className="mt-3.5 inline-flex items-center gap-2 border-2 border-[#172a48] bg-[#e7f2e5] px-3 py-1.5 text-[11px] font-black shadow-[2px_2px_0_#172a48] sm:mt-4 sm:text-xs"><Sparkles size={13} className="text-[#27735a]" />{current.trait}</span>
+                  <p className="mt-2 inline-block border-y-2 border-dashed border-[#c9b88c] py-1 font-display text-base font-black sm:mt-2 sm:py-1.5 sm:text-lg">“{current.motto}”</p>
+                  
+                  {/* Stats & Description Panel */}
+                  <div className="mt-2.5 rounded-lg border-2 border-[#172a48] bg-[#fffdf6] p-2.5 shadow-[2px_2px_0_#172a48]">
+                    <p className="text-xs leading-relaxed text-[#476275]">{current.detail}</p>
+                    <div className="mt-2 grid grid-cols-3 gap-2 border-t border-dashed border-[#d7d0bf] pt-2">
+                      <div className="text-center"><span className="block font-mono text-[8px] font-bold text-[#58708b]">SỨC MẠNH</span><span className="font-display font-black text-xs text-[#ee6b4e]"><Swords size={12} className="inline mr-0.5" />{current.power}</span></div>
+                      <div className="text-center"><span className="block font-mono text-[8px] font-bold text-[#58708b]">TỐC ĐỘ</span><span className="font-display font-black text-xs text-[#294f86]"><Zap size={12} className="inline mr-0.5" />{current.speed}</span></div>
+                      <div className="text-center"><span className="block font-mono text-[8px] font-bold text-[#58708b]">ĐỘ TRÍ TUỆ</span><span className="font-display font-black text-xs text-[#27735a]"><Shield size={12} className="inline mr-0.5" />{current.wisdom}</span></div>
+                    </div>
+                  </div>
+
+                  <span className="mt-2.5 inline-flex items-center gap-1.5 border-2 border-[#172a48] bg-[#e7f2e5] px-2.5 py-1 text-[11px] font-black shadow-[2px_2px_0_#172a48] sm:text-xs"><Sparkles size={12} className="text-[#27735a]" />{current.trait}</span>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="mt-4 flex items-center gap-2 sm:mt-5 sm:gap-3">
+            <div className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
               <button onClick={() => step(-1)} aria-label="Xem nhân vật trước" className="grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] bg-white shadow-[2px_2px_0_#172a48] transition hover:bg-[#eef1fb] active:scale-[.97] sm:h-11 sm:w-11"><ArrowLeft size={17} /></button>
               <button onClick={() => step(1)} aria-label="Xem nhân vật tiếp theo" className="grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] bg-white shadow-[2px_2px_0_#172a48] transition hover:bg-[#eef1fb] active:scale-[.97] sm:h-11 sm:w-11"><ArrowRight size={17} /></button>
-              <div className="ml-auto flex max-w-[42vw] gap-1 overflow-hidden" aria-label="Tiến độ chọn nhân vật">{AVATARS.map((avatar, dotIndex) => <button key={avatar.id} onClick={() => setIndex(dotIndex)} aria-label={`Xem ${avatar.name}`} aria-current={dotIndex === index} className={`h-2.5 shrink-0 rounded-full transition-[width,background-color] duration-200 ${dotIndex === index ? "w-6 bg-[#f6b73c]" : "w-2.5 bg-[#c9b88c] hover:bg-[#58708b]"}`} />)}</div>
+              <div className="ml-auto flex max-w-[42vw] gap-1 overflow-hidden" aria-label="Tiến độ chọn nhân vật">{AVATARS.map((avatar, dotIndex) => <button key={avatar.id} onClick={() => { playAvatarSlideSound(audioEnabled); setIndex(dotIndex); }} aria-label={`Xem ${avatar.name}`} aria-current={dotIndex === index} className={`h-2.5 shrink-0 rounded-full transition-[width,background-color] duration-200 ${dotIndex === index ? "w-6 bg-[#f6b73c]" : "w-2.5 bg-[#c9b88c] hover:bg-[#58708b]"}`} />)}</div>
             </div>
 
             <motion.button
@@ -172,7 +202,7 @@ export function AvatarCarousel({ open }: { open: boolean }) {
               disabled={isConfirming}
               animate={isConfirming ? { scale: [1, 1.04, .97, 1.02, 1], backgroundColor: ["#f6b73c", "#3e9b7a", "#f6b73c"] } : {}}
               transition={{ duration: .4 }}
-              className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#172a48] bg-[#f6b73c] px-4 py-3 font-display text-sm font-black text-[#172a48] shadow-[3px_3px_0_#172a48] transition hover:-translate-y-0.5 active:translate-y-0 active:scale-[.97] sm:mt-4 sm:text-base"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#172a48] bg-[#f6b73c] px-4 py-3 font-display text-sm font-black text-[#172a48] shadow-[3px_3px_0_#172a48] transition hover:-translate-y-0.5 active:translate-y-0 active:scale-[.97] sm:mt-3.5 sm:text-base"
             >
               {isConfirming ? <>
                 <CheckCircle2 size={18} className="animate-bounce text-[#172a48]" />
