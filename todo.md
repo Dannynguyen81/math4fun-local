@@ -220,6 +220,21 @@
 - [x] Giữ hai trạng thái chưa ký tên/đã có hồ sơ, liên kết đúng các route game và không thay gameplay, dữ liệu hoặc Supabase.
 - [x] Kiểm tra desktop/mobile, reduced motion, TypeScript/build và ảnh trực quan; chờ checkpoint phát hành.
 
+## Skill repository cho onboarding
+
+- [x] Xác thực nội dung, license, cấu trúc `SKILL.md` và khả năng tương thích của Gamestack, Game Development Orchestrator, Education Agent Skills và UI/UX Pro Max.
+- [x] Cài bốn repository skill theo quy trình an toàn ở khu vực tham chiếu cục bộ, không chạy code, hook hoặc installer.
+- [x] Ghi nhận skill khả dụng trong tài liệu audit và cập nhật hướng áp dụng cho kế hoạch landing-first authentication/Google/avatar.
+
+## Cửa ngõ xác thực và avatar trên landing
+
+- [x] Thay route UI `/start` bằng popup xác thực trên `/`, vẫn redirect tương thích link cũ về `/?auth=login`.
+- [x] Thiết kế modal đăng nhập/đăng ký theo nguyên tắc UI/UX Pro Max và Gamestack: trạng thái rõ, field label, focus/accessibility, validation và CTA game-loop có kiểm soát.
+- [x] Thêm đăng ký tên đăng nhập, mật khẩu, dropdown lớp 4/5/6 với chỉ lớp 4 khả dụng và không thu thập dữ liệu cá nhân không cần thiết.
+- [x] Xây dựng onboarding chọn 10 avatar chibi (5 nam/5 nữ), preview nhân vật đầu tiên, điều hướng trước/sau vòng lặp, thẻ giới thiệu và xác nhận bắt đầu hành trình.
+- [x] Chuẩn bị nút Google Sign-in qua Supabase, callback/identity handling và tài liệu cấu hình OAuth; chỉ kích hoạt end-to-end khi owner đã cấu hình Google provider.
+- [x] Kiểm tra desktop/mobile, local auth/admin/cookie, offline-first/Supabase, keyboard/reduced motion, TypeScript/build và lưu checkpoint.
+
 ## Cộng tác GitHub và dữ liệu Supabase
 
 - [x] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.

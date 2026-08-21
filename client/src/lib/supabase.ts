@@ -15,7 +15,7 @@ export const supabase: SupabaseClient<Database> | null = isSupabaseSyncEnabled
       auth: {
         autoRefreshToken: true,
         persistSession: true,
-        detectSessionInUrl: false,
+        detectSessionInUrl: true,
       },
     })
   : null;

@@ -36,7 +36,7 @@ export default function StartPage() {
   const [name, setName] = useState(""); const [username, setUsername] = useState(""); const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState<AvatarId>("b01"); const [notice, setNotice] = useState(""); const [busy, setBusy] = useState(false); const [chosenId, setChosenId] = useState<string | null>(null);
   const selected = getAvatar(avatar); const chosen = profiles.find((entry) => entry.id === chosenId) ?? null;
-  async function register(event: FormEvent) { event.preventDefault(); setBusy(true); setNotice(""); const result = await createProfile(name, avatar, username, password); setBusy(false); setNotice(result.message); if (result.ok) navigate("/"); }
+  async function register(event: FormEvent) { event.preventDefault(); setBusy(true); setNotice(""); const result = await createProfile(name, avatar, username, password, 4); setBusy(false); setNotice(result.message); if (result.ok) navigate("/"); }
   async function login() { if (!chosen) return; setBusy(true); setNotice(""); const result = chosen.passwordHash ? await signIn(chosen.id, password) : await setLegacyProfilePassword(chosen.id, username, password); setBusy(false); setNotice(result.message); if (result.ok) navigate("/"); }
   return <section className="mx-auto max-w-6xl overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] shadow-[7px_7px_0_#172a48]">
     <div className="relative grid gap-8 p-6 sm:p-9 lg:grid-cols-[.8fr_1.2fr]"><div className="paper-noise pointer-events-none absolute inset-0 opacity-40"/>

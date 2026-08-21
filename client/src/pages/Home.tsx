@@ -6,6 +6,7 @@ import { Link } from "wouter";
 import { ArrowRight, BookOpen, Check, ChevronRight, Compass, Flame, Gem, LockKeyhole, MapPinned, Shield, Sparkles, Star, Swords, Trophy, Wand2 } from "lucide-react";
 import { STATIONS } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
+import { useAuthGate } from "@/components/AuthGate";
 
 const HERO_ART = "/manus-storage/math4fun-rpg-hero_47048803.png";
 const MAP_ART = "/manus-storage/math4fun-world-map_aeb6eb71.png";
@@ -36,18 +37,19 @@ function WorldRoute({ signed, nextTitle, mastered }: { signed: boolean; nextTitl
   </section>;
 }
 
-function GuardianFeature({ signed }: { signed: boolean }) {
+function GuardianFeature({ signed, onAuthenticate }: { signed: boolean; onAuthenticate: () => void }) {
   return <section className="landing-guardian-card" aria-labelledby="guardian-title">
-    <div className="landing-guardian-copy"><p className="landing-eyebrow"><Gem size={14} /> COMPANION QUEST</p><h2 id="guardian-title">Mỗi lời giải đúng đều triệu hồi một người bạn.</h2><p>Thu phục guardian, luyện phép, mở XP và bước vào trận đấu Boss. Tiến độ Toán trở thành hành trang mà em có thể nhìn thấy.</p><Link href={signed ? "/collection" : "/start"} className="landing-text-cta">{signed ? "Xem bộ sưu tập guardian" : "Chọn companion đầu tiên"}<ChevronRight size={17} /></Link></div>
+    <div className="landing-guardian-copy"><p className="landing-eyebrow"><Gem size={14} /> COMPANION QUEST</p><h2 id="guardian-title">Mỗi lời giải đúng đều triệu hồi một người bạn.</h2><p>Thu phục guardian, luyện phép, mở XP và bước vào trận đấu Boss. Tiến độ Toán trở thành hành trang mà em có thể nhìn thấy.</p>{signed ? <Link href="/collection" className="landing-text-cta">Xem bộ sưu tập guardian<ChevronRight size={17} /></Link> : <button onClick={onAuthenticate} className="landing-text-cta">Chọn companion đầu tiên<ChevronRight size={17} /></button>}</div>
     <div className="landing-guardian-visual"><div className="landing-guardian-halo" aria-hidden="true" /><img src={COMPANION_ART} alt="Guardian đồng hành của Math4Fun" /><span className="landing-specimen-tag">SPECIMEN<br />M4F–01</span><span className="landing-level-pip"><Star size={12} fill="currentColor" /> LV.01</span></div>
   </section>;
 }
 
 export default function Home() {
   const { profile, isStationUnlocked, isStationMastered, stationProgress, isBossUnlocked, weeklyOpenCount, level, levelProgress, gold } = useGame();
+  const { openAuth } = useAuthGate();
   const next = profile ? STATIONS.find((station) => station.status === "ready" && isStationUnlocked(station.id) && !isStationMastered(station.id)) : undefined;
   const mastered = profile?.completedStationIds.length ?? 0;
-  const primaryHref = profile ? (next ? `/station/${next.id}` : "/map") : "/start";
+  const primaryHref = profile ? (next ? `/station/${next.id}` : "/map") : "#auth";
   const primaryLabel = profile ? (next ? `Tiếp tục: ${next.title}` : "Mở bản đồ học") : "Bắt đầu hành trình";
 
   return <div className="landing-page">
@@ -62,7 +64,7 @@ export default function Home() {
         <h1 id="math4fun-title"><Math4FunWordmark /><span className="sr-only">Math4Fun</span></h1>
         <p className="landing-hero-lede">Học Toán lớp 4 bằng những chuyến thám hiểm nhỏ: giải bài, thu phục guardian, mở phép thuật và ghi tên lên bản đồ.</p>
         <div className="landing-hero-proof"><span><Check size={15} /> Trạm học theo chủ đề</span><span><Check size={15} /> XP & guardian đồng hành</span><span><Check size={15} /> Boss thử thách cuối map</span></div>
-        <div className="landing-hero-actions"><Link href={primaryHref} className="landing-primary-cta"><Sparkles size={18} /> {primaryLabel} <ArrowRight size={17} /></Link><Link href="/map" className="landing-secondary-cta"><MapPinned size={18} /> Khám phá thế giới</Link></div>
+        <div className="landing-hero-actions">{profile ? <Link href={primaryHref} className="landing-primary-cta"><Sparkles size={18} /> {primaryLabel} <ArrowRight size={17} /></Link> : <button onClick={() => openAuth("register")} className="landing-primary-cta"><Sparkles size={18} /> {primaryLabel} <ArrowRight size={17} /></button>}<Link href="/map" className="landing-secondary-cta"><MapPinned size={18} /> Khám phá thế giới</Link></div>
         {profile && <div className="landing-return-note"><span className="landing-return-avatar">{profile.name.slice(0, 1).toUpperCase()}</span><p><small>NHẬT KÝ ĐANG MỞ</small><b>Chào {profile.name}, hôm nay em đã sẵn sàng ghi thêm dấu chân.</b></p><span><Flame size={14} /> {profile.streak} ngày</span></div>}
       </div>
       <aside className="landing-hero-card" aria-label="Tóm tắt game loop như phiếu ghi chép hành trình">
@@ -78,10 +80,10 @@ export default function Home() {
 
     <section className="landing-story-intro"><div><p className="landing-eyebrow"><Compass size={14} /> VÒNG LẶP HỌC–CHƠI</p><h2>Không phải làm bài cho xong.<br /><em>Là đi xa hơn vì hiểu hơn.</em></h2></div><p>Math4Fun biến mỗi lần luyện tập thành một vòng lặp vừa sức: mở một trạm, giải mười câu, đón guardian mới và dùng hiểu biết để vượt thử thách lớn hơn.</p></section>
 
-    <div className="landing-main-grid"><WorldRoute signed={Boolean(profile)} nextTitle={next?.title} mastered={mastered} /><GuardianFeature signed={Boolean(profile)} /></div>
+    <div className="landing-main-grid"><WorldRoute signed={Boolean(profile)} nextTitle={next?.title} mastered={mastered} /><GuardianFeature signed={Boolean(profile)} onAuthenticate={() => openAuth("register")} /></div>
 
-    <section className="landing-quest-loop" aria-labelledby="quest-loop-title"><div className="landing-quest-copy"><p className="landing-eyebrow"><Shield size={14} /> QUEST SYSTEM</p><h2 id="quest-loop-title">Toán có nhịp độ.<br />Hành trình có phần thưởng.</h2><p>Mỗi tuần, học sinh tự mở tuyến, dùng Gold có chủ đích và nhìn thấy từng bước tiến trong sổ hành trình cá nhân.</p><Link href={profile ? "/stats" : "/start"} className="landing-text-cta">{profile ? "Mở sổ tiến độ" : "Tạo sổ hành trình"}<ArrowRight size={17} /></Link></div><div className="landing-loop-artifacts"><article className="landing-loop-card landing-loop-card-one"><span>01</span><BookOpen /><b>Mở trạm</b><p>Chọn chủ đề để bắt đầu chuyến học.</p></article><article className="landing-loop-card landing-loop-card-two"><span>02</span><Wand2 /><b>Giải & lên XP</b><p>Mỗi đáp án là một kỹ năng được ghi nhận.</p></article><article className="landing-loop-card landing-loop-card-three"><span>03</span><Trophy /><b>Mở khóa thử thách</b><p>Guardian và Boss chờ em chinh phục.</p></article><svg className="landing-loop-thread" viewBox="0 0 600 130" aria-hidden="true"><path d="M30 71 C126 16 187 124 278 64 S425 8 570 59" fill="none" stroke="currentColor" strokeDasharray="5 10" strokeWidth="2" /></svg></div></section>
+    <section className="landing-quest-loop" aria-labelledby="quest-loop-title"><div className="landing-quest-copy"><p className="landing-eyebrow"><Shield size={14} /> QUEST SYSTEM</p><h2 id="quest-loop-title">Toán có nhịp độ.<br /><em>Hành trình có phần thưởng.</em></h2><p>Mỗi tuần, học sinh tự mở tuyến, dùng Gold có chủ đích và nhìn thấy từng bước tiến trong sổ hành trình cá nhân.</p>{profile ? <Link href="/stats" className="landing-text-cta">Mở sổ tiến độ<ArrowRight size={17} /></Link> : <button onClick={() => openAuth("register")} className="landing-text-cta">Tạo sổ hành trình<ArrowRight size={17} /></button>}</div><div className="landing-loop-artifacts"><article className="landing-loop-card landing-loop-card-one"><span>01</span><BookOpen /><b>Mở trạm</b><p>Chọn chủ đề để bắt đầu chuyến học.</p></article><article className="landing-loop-card landing-loop-card-two"><span>02</span><Wand2 /><b>Giải & lên XP</b><p>Mỗi đáp án là một kỹ năng được ghi nhận.</p></article><article className="landing-loop-card landing-loop-card-three"><span>03</span><Trophy /><b>Mở khóa thử thách</b><p>Guardian và Boss chờ em chinh phục.</p></article><svg className="landing-loop-thread" viewBox="0 0 600 130" aria-hidden="true"><path d="M30 71 C126 16 187 124 278 64 S425 8 570 59" fill="none" stroke="currentColor" strokeDasharray="5 10" strokeWidth="2" /></svg></div></section>
 
-    <section className="landing-final-cta"><div className="landing-final-stars" aria-hidden="true">✦ · ✧ · ✦</div><p className="landing-eyebrow"><Star size={14} fill="currentColor" /> BẢN ĐỒ ĐANG CHỜ</p><h2>Trạm học đầu tiên<br />chỉ cách một dấu chân.</h2><p>Khởi tạo hồ sơ riêng, chọn companion và bắt đầu chuyến phiêu lưu Toán của em hôm nay.</p><Link href={profile ? primaryHref : "/start"} className="landing-primary-cta"><Compass size={18} /> {profile ? primaryLabel : "Ký tên vào nhật ký"} <ArrowRight size={17} /></Link><small>{isBossUnlocked ? "Boss Atlas đã mở: nhật ký của em đã đủ mạnh." : profile ? `${weeklyOpenCount}/2 lượt mở trạm miễn phí trong tuần này.` : "Không cần tải ứng dụng. Tiến độ được giữ trên thiết bị của em."}</small></section>
+    <section className="landing-final-cta"><div className="landing-final-stars" aria-hidden="true">✦ · ✧ · ✦</div><p className="landing-eyebrow"><Star size={14} fill="currentColor" /> BẢN ĐỒ ĐANG CHỜ</p><h2>Trạm học đầu tiên<br />chỉ cách một dấu chân.</h2><p>Khởi tạo hồ sơ riêng, chọn companion và bắt đầu chuyến phiêu lưu Toán của em hôm nay.</p>{profile ? <Link href={primaryHref} className="landing-primary-cta"><Compass size={18} /> {primaryLabel} <ArrowRight size={17} /></Link> : <button onClick={() => openAuth("register")} className="landing-primary-cta"><Compass size={18} /> Ký tên vào nhật ký <ArrowRight size={17} /></button>}<small>{isBossUnlocked ? "Boss Atlas đã mở: nhật ký của em đã đủ mạnh." : profile ? `${weeklyOpenCount}/2 lượt mở trạm miễn phí trong tuần này.` : "Không cần tải ứng dụng. Tiến độ được giữ trên thiết bị của em."}</small></section>
   </div>;
 }

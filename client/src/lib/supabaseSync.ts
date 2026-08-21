@@ -84,7 +84,7 @@ export async function syncProfileToSupabase(profile: StudentProfile, ownerId: st
     display_name: profile.name,
     avatar: profile.avatar,
     state: compactProfileState(profile),
-    state_version: 14,
+    state_version: 15,
     xp: profile.xp,
     gold: profile.gold,
     streak: profile.streak,

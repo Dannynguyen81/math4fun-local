@@ -35,3 +35,17 @@ Dự án Supabase **Math4Fun** có ref `qxgyjhrmmwkibcpozzau` tại Singapore. B
 `GameContext` vẫn là cache/UI offline-first. Sau mỗi thay đổi, lớp sync lọc hoàn toàn mật khẩu, salt/hash, PIN phụ huynh, cookie và role cục bộ, sau đó đồng bộ hồ sơ học sinh, Gold ledger, report, guardian và chỉ số xếp hạng. Đồng bộ quét toàn bộ hồ sơ học sinh thay đổi trên cùng thiết bị để phản hồi report do admin cục bộ tạo cũng được đẩy lên cloud. Client dùng URL và **publishable key** (credential công khai được RLS bảo vệ), có thể ghi đè bằng `VITE_SUPABASE_URL` và `VITE_SUPABASE_PUBLISHABLE_KEY`/`VITE_SUPABASE_ANON_KEY`, hoặc tắt bằng `VITE_SUPABASE_SYNC_ENABLED=false`. Không có service-role key, mật khẩu, PIN hay cookie nào được đưa vào bundle hoặc Git.
 
 Giao diện đặt biểu tượng cloud nhỏ cạnh điều khiển ambient trên thanh trên cùng. Tooltip có bốn trạng thái thực tế: **đang đồng bộ**, **đã đồng bộ**, **ngoại tuyến** và **không thể đồng bộ**. Chỉ báo chỉ phản ánh kết nối và kết quả adapter, không hiển thị nội dung hồ sơ, Gold, report hay bất kỳ thông tin học sinh nào.
+
+## Google Sign-in cho cổng landing-first
+
+Phiên bản hiện tại có nút **Tiếp tục với Google** trong hai tab Đăng nhập và Đăng ký. Nút gọi `supabase.auth.signInWithOAuth({ provider: "google" })`, quay về landing với cờ `?auth=google`, sau đó hoàn tất phiên Supabase, tạo hoặc chọn hồ sơ cục bộ tương ứng và mở màn hình chọn avatar nếu đây là lần đầu. Tên đăng nhập/mật khẩu cục bộ, PIN phụ huynh và cookie ứng dụng không được gửi sang Google hoặc Supabase.
+
+| Bước chủ dự án cần thực hiện | Giá trị hoặc vị trí cấu hình |
+| --- | --- |
+| Tạo OAuth client | Google Cloud Console → APIs & Services → Credentials → OAuth 2.0 Client ID, loại Web application |
+| Authorized redirect URI | `https://qxgyjhrmmwkibcpozzau.supabase.co/auth/v1/callback` |
+| Bật provider | Supabase Dashboard → Authentication → Providers → Google → Enable, sau đó dán Client ID và Client Secret |
+| Redirect về website | Supabase Dashboard → Authentication → URL Configuration → thêm `https://math4fun-dyeju3sp.manus.space` và URL preview đang dùng vào danh sách Redirect URLs |
+| Kiểm thử an toàn | Đăng nhập bằng tài khoản Google thử nghiệm, xác nhận quay lại landing, chọn avatar, sau đó logout/login để bảo đảm hồ sơ vẫn được nhận diện |
+
+Google OAuth chỉ hoạt động end-to-end sau khi provider được bật và các URL trên được khai báo. Nếu provider chưa cấu hình hoặc bị chặn bởi trình duyệt, popup hiển thị thông báo lỗi, không xóa hồ sơ local và vẫn cho phép học sinh tiếp tục dùng đăng nhập cục bộ.
