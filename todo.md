@@ -213,6 +213,13 @@
 - [x] Hiển thị hộp thư/thông báo trong game khi report của người chơi đã được admin duyệt và phản hồi.
 - [x] Kiểm tra TypeScript/build, audio toggle, hiệu ứng Boss, thẻ avatar và thông báo report; lưu checkpoint.
 
+## Landing page fantasy RPG
+
+- [x] Thiết kế lại route `/` thành landing page fantasy RPG với hero immersive, world map, guardian companion, XP/Gold loop và wordmark Math4Fun đặc biệt.
+- [x] Tạo asset hero Math4Fun gốc, tối ưu cho web và ghi nhận đường dẫn asset theo quy ước dự án.
+- [x] Giữ hai trạng thái chưa ký tên/đã có hồ sơ, liên kết đúng các route game và không thay gameplay, dữ liệu hoặc Supabase.
+- [x] Kiểm tra desktop/mobile, reduced motion, TypeScript/build và ảnh trực quan; chờ checkpoint phát hành.
+
 ## Cộng tác GitHub và dữ liệu Supabase
 
 - [x] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.

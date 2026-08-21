@@ -1,52 +1,87 @@
 /**
- * Field Journal Quest home: a signed journal opening makes the learning route—not the navigation shell—the first artifact a learner sees.
+ * Math4Fun Fantasy Landing: cinematic indigo world, tactile expedition artifacts, and a bespoke Math4Fun wordmark.
+ * The route is a living RPG invitation—not a generic feature grid—and signed-in learners still see their real next step.
  */
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Compass, LockKeyhole, MapPinned, Sparkles, Swords } from "lucide-react";
-import { HERO_IMAGE, STATIONS } from "@/game/gameData";
+import { ArrowRight, BookOpen, Check, ChevronRight, Compass, Flame, Gem, LockKeyhole, MapPinned, Shield, Sparkles, Star, Swords, Trophy, Wand2 } from "lucide-react";
+import { STATIONS } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
 
-function RoutePreview({ signed }: { signed: boolean }) {
-  const positions = ["md:left-[2%] md:top-[9%]", "md:left-[26%] md:top-[56%]", "md:left-[52%] md:top-[14%]", "md:right-[1%] md:top-[58%]"];
-  return <article className="relative mt-6 overflow-hidden border-2 border-[#172a48] bg-[#fffdf6] p-5 shadow-[5px_5px_0_#172a48]">
-    <div className="absolute right-4 top-3 rotate-6 border-2 border-dashed border-[#4d8b67] bg-[#eef5f2] px-2 py-1 font-mono text-[9px] font-black tracking-[.16em] text-[#4d8b67]">ROUTE SPECIMEN</div>
-    <div aria-hidden className="absolute left-[47%] top-2 hidden -rotate-2 border border-[#c9b88c] bg-[#fff8da] px-2 py-1 font-mono text-[8px] font-black tracking-[.13em] text-[#58708b] shadow-[2px_2px_0_#c9b88c] md:block">DẤU CHÂN · TUYẾN 01</div>
-    <p className="section-kicker"><MapPinned size={13} /> BẢN RẬP TUYẾN HỌC</p>
-    <h2 className="mt-2 font-display text-3xl font-black">Những mốc đầu tiên đang chờ</h2>
-    <div className="relative mt-5 grid gap-4 md:block md:h-[250px]">
-      <svg aria-hidden viewBox="0 0 1000 280" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"><path d="M45 57 C170 35 218 210 340 184 S487 47 605 74 S718 235 838 208 S925 130 990 168" fill="none" stroke="#4d8b67" strokeDasharray="7 7" strokeWidth="3"/><path d="M45 57 C170 35 218 210 340 184 S487 47 605 74 S718 235 838 208 S925 130 990 168" fill="none" stroke="#f6b73c" strokeDasharray="3 55" strokeLinecap="round" strokeWidth="7"/></svg>
-      {STATIONS.slice(0, 4).map((station, index) => <div key={station.id} className={`relative z-10 flex items-center gap-3 border-2 border-[#172a48] bg-white p-2 shadow-[3px_3px_0_#172a48] md:absolute md:w-[23%] md:block ${positions[index]} ${index === 1 ? "md:-rotate-[1.2deg]" : index === 2 ? "md:rotate-[.8deg]" : index === 3 ? "md:-rotate-[.6deg]" : "md:rotate-[.4deg]"}`}>
-        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-[#172a48] font-display text-xl font-black shadow-[2px_2px_0_#172a48] md:absolute md:-left-3 md:-top-5 ${signed && index === 0 ? "bg-[#f6b73c]" : "bg-[#eef1fb]"}`}>{index + 1}</span>
-        <div className="min-w-0 pl-1 pt-1 md:pl-4"><b className="font-mono text-[9px] tracking-[.12em]">{station.code}</b><p className="mt-1 text-xs font-bold leading-tight">{station.title}</p><small className="mt-1 block font-mono text-[8px] font-black tracking-[.1em] text-[#58708b]">{signed && index === 0 ? "ĐIỂM ĐẾN KẾ TIẾP" : "MỐC NIÊM PHONG"}</small></div>
-      </div>)}
+const HERO_ART = "/manus-storage/math4fun-rpg-hero_47048803.png";
+const MAP_ART = "/manus-storage/math4fun-world-map_aeb6eb71.png";
+const COMPANION_ART = "/manus-storage/math4fun-guardian-companion_9ae2cec1.png";
+
+function Math4FunWordmark() {
+  return <div className="math4fun-wordmark" aria-label="Math4Fun">
+    <span className="math4fun-wordmark-math">Math</span><span className="math4fun-wordmark-four">4</span><span className="math4fun-wordmark-fun">Fun</span>
+    <span className="math4fun-wordmark-note">HỌC · KHÁM PHÁ · LÊN CẤP</span>
+  </div>;
+}
+
+function StatChip({ icon: Icon, title, copy, tone = "gold" }: { icon: typeof Gem; title: string; copy: string; tone?: "gold" | "mint" | "coral" }) {
+  return <div className={`landing-stat-chip landing-stat-${tone}`}><span><Icon size={17} aria-hidden="true" /></span><p><b>{title}</b><small>{copy}</small></p></div>;
+}
+
+function WorldRoute({ signed, nextTitle, mastered }: { signed: boolean; nextTitle?: string; mastered: number }) {
+  const labels = ["Khởi đầu", "Trạm số", "Rừng hình", "Cổng Boss"];
+  return <section className="landing-map-panel" aria-labelledby="world-map-title">
+    <div className="landing-panel-heading"><div><p className="landing-eyebrow"><MapPinned size={14} /> BẢN ĐỒ THẾ GIỚI</p><h2 id="world-map-title">Một phép tính, một dấu chân mới.</h2></div><Link href="/map" className="landing-inline-link">Xem bản đồ <ArrowRight size={15} /></Link></div>
+    <div className="landing-map-art">
+      <img src={MAP_ART} alt="Bản đồ fantasy của hành trình Math4Fun" />
+      <div className="landing-map-pulse landing-map-pulse-one" aria-hidden="true"><i /></div><div className="landing-map-pulse landing-map-pulse-two" aria-hidden="true"><i /></div><div className="landing-map-pulse landing-map-pulse-three" aria-hidden="true"><i /></div>
+      <div className="landing-map-stamp"><Compass size={18} /><span>20<br />TUYẾN</span></div>
     </div>
-    <p className="mt-8 border-t-2 border-dashed border-[#d7d0bf] pt-3 text-xs font-bold text-[#58708b]">{signed ? "Dấu mực của em đã có trên bản đồ. Chọn trạm kế tiếp để ghi bằng chứng mới." : "Ký tên, chọn companion và mở tối đa hai tuyến mỗi tuần để bản đồ bắt đầu có dấu chân."}</p>
-  </article>;
+    <div className="landing-route-steps">{labels.map((label, index) => <div className={signed && index === 1 ? "is-current" : ""} key={label}><span>{index + 1}</span><b>{label}</b></div>)}</div>
+    <p className="landing-map-caption">{signed ? `${mastered}/20 trạm đã ghi bằng chứng${nextTitle ? ` · tiếp theo: ${nextTitle}` : ""}.` : "Chọn companion, mở trạm đầu tiên và để bản đồ sáng lên theo từng lần em hiểu bài."}</p>
+  </section>;
+}
+
+function GuardianFeature({ signed }: { signed: boolean }) {
+  return <section className="landing-guardian-card" aria-labelledby="guardian-title">
+    <div className="landing-guardian-copy"><p className="landing-eyebrow"><Gem size={14} /> COMPANION QUEST</p><h2 id="guardian-title">Mỗi lời giải đúng đều triệu hồi một người bạn.</h2><p>Thu phục guardian, luyện phép, mở XP và bước vào trận đấu Boss. Tiến độ Toán trở thành hành trang mà em có thể nhìn thấy.</p><Link href={signed ? "/collection" : "/start"} className="landing-text-cta">{signed ? "Xem bộ sưu tập guardian" : "Chọn companion đầu tiên"}<ChevronRight size={17} /></Link></div>
+    <div className="landing-guardian-visual"><div className="landing-guardian-halo" aria-hidden="true" /><img src={COMPANION_ART} alt="Guardian đồng hành của Math4Fun" /><span className="landing-specimen-tag">SPECIMEN<br />M4F–01</span><span className="landing-level-pip"><Star size={12} fill="currentColor" /> LV.01</span></div>
+  </section>;
 }
 
 export default function Home() {
-  const { profile, isStationUnlocked, isStationMastered, stationProgress, isBossUnlocked, weeklyOpenCount } = useGame();
-  if (!profile) return <section>
-    <div className="relative overflow-hidden border-2 border-[#172a48] bg-[#172a48] text-white shadow-[7px_7px_0_#f6b73c]">
-      <img src={HERO_IMAGE} alt="Hành trình học Toán của Math4Fun" className="absolute inset-0 h-full w-full object-cover opacity-25" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#172a48] via-[#172a48]/85 to-[#172a48]/35" />
-      <div aria-hidden className="absolute bottom-4 right-4 hidden rotate-3 border-2 border-dashed border-[#f6b73c] bg-[#fff8da] px-3 py-2 font-mono text-[9px] font-black tracking-[.12em] text-[#172a48] shadow-[3px_3px_0_#0d1c33] sm:block">MỞ 2 TUYẾN / TUẦN<br/><span className="text-[#4d8b67]">BẢN ĐỒ ĐANG CHỜ DẤU MỰC</span></div>
-      <svg aria-hidden viewBox="0 0 360 110" className="absolute bottom-0 right-0 hidden h-24 w-80 opacity-75 sm:block"><path d="M0 74 C80 8 125 110 190 48 S280 8 360 34" fill="none" stroke="#f6b73c" strokeDasharray="5 7" strokeWidth="2"/></svg>
-      <div className="relative max-w-2xl p-7 sm:p-10"><span className="field-tag border-white/25 bg-white/10 text-white"><Compass size={14} /> FIELD JOURNAL QUEST</span><h1 className="mt-6 font-display text-5xl font-black leading-[0.92]">Một cuốn sổ.<br />Hai mươi tuyến học.</h1><p className="mt-5 max-w-xl text-sm leading-relaxed text-[#d5dfed]">Math4Fun giữ tiến độ riêng của từng em, cho phép mở tối đa hai chủ đề mỗi tuần và yêu cầu 10 câu đúng để thu phục một guardian.</p><Link href="/start" className="mt-7 inline-flex items-center gap-2 border-2 border-[#172a48] bg-[#f6b73c] px-5 py-3 font-bold text-[#172a48] shadow-[3px_3px_0_white]"><Sparkles size={17} /> Tạo sổ hành trình <ArrowRight size={16} /></Link></div>
-    </div>
-    <RoutePreview signed={false} />
-  </section>;
+  const { profile, isStationUnlocked, isStationMastered, stationProgress, isBossUnlocked, weeklyOpenCount, level, levelProgress, gold } = useGame();
+  const next = profile ? STATIONS.find((station) => station.status === "ready" && isStationUnlocked(station.id) && !isStationMastered(station.id)) : undefined;
+  const mastered = profile?.completedStationIds.length ?? 0;
+  const primaryHref = profile ? (next ? `/station/${next.id}` : "/map") : "/start";
+  const primaryLabel = profile ? (next ? `Tiếp tục: ${next.title}` : "Mở bản đồ học") : "Bắt đầu hành trình";
 
-  const next = STATIONS.find((station) => station.status === "ready" && isStationUnlocked(station.id) && !isStationMastered(station.id));
-  const mastered = profile.completedStationIds.length;
-  return <section>
-    <div className="relative overflow-hidden border-2 border-[#172a48] bg-[#172a48] text-white shadow-[7px_7px_0_#f6b73c]">
-      <img src={HERO_IMAGE} alt="Hành trình học Toán của Math4Fun" className="absolute inset-0 h-full w-full object-cover opacity-25" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#172a48] via-[#172a48]/85 to-[#172a48]/35" />
-      <div aria-hidden className="absolute bottom-3 right-5 hidden rotate-3 border-2 border-dashed border-[#f6b73c] bg-[#fff8da] px-3 py-2 font-mono text-[9px] font-black tracking-[.12em] text-[#172a48] shadow-[3px_3px_0_#0d1c33] lg:block">BẰNG CHỨNG MỚI<br/><span className="text-[#4d8b67]">TUYẾN ĐANG MỞ</span></div>
-      <div className="relative grid gap-6 p-6 sm:p-9 lg:grid-cols-[1fr_280px]"><div><span className="field-tag border-white/25 bg-white/10 text-white"><Compass size={14} /> SỔ HÀNH TRÌNH CỦA {profile.name.toUpperCase()}</span><h1 className="mt-5 font-display text-5xl font-black leading-[0.92]">Đi chậm.<br />Ghi đúng.</h1><p className="mt-5 max-w-xl text-sm leading-relaxed text-[#d5dfed]">Mỗi câu sai vẫn được ghi lại để lần sau em quay lại sửa bằng hiểu biết, không phải bằng cách thoát ra làm lại.</p><Link href={next ? `/station/${next.id}` : "/map"} className="mt-6 inline-flex items-center gap-2 border-2 border-[#172a48] bg-[#f6b73c] px-5 py-3 font-bold text-[#172a48] shadow-[3px_3px_0_white]">{next ? `Tiếp tục: ${next.title}` : "Mở bản đồ học"} <ArrowRight size={16} /></Link></div><div className="border-2 border-white/40 bg-[#172a48]/75 p-5 backdrop-blur"><p className="font-mono text-[10px] font-bold tracking-[0.16em] text-[#f6b73c]">DẤU MỐC</p><p className="mt-3 font-display text-4xl font-black">{mastered}<span className="text-lg text-[#9bb4ce]">/20</span></p><p className="text-sm text-[#d5dfed]">guardian đã thu phục</p><div className="mt-5 border-t border-white/20 pt-4 text-sm"><b>{weeklyOpenCount}/2</b> chủ đề được mở trong tuần này</div></div></div>
-    </div>
-    <RoutePreview signed />
-    <div className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]"><article className="paper-stack border-2 border-[#172a48] bg-[#fffdf6] p-5 shadow-[5px_5px_0_#172a48]"><p className="section-kicker">Dấu vết tiếp theo</p>{next ? <><h2 className="mt-3 font-display text-3xl font-black">{next.code} · {next.title}</h2><p className="mt-2 text-sm leading-relaxed text-[#58708b]">{next.brief}</p><div className="mt-5 flex items-center justify-between border-t-2 border-dashed border-[#d7d0bf] pt-4"><span className="font-bold">{stationProgress(next.id).correct}/10 câu đúng</span><Link href={`/station/${next.id}`} className="font-bold underline decoration-2 underline-offset-4">Vào trạm</Link></div></> : <><h2 className="mt-3 font-display text-3xl font-black">Chọn tuyến mới</h2><p className="mt-2 text-sm text-[#58708b]">Bản đồ cho biết các tuyến có đủ câu hỏi nguồn đã kiểm chứng để mở trong tuần này.</p><Link href="/map" className="mt-5 inline-flex font-bold underline decoration-2 underline-offset-4">Xem bản đồ học</Link></>}</article><article className="evidence-card border-2 border-[#172a48] bg-[#fff8da] p-5 shadow-[4px_4px_0_#172a48]"><p className="section-kicker">Radar Boss</p><h2 className="mt-3 font-display text-3xl font-black">{isBossUnlocked ? "Atlas đã đánh dấu em" : "Atlas còn niêm phong"}</h2><p className="mt-2 text-sm leading-relaxed text-[#58708b]">{isBossUnlocked ? "Mỗi trận có 5 câu khó, không trùng với câu thu phục. Atlas phản công kể cả khi em trả lời đúng." : "Thu phục 2 guardian bằng 20 câu đúng riêng biệt để mở thử thách 5 câu khó."}</p><Link href="/boss" className="mt-5 inline-flex items-center gap-2 font-bold underline decoration-[#f6b73c] decoration-2 underline-offset-4">{isBossUnlocked ? <Swords size={16} /> : <LockKeyhole size={16} />}{isBossUnlocked ? "Đến đấu trường" : "Xem điều kiện"}</Link></article></div>
-  </section>;
+  return <div className="landing-page">
+    <section className="landing-hero" aria-labelledby="math4fun-title">
+      <img src={HERO_ART} alt="Thế giới fantasy của hành trình học Toán Math4Fun" className="landing-hero-art" />
+      <div className="landing-hero-overlay" aria-hidden="true" />
+      <div className="landing-hero-grid" aria-hidden="true" />
+      <div className="landing-hero-orbit landing-hero-orbit-a" aria-hidden="true" /><div className="landing-hero-orbit landing-hero-orbit-b" aria-hidden="true" />
+      <div className="landing-hero-margin-notes" aria-hidden="true"><span>FIELD PLATE · MAP 01</span><span>PINNED · GUARDIAN TRACE</span><span>ROUTE DRAFT · M4F</span></div>
+      <div className="landing-hero-content">
+        <div className="landing-hero-kicker"><span><Compass size={16} /></span> NỀN TẢNG HỌC TOÁN · PHIÊU LƯU MỖI NGÀY</div>
+        <h1 id="math4fun-title"><Math4FunWordmark /><span className="sr-only">Math4Fun</span></h1>
+        <p className="landing-hero-lede">Học Toán lớp 4 bằng những chuyến thám hiểm nhỏ: giải bài, thu phục guardian, mở phép thuật và ghi tên lên bản đồ.</p>
+        <div className="landing-hero-proof"><span><Check size={15} /> Trạm học theo chủ đề</span><span><Check size={15} /> XP & guardian đồng hành</span><span><Check size={15} /> Boss thử thách cuối map</span></div>
+        <div className="landing-hero-actions"><Link href={primaryHref} className="landing-primary-cta"><Sparkles size={18} /> {primaryLabel} <ArrowRight size={17} /></Link><Link href="/map" className="landing-secondary-cta"><MapPinned size={18} /> Khám phá thế giới</Link></div>
+        {profile && <div className="landing-return-note"><span className="landing-return-avatar">{profile.name.slice(0, 1).toUpperCase()}</span><p><small>NHẬT KÝ ĐANG MỞ</small><b>Chào {profile.name}, hôm nay em đã sẵn sàng ghi thêm dấu chân.</b></p><span><Flame size={14} /> {profile.streak} ngày</span></div>}
+      </div>
+      <aside className="landing-hero-card" aria-label="Tóm tắt game loop như phiếu ghi chép hành trình">
+        <div className="landing-hero-card-top"><span>FIELD LOG</span><b>{profile ? `LV.${level}` : "LV.01"}</b></div>
+        <div className="landing-xp-track"><i style={{ width: `${profile ? Math.min(100, Math.round((levelProgress / 250) * 100)) : 12}%` }} /></div>
+        <p>{profile ? `${levelProgress}/250 XP · ${gold} Gold` : "Mở sổ để nhận XP & Gold"}</p>
+        <div className="landing-hero-card-route"><span><BookOpen size={16} /> Giải bài</span><i /><span><Gem size={16} /> Thu phục</span><i /><span><Swords size={16} /> Đấu Boss</span></div>
+        <div className="landing-hero-card-seal"><Trophy size={21} /><span>LEVEL UP<br />IS A CLUE</span></div>
+      </aside>
+    </section>
+
+    <section className="landing-proof-band" aria-label="Những thành phần chính của Math4Fun"><StatChip icon={BookOpen} title="Bài học có ngữ cảnh" copy="Chủ đề theo sách Toán 4" /><StatChip icon={Wand2} title="Học bằng chiến thuật" copy="Đúng thì tung phép, sai vẫn học tiếp" tone="mint" /><StatChip icon={Trophy} title="Tiến độ nhìn thấy được" copy="Gold, XP, huy hiệu & hành trình" tone="coral" /></section>
+
+    <section className="landing-story-intro"><div><p className="landing-eyebrow"><Compass size={14} /> VÒNG LẶP HỌC–CHƠI</p><h2>Không phải làm bài cho xong.<br /><em>Là đi xa hơn vì hiểu hơn.</em></h2></div><p>Math4Fun biến mỗi lần luyện tập thành một vòng lặp vừa sức: mở một trạm, giải mười câu, đón guardian mới và dùng hiểu biết để vượt thử thách lớn hơn.</p></section>
+
+    <div className="landing-main-grid"><WorldRoute signed={Boolean(profile)} nextTitle={next?.title} mastered={mastered} /><GuardianFeature signed={Boolean(profile)} /></div>
+
+    <section className="landing-quest-loop" aria-labelledby="quest-loop-title"><div className="landing-quest-copy"><p className="landing-eyebrow"><Shield size={14} /> QUEST SYSTEM</p><h2 id="quest-loop-title">Toán có nhịp độ.<br />Hành trình có phần thưởng.</h2><p>Mỗi tuần, học sinh tự mở tuyến, dùng Gold có chủ đích và nhìn thấy từng bước tiến trong sổ hành trình cá nhân.</p><Link href={profile ? "/stats" : "/start"} className="landing-text-cta">{profile ? "Mở sổ tiến độ" : "Tạo sổ hành trình"}<ArrowRight size={17} /></Link></div><div className="landing-loop-artifacts"><article className="landing-loop-card landing-loop-card-one"><span>01</span><BookOpen /><b>Mở trạm</b><p>Chọn chủ đề để bắt đầu chuyến học.</p></article><article className="landing-loop-card landing-loop-card-two"><span>02</span><Wand2 /><b>Giải & lên XP</b><p>Mỗi đáp án là một kỹ năng được ghi nhận.</p></article><article className="landing-loop-card landing-loop-card-three"><span>03</span><Trophy /><b>Mở khóa thử thách</b><p>Guardian và Boss chờ em chinh phục.</p></article><svg className="landing-loop-thread" viewBox="0 0 600 130" aria-hidden="true"><path d="M30 71 C126 16 187 124 278 64 S425 8 570 59" fill="none" stroke="currentColor" strokeDasharray="5 10" strokeWidth="2" /></svg></div></section>
+
+    <section className="landing-final-cta"><div className="landing-final-stars" aria-hidden="true">✦ · ✧ · ✦</div><p className="landing-eyebrow"><Star size={14} fill="currentColor" /> BẢN ĐỒ ĐANG CHỜ</p><h2>Trạm học đầu tiên<br />chỉ cách một dấu chân.</h2><p>Khởi tạo hồ sơ riêng, chọn companion và bắt đầu chuyến phiêu lưu Toán của em hôm nay.</p><Link href={profile ? primaryHref : "/start"} className="landing-primary-cta"><Compass size={18} /> {profile ? primaryLabel : "Ký tên vào nhật ký"} <ArrowRight size={17} /></Link><small>{isBossUnlocked ? "Boss Atlas đã mở: nhật ký của em đã đủ mạnh." : profile ? `${weeklyOpenCount}/2 lượt mở trạm miễn phí trong tuần này.` : "Không cần tải ứng dụng. Tiến độ được giữ trên thiết bị của em."}</small></section>
+  </div>;
 }

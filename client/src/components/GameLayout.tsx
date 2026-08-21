@@ -47,6 +47,7 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
   } = useGame();
   const ambientRef = useRef<HTMLAudioElement>(null);
   const soloStart = location === "/start";
+  const landingHome = location === "/";
   const activeBattle = profile?.battle?.status === "active";
   const activeStationAttempt = location.startsWith("/station/") && Object.values(profile?.attempts ?? {}).some((attempt) => Boolean(attempt.currentQuestionId));
   const questionRoute = activeStationAttempt || location === "/training" || (activeBattle && ["/boss", "/map-boss", "/map2-boss"].includes(location));
@@ -73,11 +74,11 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen overflow-x-hidden bg-[#f5efdf] text-[#172a48]">
       <audio ref={ambientRef} src={AMBIENT_AUDIO} loop preload="auto" />
       <div className="paper-noise pointer-events-none fixed inset-0 z-0" />
-      <header className="relative z-30 border-b-2 border-[#172a48] bg-[#fffdf6]/95 backdrop-blur">
+      <header className={`relative z-30 border-b-2 border-[#172a48] backdrop-blur ${landingHome ? "bg-[#0d1631]/94 text-white" : "bg-[#fffdf6]/95"}`}>
         <div className="mx-auto flex max-w-[1536px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2.5" aria-label="Math4Fun trang chủ">
+          <Link href="/" className={`flex items-center gap-2.5 ${landingHome ? "text-white" : ""}`} aria-label="Math4Fun trang chủ">
             <img src={LOGO_IMAGE} alt="Biểu tượng la bàn Math4Fun" className="h-11 w-11 object-contain" />
-            <span className="leading-none"><span className="block font-display text-xl font-black tracking-tight">Math4Fun</span><span className="block font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#58708b]">field journal</span></span>
+            <span className="leading-none"><span className="block font-display text-xl font-black tracking-tight">Math4Fun</span><span className={`block font-mono text-[9px] font-bold uppercase tracking-[.18em] ${landingHome ? "text-[#b9cae4]" : "text-[#58708b]"}`}>field journal</span></span>
           </Link>
           <div className="flex items-center gap-2">
             <Tooltip>
@@ -132,8 +133,8 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
         </div>
       </header>
 
-      <div className={`relative z-10 mx-auto max-w-[1536px] px-4 py-6 sm:px-6 lg:px-8 ${soloStart ? "" : "lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-8"}`}>
-        {!soloStart && <aside className="order-2 mb-6 lg:order-1 lg:mb-0 lg:opacity-90"><div className="sticky top-5 border-2 border-[#172a48] bg-[#fffdf6]/88 p-3 shadow-[3px_3px_0_#172a48]">
+      <div className={`relative z-10 mx-auto max-w-[1536px] px-4 py-6 sm:px-6 lg:px-8 ${soloStart || landingHome ? "" : "lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-8"}`}>
+        {!soloStart && !landingHome && <aside className="order-2 mb-6 lg:order-1 lg:mb-0 lg:opacity-90"><div className="sticky top-5 border-2 border-[#172a48] bg-[#fffdf6]/88 p-3 shadow-[3px_3px_0_#172a48]">
           <p className="px-2 pb-3 font-mono text-[9px] font-bold uppercase tracking-[.18em] text-[#58708b]">Nhật ký hành trình · chỉ mục</p>
           {profile && <div className="mb-3 flex items-center gap-2 border-2 border-dashed border-[#172a48] bg-[#eef1fb] p-2"><PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="sm" /><span className="min-w-0"><b className="block truncate text-sm">{profile.name}</b><small className="font-mono text-[9px] font-bold tracking-[.12em] text-[#58708b]">{isAdmin ? "LOCAL ADMIN ACTIVE" : "COMPANION ACTIVE"}</small></span></div>}
           <nav className="space-y-1" aria-label="Điều hướng chính">{visibleNavItems.map(({ href, label, icon: Icon }) => { const active = isActivePath(location, href); return <Link key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-bold transition ${active ? "bg-[#172a48] text-white" : "hover:bg-[#fff0b6]"}`}><Icon size={16} className={active ? "text-[#f6b73c]" : "text-[#58708b]"} />{label}</Link>; })}</nav>
@@ -147,9 +148,9 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
           </> : <Link href="/start" className="block overflow-hidden border-2 border-dashed border-[#172a48] bg-[#fff8da] p-3 hover:bg-[#fff0b6]"><span className="font-mono text-[9px] font-bold tracking-[.14em] text-[#58708b]">ROUTE DORMANT</span><span className="mt-2 grid h-16 place-items-center border-y-2 border-dashed border-[#172a48] bg-[#fffdf6]"><span className="grid h-10 w-10 place-items-center rounded-full border-2 border-[#172a48] bg-[#d7d0bf]"><LockKeyhole size={16} /></span></span><b className="mt-3 block font-display text-xl">Bản đồ chưa ký tên</b><span className="mt-1 block text-xs leading-relaxed text-[#58708b]">Đường chỉ khâu sẽ sáng theo lựa chọn của em.</span><span className="mt-3 block text-sm font-bold">Ký tên mở sổ <Compass className="ml-1 inline" size={14} /></span></Link>}
           <div className="mt-4 text-xs leading-relaxed text-[#58708b]"><ShieldCheck className="mr-1 inline text-[#3e9b7a]" size={13} />Tiến độ chỉ lưu ở trình duyệt này.</div>
         </div></aside>}
-        <main className="min-w-0 lg:order-2"><div className="journey-strip mb-5"><span className="journey-strip-label"><Compass size={13} />{routeLabel(location)}</span><span className="journey-thread" aria-hidden="true"><i /><i /><i className={location === "/map" ? "is-current" : ""} /><i /><i /></span><span className="journey-strip-proof">{profile ? `LV.${level} · ${profile.correctQuestionIds.length} bằng chứng · ${gold} Gold` : "CHƯA MỞ SỔ"}</span></div>{children}</main>
+        <main className="min-w-0 lg:order-2">{!landingHome && <div className="journey-strip mb-5"><span className="journey-strip-label"><Compass size={13} />{routeLabel(location)}</span><span className="journey-thread" aria-hidden="true"><i /><i /><i className={location === "/map" ? "is-current" : ""} /><i /><i /></span><span className="journey-strip-proof">{profile ? `LV.${level} · ${profile.correctQuestionIds.length} bằng chứng · ${gold} Gold` : "CHƯA MỞ SỔ"}</span></div>}{children}</main>
       </div>
-      {!soloStart && <nav className="sticky bottom-0 z-30 grid grid-cols-5 border-t-2 border-[#172a48] bg-[#fffdf6] px-2 py-2 lg:hidden">{navItems.slice(0, 5).map(({ href, label, icon: Icon }) => { const active = isActivePath(location, href); return <Link key={href} href={href} className={`grid place-items-center gap-1 rounded-lg py-1.5 text-[8px] font-bold ${active ? "bg-[#172a48] text-white" : "text-[#58708b]"}`}><Icon size={15} className={active ? "text-[#f6b73c]" : ""} />{label}</Link>; })}</nav>}
+      {!soloStart && !landingHome && <nav className="sticky bottom-0 z-30 grid grid-cols-5 border-t-2 border-[#172a48] bg-[#fffdf6] px-2 py-2 lg:hidden">{navItems.slice(0, 5).map(({ href, label, icon: Icon }) => { const active = isActivePath(location, href); return <Link key={href} href={href} className={`grid place-items-center gap-1 rounded-lg py-1.5 text-[8px] font-bold ${active ? "bg-[#172a48] text-white" : "text-[#58708b]"}`}><Icon size={15} className={active ? "text-[#f6b73c]" : ""} />{label}</Link>; })}</nav>}
       <footer className="relative z-10 border-t-2 border-dashed border-[#d7d0bf] px-4 py-5 text-center text-xs text-[#58708b]"><BookOpen className="mr-1 inline-block" size={13} />Câu hỏi hiển thị có nguồn Archimede Toán 4 Tập 1–2 đã đối chiếu. <ShieldCheck className="ml-1 inline-block text-[#3e9b7a]" size={13} /></footer>
       {isBossUnlocked && <div className="pointer-events-none fixed bottom-24 right-4 z-20 hidden border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-xs font-black shadow-[3px_3px_0_#172a48] lg:block"><Compass className="mr-1 inline-block" size={14} />Boss Atlas đã mở</div>}
     </div>
