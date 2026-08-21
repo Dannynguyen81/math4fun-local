@@ -88,7 +88,7 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
               </TooltipTrigger>
               <TooltipContent className="max-w-64 border-2 border-[#172a48] bg-[#172a48] text-center text-xs text-white">{syncStatusLabel}</TooltipContent>
             </Tooltip>
-            {profile && <span className="hidden items-center gap-1.5 border-2 border-[#172a48] bg-[#fff0b6] px-2 py-1 text-xs font-black shadow-[2px_2px_0_#172a48] sm:flex" aria-label={`${gold} Gold`} title={`${gold} Gold`}><img src="/manus-storage/math4fun-gold-coin-3d_1a25edfc.png" alt="" aria-hidden="true" className="h-6 w-6 shrink-0 object-contain drop-shadow-[0_1px_0_rgba(23,42,72,.42)]" />{gold}</span>}
+            {profile && <span className="hidden items-center gap-1.5 border-2 border-[#172a48] bg-[#fff0b6] px-2 py-1 text-xs font-black shadow-[2px_2px_0_#172a48] sm:flex" aria-label={`${gold} Gold`} title={`${gold} Gold`}><img src="/manus-storage/math4fun-gold-coin-3d_1a25edfc.png" alt="" aria-hidden="true" className="gold-coin-wobble h-6 w-6 shrink-0 object-contain drop-shadow-[0_1px_0_rgba(23,42,72,.42)]" />{gold}</span>}
             {profile && unreadReportReplies.length > 0 && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

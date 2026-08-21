@@ -8,6 +8,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
 import { isSupabaseSyncEnabled } from "@/lib/supabase";
 import { fetchSupabaseLeaderboardResult, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
+import { playGoldGainSound } from "@/lib/magicAudio";
 
 export const EXTRA_STATION_OPEN_GOLD = 30;
 
@@ -507,6 +508,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
   const syncOwnerRef = useRef<string | null>(null);
   const lastSyncedProfileRef = useRef<Record<string, string>>({});
+  const observedGoldRef = useRef<{ profileId: string; gold: number } | null>(null);
   useEffect(() => { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }, [store]);
   useEffect(() => { writeSessionCookie(store.activeProfileId); }, [store.activeProfileId]);
   useEffect(() => { parentPinRef.current = store.parentPin; }, [store.parentPin]);
@@ -514,6 +516,16 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
   const isAdmin = profile?.role === "admin" && profile.id === ADMIN_PROFILE_ID;
+  useEffect(() => {
+    if (!profile) { observedGoldRef.current = null; return; }
+    const observed = observedGoldRef.current;
+    if (!observed || observed.profileId !== profile.id) {
+      observedGoldRef.current = { profileId: profile.id, gold: profile.gold };
+      return;
+    }
+    if (profile.gold > observed.gold) playGoldGainSound(store.audioEnabled);
+    observedGoldRef.current = { profileId: profile.id, gold: profile.gold };
+  }, [profile?.id, profile?.gold, store.audioEnabled]);
   const markSyncFailure = useCallback(() => setSyncStatus(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "error"), []);
   const syncStatusLabel = useMemo(() => {
     if (syncStatus === "synced") return "Đã đồng bộ Supabase";

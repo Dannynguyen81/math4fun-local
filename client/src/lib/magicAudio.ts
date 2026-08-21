@@ -185,3 +185,34 @@ export function playFiveStreakSound(enabled: boolean) {
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), 1180);
 }
+
+/** A light two-note coin chime, reserved for a positive Gold balance change. */
+export function playGoldGainSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.075, now + 0.012);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+  master.connect(context.destination);
+  [1318.51, 1760].forEach((frequency, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.075;
+    oscillator.type = index === 0 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(frequency, start);
+    oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.012, start + 0.14);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(index === 0 ? 0.72 : 0.5, start + 0.012);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.19);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.22);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 520);
+}
