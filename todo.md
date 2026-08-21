@@ -262,3 +262,11 @@
 - [x] Thu gọn carousel onboarding để nhìn bao quát trên màn hình chính ở desktop và mobile.
 - [x] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
 - [x] Chạy `pnpm check`, `pnpm build` và kiểm tra screenshot ở desktop 1280×720 và mobile 390×844.
+
+## Nâng cấp Header Icon, Coin 3D và Thao tác Carousel — 2026-08-21
+
+- [ ] Thiết kế lại cụm icon header theo tham chiếu (cloud, coin badge, user pill, âm thanh, tắt tiếng) với typographic rõ ràng, nền bọc thẻ bài tinh tế và coin 3D xoay nổi bật.
+- [ ] Bổ sung thao tác vuốt (swipe) trên mobile và phím tắt bàn phím (`ArrowLeft`, `ArrowRight`, `Enter`) cho carousel avatar.
+- [ ] Thêm hiệu ứng viền sáng/đổ bóng nổi bật (specimen highlight ring) cho nhân vật ở vị trí trung tâm.
+- [ ] Đặt nút "Chọn nhân vật này" ngay bên dưới card avatar kèm hoạt ảnh xác nhận thành công (particles / scale pulse / checkmark flash) khi click.
+- [ ] Chạy `pnpm check`, `pnpm build` và kiểm tra trực quan trên desktop/mobile.

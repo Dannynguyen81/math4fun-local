@@ -81,21 +81,28 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
             <img src={LOGO_IMAGE} alt="Biểu tượng la bàn Math4Fun" className="h-11 w-11 object-contain" />
             <span className="leading-none"><span className="block font-display text-xl font-black tracking-tight">Math4Fun</span><span className={`block font-mono text-[9px] font-bold uppercase tracking-[.18em] ${landingHome ? "text-[#b9cae4]" : "text-[#58708b]"}`}>field journal</span></span>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <Tooltip>
               <TooltipTrigger asChild>
-                <span tabIndex={0} role="status" aria-live="polite" aria-label={syncStatusLabel} className={`grid h-9 w-9 place-items-center border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] ${syncVisual.className}`}>
-                  <SyncIcon size={17} aria-hidden="true" />
+                <span tabIndex={0} role="status" aria-live="polite" aria-label={syncStatusLabel} className={`grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] transition hover:scale-105 ${syncVisual.className}`}>
+                  <SyncIcon size={18} aria-hidden="true" />
                 </span>
               </TooltipTrigger>
               <TooltipContent className="max-w-64 border-2 border-[#172a48] bg-[#172a48] text-center text-xs text-white">{syncStatusLabel}</TooltipContent>
             </Tooltip>
-            {profile && <span className="hidden items-center gap-1.5 border-2 border-[#172a48] bg-[#fff0b6] px-2 py-1 text-xs font-black shadow-[2px_2px_0_#172a48] sm:flex" aria-label={`${gold} Gold`} title={`${gold} Gold`}><img src="/manus-storage/math4fun-gold-coin-3d_1a25edfc.png" alt="" aria-hidden="true" className="gold-coin-wobble h-6 w-6 shrink-0 object-contain drop-shadow-[0_1px_0_rgba(23,42,72,.42)]" />{gold}</span>}
+
+            {profile && (
+              <div className="flex items-center gap-1.5 rounded-lg border-2 border-[#172a48] bg-[#fff0b6] px-3 py-1.5 text-xs font-black shadow-[2px_2px_0_#172a48]" aria-label={`${gold} Gold`} title={`${gold} Gold`}>
+                <img src="/manus-storage/math4fun-gold-coin-3d_1a25edfc.png" alt="" aria-hidden="true" className="gold-coin-wobble h-7 w-7 shrink-0 object-contain drop-shadow-[0_2px_0_rgba(23,42,72,.42)]" />
+                <span className="font-display text-sm tracking-tight text-[#172a48]">{gold}</span>
+              </div>
+            )}
+
             {profile && unreadReportReplies.length > 0 && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="relative grid h-9 w-9 place-items-center border-2 border-[#172a48] bg-[#e7f2e5] shadow-[2px_2px_0_#172a48]" aria-label={`${unreadReportReplies.length} phản hồi report mới`}>
-                    <Bell size={17} />
+                  <button className="relative grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] bg-[#e7f2e5] shadow-[2px_2px_0_#172a48] transition hover:scale-105" aria-label={`${unreadReportReplies.length} phản hồi report mới`}>
+                    <Bell size={18} />
                     <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full border-2 border-[#172a48] bg-[#ee6b4e] px-1 text-[10px] font-black text-white">{unreadReportReplies.length}</span>
                   </button>
                 </DropdownMenuTrigger>
@@ -111,25 +118,31 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+
             {profile && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 border-2 border-[#172a48] bg-[#172a48] py-1 pl-1 pr-2 text-sm font-bold text-white shadow-[2px_2px_0_#f6b73c]" aria-label="Mở menu tài khoản">
-                    <PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="sm" compact />
-                    <span className="hidden max-w-28 truncate sm:block">{profile.name}</span><ChevronDown size={14} />
+                  <button className="flex items-center gap-2.5 rounded-lg border-2 border-[#172a48] bg-[#172a48] py-1.5 pl-1.5 pr-3 text-sm font-bold text-white shadow-[2px_2px_0_#f6b73c] transition hover:scale-[1.02]" aria-label="Mở menu tài khoản">
+                    <div className="grid h-8 w-8 place-items-center rounded-full border border-[#f6b73c] bg-[#fffdf6] overflow-hidden">
+                      <PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="sm" compact />
+                    </div>
+                    <span className="hidden max-w-32 truncate font-display font-black tracking-tight sm:block">{profile.name}</span>
+                    <ChevronDown size={14} className="text-[#f6b73c]" />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-64 border-2 border-[#172a48] bg-[#fffdf6] p-2 shadow-[4px_4px_0_#172a48]">
-                  <div className="border-b-2 border-dashed border-[#d7d0bf] px-2 pb-2"><b className="block truncate">{profile.name}</b><span className="block truncate text-xs text-[#58708b]">@{profile.username}</span></div>
-                  <DropdownMenuItem onSelect={() => navigate("/profile")}><UserRound />Hồ sơ cá nhân</DropdownMenuItem>
-                  {isAdmin && <DropdownMenuItem onSelect={() => navigate("/admin/questions")}><ClipboardPenLine />Duyệt câu hỏi</DropdownMenuItem>}
-                  <DropdownMenuItem variant="destructive" onSelect={() => { exitGame(); navigate("/"); }}><LogOut />Đăng xuất</DropdownMenuItem>
+                  <div className="border-b-2 border-dashed border-[#d7d0bf] px-2 pb-2"><b className="block truncate font-display font-black text-sm">{profile.name}</b><span className="block truncate font-mono text-xs text-[#58708b]">@{profile.username}</span></div>
+                  <DropdownMenuItem onSelect={() => navigate("/profile")} className="cursor-pointer font-bold"><UserRound size={15} className="mr-2" />Hồ sơ cá nhân</DropdownMenuItem>
+                  {isAdmin && <DropdownMenuItem onSelect={() => navigate("/admin/questions")} className="cursor-pointer font-bold"><ClipboardPenLine size={15} className="mr-2" />Duyệt câu hỏi</DropdownMenuItem>}
+                  <DropdownMenuItem variant="destructive" onSelect={() => { exitGame(); navigate("/"); }} className="cursor-pointer font-bold text-[#ee6b4e]"><LogOut size={15} className="mr-2" />Đăng xuất</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
-            <button onClick={() => setAmbientEnabled(!ambientEnabled)} className={`grid h-9 w-9 place-items-center border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] ${ambientEnabled ? "bg-[#dbe5ff]" : "bg-[#fffdf6]"}`} aria-label={ambientEnabled ? "Tắt nhạc nền" : "Bật nhạc nền"} title={ambientEnabled ? "Tắt nhạc nền" : "Bật nhạc nền"}><Music2 size={17} className={ambientEnabled ? "" : "opacity-35"} /></button>
-            <button onClick={() => setAudioEnabled(!audioEnabled)} className="grid h-9 w-9 place-items-center border-2 border-[#172a48] bg-[#fff8da] shadow-[2px_2px_0_#172a48]" aria-label={audioEnabled ? "Tắt âm hiệu ứng" : "Bật âm hiệu ứng"} title={audioEnabled ? "Tắt âm hiệu ứng" : "Bật âm hiệu ứng"}>{audioEnabled ? <Volume2 size={17} /> : <VolumeX size={17} />}</button>
-            {!profile && <button onClick={() => openAuth("login")} className="border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-sm font-bold text-[#172a48] shadow-[2px_2px_0_#172a48] transition hover:-translate-y-0.5 active:translate-y-0 active:scale-[.97]">Đăng nhập</button>}
+
+            <button onClick={() => setAmbientEnabled(!ambientEnabled)} className={`grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] transition hover:scale-105 ${ambientEnabled ? "bg-[#dbe5ff] text-[#294f86]" : "bg-[#fffdf6] text-[#58708b]"}`} aria-label={ambientEnabled ? "Tắt nhạc nền" : "Bật nhạc nền"} title={ambientEnabled ? "Tắt nhạc nền" : "Bật nhạc nền"}><Music2 size={18} className={ambientEnabled ? "" : "opacity-40"} /></button>
+            <button onClick={() => setAudioEnabled(!audioEnabled)} className={`grid h-10 w-10 place-items-center rounded-lg border-2 border-[#172a48] shadow-[2px_2px_0_#172a48] transition hover:scale-105 ${audioEnabled ? "bg-[#fff8da] text-[#a47326]" : "bg-[#fffdf6] text-[#58708b]"}`} aria-label={audioEnabled ? "Tắt âm hiệu ứng" : "Bật âm hiệu ứng"} title={audioEnabled ? "Tắt âm hiệu ứng" : "Bật âm hiệu ứng"}>{audioEnabled ? <Volume2 size={18} /> : <VolumeX size={18} className="opacity-40" />}</button>
+
+            {!profile && <button onClick={() => openAuth("login")} className="rounded-lg border-2 border-[#172a48] bg-[#f6b73c] px-4 py-2 font-display text-sm font-black text-[#172a48] shadow-[3px_3px_0_#172a48] transition hover:-translate-y-0.5 active:translate-y-0 active:scale-[.97]">Đăng nhập</button>}
           </div>
         </div>
       </header>
