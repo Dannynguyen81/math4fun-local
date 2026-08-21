@@ -206,6 +206,7 @@
 ## Điều khiển âm thanh và phản hồi người chơi
 
 - [x] Thêm nút bật/tắt nhạc nền ở góc trên phải, lưu tùy chọn cục bộ và giữ âm hiệu ứng chiến đấu độc lập.
+- [x] Nâng cấp icon Gold ở thanh trên thành đồng tiền 3D màu sắc nổi bật, tương phản tốt và giữ kích thước phù hợp mobile.
 - [x] Thêm rung lắc/chớp sáng GPU-friendly khi Boss phản công, đồng bộ với âm thanh nhưng tôn trọng giảm chuyển động.
 - [x] Thiết kế viền/stamp tương tác cho thẻ avatar trên nền parchment, có trạng thái chọn rõ ràng.
 - [x] Hiển thị hộp thư/thông báo trong game khi report của người chơi đã được admin duyệt và phản hồi.
