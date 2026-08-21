@@ -125,8 +125,8 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2.5 rounded-lg border-2 border-[#172a48] bg-[#172a48] py-1.5 pl-1.5 pr-3 text-sm font-bold text-white shadow-[2px_2px_0_#f6b73c] transition hover:scale-[1.02]" aria-label="Mở menu tài khoản">
-                    <div className="grid h-8 w-8 place-items-center rounded-full border border-[#f6b73c] bg-[#fffdf6] overflow-hidden">
-                      <PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="sm" compact />
+                    <div className="grid h-9 w-9 place-items-center rounded-lg border-2 border-[#f6b73c] bg-[#fffdf6] overflow-hidden shadow-inner">
+                      <PlayerAvatar avatar={profile.avatar} name={profile.name} outfitId={profile.equippedCosmetics.outfit} trailId={profile.equippedCosmetics.trail} size="md" />
                     </div>
                     <span className="hidden max-w-32 truncate font-display font-black tracking-tight sm:block">{profile.name}</span>
                     <ChevronDown size={14} className="text-[#f6b73c]" />
