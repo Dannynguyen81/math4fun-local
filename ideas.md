@@ -127,3 +127,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Route/evidence trail trên các trang phụ ưu tiên cấu trúc ghim lệch, note và dấu chuyển hóa; không biến thành thanh onboarding ngang đều đặn.
 - Chọn companion là một tuyến tiêu bản ghim dọc route thread, có các thẻ lệch nhịp và một bằng chứng đang chọn lớn hơn rõ rệt; không để 20 lựa chọn có cùng trọng số như một catalog.
 - Ảnh avatar phải được đặt trên xử lý giấy/taxonomy trung tính; không dùng các trường nền tím hoặc hồng bão hòa làm nền thẻ mặc định.
+- Hero là một trang sổ/artefact thám hiểm vật lý: các dải Indigo chỉ xuất hiện cùng nhãn giấy, route fragment, stamp hoặc bằng chứng mở tuyến.
+- Chọn companion luôn ưu tiên tiêu bản đang chọn như bằng chứng số 01; các lựa chọn còn lại là specimen ghim lệch theo tuyến, không phải catalog đồng trọng số.
+- Xếp hạng là **field score log**: thứ hạng, điểm, guardian, huy hiệu và tiến độ phải nằm trong cùng một bản ghi hành trình có trail/stamp, không được đọc như bảng dữ liệu tab chung chung.

@@ -213,8 +213,15 @@
 
 ## Cộng tác GitHub và dữ liệu Supabase
 
-- [ ] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.
-- [ ] Bổ sung tài liệu README/AGENTS cho quy trình cộng tác của nhiều AI Agent, nhánh, kiểm tra build và bảo vệ dữ liệu.
-- [ ] Đánh giá mô hình localStorage hiện tại và xác định schema Supabase tối thiểu cho hồ sơ, câu hỏi, report, Gold và leaderboard.
-- [ ] Xác nhận repository GitHub đích và dự án Supabase trước khi thực hiện các thao tác kết nối có tính thay đổi bên ngoài.
-- [ ] Xuất mã lên GitHub, thiết lập Supabase khi được xác nhận, rồi kiểm chứng quy trình phát triển đa tác nhân.
+- [x] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.
+- [x] Bổ sung tài liệu README/AGENTS cho quy trình cộng tác của nhiều AI Agent, nhánh, kiểm tra build và bảo vệ dữ liệu.
+- [x] Đánh giá mô hình localStorage hiện tại và xác định schema Supabase tối thiểu cho hồ sơ, câu hỏi, report, Gold và leaderboard.
+- [x] Xác nhận repository GitHub đích và dự án Supabase trước khi thực hiện các thao tác kết nối có tính thay đổi bên ngoài.
+- [x] Cài Supabase client, tích hợp lớp đồng bộ offline-first đa hồ sơ và kiểm chứng `pnpm check`/`pnpm build`; GitHub Actions secrets chưa thể tạo do token hiện tại bị GitHub từ chối quyền Actions secrets.
+
+## Dự án Supabase Math4Fun
+
+- [x] Lấy chi phí chính thức và xác nhận của người dùng trước khi tạo dự án Supabase mới Math4Fun.
+- [x] Tạo dự án Math4Fun ở khu vực Singapore phù hợp, rồi kiểm tra trạng thái sẵn sàng.
+- [x] Áp dụng schema có RLS cho dữ liệu người chơi, question bank, report, Gold ledger và leaderboard.
+- [x] Lưu cấu hình công khai an toàn, sinh TypeScript types, bật Anonymous sign-ins, kiểm tra RLS/leaderboard và cập nhật hướng dẫn GitHub/Supabase cho AI Agent.

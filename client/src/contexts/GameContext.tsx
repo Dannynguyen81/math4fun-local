@@ -6,6 +6,8 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { isSupabaseSyncEnabled } from "@/lib/supabase";
+import { fetchSupabaseLeaderboard, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
 
 export const EXTRA_STATION_OPEN_GOLD = 30;
 
@@ -496,7 +498,10 @@ function readStore(): GameStore {
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<GameStore>(readStore);
+  const [cloudLeaderboard, setCloudLeaderboard] = useState<LeaderboardEntry[]>([]);
   const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
+  const syncOwnerRef = useRef<string | null>(null);
+  const lastSyncedProfileRef = useRef<Record<string, string>>({});
   useEffect(() => { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }, [store]);
   useEffect(() => { writeSessionCookie(store.activeProfileId); }, [store.activeProfileId]);
   useEffect(() => { parentPinRef.current = store.parentPin; }, [store.parentPin]);
@@ -504,6 +509,52 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
   const isAdmin = profile?.role === "admin" && profile.id === ADMIN_PROFILE_ID;
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    let disposed = false;
+    const startSync = async () => {
+      const ownerId = await getSupabaseOwnerId();
+      if (disposed || !ownerId) return;
+      syncOwnerRef.current = ownerId;
+      const profilesToSync = store.profiles.filter((entry) => entry.role !== "admin");
+      await Promise.all(profilesToSync.map(async (entry) => {
+        const result = await syncProfileToSupabase(entry, ownerId);
+        if (result.ok) lastSyncedProfileRef.current[entry.id] = JSON.stringify(entry);
+      }));
+      const remote = await fetchSupabaseLeaderboard();
+      if (!disposed) setCloudLeaderboard(remote);
+    };
+    void startSync();
+    return () => { disposed = true; };
+  }, []);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    let disposed = false;
+    const refresh = async () => {
+      const remote = await fetchSupabaseLeaderboard();
+      if (!disposed) setCloudLeaderboard(remote);
+    };
+    void refresh();
+    const refreshId = window.setInterval(() => { void refresh(); }, 60_000);
+    return () => { disposed = true; window.clearInterval(refreshId); };
+  }, []);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    const ownerId = syncOwnerRef.current;
+    if (!ownerId) return;
+    const pendingProfiles = store.profiles
+      .filter((entry) => entry.role !== "admin")
+      .map((entry) => ({ profile: entry, snapshot: JSON.stringify(entry) }))
+      .filter(({ profile: entry, snapshot }) => lastSyncedProfileRef.current[entry.id] !== snapshot);
+    if (!pendingProfiles.length) return;
+    const syncId = window.setTimeout(() => {
+      void Promise.all(pendingProfiles.map(async ({ profile: entry, snapshot }) => {
+        const result = await syncProfileToSupabase(entry, ownerId);
+        if (result.ok) lastSyncedProfileRef.current[entry.id] = snapshot;
+      })).then(() => { void fetchSupabaseLeaderboard().then(setCloudLeaderboard); });
+    }, 900);
+    return () => window.clearTimeout(syncId);
+  }, [store.profiles]);
   const questionBank = useMemo(() => Object.values(QUESTIONS_BY_ID).sort((left, right) => left.stationId - right.stationId || left.id.localeCompare(right.id)), [store.questionOverrides]);
   const updateProfile = useCallback((profileId: string, updater: (entry: StudentProfile) => StudentProfile) => {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => entry.id === profileId ? updater(entry) : entry) }));
@@ -1074,12 +1125,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (profile.streak >= 14) badges.push("streak-14");
     return badges;
   }, [profile]);
-  const leaderboard = useMemo<LeaderboardEntry[]>(() => store.profiles.map((entry) => {
-    const elementCount = ELEMENT_ORDER.filter((element) => (entry.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2).length;
-    const streakBadgeCount = entry.streak >= 14 ? 2 : entry.streak >= 7 ? 1 : 0;
-    const score = entry.xp + entry.completedStationIds.length * 250 + entry.collectedGuardianIds.length * 175 + elementCount * 300 + streakBadgeCount * 200;
-    return { profileId: entry.id, name: entry.name, avatar: entry.avatar, score, level: Math.floor(entry.xp / 250) + 1, badges: elementCount + streakBadgeCount, guardians: entry.collectedGuardianIds.length, stations: entry.completedStationIds.length, streak: entry.streak };
-  }).sort((left, right) => right.score - left.score || right.level - left.level || left.name.localeCompare(right.name, "vi")), [store.profiles]);
+  const leaderboard = useMemo<LeaderboardEntry[]>(() => {
+    const localEntries = store.profiles.map(toLeaderboardEntry);
+    const localIds = new Set(localEntries.map((entry) => entry.profileId));
+    return [...localEntries, ...cloudLeaderboard.filter((entry) => !localIds.has(entry.profileId))]
+      .sort((left, right) => right.score - left.score || right.level - left.level || left.name.localeCompare(right.name, "vi"));
+  }, [cloudLeaderboard, store.profiles]);
   const value = useMemo<GameContextValue>(() => ({
     profile,
     profiles: store.profiles,
