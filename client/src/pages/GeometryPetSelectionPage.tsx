@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Compass, Shield, Zap, Droplet, Wind, Sparkles, Award, 
-  ChevronLeft, ChevronRight, CheckCircle2, BookOpen, Ruler, Scale 
+  ChevronLeft, ChevronRight, CheckCircle2, BookOpen, Ruler, Scale, Filter, GitCompare, Info 
 } from "lucide-react";
-import { playAvatarSlideSound, playAvatarSelectSound } from "@/lib/magicAudio";
+import { playAvatarSlideSound, playAvatarSelectSound, playFireworkPopSound } from "@/lib/magicAudio";
+import { useGame } from "@/contexts/GameContext";
 
 interface GeoPet {
   id: string;
@@ -30,6 +31,7 @@ interface GeoPet {
     accent: string;
   };
   visualShape: string;
+  mathConceptTooltip: string;
 }
 
 const GEOMETRY_PETS: GeoPet[] = [
@@ -51,6 +53,7 @@ const GEOMETRY_PETS: GeoPet[] = [
       accent: "#10b981",
     },
     visualShape: "Kubernetes Cube 3D CSS Model",
+    mathConceptTooltip: "Diện tích hình chữ nhật bằng chiều dài nhân chiều rộng (cùng đơn vị đo). Chu vi bằng tổng bốn cạnh.",
   },
   {
     id: "vane",
@@ -70,6 +73,7 @@ const GEOMETRY_PETS: GeoPet[] = [
       accent: "#f59e0b",
     },
     visualShape: "Pyramid Apex 3D CSS Model",
+    mathConceptTooltip: "Góc nhọn nhỏ hơn 90°, góc vuông bằng 90°, góc tù lớn hơn 90° và nhỏ hơn 180°, góc bẹt bằng 180°.",
   },
   {
     id: "scalera",
@@ -89,29 +93,39 @@ const GEOMETRY_PETS: GeoPet[] = [
       accent: "#06b6d4",
     },
     visualShape: "Spiral Nautilus 3D CSS Model",
+    mathConceptTooltip: "1kg = 1000g; 1m = 10dm = 100cm = 1000mm. Khi đổi từ đơn vị lớn sang nhỏ ta nhân, ngược lại ta chia.",
   },
 ];
 
 export default function GeometryPetSelectionPage() {
   const [, navigate] = useLocation();
+  const { audioEnabled } = useGame();
+  const [filterElement, setFilterElement] = useState<string>("all");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedPet, setSelectedPet] = useState<GeoPet | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
-  const activePet = GEOMETRY_PETS[currentIndex];
+  const filteredPets = useMemo(() => {
+    if (filterElement === "all") return GEOMETRY_PETS;
+    return GEOMETRY_PETS.filter((pet) => pet.element === filterElement);
+  }, [filterElement]);
+
+  const activePet = filteredPets[currentIndex] ?? filteredPets[0] ?? GEOMETRY_PETS[0];
 
   const handlePrev = () => {
-    playAvatarSlideSound(true);
-    setCurrentIndex((prev) => (prev === 0 ? GEOMETRY_PETS.length - 1 : prev - 1));
+    playAvatarSlideSound(audioEnabled);
+    setCurrentIndex((prev) => (prev === 0 ? filteredPets.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    playAvatarSlideSound(true);
-    setCurrentIndex((prev) => (prev === GEOMETRY_PETS.length - 1 ? 0 : prev + 1));
+    playAvatarSlideSound(audioEnabled);
+    setCurrentIndex((prev) => (prev === filteredPets.length - 1 ? 0 : prev + 1));
   };
 
   const handleSelect = (pet: GeoPet) => {
-    playAvatarSelectSound(true);
+    playAvatarSelectSound(audioEnabled);
+    playFireworkPopSound(audioEnabled);
     setSelectedPet(pet);
     setIsConfirming(true);
     setTimeout(() => {
@@ -121,28 +135,59 @@ export default function GeometryPetSelectionPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#121629] via-[#1a2238] to-[#0d111a] text-[#f3f4f6] p-4 md:p-8 flex flex-col justify-between relative overflow-hidden font-sans">
-      {/* Decorative Parched Map Background Grid & Particles */}
+      {/* Decorative Background Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
       <div className="absolute top-1/4 left-10 w-72 h-72 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <header className="max-w-5xl mx-auto w-full flex items-center justify-between z-10 mb-6 border-b border-amber-500/20 pb-4">
+      <header className="max-w-5xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-4 z-15 mb-4 border-b border-amber-500/20 pb-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
             <Compass className="w-6 h-6 animate-spin-slow" />
           </div>
           <div>
             <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold">Math4Fun Field Journal</span>
-            <h1 className="text-xl md:text-2xl font-bold font-serif text-amber-100">Chọn Bạn Đồng Hành - Hình Học & Đo Lường</h1>
+            <h1 className="text-xl md:text-2xl font-bold font-serif text-amber-100">Chọn Pet Hình Học & Đo Lường</h1>
           </div>
         </div>
-        <button 
-          onClick={() => navigate("/")}
-          className="px-4 py-2 text-sm bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition"
-        >
-          Quay lại Trang Chủ
-        </button>
+
+        <div className="flex items-center gap-3">
+          {/* Element Quick Filters */}
+          <div className="flex items-center bg-slate-900/80 border border-slate-700 rounded-xl p-1 gap-1">
+            <Filter className="w-4 h-4 text-amber-400 ml-2" />
+            {[
+              { id: "all", label: "Tất cả" },
+              { id: "earth", label: "Đất" },
+              { id: "wind", label: "Gió" },
+              { id: "water", label: "Nước" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => { setFilterElement(tab.id); setCurrentIndex(0); }}
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition ${
+                  filterElement === tab.id ? "bg-amber-500 text-slate-950 font-bold" : "text-slate-300 hover:bg-slate-800"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setShowComparison(true)}
+            className="px-3.5 py-2 text-xs bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-200 border border-indigo-500/40 rounded-xl flex items-center gap-1.5 transition"
+          >
+            <GitCompare className="w-4 h-4" /> So sánh chỉ số
+          </button>
+
+          <button 
+            onClick={() => navigate("/")}
+            className="px-4 py-2 text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition"
+          >
+            Trang Chủ
+          </button>
+        </div>
       </header>
 
       {/* Main Content Carousel */}
@@ -184,7 +229,7 @@ export default function GeometryPetSelectionPage() {
                   {activePet.element === "water" && <Droplet className="w-3.5 h-3.5" />}
                   {activePet.elementLabel}
                 </span>
-                <span className="text-xs text-slate-400 font-mono">ID: PET-GEO-0{currentIndex + 1}</span>
+                <span className="text-xs text-slate-400 font-mono">ID: PET-GEO-{activePet.id.toUpperCase()}</span>
               </div>
 
               {/* Grid Content: 3D Visual Preview & Details */}
@@ -193,7 +238,6 @@ export default function GeometryPetSelectionPage() {
                 <div className="md:col-span-5 flex flex-col items-center justify-center bg-slate-900/60 rounded-2xl p-6 border border-slate-700/50 relative group">
                   <div className="absolute inset-0 bg-radial from-amber-500/10 to-transparent rounded-2xl pointer-events-none" />
                   
-                  {/* Floating 3D Simulated Avatar Node */}
                   <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-900 border border-amber-500/30 flex flex-col items-center justify-center relative shadow-inner animate-float">
                     <div className="absolute -top-3 -right-3 px-2 py-0.5 bg-amber-500 text-slate-950 font-bold text-[10px] rounded-md shadow">
                       3D MODEL
@@ -243,13 +287,17 @@ export default function GeometryPetSelectionPage() {
                     {activePet.description}
                   </p>
 
-                  {/* Math Skill Binding */}
-                  <div className="bg-amber-950/30 border border-amber-500/30 p-3 rounded-xl">
+                  {/* Math Skill Binding with Tooltip */}
+                  <div className="bg-amber-950/30 border border-amber-500/30 p-3 rounded-xl relative group">
                     <div className="flex items-center gap-2 text-xs font-semibold text-amber-400 mb-1">
                       <BookOpen className="w-3.5 h-3.5" />
                       <span>NĂNG LỰC TOÁN HỌC LỚP 4:</span>
                     </div>
                     <p className="text-xs text-amber-200/90 font-medium">{activePet.mathSkill}</p>
+                    <div className="mt-2 pt-2 border-t border-amber-500/20 text-[11px] text-slate-300 flex items-start gap-1.5">
+                      <Info className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                      <span>{activePet.mathConceptTooltip}</span>
+                    </div>
                   </div>
 
                   {/* Stat Grid */}
@@ -295,11 +343,11 @@ export default function GeometryPetSelectionPage() {
 
         {/* Dots Indicator */}
         <div className="flex items-center gap-3 mt-8">
-          {GEOMETRY_PETS.map((pet, idx) => (
+          {filteredPets.map((pet, idx) => (
             <button
               key={pet.id}
               onClick={() => {
-                playAvatarSlideSound(true);
+                playAvatarSlideSound(audioEnabled);
                 setCurrentIndex(idx);
               }}
               className={`h-2.5 rounded-full transition-all duration-300 ${
@@ -310,6 +358,78 @@ export default function GeometryPetSelectionPage() {
           ))}
         </div>
       </main>
+
+      {/* Comparison Modal */}
+      <AnimatePresence>
+        {showComparison && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center p-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-slate-900 border-2 border-indigo-500 p-6 md:p-8 rounded-3xl max-w-3xl w-full shadow-2xl relative"
+            >
+              <div className="flex items-center justify-between mb-6 border-b border-slate-800 pb-4">
+                <div className="flex items-center gap-2 text-indigo-400 font-bold text-lg">
+                  <GitCompare className="w-5 h-5" /> So sánh chỉ số các Pet Hình Học
+                </div>
+                <button 
+                  onClick={() => setShowComparison(false)}
+                  className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+                >
+                  Đóng
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {GEOMETRY_PETS.map((pet) => (
+                  <div key={pet.id} className="bg-slate-950/70 border border-slate-800 p-4 rounded-2xl flex flex-col justify-between">
+                    <div>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">{pet.elementLabel}</span>
+                      <h3 className="text-base font-bold text-white mt-2">{pet.name}</h3>
+                      <p className="text-xs text-slate-400 mt-1">{pet.role}</p>
+                    </div>
+
+                    <div className="space-y-2 my-4 text-xs">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Sức mạnh:</span>
+                        <span className="font-bold text-emerald-400">{pet.stats.power}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Chính xác:</span>
+                        <span className="font-bold text-amber-400">{pet.stats.precision}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Tốc độ:</span>
+                        <span className="font-bold text-cyan-400">{pet.stats.speed}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Phòng thủ:</span>
+                        <span className="font-bold text-indigo-400">{pet.stats.defense}</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setShowComparison(false);
+                        const idx = filteredPets.findIndex((p) => p.id === pet.id);
+                        if (idx !== -1) setCurrentIndex(idx);
+                      }}
+                      className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-xl text-xs font-semibold transition"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Confirmation Success Overlay */}
       <AnimatePresence>

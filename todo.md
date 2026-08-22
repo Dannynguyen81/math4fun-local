@@ -263,6 +263,16 @@
 - [x] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
 - [x] Chạy `pnpm check`, `pnpm build` và kiểm tra screenshot ở desktop 1280×720 và mobile 390×844.
 
+## Nâng cấp Màn hình Chọn Pet, Võ đài và Xác thực Admin — 2026-08-21
+
+- [x] Sửa lỗi đăng nhập admin `admin/admin` bị kẹt do quy tắc mật khẩu mới.
+- [x] Thêm bộ lọc nhanh các pet theo hệ nguyên tố (Đất, Gió, Nước, ...) trên đầu trang chọn pet.
+- [x] Thêm hiệu ứng hover tooltip giải thích khái niệm toán học cho chỉ số của từng pet.
+- [x] Thêm chế độ modal so sánh chỉ số pet cạnh nhau trực quan trước khi chọn.
+- [x] Tích hợp bộ ba pet hình học (Cubix, Vane, Scalera) vào hệ thống pet đồng hành và Võ đài Huấn luyện.
+- [x] Bổ sung âm thanh pháo hoa (firework pop) khi xác nhận chọn pet mới.
+- [x] Chạy `pnpm build` thành công và xác thực giao diện.
+
 ## Nâng cấp Header Icon, Coin 3D và Thao tác Carousel — 2026-08-21
 
 - [ ] Thiết kế lại cụm icon header theo tham chiếu (cloud, coin badge, user pill, âm thanh, tắt tiếng) với typographic rõ ràng, nền bọc thẻ bài tinh tế và coin 3D xoay nổi bật.

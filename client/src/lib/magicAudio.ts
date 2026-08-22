@@ -275,3 +275,51 @@ export function playAvatarSelectSound(enabled: boolean) {
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), 800);
 }
+
+/** Play a sparkling firework pop sound when confirming pet selection or achieving high milestones. */
+export function playFireworkPopSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+  master.connect(context.destination);
+
+  // Pop sound
+  const popOsc = context.createOscillator();
+  const popGain = context.createGain();
+  popOsc.type = "sine";
+  popOsc.frequency.setValueAtTime(320, now);
+  popOsc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
+  popGain.gain.setValueAtTime(0.0001, now);
+  popGain.gain.exponentialRampToValueAtTime(0.9, now + 0.01);
+  popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+  popOsc.connect(popGain);
+  popGain.connect(master);
+  popOsc.start(now);
+  popOsc.stop(now + 0.1);
+
+  // Sparkle shimmer
+  [587.33, 880, 1174.66, 1760].forEach((freq, idx) => {
+    const osc = context.createOscillator();
+    const gain = context.createGain();
+    const start = now + 0.08 + idx * 0.07;
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(freq, start);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.05, start + 0.2);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.35, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
+    osc.connect(gain);
+    gain.connect(master);
+    osc.start(start);
+    osc.stop(start + 0.32);
+  });
+
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 750);
+}
