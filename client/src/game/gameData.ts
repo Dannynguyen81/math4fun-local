@@ -140,7 +140,7 @@ export type WeeklyMagicQuestDefinition = {
 
 export type CosmeticSlot = "outfit" | "trail";
 export type ShopItem = {
-  id: "potion-25" | "potion-50" | "potion-100" | "outfit-indigo" | "outfit-marigold" | "outfit-moss" | "trail-stars" | "trail-leaves";
+  id: "potion-25" | "potion-50" | "potion-100" | "outfit-indigo" | "outfit-marigold" | "outfit-moss" | "outfit-tide" | "outfit-ember" | "outfit-wind" | "trail-stars" | "trail-leaves" | "trail-bubbles" | "trail-embers" | "trail-gust";
   label: string;
   price: number;
   description: string;
@@ -149,11 +149,11 @@ export type ShopItem = {
   kind: "healing" | "cosmetic";
   heal?: number;
   slot?: CosmeticSlot;
-  setId?: "indigo" | "moss";
+  setId?: "indigo" | "moss" | "tide" | "ember" | "wind";
 };
 
 export type CosmeticSetDefinition = {
-  id: "indigo" | "moss";
+  id: "indigo" | "moss" | "tide" | "ember" | "wind";
   label: string;
   motif: string;
   note: string;
@@ -162,35 +162,58 @@ export type CosmeticSetDefinition = {
   bonusXp: number;
 };
 
-const sprite = (id: number) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+/** Asset 3D nguyên bản của Math4Fun, lưu trong kho webdev để không phụ thuộc nguồn sprite bên ngoài. */
+export const ORIGINAL_PET_SPRITES = {
+  cubix: "/manus-storage/math4fun-pet-cubix_ba140107.svg",
+  vane: "/manus-storage/math4fun-pet-vane_0140ff48.svg",
+  scalera: "/manus-storage/math4fun-pet-scalera_daf9b223.svg",
+  voltaria: "/manus-storage/math4fun-pet-voltaria_dfe2febe.svg",
+  mossar: "/manus-storage/math4fun-pet-mossar_523e9221.svg",
+  coris: "/manus-storage/math4fun-pet-coris_886688de.svg",
+  aerion: "/manus-storage/math4fun-pet-aerion_bbc66d7f.svg",
+  brio: "/manus-storage/math4fun-pet-brio_77f412a2.svg",
+  lumen: "/manus-storage/math4fun-pet-lumen_d01ceac8.svg",
+  noris: "/manus-storage/math4fun-pet-noris_17354bb2.svg",
+  pavor: "/manus-storage/math4fun-pet-pavor_9d580e89.svg",
+  solaris: "/manus-storage/math4fun-pet-solaris_e98a2fb6.svg",
+  dexia: "/manus-storage/math4fun-pet-dexia_c3265afb.svg",
+  marion: "/manus-storage/math4fun-pet-marion_c26c0968.svg",
+  senia: "/manus-storage/math4fun-pet-senia_3bf50bc6.svg",
+  koran: "/manus-storage/math4fun-pet-koran_c1bc681f.svg",
+  vexan: "/manus-storage/math4fun-pet-vexan_df717b78.svg",
+  runon: "/manus-storage/math4fun-pet-runon_004a0244.svg",
+  tavira: "/manus-storage/math4fun-pet-tavira_a54b4e1f.svg",
+  nexia: "/manus-storage/math4fun-pet-nexia_f9e702b8.svg",
+  atlasPrime: "/manus-storage/math4fun-pet-style-anchor.png",
+} as const;
 
 export const GUARDIANS: Guardian[] = [
-  { id: "pipra", name: "Pipra", type: "SEQUENCE / SCOUT", element: "gió", description: "Bạn đồng hành mở đầu, ghi dấu từng bước của dãy số trước khi suy luận.", stationId: 1, sprite: sprite(172), tone: "bg-emerald-500" },
-  { id: "mimo", name: "Mimo", type: "MEAN / GUIDE", element: "nước", description: "Dùng la bàn cân bằng để nhìn ra tổng ẩn sau trung bình cộng.", stationId: 2, sprite: sprite(298), tone: "bg-sky-500" },
-  { id: "voltix", name: "Voltix", type: "UNIT / SPARK", element: "sấm", description: "Biết chia nhỏ mỗi đơn vị trước khi nhân rộng con đường.", stationId: 3, sprite: sprite(403), tone: "bg-amber-400" },
-  { id: "mossy", name: "Mossy", type: "DIFFERENCE / TRAIL", element: "đất", description: "Dẫn đường qua bài toán thừa–thiếu bằng những dấu chân cân bằng.", stationId: 4, sprite: sprite(387), tone: "bg-lime-500" },
-  { id: "coru", name: "Coru", type: "FRACTION / COMPASS", element: "lửa", description: "Chia hành trình thành những phần bằng nhau thật rõ ràng.", stationId: 5, sprite: sprite(447), tone: "bg-rose-400" },
-  { id: "aeris", name: "Aeris", type: "AREA / FIELD", element: "gió", description: "Ghi kích thước vùng đất bằng những ô lưới gọn gàng.", stationId: 6, sprite: sprite(280), tone: "bg-cyan-500" },
-  { id: "brix", name: "Brix", type: "MASS / CRAFT", element: "đất", description: "Chỉ ra phép đổi đơn vị qua từng viên gạch ký hiệu.", stationId: 7, sprite: sprite(66), tone: "bg-orange-500" },
-  { id: "luma", name: "Luma", type: "TIME / LANTERN", element: "lửa", description: "Giữ nhịp thời gian của mỗi cuộc thám hiểm.", stationId: 8, sprite: sprite(175), tone: "bg-yellow-400" },
-  { id: "nori", name: "Nori", type: "GRAPH / TIDE", element: "nước", description: "Đọc số liệu như đọc làn sóng trên bản đồ.", stationId: 9, sprite: sprite(183), tone: "bg-blue-500" },
-  { id: "pavo", name: "Pavo", type: "PERIMETER / MARK", element: "độc", description: "Đánh dấu chu vi và diện tích bằng những nét mực tím gọn gàng.", stationId: 10, sprite: sprite(234), tone: "bg-violet-500" },
-  { id: "soli", name: "Soli", type: "REVERSE / FLAME", element: "lửa", description: "Lần ngược dấu vết để tìm số ban đầu.", stationId: 11, sprite: sprite(37), tone: "bg-red-500" },
-  { id: "dexo", name: "Dexo (Pikachu)", type: "MULTIPLY / SPARK", element: "sấm", description: "Bạn đồng hành Pikachu hệ Sấm sét, biến quy luật nhân chia thành tia chớp có thứ tự.", stationId: 12, sprite: sprite(25), tone: "bg-amber-500" },
-  { id: "maru", name: "Maru", type: "DIVIDE / TIDE", element: "nước", description: "Chia đường đi đều nhau, không bỏ sót dấu mốc.", stationId: 13, sprite: sprite(158), tone: "bg-teal-500" },
-  { id: "sena", name: "Sena", type: "DECIMAL / MIST", element: "gió", description: "Giữ những con số bé xíu đúng vị trí trên dòng kẻ.", stationId: 14, sprite: sprite(133), tone: "bg-slate-500" },
-  { id: "kora", name: "Kora", type: "COMPOSITE / LEAF", element: "đất", description: "Ghép mảnh và ghi diện tích các hình cắt theo từng dấu lá.", stationId: 15, sprite: sprite(152), tone: "bg-green-500" },
-  { id: "vexa", name: "Vexa", type: "RATIO / VENOM", element: "độc", description: "Đọc các quan hệ hơn–kém qua ký hiệu tím kín đáo.", stationId: 16, sprite: sprite(23), tone: "bg-fuchsia-500" },
-  { id: "runo", name: "Runo", type: "MONEY / COIN", element: "lửa", description: "Canh giữ phép tính mua bán bằng dấu niêm phong đồng.", stationId: 17, sprite: sprite(52), tone: "bg-orange-400" },
-  { id: "tavi", name: "Tavi", type: "DATA / NOTE", element: "nước", description: "Chép số liệu thành bảng gọn và dễ đọc.", stationId: 18, sprite: sprite(54), tone: "bg-indigo-400" },
-  { id: "oryx", name: "Oryx", type: "REVIEW / STORM", element: "sấm", description: "Ghép các dấu vết cũ thành một cơn mưa ôn tập.", stationId: 19, sprite: sprite(135), tone: "bg-yellow-500" },
-  { id: "nexa", name: "Nexa", type: "MIXED / ARCHIVE", element: "gió", description: "Người ghi chép cuối tuyến cho bài toán tổng hợp.", stationId: 20, sprite: sprite(196), tone: "bg-indigo-600" },
-  { id: "atlas", name: "Atlas", type: "BOSS / ARCHIVE", element: "độc", description: "Người giữ kho lưu trữ. Atlas phản công ở mọi lượt, kể cả khi em trả lời đúng.", stationId: "boss", sprite: sprite(143), tone: "bg-indigo-700" },
+  { id: "cubix", name: "Cubix", type: "GEOMETRY / EARTH", element: "đất", description: "Pet hình khối đất nung nguyên bản, giúp tính chu vi và thể tích hình khối 3D.", stationId: 1, sprite: ORIGINAL_PET_SPRITES.cubix, tone: "bg-amber-600" },
+  { id: "vane", name: "Vane", type: "WIND / ANGLE", element: "gió", description: "Pet chong chóng gió nguyên bản, đo đạc góc độ và khoảng cách trên bản đồ.", stationId: 2, sprite: ORIGINAL_PET_SPRITES.vane, tone: "bg-teal-500" },
+  { id: "scalera", name: "Scalera", type: "WATER / SCALE", element: "nước", description: "Pet giọt nước tỷ lệ nguyên bản, quy đổi đơn vị đo lường chính xác.", stationId: 3, sprite: ORIGINAL_PET_SPRITES.scalera, tone: "bg-sky-500" },
+  { id: "voltaria", name: "Voltaria", type: "UNIT / SPARK", element: "sấm", description: "Pet lăng kính sấm sét nguyên bản, phân chia đơn vị tính toán.", stationId: 4, sprite: ORIGINAL_PET_SPRITES.voltaria, tone: "bg-amber-400" },
+  { id: "mossar", name: "Mossar", type: "DIFFERENCE / TRAIL", element: "đất", description: "Pet mầm rêu cổ đại, cân bằng bài toán tổng hiệu.", stationId: 5, sprite: ORIGINAL_PET_SPRITES.mossar, tone: "bg-lime-600" },
+  { id: "coris", name: "Coris", type: "FRACTION / CRYSTAL", element: "lửa", description: "Pet tinh thể phân đoạn rực lửa, chia đều các phần.", stationId: 6, sprite: ORIGINAL_PET_SPRITES.coris, tone: "bg-rose-500" },
+  { id: "aerion", name: "Aerion", type: "AREA / FIELD", element: "gió", description: "Pet lưới gió không gian, đo đạc diện tích ô lưới.", stationId: 7, sprite: ORIGINAL_PET_SPRITES.aerion, tone: "bg-cyan-600" },
+  { id: "brio", name: "Brio", type: "MASS / CRAFT", element: "đất", description: "Pet khối trọng lượng đất nung, quy đổi khối lượng.", stationId: 8, sprite: ORIGINAL_PET_SPRITES.brio, tone: "bg-orange-600" },
+  { id: "lumen", name: "Lumen", type: "TIME / LANTERN", element: "lửa", description: "Pet đèn lồng thời gian, giữ nhịp độ hành trình.", stationId: 9, sprite: ORIGINAL_PET_SPRITES.lumen, tone: "bg-yellow-500" },
+  { id: "noris", name: "Noris", type: "GRAPH / TIDE", element: "nước", description: "Pet dòng chảy biểu đồ, đọc số liệu trực quan.", stationId: 10, sprite: ORIGINAL_PET_SPRITES.noris, tone: "bg-blue-600" },
+  { id: "pavor", name: "Pavor", type: "PERIMETER / MARK", element: "độc", description: "Pet huy hiệu chu vi tím, định hình ranh giới hình học.", stationId: 11, sprite: ORIGINAL_PET_SPRITES.pavor, tone: "bg-violet-600" },
+  { id: "solaris", name: "Solaris", type: "REVERSE / FLAME", element: "lửa", description: "Pet ngọn lửa ngược, tìm lại số ban đầu.", stationId: 12, sprite: ORIGINAL_PET_SPRITES.solaris, tone: "bg-red-600" },
+  { id: "dexia", name: "Dexia", type: "MULTIPLY / SPARK", element: "sấm", description: "Pet tia chớp nhân chia, tính toán tốc độ cao.", stationId: 13, sprite: ORIGINAL_PET_SPRITES.dexia, tone: "bg-amber-500" },
+  { id: "marion", name: "Marion", type: "DIVIDE / TIDE", element: "nước", description: "Pet bánh xe nước chia đều, giải bài toán phân phối.", stationId: 14, sprite: ORIGINAL_PET_SPRITES.marion, tone: "bg-teal-600" },
+  { id: "senia", name: "Senia", type: "DECIMAL / MIST", element: "gió", description: "Pet sương mù số thập phân, định vị chính xác.", stationId: 15, sprite: ORIGINAL_PET_SPRITES.senia, tone: "bg-slate-600" },
+  { id: "koran", name: "Koran", type: "COMPOSITE / LEAF", element: "đất", description: "Pet lá ghép diện tích đa giác phức hợp.", stationId: 16, sprite: ORIGINAL_PET_SPRITES.koran, tone: "bg-green-600" },
+  { id: "vexan", name: "Vexan", type: "RATIO / VENOM", element: "độc", description: "Pet tỷ lệ độc lập, so sánh hơn kém rõ ràng.", stationId: 17, sprite: ORIGINAL_PET_SPRITES.vexan, tone: "bg-fuchsia-600" },
+  { id: "runon", name: "Runon", type: "MONEY / COIN", element: "lửa", description: "Pet đồng tiền niêm phong, tính toán mua sắm.", stationId: 18, sprite: ORIGINAL_PET_SPRITES.runon, tone: "bg-orange-500" },
+  { id: "tavira", name: "Tavira", type: "DATA / NOTE", element: "nước", description: "Pet bảng số liệu gọn gàng, tổng hợp dữ liệu.", stationId: 19, sprite: ORIGINAL_PET_SPRITES.tavira, tone: "bg-indigo-500" },
+  { id: "nexia", name: "Nexia", type: "MIXED / ARCHIVE", element: "gió", description: "Pet lưu trữ tổng hợp cuối tuyến học tập.", stationId: 20, sprite: ORIGINAL_PET_SPRITES.nexia, tone: "bg-indigo-700" },
+  { id: "atlas-prime", name: "Atlas Prime", type: "BOSS / ARCHIVE", element: "độc", description: "Thủ lĩnh kho lưu trữ nguyên bản, phản công sắc bén ở mọi lượt.", stationId: "boss", sprite: ORIGINAL_PET_SPRITES.atlasPrime, tone: "bg-slate-900" },
 ];
 
 export const MAP_BOSS_ARCHIVES: Record<MapId, MapBossArchive> = {
-  1: { mapId: 1, name: "Atlas", title: "Người Giữ Kho Mực Chàm", element: "độc", sprite: sprite(143), note: "Atlas phản công ở mỗi lượt của trận tổng hợp Tập 1.", badge: "Dũng sĩ diệt Boss cấp 1", reward: "Mở Map 2 · Nhật ký La Bàn Vàng" },
-  2: { mapId: 2, name: "Myrion", title: "Người Gác La Bàn Vàng", element: "sấm", sprite: sprite(150), note: "Myrion là cửa khảo nghiệm cuối, tổng hợp các dấu vết từ Tập 2.", badge: "Dũng sĩ diệt Boss cấp 2", reward: "Ghi danh hoàn tất hành trình Toán 4" },
+  1: { mapId: 1, name: "Atlas", title: "Người Giữ Kho Mực Chàm", element: "độc", sprite: ORIGINAL_PET_SPRITES.atlasPrime, note: "Atlas phản công ở mỗi lượt của trận tổng hợp Tập 1.", badge: "Dũng sĩ diệt Boss cấp 1", reward: "Mở Map 2 · Nhật ký La Bàn Vàng" },
+  2: { mapId: 2, name: "Myrion", title: "Người Gác La Bàn Vàng", element: "sấm", sprite: ORIGINAL_PET_SPRITES.atlasPrime, note: "Myrion là cửa khảo nghiệm cuối, tổng hợp các dấu vết từ Tập 2.", badge: "Dũng sĩ diệt Boss cấp 2", reward: "Ghi danh hoàn tất hành trình Toán 4" },
 };
 
 /** Bảo đảm cả guardian hệ Nước vẫn có thể thắng nếu trả lời đúng đủ mười lượt; Map 2 phản công nhỉnh hơn. */
@@ -249,26 +272,26 @@ export const WEEKLY_MAGIC_QUESTS: WeeklyMagicQuestDefinition[] = [
 ];
 
 export const STATIONS: Station[] = [
-  { id: 1, code: "T1.01", title: "Dãy số & quy luật", brief: "Đếm số hạng, dự đoán quy luật và tính tổng bằng những bước nhảy có ghi chép.", group: "Số và quy luật", book: "Tập 1", guardianId: "pipra", accent: "bg-emerald-500", questionIds: ["B80a", "B80b", "B81a", "B82a", "B87b", "B83a-count", "B83a-term50", "B83a-sum", "B86a", "B86b"], masteryTarget: 10, status: "ready" },
-  { id: 2, code: "T2.01", title: "Trung bình cộng", brief: "Dùng tổng và số phần để cân bằng dữ liệu, tuổi và những đại lượng chưa biết.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "mimo", accent: "bg-sky-500", questionIds: ["T2-B1a", "T2-B1b", "T2-B1c", "T2-B1d", "T2-B1.4a", "T2-B1.4b", "T2-B2.1", "T2-B2.2", "T2-B2.3", "T2-B2.4"], masteryTarget: 10, status: "ready" },
-  { id: 3, code: "T2.02", title: "Rút về đơn vị", brief: "Tìm giá trị một đơn vị rồi mở rộng theo số lần như nhau.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "voltix", accent: "bg-amber-400", questionIds: ["T2-RVD-apple", "T2-RVD-cloth", "T2-RVD-1", "T2-RVD-2", "T2-RVD-3", "T2-RVD-candy", "T2-RVD-workers-m", "T2-RVD-workers-days", "T2-RVD-B12.1", "T2-RVD-B12.2", "T2-RVD-B12.3", "T2-RVD-B12.4"], masteryTarget: 10, status: "ready" },
-  { id: 4, code: "T2.03", title: "Bài toán thừa–thiếu", brief: "Dùng hiệu của hai cách chia để lần ra số người và số vật.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "mossy", accent: "bg-lime-500", questionIds: ["T2-TT-apple-pupils", "T2-TT-apple-total", "T2-TT-marbles-bags", "T2-TT-marbles-total", "T2-TT-shirts-total", "T2-TT-notebooks-pupils", "T2-TT-notebooks-total", "T2-TT-mango-total", "T2-TT-candy-total", "T2-TT-trucks-count"], masteryTarget: 10, status: "ready" },
-  { id: 5, code: "T1.02", title: "Phân số", brief: "Nhận biết phần bằng nhau và so sánh phần của một đơn vị.", group: "Phân số", book: "Tập 1", guardianId: "coru", accent: "bg-rose-400", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 6, code: "T1.03", title: "Diện tích hình chữ nhật", brief: "Dùng chu vi, chiều dài và chiều rộng để ghi nhận vùng đất qua đơn vị đo.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "aeris", accent: "bg-cyan-500", questionIds: ["T1-AREA-116-p", "T1-AREA-116-diff", "T1-AREA-116-length", "T1-AREA-116-width", "T1-AREA-116-area", "T1-AREA-117-p", "T1-AREA-117-square", "T1-AREA-117-length", "T1-AREA-117-width", "T1-AREA-117-area"], masteryTarget: 10, status: "ready" },
-  { id: 7, code: "T1.04", title: "Khối lượng", brief: "Đổi đơn vị và xử lý phép tính theo khối lượng.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "brix", accent: "bg-orange-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 8, code: "T1.05", title: "Thời gian", brief: "Đọc lịch, giờ và quãng thời gian chính xác.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "luma", accent: "bg-yellow-400", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 9, code: "T1.06", title: "Bảng số liệu", brief: "Tìm thông tin, tổng và hiệu qua bảng dữ liệu.", group: "Dữ liệu", book: "Tập 1", guardianId: "nori", accent: "bg-blue-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 10, code: "T1.G1", title: "Chu vi & diện tích", brief: "Tìm cạnh, chu vi và diện tích hình vuông, hình chữ nhật qua dấu mực hình học.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "pavo", accent: "bg-violet-500", questionIds: ["T1-G1-ex1-perimeter", "T1-G1-ex1-width", "T1-G1-ex1-area", "T1-G1-ex2-width", "T1-G1-ex2-length", "T1-G1-ex2-area", "T1-G1-b56-side", "T1-G1-b56-area", "T1-G1-b57-width", "T1-G1-b57-area"], masteryTarget: 10, status: "ready" },
-  { id: 11, code: "T1.08", title: "Bài toán tổng–hiệu", brief: "Lần theo sơ đồ đoạn thẳng để tìm hai số qua tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 1", guardianId: "soli", accent: "bg-red-500", questionIds: ["T1-TH-118-first", "T1-TH-118-second", "T1-TH-119-first", "T1-TH-119-second", "T1-TH-120-box1", "T1-TH-120-box2", "T1-TH-121-lower", "T1-TH-122-thu", "T1-TH-123-older", "T1-TH-124-mother"], masteryTarget: 10, status: "ready" },
-  { id: 12, code: "T1.09", title: "Nhân & chia", brief: "Củng cố quy tắc tính, tính chất phép toán và tìm ẩn số.", group: "Số và phép tính", book: "Tập 1", guardianId: "dexo", accent: "bg-amber-500", questionIds: ["T1-NC-136a", "T1-NC-136b", "T1-NC-136c", "T1-NC-136d", "T1-NC-137g", "T1-NC-138a", "T1-NC-138b", "T1-NC-138d", "T1-NC-140-first", "T1-NC-141-first"], masteryTarget: 10, status: "ready" },
-  { id: 13, code: "T2.06", title: "Chia có dư", brief: "Đọc thương và số dư trong mỗi tình huống thực tế.", group: "Số và phép tính", book: "Tập 2", guardianId: "maru", accent: "bg-teal-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 14, code: "T2.07", title: "Số thập phân", brief: "Đọc, viết và so sánh các phần mười, phần trăm.", group: "Số và phép tính", book: "Tập 2", guardianId: "sena", accent: "bg-slate-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 15, code: "T1.G2", title: "Hình ghép & mảnh cắt", brief: "Tách khung, phần lõm và mảnh cắt để tính diện tích qua các dấu lá.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "kora", accent: "bg-green-500", questionIds: ["T1-G2-ex3-area", "T1-G2-ex4-outer", "T1-G2-ex4-cutout", "T1-G2-ex4-area", "T1-G2-b60-width", "T1-G2-b60-length", "T1-G2-b60-area", "T1-G2-b61-length", "T1-G2-b61-area", "T1-G2-b67-area"], masteryTarget: 10, status: "ready" },
-  { id: 16, code: "T2.09", title: "Tổng–hiệu", brief: "Dùng sơ đồ đoạn thẳng để giải quan hệ tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "vexa", accent: "bg-fuchsia-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 17, code: "T2.10", title: "Tiền Việt Nam", brief: "Tính toán mua bán bằng các mệnh giá quen thuộc.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "runo", accent: "bg-orange-400", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 18, code: "T2.11", title: "Thống kê & xác suất", brief: "Ghi nhận bảng, biểu đồ và khả năng xảy ra của một việc.", group: "Dữ liệu", book: "Tập 2", guardianId: "tavi", accent: "bg-indigo-400", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 19, code: "T2.12", title: "Ôn tập số học", brief: "Kết nối dấu vết số học của cả năm thành một tuyến ôn tập.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "oryx", accent: "bg-yellow-500", questionIds: [], masteryTarget: 10, status: "ready" },
-  { id: 20, code: "T2.13", title: "Ôn tập tổng hợp", brief: "Tổng hợp các dạng bài trước khi chạm đến kho lưu trữ cuối tuyến.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "nexa", accent: "bg-indigo-600", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 1, code: "T1.01", title: "Dãy số & quy luật", brief: "Đếm số hạng, dự đoán quy luật và tính tổng bằng những bước nhảy có ghi chép.", group: "Số và quy luật", book: "Tập 1", guardianId: "cubix", accent: "bg-emerald-500", questionIds: ["B80a", "B80b", "B81a", "B82a", "B87b", "B83a-count", "B83a-term50", "B83a-sum", "B86a", "B86b"], masteryTarget: 10, status: "ready" },
+  { id: 2, code: "T2.01", title: "Trung bình cộng", brief: "Dùng tổng và số phần để cân bằng dữ liệu, tuổi và những đại lượng chưa biết.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "vane", accent: "bg-sky-500", questionIds: ["T2-B1a", "T2-B1b", "T2-B1c", "T2-B1d", "T2-B1.4a", "T2-B1.4b", "T2-B2.1", "T2-B2.2", "T2-B2.3", "T2-B2.4"], masteryTarget: 10, status: "ready" },
+  { id: 3, code: "T2.02", title: "Rút về đơn vị", brief: "Tìm giá trị một đơn vị rồi mở rộng theo số lần như nhau.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "scalera", accent: "bg-amber-400", questionIds: ["T2-RVD-apple", "T2-RVD-cloth", "T2-RVD-1", "T2-RVD-2", "T2-RVD-3", "T2-RVD-candy", "T2-RVD-workers-m", "T2-RVD-workers-days", "T2-RVD-B12.1", "T2-RVD-B12.2", "T2-RVD-B12.3", "T2-RVD-B12.4"], masteryTarget: 10, status: "ready" },
+  { id: 4, code: "T2.03", title: "Bài toán thừa–thiếu", brief: "Dùng hiệu của hai cách chia để lần ra số người và số vật.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "voltaria", accent: "bg-lime-500", questionIds: ["T2-TT-apple-pupils", "T2-TT-apple-total", "T2-TT-marbles-bags", "T2-TT-marbles-total", "T2-TT-shirts-total", "T2-TT-notebooks-pupils", "T2-TT-notebooks-total", "T2-TT-mango-total", "T2-TT-candy-total", "T2-TT-trucks-count"], masteryTarget: 10, status: "ready" },
+  { id: 5, code: "T1.02", title: "Phân số", brief: "Nhận biết phần bằng nhau và so sánh phần của một đơn vị.", group: "Phân số", book: "Tập 1", guardianId: "mossar", accent: "bg-rose-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 6, code: "T1.03", title: "Diện tích hình chữ nhật", brief: "Dùng chu vi, chiều dài và chiều rộng để ghi nhận vùng đất qua đơn vị đo.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "coris", accent: "bg-cyan-500", questionIds: ["T1-AREA-116-p", "T1-AREA-116-diff", "T1-AREA-116-length", "T1-AREA-116-width", "T1-AREA-116-area", "T1-AREA-117-p", "T1-AREA-117-square", "T1-AREA-117-length", "T1-AREA-117-width", "T1-AREA-117-area"], masteryTarget: 10, status: "ready" },
+  { id: 7, code: "T1.04", title: "Khối lượng", brief: "Đổi đơn vị và xử lý phép tính theo khối lượng.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "aerion", accent: "bg-orange-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 8, code: "T1.05", title: "Thời gian", brief: "Đọc lịch, giờ và quãng thời gian chính xác.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "brio", accent: "bg-yellow-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 9, code: "T1.06", title: "Bảng số liệu", brief: "Tìm thông tin, tổng và hiệu qua bảng dữ liệu.", group: "Dữ liệu", book: "Tập 1", guardianId: "lumen", accent: "bg-blue-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 10, code: "T1.G1", title: "Chu vi & diện tích", brief: "Tìm cạnh, chu vi và diện tích hình vuông, hình chữ nhật qua dấu mực hình học.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "noris", accent: "bg-violet-500", questionIds: ["T1-G1-ex1-perimeter", "T1-G1-ex1-width", "T1-G1-ex1-area", "T1-G1-ex2-width", "T1-G1-ex2-length", "T1-G1-ex2-area", "T1-G1-b56-side", "T1-G1-b56-area", "T1-G1-b57-width", "T1-G1-b57-area"], masteryTarget: 10, status: "ready" },
+  { id: 11, code: "T1.08", title: "Bài toán tổng–hiệu", brief: "Lần theo sơ đồ đoạn thẳng để tìm hai số qua tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 1", guardianId: "pavor", accent: "bg-red-500", questionIds: ["T1-TH-118-first", "T1-TH-118-second", "T1-TH-119-first", "T1-TH-119-second", "T1-TH-120-box1", "T1-TH-120-box2", "T1-TH-121-lower", "T1-TH-122-thu", "T1-TH-123-older", "T1-TH-124-mother"], masteryTarget: 10, status: "ready" },
+  { id: 12, code: "T1.09", title: "Nhân & chia", brief: "Củng cố quy tắc tính, tính chất phép toán và tìm ẩn số.", group: "Số và phép tính", book: "Tập 1", guardianId: "solaris", accent: "bg-amber-500", questionIds: ["T1-NC-136a", "T1-NC-136b", "T1-NC-136c", "T1-NC-136d", "T1-NC-137g", "T1-NC-138a", "T1-NC-138b", "T1-NC-138d", "T1-NC-140-first", "T1-NC-141-first"], masteryTarget: 10, status: "ready" },
+  { id: 13, code: "T2.06", title: "Chia có dư", brief: "Đọc thương và số dư trong mỗi tình huống thực tế.", group: "Số và phép tính", book: "Tập 2", guardianId: "dexia", accent: "bg-teal-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 14, code: "T2.07", title: "Số thập phân", brief: "Đọc, viết và so sánh các phần mười, phần trăm.", group: "Số và phép tính", book: "Tập 2", guardianId: "marion", accent: "bg-slate-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 15, code: "T1.G2", title: "Hình ghép & mảnh cắt", brief: "Tách khung, phần lõm và mảnh cắt để tính diện tích qua các dấu lá.", group: "Hình học & đo lường", book: "Tập 1", guardianId: "senia", accent: "bg-green-500", questionIds: ["T1-G2-ex3-area", "T1-G2-ex4-outer", "T1-G2-ex4-cutout", "T1-G2-ex4-area", "T1-G2-b60-width", "T1-G2-b60-length", "T1-G2-b60-area", "T1-G2-b61-length", "T1-G2-b61-area", "T1-G2-b67-area"], masteryTarget: 10, status: "ready" },
+  { id: 16, code: "T2.09", title: "Tổng–hiệu", brief: "Dùng sơ đồ đoạn thẳng để giải quan hệ tổng và hiệu.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "koran", accent: "bg-fuchsia-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 17, code: "T2.10", title: "Tiền Việt Nam", brief: "Tính toán mua bán bằng các mệnh giá quen thuộc.", group: "Đại lượng và bài toán", book: "Tập 2", guardianId: "vexan", accent: "bg-orange-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 18, code: "T2.11", title: "Thống kê & xác suất", brief: "Ghi nhận bảng, biểu đồ và khả năng xảy ra của một việc.", group: "Dữ liệu", book: "Tập 2", guardianId: "runon", accent: "bg-indigo-400", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 19, code: "T2.12", title: "Ôn tập số học", brief: "Kết nối dấu vết số học của cả năm thành một tuyến ôn tập.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "tavira", accent: "bg-yellow-500", questionIds: [], masteryTarget: 10, status: "ready" },
+  { id: 20, code: "T2.13", title: "Ôn tập tổng hợp", brief: "Tổng hợp các dạng bài trước khi chạm đến kho lưu trữ cuối tuyến.", group: "Ôn tập tổng hợp", book: "Tập 2", guardianId: "nexia", accent: "bg-indigo-600", questionIds: [], masteryTarget: 10, status: "ready" },
 ];
 
 export const QUESTIONS: VerifiedQuestion[] = [
@@ -389,11 +412,11 @@ export const SHOP_ITEMS: ShopItem[] = [
   { id: "potion-25", label: "Bình Lộ Sáng 25%", kind: "healing", icon: "◒", heal: 25, price: 30, description: "Hồi 25 HP cho một guardian đang sở hữu.", tone: "bg-[#e4f3fb] border-[#55a9dd]" },
   { id: "potion-50", label: "Bình Lộ Sáng 50%", kind: "healing", icon: "◐", heal: 50, price: 60, description: "Hồi 50 HP cho một guardian đang sở hữu.", tone: "bg-[#e7f2e5] border-[#3e9b7a]" },
   { id: "potion-100", label: "Bình Lộ Sáng 100%", kind: "healing", icon: "◉", heal: 100, price: 120, description: "Hồi đầy 100 HP cho một guardian đang sở hữu.", tone: "bg-[#fff0b6] border-[#f6b73c]" },
-  { id: "outfit-indigo", label: "Áo Khoác Indigo", kind: "cosmetic", icon: "✦", slot: "outfit", setId: "indigo", price: 40, description: "Áo khoác mực chàm cho thám hiểm ban sớm.", tone: "bg-[#e9e8f7] border-[#57518d]" },
-  { id: "outfit-marigold", label: "Khăn Choàng Marigold", kind: "cosmetic", icon: "✹", slot: "outfit", price: 55, description: "Khăn choàng vàng la bàn, rực rỡ trên tuyến học.", tone: "bg-[#fff0b6] border-[#d99818]" },
-  { id: "outfit-moss", label: "Túi Mẫu Vật Moss", kind: "cosmetic", icon: "▣", slot: "outfit", setId: "moss", price: 70, description: "Túi vải rêu để ghi lại bằng chứng của một hành trình dài.", tone: "bg-[#e6f0df] border-[#5f8a5e]" },
-  { id: "trail-stars", label: "Dấu Chân Sao", kind: "cosmetic", icon: "✧", slot: "trail", setId: "indigo", price: 45, description: "Đường đi có dấu sao nhỏ cho mỗi lần mở nhật ký.", tone: "bg-[#f3e8ff] border-[#9a77b8]" },
-  { id: "trail-leaves", label: "Dấu Lá Lộ Trình", kind: "cosmetic", icon: "❋", slot: "trail", setId: "moss", price: 65, description: "Dấu lá ép hiện bên cạnh companion trong hồ sơ.", tone: "bg-[#e7f2e5] border-[#4d8b67]" },
+  { id: "outfit-indigo", label: "Áo Khoác Indigo 3D", kind: "cosmetic", icon: "✦", slot: "outfit", setId: "indigo", price: 40, description: "Áo giáp mô hình nổi 3D phong cách mực chàm.", tone: "bg-[#e9e8f7] border-[#57518d]" },
+  { id: "outfit-marigold", label: "Giáp La Bàn Marigold 3D", kind: "cosmetic", icon: "✹", slot: "outfit", price: 55, description: "Áo giáp pha lê la bàn vàng 3D nổi khối.", tone: "bg-[#fff0b6] border-[#d99818]" },
+  { id: "outfit-moss", label: "Ba Lô 3D Rêu Cổ Đại", kind: "cosmetic", icon: "▣", slot: "outfit", setId: "moss", price: 70, description: "Ba lô dập nổi 3D chứa tài liệu thám hiểm.", tone: "bg-[#e6f0df] border-[#5f8a5e]" },
+  { id: "trail-stars", label: "Hiệu Ứng Sao Lấp Lánh 3D", kind: "cosmetic", icon: "✧", slot: "trail", setId: "indigo", price: 45, description: "Hào quang hạt sao 3D xoay quanh companion.", tone: "bg-[#f3e8ff] border-[#9a77b8]" },
+  { id: "trail-leaves", label: "Hiệu Ứng Lá Cổ 3D", kind: "cosmetic", icon: "❋", slot: "trail", setId: "moss", price: 65, description: "Vòng xoáy lá 3D sinh động theo từng bước chân.", tone: "bg-[#e7f2e5] border-[#4d8b67]" },
 ];
 
 export const COMPANION_COSMETIC_SETS: CosmeticSetDefinition[] = [
@@ -407,6 +430,9 @@ QUESTIONS.push(
   { id: "MAP1-SAMPLE-AREA", stationId: 6, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · hình chữ nhật", prompt: "Một hình chữ nhật có chu vi 72 cm, chiều dài hơn chiều rộng 8 cm. Diện tích hình chữ nhật là bao nhiêu cm²?", choices: [288, 308, 328, 348], answer: 308, hint: "Nửa chu vi là 36 cm. Tìm hai số có tổng 36 và hiệu 8.", explanation: "Chiều rộng là (36 − 8) : 2 = 14 cm, chiều dài là 22 cm. Diện tích là 22 × 14 = 308 cm².", difficulty: "H", pool: "boss" },
   { id: "MAP1-SAMPLE-SUMDIFF", stationId: 11, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · tổng–hiệu", prompt: "Tổng của hai số là 452, hiệu của chúng là 78. Số bé là bao nhiêu?", choices: [177, 187, 197, 207], answer: 187, hint: "Số bé bằng (tổng − hiệu) : 2.", explanation: "(452 − 78) : 2 = 187.", difficulty: "H", pool: "boss" },
   { id: "MAP1-SAMPLE-MULTI", stationId: 12, source: "Luyện Boss Map 1 · câu mẫu kiểm thử · nhân và chia", prompt: "Có 8 hộp, mỗi hộp 24 thẻ học. Chia đều tất cả thẻ vào 6 túi. Mỗi túi có bao nhiêu thẻ?", choices: [28, 30, 32, 34], answer: 32, hint: "Tính tổng số thẻ trước, rồi chia đều cho 6 túi.", explanation: "8 × 24 = 192 thẻ; 192 : 6 = 32 thẻ mỗi túi.", difficulty: "M", pool: "boss" },
+  { id: "ARCHIMEDE-SEMESTER-REV-1", stationId: 19, source: "Archimede Toán 4 · Ôn tập cuối học kỳ · Bài tổng hợp 1", prompt: "Một hình chữ nhật có chu vi bằng 120 cm, chiều dài gấp 3 lần chiều rộng. Diện tích hình chữ nhật đó là bao nhiêu xăng-ti-mét vuông?", choices: [675, 750, 825, 900], answer: 675, hint: "Nửa chu vi là 60 cm. Tổng số phần bằng nhau là 3 + 1 = 4 phần.", explanation: "Chiều rộng = 60 : 4 = 15 cm; chiều dài = 45 cm. Diện tích = 45 × 15 = 675 cm².", difficulty: "H", pool: "station" },
+  { id: "ARCHIMEDE-SEMESTER-REV-2", stationId: 19, source: "Archimede Toán 4 · Ôn tập cuối học kỳ · Bài tổng hợp 2", prompt: "Tính giá trị biểu thức: 4256 + 128 × 15 : 4", choices: [4686, 4736, 4786, 4836], answer: 4736, hint: "Thực hiện phép nhân trước, chia sau, rồi cộng lại.", explanation: "128 × 15 = 1920; 1920 : 4 = 480; 4256 + 480 = 4736.", difficulty: "M", pool: "station" },
+  { id: "ARCHIMEDE-SEMESTER-REV-3", stationId: 20, source: "Archimede Toán 4 · Ôn tập cuối học kỳ · Bài tổng hợp 3", prompt: "Trung bình cộng của ba số là 145. Số thứ nhất là 120, số thứ hai kém số thứ nhất 15 đơn vị. Số thứ ba là bao nhiêu?", choices: [160, 170, 180, 190], answer: 180, hint: "Tổng ba số là 145 × 3 = 435. Tìm số thứ hai trước.", explanation: "Số thứ hai = 120 − 15 = 105. Số thứ ba = 435 − (120 + 105) = 180.", difficulty: "H", pool: "station" },
 );
 
 QUESTIONS.push(...AI_PRACTICE_QUESTIONS);

@@ -265,7 +265,7 @@ type GameContextValue = {
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ mode: "atlas", status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
+const emptyInventory = (): Record<ShopItem["id"], number> => Object.fromEntries(SHOP_ITEMS.map((item) => [item.id, 0])) as Record<ShopItem["id"], number>;
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
 const DEFAULT_STORE: GameStore = { version: 15, profiles: [], activeProfileId: null, audioEnabled: true, ambientEnabled: true, siteVisitCount: 0, questionOverrides: {} };
