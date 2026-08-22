@@ -1,0 +1,83 @@
+schema_version: "2.0"
+status: "needs-human-review"
+id: "pet-geo-02"
+name: "Vane"
+species_concept: "Sinh vật chong chóng gió trong suốt, chuyên đo đạc góc độ và định hướng các luồng không gian."
+one_line_hook: "Cánh quạt tri thức xoay tít mở ra những góc đo hoàn hảo."
+personality:
+  traits: ["nhanh nhẹn", "tinh nghịch", "ưa khám phá"]
+  expression_grammar: "Mắt cong hình trăng lưỡi liềm rạng rỡ, miệng cười tự tin, tai nhọn hình thước đo độ."
+  emotional_target: "Cảm giác hứng khởi, tự do và nhạy bén khi nhận diện góc nhọn, góc tù."
+world:
+  habitat: "Đỉnh Đồi Đo Góc nơi đón những ngọn gió lành từ bốn phương."
+  lore_seed: "Được sinh ra từ trận cuồng phong mang theo các dụng cụ vẽ kỹ thuật cổ xưa."
+  field_note: "Vane thường lượn lờ quanh các đỉnh tháp chuông để đo đạc góc nâng của mặt trời bằng chiếc trượng bút chì."
+visual:
+  silhouette_family: "Đĩa bay tam giác / Cánh quạt mượt (Aerodynamic Triangle)"
+  anatomy: "Thân hình hình chóp tam giác bằng nhựa acrylic trong suốt màu vàng nghệ, đầu đội mũ chong chóng ba cánh."
+  appendages: ["cánh quạt chong chóng trên đầu", "tay lơ lửng bằng năng lượng gió", "chân đế mây mờ"]
+  face: "Mắt lanh lợi hình cung sáng bóng, miệng cười mỉm tự tin."
+  material_language: ["nhựa acrylic trong suốt", "đồng thau đánh bóng", "vải canvas màu vàng nghệ"]
+  palette:
+    dominant: "#D49B2B"
+    support: ["#E8C15A", "#4A6B5B", "#FFFFFF"]
+    value_hierarchy: "Màu vàng nghệ rực rỡ làm chủ đạo, điểm nhấn nhựa trong suốt phản chiếu ánh sáng và viền đồng."
+  prop: "Một chiếc trượng bút chì cổ bằng gỗ có khắc vạch độ."
+  camera: "3/4 full-body, neutral parchment background"
+  lighting: "bright soft studio key light, golden hour rim light, floating soft shadow"
+  display_notes: "Cần thể hiện rõ độ trong suốt của nhựa acrylic và cánh quạt chong chóng."
+  exclusions: ["pixel art", "động vật có lông", "màu tối u ám", "vũ khí nhọn"]
+gameplay:
+  element: "wind"
+  role: "striker"
+  base_stats:
+    power: 4
+    resilience: 2
+    focus: 4
+    agility: 5
+  strengths: ["Tốc độ cao", "Khắc chế hệ Đất", "Thưởng lớn khi giải đúng bài toán góc độ"]
+  weaknesses: ["Lượng máu (resilience) thấp", "Dễ suy yếu khi gặp địa hình trũng"]
+  signature_skill:
+    name: "Tia Sáng Phân Giác"
+    level_unlock: 1
+    feedback: "Vane xoay tít tạo ra luồng gió hình tia sáng chia đôi góc vuông thành hai góc 45 độ!"
+  xp_hook: "Nhận XP nhân đôi khi hoàn thành các câu hỏi trắc nghiệm về góc nhọn, góc tù, góc vuông."
+  reward_policy: "Thưởng trang phục phi công gió và kính bảo hộ đo đạc."
+education:
+  target_grade: 4
+  math_skill: "Nhận diện góc nhọn, góc tù, góc vuông, góc bẹt và sử dụng thước đo độ."
+  practice_behavior: "Ước lượng độ lớn của góc trước khi chọn đáp án chính xác."
+  feedback: "Hiển thị vòm cung đo độ phát sáng màu vàng khi tung kỹ năng."
+  hint_policy: "Never disclose the answer"
+  accessibility: ["reduced motion", "color-independent cue", "high contrast markers"]
+originality_audit:
+  abstract_inspiration: "Chong chóng gió, thước đo độ học sinh, tinh linh gió trong suốt."
+  differentiators:
+    - "Thân hình chóp tam giác bằng nhựa trong suốt độc đáo thay vì chim hay thú có lông."
+    - "Cánh quạt chong chóng trên đầu dùng để cảm nhận hướng gió và góc độ."
+    - "Vũ khí là trượng bút chì khắc vạch đo độ thay vì gậy phép thông thường."
+  prohibited_markers_checked: true
+  similarity_red_flags_noted: "Không giống bất kỳ Pokémon chim hay gió nào; mang phong cách dụng cụ học tập hiện đại."
+  reviewer: "Danny Nguyen (Lead Designer)"
+production:
+  asset_ids: ["pet_vane_idle", "pet_vane_cast", "pet_vane_victory", "pet_vane_icon"]
+  filenames: ["vane_01.png", "vane_02_cast.png", "vane_icon.png"]
+  framing: "full-body 3/4 view, dynamic floating pose"
+  transparent_background: true
+  resolution_aspect: "1024x1024, 1:1"
+  fallback: "static SVG vector badge for reduced-motion"
+  engine_notes: "Hiệu ứng xoay cánh quạt lặp lại mượt mà bằng CSS/Sprite animation."
+  acceptance_criteria:
+    - "Đặc tính nhựa trong suốt và chong chóng hiển thị rõ ở mọi kích thước."
+    - "Không vi phạm quy tắc bản quyền."
+    - "Đã vượt qua bộ lọc kiểm tra."
+  open_risks: []
+  review_status: "needs-human-review"
+prompt_pack:
+  silhouette_exploration: "Chibi 3D game asset, aerodynamic triangle transparent acrylic creature with spinning propeller hat on head, holding a wooden pencil staff, educational wind companion, bright tactile materials, translucent yellow plastic, polished brass, parchment background, clean game asset."
+  locked_character_sheet: "3D Japanese chibi game asset style, full-body front and 3/4 turn of Vane, a triangular translucent yellow acrylic spirit with propeller hat, pencil staff, cute confident expression, tactile craftsmanship, child-safe fantasy explorer, bright studio lighting, transparent background."
+  gameplay_pose: "Vane casting wind magic, spinning rapidly with glowing protractor arc waves around it, dynamic floating pose, translucent acrylic and wood textures, golden rim light, game sprite quality."
+  vfx_prompt: "Swirling wind trails, glowing golden protractor arc lines, translucent breeze particles, soft magical aura, game visual effects."
+  icon_prompt: "Square icon badge of Vane face with propeller hat and translucent yellow acrylic frame, clean game UI element."
+  continuity_block: "3D Japanese chibi game asset style, tactile materials (parched leather, smooth ceramic, polished natural wood), clean soft studio lighting with warm rim light, solid transparent background, playful proportions, high readability at 48px UI size, zero violent gore, child-safe fantasy explorer aesthetic."
+  negative_constraints: "photorealism, gritty textures, sharp weapons, scary teeth, complex armor, human anatomy, floating limbs, messy sketch, dark gloomy shadows, copyrighted Pokémon features."
