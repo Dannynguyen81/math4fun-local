@@ -450,12 +450,34 @@ export default function GeometryPetSelectionPage() {
                 <Award className="w-10 h-10" />
               </div>
               <h2 className="text-2xl font-bold font-serif text-amber-100 mb-2">Triệu Hồi Thành Công!</h2>
-              <p className="text-sm text-slate-300 mb-4">
-                Bạn đã chính thức đồng hành cùng <span className="text-amber-400 font-bold">{selectedPet.name}</span> trong sứ mệnh chinh phục Hình học & Đo lường lớp 4!
+              <p className="text-sm text-slate-300 mb-3">
+                Bạn đã chính thức triệu hồi thành công <span className="text-amber-400 font-bold">{selectedPet.name}</span>!
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 text-amber-300 rounded-xl border border-amber-500/30 text-xs font-mono">
-                <Sparkles className="w-4 h-4" /> Đang chuyển về bản đồ hành trình...
+              <div className="mb-4 text-left">
+                <label className="block text-xs font-bold text-slate-300 mb-1">Đặt tên riêng cho pet của em (tùy chọn):</label>
+                <input
+                  type="text"
+                  defaultValue={selectedPet.name}
+                  id="custom-pet-name-input"
+                  maxLength={20}
+                  className="w-full bg-slate-900 border-2 border-amber-500/50 rounded-xl px-3 py-2 text-sm text-amber-200 outline-none focus:border-amber-400 font-bold text-center"
+                  placeholder="Ví dụ: Cubix Siêu Đẳng"
+                />
               </div>
+              <button
+                onClick={() => {
+                  const input = document.getElementById("custom-pet-name-input") as HTMLInputElement | null;
+                  const customName = input?.value?.trim();
+                  if (customName) {
+                    // Cập nhật tên tùy chỉnh vào profile nếu muốn (có thể lưu tạm/localStorage hoặc alert xác nhận)
+                    window.localStorage.setItem(`math4fun-pet-name-${selectedPet.id}`, customName);
+                  }
+                  navigate("/");
+                }}
+                className="w-full py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold rounded-xl shadow-lg transition transform hover:scale-105 active:scale-95 text-sm cursor-pointer"
+              >
+                Xác nhận tên & Bắt đầu hành trình
+              </button>
             </motion.div>
           </motion.div>
         )}

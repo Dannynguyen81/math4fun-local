@@ -323,3 +323,33 @@ export function playFireworkPopSound(enabled: boolean) {
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), 750);
 }
+/** A triumphant fanfare for winning a Training Arena battle. */
+export function playTrainingVictorySound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.12, now + 0.02);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
+  master.connect(context.destination);
+  [523.25, 659.25, 783.99, 987.77, 1046.5].forEach((freq, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.12;
+    oscillator.type = index === 4 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(freq, start);
+    oscillator.frequency.exponentialRampToValueAtTime(freq * 1.02, start + 0.3);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(index === 4 ? 0.95 : 0.6, start + 0.02);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.35);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.4);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 1250);
+}

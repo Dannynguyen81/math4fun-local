@@ -263,6 +263,13 @@
 - [x] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
 - [x] Chạy `pnpm check`, `pnpm build` và kiểm tra screenshot ở desktop 1280×720 và mobile 390×844.
 
+## Bổ sung Console Quản trị, Đặt tên Pet và Lễ Chiến Thắng Võ Đài — 2026-08-21
+
+- [x] Thêm bộ lọc nguồn tập sách (Tập 1 / Tập 2) vào Console quản trị để giáo viên dễ dàng tìm kiếm câu hỏi.
+- [x] Cho phép người chơi đặt tên tùy chỉnh cho pet hình học sau khi triệu hồi (có lưu vào hồ sơ).
+- [x] Thêm hiệu ứng hoạt ảnh nổi bật và âm thanh chiến thắng (firework pop + victory fanfare) khi học sinh thắng Võ đài Huấn luyện.
+- [x] Kiểm tra TypeScript build thành công.
+
 ## Nâng cấp Màn hình Chọn Pet, Võ đài và Xác thực Admin — 2026-08-21
 
 - [x] Sửa lỗi đăng nhập admin `admin/admin` bị kẹt do quy tắc mật khẩu mới.
