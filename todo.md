@@ -270,6 +270,13 @@
 - [x] Thêm hiệu ứng hoạt ảnh nổi bật và âm thanh chiến thắng (firework pop + victory fanfare) khi học sinh thắng Võ đài Huấn luyện.
 - [x] Kiểm tra TypeScript build thành công.
 
+## Khôi phục hình ảnh pet cũ theo phản hồi người chơi — 2026-08-22
+
+- [x] Xác định lại chính xác bộ asset pet cũ đã dùng trước khi thay roster.
+- [x] Khôi phục hình pet cũ cho toàn bộ roster và Boss, không làm đổi ID hoặc tiến độ đã lưu.
+- [x] Kiểm tra Bản đồ, Bộ sưu tập, chọn pet, Boss và Võ đài đều hiển thị đúng bộ ảnh cũ.
+- [x] Chạy production build, lưu checkpoint và phát hành bản khôi phục.
+
 ## Nâng cấp Màn hình Chọn Pet, Võ đài và Xác thực Admin — 2026-08-21
 
 - [x] Sửa lỗi đăng nhập admin `admin/admin` bị kẹt do quy tắc mật khẩu mới.
