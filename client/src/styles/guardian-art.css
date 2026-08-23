@@ -1,50 +1,13 @@
 /* Math4Fun Guardian art presentation.
- * The 22 verified Guardians live in one 5x5 transparent sprite sheet. Every
- * /guardians/<art>.svg or .webp URL is rendered from its own cell here so all
- * pages share the same artwork without SVG external-resource loading issues.
+ * Guardian canon now points to direct WebP files again. Keep presentation
+ * transparent and circular; do not paint a second sprite behind the image.
  */
 img[src*="/guardians/"] {
-  background-color: transparent !important;
-  background-image: url("/guardians/guardian-sprite.webp");
-  background-repeat: no-repeat;
-  background-size: 500% 500%;
+  background: transparent !important;
   object-fit: contain;
   clip-path: circle(49% at 50% 50%);
 }
 
-/* Row 1 */
-img[src*="/guardians/pipra." ] { background-position: 0% 0%; }
-img[src*="/guardians/mimo."  ] { background-position: 25% 0%; }
-img[src*="/guardians/voltix."] { background-position: 50% 0%; }
-img[src*="/guardians/mossy." ] { background-position: 75% 0%; }
-img[src*="/guardians/coru."  ] { background-position: 100% 0%; }
-
-/* Row 2 */
-img[src*="/guardians/aeris." ] { background-position: 0% 25%; }
-img[src*="/guardians/brix."  ] { background-position: 25% 25%; }
-img[src*="/guardians/luma."  ] { background-position: 50% 25%; }
-img[src*="/guardians/nori."  ] { background-position: 75% 25%; }
-img[src*="/guardians/pavo."  ] { background-position: 100% 25%; }
-
-/* Row 3 */
-img[src*="/guardians/soli."  ] { background-position: 0% 50%; }
-img[src*="/guardians/dexo."  ] { background-position: 25% 50%; }
-img[src*="/guardians/maru."  ] { background-position: 50% 50%; }
-img[src*="/guardians/sena."  ] { background-position: 75% 50%; }
-img[src*="/guardians/kora."  ] { background-position: 100% 50%; }
-
-/* Row 4 */
-img[src*="/guardians/vexa."  ] { background-position: 0% 75%; }
-img[src*="/guardians/runo."  ] { background-position: 25% 75%; }
-img[src*="/guardians/tavi."  ] { background-position: 50% 75%; }
-img[src*="/guardians/oryx."  ] { background-position: 75% 75%; }
-img[src*="/guardians/nexa."  ] { background-position: 100% 75%; }
-
-/* Row 5 — Bosses */
-img[src*="/guardians/atlas." ] { background-position: 0% 100%; }
-img[src*="/guardians/myrion."] { background-position: 25% 100%; }
-
-/* The sprite cells already have safe transparent breathing room. */
 .guardian-stamp img[src*="/guardians/"] {
   width: 100%;
   height: 100%;
