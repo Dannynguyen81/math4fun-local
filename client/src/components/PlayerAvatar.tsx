@@ -11,6 +11,8 @@ export const avatarImageById: Record<AvatarId, string> = {
   b06: `${MEDIA}/math4fun-chibi-b06.png`, b07: `${MEDIA}/math4fun-chibi-b07.png`, b08: `${MEDIA}/math4fun-chibi-b08.png`, b09: `${MEDIA}/math4fun-chibi-b09.png`, b10: `${MEDIA}/math4fun-chibi-b10.png`,
   g01: `${MEDIA}/math4fun-chibi-g01.png`, g02: `${MEDIA}/math4fun-chibi-g02.png`, g03: `${MEDIA}/math4fun-chibi-g03.png`, g04: `${MEDIA}/math4fun-chibi-g04.png`, g05: `${MEDIA}/math4fun-chibi-g05.png`,
   g06: `${MEDIA}/math4fun-chibi-g06.png`, g07: createFallbackChibi("Thư Kim Chỉ", "#efb18d", "#25324d", "#7658a6", "#f5c54c", "<circle cx=\"70\" cy=\"95\" r=\"15\" fill=\"none\" stroke=\"#172a48\" stroke-width=\"3\"/><circle cx=\"128\" cy=\"95\" r=\"15\" fill=\"none\" stroke=\"#172a48\" stroke-width=\"3\"/><path d=\"M85 95h28\" stroke=\"#172a48\" stroke-width=\"3\"/><path d=\"M44 48l17-10 13 15-18 9z\" fill=\"#f5c54c\"/>"), g08: createFallbackChibi("Lan Sao Băng", "#d99775", "#402d42", "#cf6c45", "#f6b73c", "<path d=\"M144 55l8 8 12-3-7 11 5 12-13-5-10 8 1-14-10-8 14-1z\" fill=\"#f6b73c\"/><path d=\"M91 104q10-7 20 0\" fill=\"none\" stroke=\"#172a48\" stroke-width=\"2\"/>"), g09: createFallbackChibi("Yến Vỏ Sò", "#c98769", "#472d29", "#2e8f86", "#d5dfed", "<path d=\"M49 56q-13 12-4 28 16-10 27-7\" fill=\"#472d29\"/><path d=\"M136 50l13 11-12 8-11-9z\" fill=\"#ee6b4e\"/><path d=\"M77 178h46v47H77z\" fill=\"#2e8f86\"/>"), g10: `${MEDIA}/math4fun-chibi-g10.png`,
+  onb01: `${MEDIA}/math4fun-onboarding-b01-transparent.png`, onb02: `${MEDIA}/math4fun-onboarding-b02.png`, onb03: `${MEDIA}/math4fun-onboarding-b03.png`, onb04: `${MEDIA}/math4fun-onboarding-b04-transparent.png`, onb05: `${MEDIA}/math4fun-onboarding-b05.png`,
+  ong01: `${MEDIA}/math4fun-onboarding-g01-transparent.png`, ong02: `${MEDIA}/math4fun-onboarding-g02-grabcut.png`, ong03: `${MEDIA}/math4fun-onboarding-g03-transparent.png`, ong04: `${MEDIA}/math4fun-onboarding-g04-transparent.png`, ong05: `${MEDIA}/math4fun-onboarding-g05.png`,
   compass: `${MEDIA}/math4fun-avatar-compass.png`, ember: `${MEDIA}/math4fun-avatar-ember.png`, tide: `${MEDIA}/math4fun-avatar-tide.png`, leaf: `${MEDIA}/math4fun-avatar-leaf.png`,
 };
 
@@ -31,8 +33,8 @@ export function PlayerAvatar({ avatar, name = "Companion", outfitId, trailId, si
   const hasTrail = Boolean(trailId);
   return <span className={`relative inline-grid shrink-0 place-items-center ${sizeClass[size]} ${className}`}>
     {hasTrail && <span aria-hidden="true" className="absolute -bottom-1 -left-1 -right-1 h-2 rotate-[-3deg] border-y border-[#172a48] bg-[#f6b73c]/75"/>}
-    <span className={`relative grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-[#172a48] bg-[#fffdf6] ${hasOutfit ? "shadow-[3px_3px_0_#f6b73c]" : "shadow-[2px_2px_0_#172a48]"}`}>
-      <img src={avatarImageById[avatar]} alt={name} className="h-full w-full object-contain p-0.5" />
+    <span className={`relative grid h-full w-full place-items-center overflow-hidden rounded-full border-2 border-[#172a48] bg-[#fdfaf3] ${hasOutfit ? "shadow-[3px_3px_0_#f6b73c]" : "shadow-[2px_2px_0_#172a48]"}`}>
+      <img src={avatarImageById[avatar]} alt={name} className="h-full w-full object-cover object-top scale-[1.18] pt-1" />
       {hasOutfit && <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#172a48]/45 to-transparent"/>}
     </span>
     {!compact && hasOutfit && <span aria-hidden="true" className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full border border-[#172a48] bg-[#f6b73c] text-[9px] font-black">✦</span>}

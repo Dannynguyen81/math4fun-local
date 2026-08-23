@@ -24,7 +24,7 @@ import {
 } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
-import { playElementLevelUpSound, playElementSound, playFiveStreakSound, playTechniqueSound } from "@/lib/magicAudio";
+import { playElementLevelUpSound, playElementSound, playFiveStreakSound, playTechniqueSound, playTrainingVictorySound, playFireworkPopSound } from "@/lib/magicAudio";
 
 const elementColor: Record<string, string> = { "sấm": "#f6b73c", "lửa": "#ee6b4e", "nước": "#55a9dd", "gió": "#3e9b7a", "độc": "#8e69ad", "đất": "#b17a3d" };
 const shuffle = <T,>(items: T[]) => [...items].sort(() => Math.random() - 0.5);
@@ -210,6 +210,10 @@ export default function TrainingPage() {
       const unlocked = getTrainingTechnique(result.trainingLevelUp.nextLevel);
       setLevelCelebration({ level: result.trainingLevelUp.nextLevel, technique: unlocked.name, bonusDamage: unlocked.bonusDamage });
       playElementLevelUpSound(activeGuardian.element, audioEnabled);
+    }
+    if (result.ended && result.correct && battle?.status === "victory") {
+      playTrainingVictorySound(audioEnabled);
+      playFireworkPopSound(audioEnabled);
     }
   }
   function revealHint() {

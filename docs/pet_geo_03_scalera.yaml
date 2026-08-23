@@ -1,0 +1,83 @@
+schema_version: "2.0"
+status: "needs-human-review"
+id: "pet-geo-03"
+name: "Scalera"
+species_concept: "Sinh vật vỏ ốc xoắn ốc bằng gốm men ngọc, chuyên cân đo đong đếm khối lượng và đơn vị đo lường."
+one_line_hook: "Vỏ ốc xoắn ốc cân bằng mọi con số trong thế giới đo lường."
+personality:
+  traits: ["điềm đạm", "chính xác", "ân cần"]
+  expression_grammar: "Mắt to long lanh bọt nước, má hồng phúng phính, biểu cảm bình tĩnh và đáng tin cậy."
+  emotional_target: "Cảm giác vững vàng, tin cậy và mạch lạc khi thực hiện chuyển đổi đơn vị đo (g, kg, m, cm)."
+world:
+  habitat: "Vịnh Thang Đo nơi các dòng suối đo lường chảy qua những chiếc cầu đá cổ."
+  lore_seed: "Được nuôi dưỡng trong các dòng nước tinh khiết chứa đầy các hạt cân tiểu ly bằng đồng."
+  field_note: "Scalera luôn mang theo một chiếc mũ quả cân nhỏ trên đầu và dùng vỏ ốc xoắn để so sánh trọng lượng các vật thể."
+visual:
+  silhouette_family: "Vỏ ốc xoắn ốc đối xứng (Spiral Shell / Balance Beam)"
+  anatomy: "Thân mềm mại màu xanh ngọc bích, nằm trong chiếc vỏ ốc xoắn ốc bằng gốm khắc vạch chia độ phát sáng, đội mũ quả cân đồng."
+  appendages: ["xúc tu nước mềm mại", "vỏ ốc xoắn ốc đối xứng", "đế trượt nước mượt mà"]
+  face: "Mắt to trong trẻo ánh nước, má hồng đáng yêu, miệng cười nhẹ nhàng."
+  material_language: ["gốm men ngọc bích", "đồng thau nguyên chất", "bọt nước trong suốt"]
+  palette:
+    dominant: "#2E4A62"
+    support: ["#4A708B", "#D49B2B", "#E2ECE9"]
+    value_hierarchy: "Màu xanh ngọc bích cổ điển làm chủ đạo, điểm nhấn đồng thau vàng ở mũ quả cân và vạch chia độ."
+  prop: "Một chiếc cân đĩa mini bằng đồng thau cầm trên tay."
+  camera: "3/4 full-body, neutral parchment background"
+  lighting: "soft soothing studio key light, blue-teal rim light, contact shadow"
+  display_notes: "Cần thể hiện rõ các vòng xoắn ốc của vỏ ốc và các vạch chia độ phát sáng nhẹ."
+  exclusions: ["pixel art", "động vật có lông vũ", "màu sắc chói lọi", "gai nhọn góc cạnh"]
+gameplay:
+  element: "water"
+  role: "support"
+  base_stats:
+    power: 2
+    resilience: 4
+    focus: 5
+    agility: 3
+  strengths: ["Hồi phục năng lượng cho đồng đội", "Thưởng lớn khi giải đúng bài toán đổi đơn vị đo lường"]
+  weaknesses: ["Sát thương trực diện thấp", "Cần thời gian niệm chú"]
+  signature_skill:
+    name: "Cân Bằng Hoàn Hảo"
+    level_unlock: 1
+    feedback: "Scalera giơ cao chiếc cân đồng, tạo ra dòng nước xoáy giúp đồng đội cân bằng trạng thái và nhân đôi điểm số!"
+  xp_hook: "Nhận XP vượt trội khi giải chính xác các bài toán quy đổi đơn vị đo độ dài và khối lượng."
+  reward_policy: "Thưởng trang phục nhà thông thái biển sâu và phụ kiện kính lúp đồng."
+education:
+  target_grade: 4
+  math_skill: "Chuyển đổi đơn vị đo độ dài (mm, cm, m, km) và khối lượng (g, kg)."
+  practice_behavior: "Quy đổi về cùng một đơn vị trước khi thực hiện phép tính cộng trừ."
+  feedback: "Hiển thị đĩa cân đồng thau thăng bằng với các quả cân phát sáng khi trả lời đúng."
+  hint_policy: "Never disclose the answer"
+  accessibility: ["reduced motion", "color-independent cue", "high contrast scale markers"]
+originality_audit:
+  abstract_inspiration: "Vỏ ốc anh vũ, cân tiểu ly cổ điển, sinh vật biển hiền lành."
+  differentiators:
+    - "Thân hình vỏ ốc xoắn ốc bằng gốm có vạch chia độ độc đáo thay vì cá hay thủy quái thông thường."
+    - "Đội mũ quả cân đồng thau cổ điển biểu thị tinh thần đo lường chính xác."
+    - "Sử dụng đĩa cân làm công cụ tương tác phép thuật thay vì phép bắn nước đơn thuần."
+  prohibited_markers_checked: true
+  similarity_red_flags_noted: "Không giống bất kỳ Pokémon ốc sên nào; mang phong cách dụng cụ khoa học cổ điển."
+  reviewer: "Danny Nguyen (Lead Designer)"
+production:
+  asset_ids: ["pet_scalera_idle", "pet_scalera_cast", "pet_scalera_victory", "pet_scalera_icon"]
+  filenames: ["scalera_01.png", "scalera_02_cast.png", "scalera_icon.png"]
+  framing: "full-body 3/4 view, centered stable pose"
+  transparent_background: true
+  resolution_aspect: "1024x1024, 1:1"
+  fallback: "static SVG vector badge for reduced-motion"
+  engine_notes: "Hiệu ứng bập bênh nhẹ của đĩa cân lặp lại mượt mà."
+  acceptance_criteria:
+    - "Vỏ ốc xoắn ốc và các vạch chia độ rõ nét ở mọi kích thước."
+    - "Không vi phạm quy tắc bản quyền."
+    - "Đã vượt qua bộ lọc kiểm tra."
+  open_risks: []
+  review_status: "needs-human-review"
+prompt_pack:
+  silhouette_exploration: "Chibi 3D game asset, spiral seashell creature made of celadon ceramic with measurement scale markings, wearing a tiny brass weight hat, holding a miniature brass balance scale, educational water companion, soothing tactile materials, soft teal ceramic, polished brass, water droplets, parchment background, clean game asset."
+  locked_character_sheet: "3D Japanese chibi game asset style, full-body front and 3/4 turn of Scalera, a celadon ceramic spiral shell creature with brass weight hat, holding balance scale, gentle friendly expression, tactile craftsmanship, child-safe fantasy explorer, soothing studio lighting, transparent background."
+  gameplay_pose: "Scalera casting water and measurement magic, holding a glowing brass balance scale with floating metric weights, peaceful stable pose, celadon ceramic and brass textures, soft blue rim light, game sprite quality."
+  vfx_prompt: "Gentle water ripples, glowing metric weight icons, tiny sparkling water droplets, soothing magical aura, game visual effects."
+  icon_prompt: "Square icon badge of Scalera face with brass weight hat and celadon ceramic spiral shell frame, clean game UI element."
+  continuity_block: "3D Japanese chibi game asset style, tactile materials (parched leather, smooth ceramic, polished natural wood), clean soft studio lighting with warm rim light, solid transparent background, playful proportions, high readability at 48px UI size, zero violent gore, child-safe fantasy explorer aesthetic."
+  negative_constraints: "photorealism, gritty textures, sharp weapons, scary teeth, complex armor, human anatomy, floating limbs, messy sketch, dark gloomy shadows, copyrighted Pokémon features."

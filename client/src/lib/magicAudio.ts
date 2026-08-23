@@ -185,3 +185,171 @@ export function playFiveStreakSound(enabled: boolean) {
   void context.resume?.();
   window.setTimeout(() => void context.close?.(), 1180);
 }
+
+/** A light two-note coin chime, reserved for a positive Gold balance change. */
+export function playGoldGainSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.075, now + 0.012);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+  master.connect(context.destination);
+  [1318.51, 1760].forEach((frequency, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.075;
+    oscillator.type = index === 0 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(frequency, start);
+    oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.012, start + 0.14);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(index === 0 ? 0.72 : 0.5, start + 0.012);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.19);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.22);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 520);
+}
+
+
+/** A playful slide cue when switching avatar specimens in the onboarding carousel. */
+export function playAvatarSlideSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.045, now + 0.01);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+  master.connect(context.destination);
+  const oscillator = context.createOscillator();
+  const envelope = context.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(440, now);
+  oscillator.frequency.exponentialRampToValueAtTime(660, now + 0.15);
+  envelope.gain.setValueAtTime(0.0001, now);
+  envelope.gain.exponentialRampToValueAtTime(0.7, now + 0.02);
+  envelope.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+  oscillator.connect(envelope);
+  envelope.connect(master);
+  oscillator.start(now);
+  oscillator.stop(now + 0.18);
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 250);
+}
+
+/** A joyful celebration fanfare when confirming a chosen avatar companion. */
+export function playAvatarSelectSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.09, now + 0.02);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.65);
+  master.connect(context.destination);
+  [523.25, 659.25, 783.99, 1046.5].forEach((freq, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.1;
+    oscillator.type = index === 3 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(freq, start);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(0.8, start + 0.02);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.32);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 800);
+}
+
+/** Play a sparkling firework pop sound when confirming pet selection or achieving high milestones. */
+export function playFireworkPopSound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.08, now + 0.02);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+  master.connect(context.destination);
+
+  // Pop sound
+  const popOsc = context.createOscillator();
+  const popGain = context.createGain();
+  popOsc.type = "sine";
+  popOsc.frequency.setValueAtTime(320, now);
+  popOsc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
+  popGain.gain.setValueAtTime(0.0001, now);
+  popGain.gain.exponentialRampToValueAtTime(0.9, now + 0.01);
+  popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+  popOsc.connect(popGain);
+  popGain.connect(master);
+  popOsc.start(now);
+  popOsc.stop(now + 0.1);
+
+  // Sparkle shimmer
+  [587.33, 880, 1174.66, 1760].forEach((freq, idx) => {
+    const osc = context.createOscillator();
+    const gain = context.createGain();
+    const start = now + 0.08 + idx * 0.07;
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(freq, start);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.05, start + 0.2);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.35, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
+    osc.connect(gain);
+    gain.connect(master);
+    osc.start(start);
+    osc.stop(start + 0.32);
+  });
+
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 750);
+}
+/** A triumphant fanfare for winning a Training Arena battle. */
+export function playTrainingVictorySound(enabled: boolean) {
+  if (!enabled || typeof window === "undefined") return;
+  const Context = window.AudioContext ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Context) return;
+  const context = new Context();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.12, now + 0.02);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
+  master.connect(context.destination);
+  [523.25, 659.25, 783.99, 987.77, 1046.5].forEach((freq, index) => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    const start = now + index * 0.12;
+    oscillator.type = index === 4 ? "sine" : "triangle";
+    oscillator.frequency.setValueAtTime(freq, start);
+    oscillator.frequency.exponentialRampToValueAtTime(freq * 1.02, start + 0.3);
+    envelope.gain.setValueAtTime(0.0001, start);
+    envelope.gain.exponentialRampToValueAtTime(index === 4 ? 0.95 : 0.6, start + 0.02);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.35);
+    oscillator.connect(envelope);
+    envelope.connect(master);
+    oscillator.start(start);
+    oscillator.stop(start + 0.4);
+  });
+  void context.resume?.();
+  window.setTimeout(() => void context.close?.(), 1250);
+}
