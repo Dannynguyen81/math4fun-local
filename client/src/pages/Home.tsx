@@ -8,9 +8,9 @@ import { STATIONS } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
 import { useAuthGate } from "@/components/AuthGate";
 
-const HERO_ART = "/manus-storage/math4fun-rpg-hero_47048803.png";
-const MAP_ART = "/manus-storage/math4fun-world-map_aeb6eb71.png";
-const COMPANION_ART = "/manus-storage/math4fun-guardian-companion_9ae2cec1.png";
+const HERO_ART = "/media/math4fun-rpg-hero.png";
+const MAP_ART = "/media/math4fun-world-map.png";
+const COMPANION_ART = "/media/math4fun-guardian-companion.png";
 
 function Math4FunWordmark() {
   return <div className="math4fun-wordmark" aria-label="Math4Fun">

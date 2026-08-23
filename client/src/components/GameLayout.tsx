@@ -10,7 +10,7 @@ import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-const AMBIENT_AUDIO = "/manus-storage/math4fun-field-journal-ambient_ab24706b.mp3";
+const AMBIENT_AUDIO = "/media/math4fun-field-journal-ambient.mp3";
 
 const navItems = [
   { href: "/", label: "Trang chủ", icon: Home },
@@ -96,7 +96,7 @@ export default function GameLayout({ children }: { children: React.ReactNode }) 
               <div className="relative flex items-center gap-1.5 rounded-lg border-2 border-[#172a48] bg-[#fff0b6] px-3 py-1.5 text-xs font-black shadow-[2px_2px_0_#172a48]" aria-label={`${gold} Gold`} title={`${gold} Gold`}>
                 <span className="coin-sparkle-1 pointer-events-none absolute -left-1.5 -top-1.5 text-xs font-black text-[#f6b73c]">✨</span>
                 <span className="coin-sparkle-2 pointer-events-none absolute -bottom-1 -right-1 text-[10px] font-black text-[#f6b73c]">⭐</span>
-                <img src="/manus-storage/math4fun-gold-coin-3d_1a25edfc.png" alt="" aria-hidden="true" className="gold-coin-wobble h-7 w-7 shrink-0 object-contain drop-shadow-[0_2px_0_rgba(23,42,72,.42)]" />
+                <img src="/media/math4fun-gold-coin-3d.png" alt="" aria-hidden="true" className="gold-coin-wobble h-7 w-7 shrink-0 object-contain drop-shadow-[0_2px_0_rgba(23,42,72,.42)]" />
                 <span className="font-display text-sm tracking-tight text-[#172a48]">{gold}</span>
               </div>
             )}

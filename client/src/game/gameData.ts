@@ -5,14 +5,14 @@
  */
 import { AI_PRACTICE_QUESTIONS } from "./practiceBank";
 
-export const HERO_IMAGE = "/manus-storage/math4fun-hero-journey_c4c6745e.jpg";
-export const ARENA_IMAGE = "/manus-storage/math4fun-arcane-arena-reference_3e0f6085.jpg";
-export const CARD_IMAGE = "/manus-storage/math4fun-guardian-card_0acf6e09.jpg";
-export const STICKERS_IMAGE = "/manus-storage/math4fun-reward-stickers_3366726f.jpg";
-export const LOGO_IMAGE = "/manus-storage/math4fun-logo-mark_7740cd77.png";
-export const ELEMENTS_IMAGE = "/manus-storage/math4fun-spell-elements_450241d7.png";
-export const PROFILE_IMAGE = "/manus-storage/math4fun-profile-compass_bf90b6cf.png";
-export const BATTLE_AUDIO = "/manus-storage/math4fun-battle-loop_053e734b.wav";
+export const HERO_IMAGE = "/media/math4fun-hero-journey.jpg";
+export const ARENA_IMAGE = "/media/math4fun-arcane-arena-reference.jpg";
+export const CARD_IMAGE = "/media/math4fun-guardian-card.jpg";
+export const STICKERS_IMAGE = "/media/math4fun-reward-stickers.jpg";
+export const LOGO_IMAGE = "/media/math4fun-logo-mark.png";
+export const ELEMENTS_IMAGE = "/media/math4fun-spell-elements.png";
+export const PROFILE_IMAGE = "/media/math4fun-profile-compass.png";
+export const BATTLE_AUDIO = "/media/math4fun-battle-loop.wav";
 
 export type Difficulty = "E" | "M" | "H";
 export type Book = "Tập 1" | "Tập 2";
@@ -227,12 +227,12 @@ export const MAP_BOSS_RULES: Record<MapId, { maxHp: number; wrongAnswerDamage: n
 
 /** Field Journal Quest: a shared local-only catalog for the Boss study reel and Magic Book gallery. */
 export const MAGIC_MEDIA: Record<ElementName, MagicMedia> = {
-  "sấm": { title: "Tia Chớp Số Học", shortLabel: "SẤM ẤN", src: "/manus-storage/thunder-number-spell_ea927287.mp4", note: "Tia chớp nạp từ một phép tính đúng." },
-  "lửa": { title: "Hỏa Ấn Số Học", shortLabel: "HỎA ẤN", src: "/manus-storage/FlameSeal_5f0136e4.mp4", note: "Dấu số ghép thành ngọn lửa quyết tâm." },
-  "nước": { title: "Thủy Triều Số Học", shortLabel: "THỦY ẤN", src: "/manus-storage/TideSeal_750f204b.mp4", note: "Con số được cân bằng như những làn sóng." },
-  "độc": { title: "Độc Ấn Quy Luật", shortLabel: "ĐỘC ẤN", src: "/manus-storage/VenomSeal_c53ae165.mp4", note: "Chuỗi dấu tím nối lại theo một quy luật kín đáo." },
-  "gió": { title: "Gió Ấn Mở Đường", shortLabel: "GIÓ ẤN", src: "/manus-storage/WindGlyph_954183b6.mp4", note: "Những bước suy luận tạo thành đường gió mở tuyến mới." },
-  "đất": { title: "Địa Ấn Cân Bằng", shortLabel: "ĐỊA ẤN", src: "/manus-storage/EarthSeal_bc898ab9.mp4", note: "Các dấu số dựng thành nền đất bền vững." },
+  "sấm": { title: "Tia Chớp Số Học", shortLabel: "SẤM ẤN", src: "/media/thunder-number-spell.mp4", note: "Tia chớp nạp từ một phép tính đúng." },
+  "lửa": { title: "Hỏa Ấn Số Học", shortLabel: "HỎA ẤN", src: "/media/FlameSeal.mp4", note: "Dấu số ghép thành ngọn lửa quyết tâm." },
+  "nước": { title: "Thủy Triều Số Học", shortLabel: "THỦY ẤN", src: "/media/TideSeal.mp4", note: "Con số được cân bằng như những làn sóng." },
+  "độc": { title: "Độc Ấn Quy Luật", shortLabel: "ĐỘC ẤN", src: "/media/VenomSeal.mp4", note: "Chuỗi dấu tím nối lại theo một quy luật kín đáo." },
+  "gió": { title: "Gió Ấn Mở Đường", shortLabel: "GIÓ ẤN", src: "/media/WindGlyph.mp4", note: "Những bước suy luận tạo thành đường gió mở tuyến mới." },
+  "đất": { title: "Địa Ấn Cân Bằng", shortLabel: "ĐỊA ẤN", src: "/media/EarthSeal.mp4", note: "Các dấu số dựng thành nền đất bền vững." },
 };
 
 /** Quy ước chiến thuật riêng của Math4Fun; dùng để đọc Sổ Phép, chưa thay đổi điểm Toán. */

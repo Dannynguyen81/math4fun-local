@@ -277,6 +277,13 @@
 - [x] Kiểm tra Bản đồ, Bộ sưu tập, chọn pet, Boss và Võ đài đều hiển thị đúng bộ ảnh cũ.
 - [x] Chạy production build, lưu checkpoint và phát hành bản khôi phục.
 
+## Đưa asset gốc vào Git repository — 2026-08-23
+
+- [x] Lập danh mục asset đang được ứng dụng tham chiếu từ ngoài repository.
+- [x] Sao chép toàn bộ ảnh hero, arena, profile, logo, guardian-card, reward sticker và asset nguyên tố vào `client/public/media/` mà không đổi tên.
+- [x] Sao chép toàn bộ battle audio và Magic Book spell video đang được tham chiếu vào `client/public/media/` mà không đổi tên.
+- [x] Kiểm tra tệp đầy đủ, production build và tạo commit trên nhánh Git mới.
+
 ## Nâng cấp Màn hình Chọn Pet, Võ đài và Xác thực Admin — 2026-08-21
 
 - [x] Sửa lỗi đăng nhập admin `admin/admin` bị kẹt do quy tắc mật khẩu mới.
