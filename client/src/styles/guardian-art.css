@@ -14,3 +14,17 @@ img[src*="/guardians/"] {
   height: 88%;
   margin: auto;
 }
+
+/* Mobile first: route cards form a clean single column. The stitched zig-zag
+ * returns only when there is enough horizontal room for it. */
+.route-mobile-card {
+  margin-left: 0 !important;
+  rotate: 0deg !important;
+}
+
+@media (min-width: 640px) {
+  .route-mobile-card {
+    margin-left: min(var(--route-offset, 0%), 300px) !important;
+    rotate: var(--route-rotate, 0deg) !important;
+  }
+}
