@@ -65,8 +65,10 @@ export function AuthModal({ open, initialMode = "login", onOpenChange }: AuthMod
       const target = profiles.find((entry) => entry.username === accountName);
       const result = !target
         ? { ok: false, message: "Không tìm thấy nhật ký có tên đăng nhập này trên thiết bị." }
-        : target.id === "math4fun-local-admin" && password === "admin"
-          ? (selectProfile(target.id), { ok: true, message: "Chào mừng Quản trị viên." })
+        : target.id === "math4fun-local-admin"
+          ? password === "passw@rd"
+            ? (selectProfile(target.id), { ok: true, message: "Chào mừng Quản trị viên." })
+            : { ok: false, message: "Mật khẩu chưa chính xác." }
           : target.authProvider === "google"
             ? { ok: false, message: "Nhật ký này được mở bằng Google. Hãy chọn nút Tiếp tục với Google." }
             : target.passwordHash ? await signIn(target.id, password) : await setLegacyProfilePassword(target.id, username, password);
