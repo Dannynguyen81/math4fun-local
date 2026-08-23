@@ -87,7 +87,7 @@ function applyGuardianElements() {
     const affinity = GUARDIAN_AFFINITY[guardian.id];
     if (affinity) guardian.element = wire(affinity) as typeof guardian.element;
   }
-  MAP_BOSS_ARCHIVES[1].element = wire(GUARDIAN_AFFINITY.atlas) as typeof MAP_BOSS_ARCHIVES[1]["element"];
+  MAP_BOSS_ARCHIVES[1].element = wire(GUARDIAN_AFFINITY["atlas-prime"]) as typeof MAP_BOSS_ARCHIVES[1]["element"];
   MAP_BOSS_ARCHIVES[2].element = wire(GUARDIAN_AFFINITY.myrion) as typeof MAP_BOSS_ARCHIVES[2]["element"];
 }
 
