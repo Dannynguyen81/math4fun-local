@@ -52,11 +52,30 @@ export function AuthGateProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  // Do not eject an admin profile merely because React state has not yet observed
+  // the SIGNED_IN event. Re-read the authoritative Supabase session first. This
+  // removes a race where signInWithPassword succeeds and selectProfile(admin)
+  // runs a few milliseconds before onAuthStateChange updates adminAuthorized.
   useEffect(() => {
     if (!authChecked || profile?.role !== "admin" || adminAuthorized) return;
-    exitGame();
-    setMode("login");
-    setOpen(true);
+    if (!supabase) {
+      exitGame();
+      setMode("login");
+      setOpen(true);
+      return;
+    }
+    let disposed = false;
+    void supabase.auth.getUser().then(({ data, error }) => {
+      if (disposed) return;
+      if (!error && isSupabaseAdmin(data.user)) {
+        setAdminAuthorized(true);
+        return;
+      }
+      exitGame();
+      setMode("login");
+      setOpen(true);
+    });
+    return () => { disposed = true; };
   }, [adminAuthorized, authChecked, exitGame, profile?.role]);
 
   const value = useMemo<AuthGateValue>(() => ({ openAuth: (nextMode = "login") => { setMode(nextMode); setOpen(true); } }), []);
