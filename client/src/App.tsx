@@ -8,6 +8,7 @@ import GameLayout from "./components/GameLayout";
 import { GameProvider } from "./contexts/GameContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import "./game/guardianBranding";
+import "./game/fiveElementCombat";
 import BossPage from "./pages/BossPage";
 import TrainingPage from "./pages/TrainingPage";
 import CollectionPage from "./pages/CollectionPage";
