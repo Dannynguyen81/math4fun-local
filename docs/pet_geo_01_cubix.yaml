@@ -1,0 +1,83 @@
+schema_version: "2.0"
+status: "needs-human-review"
+id: "pet-geo-01"
+name: "Cubix"
+species_concept: "Khối lập phương gốm gỗ sống động, có các khớp nối từ tính linh hoạt giúp đo lường mọi không gian."
+one_line_hook: "Nhà đo đạc diện tích nhỏ gọn biến mọi ô vuông thành giai điệu."
+personality:
+  traits: ["cẩn trọng", "ưa ngăn nắp", "tò mò không ngớt"]
+  expression_grammar: "Mắt thấu kính tròn to mở lớn khi phát hiện diện tích mới, miệng chữ D cười hiền."
+  emotional_target: "Cảm giác an tâm, chính xác và vui tươi khi học hình học không gian."
+world:
+  habitat: "Thung lũng Thước Kẻ bên cạnh các đền thờ hình học cổ."
+  lore_seed: "Được đẽo từ những khối gỗ lim cổ thụ và đất nung đặc biệt, Cubix sinh ra để giải mã các bài toán chu vi và diện tích."
+  field_note: "Thường thấy Cubix lăn lộn đo đạc các thửa ruộng hình chữ nhật của làng Toán học với chiếc đuôi thước gập."
+visual:
+  silhouette_family: "Khối hộp lục lăng (Blocky/Geometric)"
+  anatomy: "Thân hình là khối lập phương mượt mà bằng gốm xanh rêu, tay chân khớp bi linh hoạt, đuôi là một đoạn thước gập gỗ."
+  appendages: ["tay gốm khớp bi", "chân đế đệm cao su nhỏ", "đuôi thước gập 3 khúc"]
+  face: "Mắt thấu kính tròn viền đồng thau, không mũi, miệng chữ D cười thân thiện."
+  material_language: ["gốm men xanh rêu nhám mờ", "gỗ tự nhiên đánh bóng", "đồng thau cổ điển"]
+  palette:
+    dominant: "#4A6B5B"
+    support: ["#88A895", "#C2A676", "#32443A"]
+    value_hierarchy: "Màu xanh rêu trầm làm chủ đạo, điểm nhấn gỗ vàng ấm ở đuôi thước và đồng thau ở vành mắt."
+  prop: "Một chiếc thước gập bằng gỗ mini giắt ở thắt lưng."
+  camera: "3/4 full-body, neutral parchment background"
+  lighting: "soft studio key light, gentle amber rim light, contact shadow"
+  display_notes: "Cần giữ hình khối vuông vắn, không bị bo tròn quá mức làm mất tính nhận diện hình học."
+  exclusions: ["pixel art", "động vật có vú thông thường", "khối cầu", "màu neon rực rỡ"]
+gameplay:
+  element: "earth"
+  role: "tank"
+  base_stats:
+    power: 4
+    resilience: 5
+    focus: 3
+    agility: 2
+  strengths: ["Chống chịu tốt", "Tăng điểm khi giải đúng bài toán diện tích"]
+  weaknesses: ["Tốc độ di chuyển chậm", "Yếu thế trước hệ Gió"]
+  signature_skill:
+    name: "Lưới Ô Vuông Hộ Thân"
+    level_unlock: 1
+    feedback: "Cubix xếp các khối ô vuông bảo vệ đồng đội, tạo hiệu ứng đếm số lượng ô vuông sáng rực!"
+  xp_hook: "Nhận XP bổ sung khi giải đúng các bài toán tính chu vi và diện tích hình chữ nhật."
+  reward_policy: "Thưởng trang phục thước kẻ gỗ và phụ kiện mũ kỹ sư địa lý."
+education:
+  target_grade: 4
+  math_skill: "Tính chu vi và diện tích hình chữ nhật, hình vuông (đơn vị đo cm², m²)."
+  practice_behavior: "Đếm số ô vuông đơn vị trước khi tính toán diện tích tổng."
+  feedback: "Hiển thị lưới ô vuông trực quan trên mặt đất khi Cubix tung kỹ năng."
+  hint_policy: "Never disclose the answer"
+  accessibility: ["reduced motion", "color-independent cue", "high contrast shapes"]
+originality_audit:
+  abstract_inspiration: "Khối lập phương, thước gập học sinh, robot đất nung cổ."
+  differentiators:
+    - "Thân hình lập phương bằng gốm có khớp nối từ tính thay vì hình dạng thú thông thường."
+    - "Đuôi thước gập độc đáo dùng để đo lường trong hoạt ảnh chiến đấu."
+    - "Biểu cảm thấu kính thay đổi theo số đo hình học thay vì mắt sinh học."
+  prohibited_markers_checked: true
+  similarity_red_flags_noted: "Không giống bất kỳ quái vật Pokémon khối gạch nào; mang phong cách đồ chơi giáo dục gỗ/gốm."
+  reviewer: "Danny Nguyen (Lead Designer)"
+production:
+  asset_ids: ["pet_cubix_idle", "pet_cubix_cast", "pet_cubix_victory", "pet_cubix_icon"]
+  filenames: ["cubix_01.png", "cubix_02_cast.png", "cubix_icon.png"]
+  framing: "full-body 3/4 view, center aligned"
+  transparent_background: true
+  resolution_aspect: "1024x1024, 1:1"
+  fallback: "static SVG vector badge for reduced-motion"
+  engine_notes: "Sử dụng sprite sheet 8 khung hình cho trạng thái idle và cast."
+  acceptance_criteria:
+    - "Nhìn rõ hình khối lập phương ngay cả ở kích thước 48px."
+    - "Không có chi tiết rườm rà vi phạm style guide."
+    - "Đã vượt qua bộ lọc kiểm tra tính nguyên bản."
+  open_risks: []
+  review_status: "needs-human-review"
+prompt_pack:
+  silhouette_exploration: "Chibi 3D game asset, isometric blocky ceramic cube creature with jointed limbs and wooden folding ruler tail, educational puzzle companion, cute tactile materials, smooth matte green ceramic, polished wood, brass accents, parchment background, clean game asset."
+  locked_character_sheet: "3D Japanese chibi game asset style, full-body front and 3/4 turn of Cubix, a blocky ceramic cube creature with lens eyes, wood folding ruler tail, matte green ceramic body, brass eyepiece rims, tactile craftsmanship, child-safe fantasy explorer, studio lighting, transparent background."
+  gameplay_pose: "Cubix casting earth magic, deploying glowing grid squares on the ground, energetic pose, tactile clay and wood textures, soft amber rim light, game sprite quality."
+  vfx_prompt: "Magical earth geometry particles, glowing green grid lines and square tiles appearing in sequence, soft glowing magical aura, game visual effects."
+  icon_prompt: "Square icon badge of Cubix face with lens eyes and wood ruler frame, matte green ceramic texture, polished wood border, clean game UI element."
+  continuity_block: "3D Japanese chibi game asset style, tactile materials (parched leather, smooth ceramic, polished natural wood), clean soft studio lighting with warm rim light, solid transparent background, playful proportions, high readability at 48px UI size, zero violent gore, child-safe fantasy explorer aesthetic."
+  negative_constraints: "photorealism, gritty textures, sharp weapons, scary teeth, complex armor, human anatomy, floating limbs, messy sketch, dark gloomy shadows, copyrighted Pokémon features."

@@ -206,15 +206,91 @@
 ## Điều khiển âm thanh và phản hồi người chơi
 
 - [x] Thêm nút bật/tắt nhạc nền ở góc trên phải, lưu tùy chọn cục bộ và giữ âm hiệu ứng chiến đấu độc lập.
+- [x] Nâng cấp icon Gold ở thanh trên thành đồng tiền 3D màu sắc nổi bật, tương phản tốt và giữ kích thước phù hợp mobile.
+- [x] Phát âm ting vui tai khi Gold tăng và tạo chuyển động xoay nhẹ cho đồng tiền 3D, tuân theo cài đặt âm và prefers-reduced-motion.
 - [x] Thêm rung lắc/chớp sáng GPU-friendly khi Boss phản công, đồng bộ với âm thanh nhưng tôn trọng giảm chuyển động.
 - [x] Thiết kế viền/stamp tương tác cho thẻ avatar trên nền parchment, có trạng thái chọn rõ ràng.
 - [x] Hiển thị hộp thư/thông báo trong game khi report của người chơi đã được admin duyệt và phản hồi.
 - [x] Kiểm tra TypeScript/build, audio toggle, hiệu ứng Boss, thẻ avatar và thông báo report; lưu checkpoint.
 
+## Landing page fantasy RPG
+
+- [x] Thiết kế lại route `/` thành landing page fantasy RPG với hero immersive, world map, guardian companion, XP/Gold loop và wordmark Math4Fun đặc biệt.
+- [x] Tạo asset hero Math4Fun gốc, tối ưu cho web và ghi nhận đường dẫn asset theo quy ước dự án.
+- [x] Giữ hai trạng thái chưa ký tên/đã có hồ sơ, liên kết đúng các route game và không thay gameplay, dữ liệu hoặc Supabase.
+- [x] Kiểm tra desktop/mobile, reduced motion, TypeScript/build và ảnh trực quan; chờ checkpoint phát hành.
+
+## Skill repository cho onboarding
+
+- [x] Xác thực nội dung, license, cấu trúc `SKILL.md` và khả năng tương thích của Gamestack, Game Development Orchestrator, Education Agent Skills và UI/UX Pro Max.
+- [x] Cài bốn repository skill theo quy trình an toàn ở khu vực tham chiếu cục bộ, không chạy code, hook hoặc installer.
+- [x] Ghi nhận skill khả dụng trong tài liệu audit và cập nhật hướng áp dụng cho kế hoạch landing-first authentication/Google/avatar.
+
+## Cửa ngõ xác thực và avatar trên landing
+
+- [x] Thay route UI `/start` bằng popup xác thực trên `/`, vẫn redirect tương thích link cũ về `/?auth=login`.
+- [x] Thiết kế modal đăng nhập/đăng ký theo nguyên tắc UI/UX Pro Max và Gamestack: trạng thái rõ, field label, focus/accessibility, validation và CTA game-loop có kiểm soát.
+- [x] Thêm đăng ký tên đăng nhập, mật khẩu, dropdown lớp 4/5/6 với chỉ lớp 4 khả dụng và không thu thập dữ liệu cá nhân không cần thiết.
+- [x] Xây dựng onboarding chọn 10 avatar chibi (5 nam/5 nữ), preview nhân vật đầu tiên, điều hướng trước/sau vòng lặp, thẻ giới thiệu và xác nhận bắt đầu hành trình.
+- [x] Chuẩn bị nút Google Sign-in qua Supabase, callback/identity handling và tài liệu cấu hình OAuth; chỉ kích hoạt end-to-end khi owner đã cấu hình Google provider.
+- [x] Kiểm tra desktop/mobile, local auth/admin/cookie, offline-first/Supabase, keyboard/reduced motion, TypeScript/build và lưu checkpoint.
+- [ ] Hòa nền hoặc loại bỏ khung hình chữ nhật lộ ra ở ONB 01, ONB 04, ONG 01, ONG 02, ONG 03 và ONG 04.
+- [ ] Thu gọn carousel onboarding để nhìn bao quát trên màn hình chính ở desktop và mobile.
+- [ ] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
+
 ## Cộng tác GitHub và dữ liệu Supabase
 
-- [ ] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.
-- [ ] Bổ sung tài liệu README/AGENTS cho quy trình cộng tác của nhiều AI Agent, nhánh, kiểm tra build và bảo vệ dữ liệu.
-- [ ] Đánh giá mô hình localStorage hiện tại và xác định schema Supabase tối thiểu cho hồ sơ, câu hỏi, report, Gold và leaderboard.
-- [ ] Xác nhận repository GitHub đích và dự án Supabase trước khi thực hiện các thao tác kết nối có tính thay đổi bên ngoài.
-- [ ] Xuất mã lên GitHub, thiết lập Supabase khi được xác nhận, rồi kiểm chứng quy trình phát triển đa tác nhân.
+- [x] Kiểm tra repository Git hiện có, trạng thái xác thực GitHub và các tệp cần loại trừ khi công khai mã nguồn.
+- [x] Bổ sung tài liệu README/AGENTS cho quy trình cộng tác của nhiều AI Agent, nhánh, kiểm tra build và bảo vệ dữ liệu.
+- [x] Đánh giá mô hình localStorage hiện tại và xác định schema Supabase tối thiểu cho hồ sơ, câu hỏi, report, Gold và leaderboard.
+- [x] Xác nhận repository GitHub đích và dự án Supabase trước khi thực hiện các thao tác kết nối có tính thay đổi bên ngoài.
+- [x] Cài Supabase client, tích hợp lớp đồng bộ offline-first đa hồ sơ và kiểm chứng `pnpm check`/`pnpm build`; GitHub Actions secrets chưa thể tạo do token hiện tại bị GitHub từ chối quyền Actions secrets.
+- [x] Thêm chỉ báo nhỏ, dễ hiểu và có thể truy cập về trạng thái đồng bộ Supabase (đang đồng bộ/đã đồng bộ/ngoại tuyến/lỗi), không phơi bày dữ liệu học sinh.
+- [x] Viết hướng dẫn chủ sở hữu repository cấp quyền Actions secrets an toàn và đưa hai biến Supabase vào workflow CI; chờ chủ repository tạo secret hoặc tái xác thực token có quyền Actions secrets.
+
+## Dự án Supabase Math4Fun
+
+- [x] Lấy chi phí chính thức và xác nhận của người dùng trước khi tạo dự án Supabase mới Math4Fun.
+- [x] Tạo dự án Math4Fun ở khu vực Singapore phù hợp, rồi kiểm tra trạng thái sẵn sàng.
+- [x] Áp dụng schema có RLS cho dữ liệu người chơi, question bank, report, Gold ledger và leaderboard.
+- [x] Lưu cấu hình công khai an toàn, sinh TypeScript types, bật Anonymous sign-ins, kiểm tra RLS/leaderboard và cập nhật hướng dẫn GitHub/Supabase cho AI Agent.
+
+
+## Tinh chỉnh carousel chọn avatar — 2026-08-21
+
+- [x] Hòa nền hoặc loại bỏ khung hình chữ nhật lộ ra ở ONB 01, ONB 04, ONG 01, ONG 02, ONG 03 và ONG 04; ONG 02 dùng bản GrabCut giữ nguyên tóc và đạo cụ.
+- [x] Thu gọn carousel onboarding để nhìn bao quát trên màn hình chính ở desktop và mobile.
+- [x] Thêm chuyển cảnh mượt, trạng thái tải ảnh và reduced-motion fallback cho carousel avatar.
+- [x] Chạy `pnpm check`, `pnpm build` và kiểm tra screenshot ở desktop 1280×720 và mobile 390×844.
+
+## Bổ sung Console Quản trị, Đặt tên Pet và Lễ Chiến Thắng Võ Đài — 2026-08-21
+
+- [x] Thêm bộ lọc nguồn tập sách (Tập 1 / Tập 2) vào Console quản trị để giáo viên dễ dàng tìm kiếm câu hỏi.
+- [x] Cho phép người chơi đặt tên tùy chỉnh cho pet hình học sau khi triệu hồi (có lưu vào hồ sơ).
+- [x] Thêm hiệu ứng hoạt ảnh nổi bật và âm thanh chiến thắng (firework pop + victory fanfare) khi học sinh thắng Võ đài Huấn luyện.
+- [x] Kiểm tra TypeScript build thành công.
+
+## Khôi phục hình ảnh pet cũ theo phản hồi người chơi — 2026-08-22
+
+- [x] Xác định lại chính xác bộ asset pet cũ đã dùng trước khi thay roster.
+- [x] Khôi phục hình pet cũ cho toàn bộ roster và Boss, không làm đổi ID hoặc tiến độ đã lưu.
+- [x] Kiểm tra Bản đồ, Bộ sưu tập, chọn pet, Boss và Võ đài đều hiển thị đúng bộ ảnh cũ.
+- [x] Chạy production build, lưu checkpoint và phát hành bản khôi phục.
+
+## Nâng cấp Màn hình Chọn Pet, Võ đài và Xác thực Admin — 2026-08-21
+
+- [x] Sửa lỗi đăng nhập admin `admin/admin` bị kẹt do quy tắc mật khẩu mới.
+- [x] Thêm bộ lọc nhanh các pet theo hệ nguyên tố (Đất, Gió, Nước, ...) trên đầu trang chọn pet.
+- [x] Thêm hiệu ứng hover tooltip giải thích khái niệm toán học cho chỉ số của từng pet.
+- [x] Thêm chế độ modal so sánh chỉ số pet cạnh nhau trực quan trước khi chọn.
+- [x] Tích hợp bộ ba pet hình học (Cubix, Vane, Scalera) vào hệ thống pet đồng hành và Võ đài Huấn luyện.
+- [x] Bổ sung âm thanh pháo hoa (firework pop) khi xác nhận chọn pet mới.
+- [x] Chạy `pnpm build` thành công và xác thực giao diện.
+
+## Nâng cấp Header Icon, Coin 3D và Thao tác Carousel — 2026-08-21
+
+- [ ] Thiết kế lại cụm icon header theo tham chiếu (cloud, coin badge, user pill, âm thanh, tắt tiếng) với typographic rõ ràng, nền bọc thẻ bài tinh tế và coin 3D xoay nổi bật.
+- [ ] Bổ sung thao tác vuốt (swipe) trên mobile và phím tắt bàn phím (`ArrowLeft`, `ArrowRight`, `Enter`) cho carousel avatar.
+- [ ] Thêm hiệu ứng viền sáng/đổ bóng nổi bật (specimen highlight ring) cho nhân vật ở vị trí trung tâm.
+- [ ] Đặt nút "Chọn nhân vật này" ngay bên dưới card avatar kèm hoạt ảnh xác nhận thành công (particles / scale pulse / checkmark flash) khi click.
+- [ ] Chạy `pnpm check`, `pnpm build` và kiểm tra trực quan trên desktop/mobile.

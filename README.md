@@ -25,10 +25,11 @@ pnpm build
 | `client/src/pages` | Màn hình hành trình, trạm, Boss, Võ đài, quản trị và thống kê. |
 | `client/src/contexts/GameContext.tsx` | Trạng thái hồ sơ, Gold, report, tiến trình và phiên local. |
 | `client/src/game` | Dữ liệu câu hỏi, guardian, Map, Boss và quy tắc combat. |
-| `client/src/lib` | Âm thanh, helper và tiện ích giao diện. |
-| `docs/SUPABASE_MIGRATION.md` | Lộ trình đưa dữ liệu dùng chung lên Supabase khi cần. |
+| `client/src/lib` | Âm thanh, helper giao diện và lớp sync Supabase offline-first. |
+| `supabase/migrations` | Schema versioned, RLS và quyền đọc bảng xếp hạng tối thiểu. |
+| `docs/SUPABASE_MIGRATION.md` | Lộ trình, ranh giới dữ liệu và trạng thái vận hành Supabase. |
 
-Ứng dụng hiện là frontend tĩnh với localStorage để phù hợp chế độ chơi local. GitHub là nguồn chuẩn cho **mã nguồn**. Supabase chỉ nên trở thành nguồn chuẩn cho **dữ liệu dùng chung** khi cần đồng bộ nhiều thiết bị, xử lý report tập trung hoặc bảng xếp hạng thật.
+Ứng dụng vẫn là frontend tĩnh: localStorage là cache/UI offline-first cho gameplay. GitHub là nguồn chuẩn cho **mã nguồn**; Supabase đang là lớp đồng bộ tùy chọn cho **dữ liệu dùng chung**, report tập trung và bảng xếp hạng nhiều thiết bị.
 
 ## Cộng tác với AI Agent
 
@@ -36,5 +37,4 @@ Mọi Agent phải đọc `AGENTS.md`, giữ nguyên phong cách Field Journal Q
 
 ## Supabase
 
-Không đưa `SUPABASE_SERVICE_ROLE_KEY` hoặc tệp `.env` vào repository. Khi chuyển sang dữ liệu dùng chung, thực hiện migration trong `docs/SUPABASE_MIGRATION.md`, bật RLS và chỉ để frontend dùng anon/publishable key theo chính sách RLS.
-
+Không đưa `SUPABASE_SERVICE_ROLE_KEY` hoặc tệp `.env` vào repository. Frontend chỉ dùng URL và publishable/anon key qua RLS; `GameContext` không đưa mật khẩu, PIN phụ huynh, hash/salt, cookie hay role cục bộ lên cloud. Từ một thiết bị, một phiên Auth ẩn danh có thể đồng bộ nhiều hồ sơ học sinh cục bộ. Xem `docs/SUPABASE_MIGRATION.md` trước khi thay đổi migration hoặc policy.

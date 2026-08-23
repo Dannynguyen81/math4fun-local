@@ -6,14 +6,20 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { isSupabaseSyncEnabled } from "@/lib/supabase";
+import { fetchSupabaseLeaderboardResult, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
+import { playGoldGainSound } from "@/lib/magicAudio";
 
 export const EXTRA_STATION_OPEN_GOLD = 30;
 
 export type AvatarId =
   | "compass" | "ember" | "tide" | "leaf"
   | "b01" | "b02" | "b03" | "b04" | "b05" | "b06" | "b07" | "b08" | "b09" | "b10"
-  | "g01" | "g02" | "g03" | "g04" | "g05" | "g06" | "g07" | "g08" | "g09" | "g10";
-const AVATAR_IDS: AvatarId[] = ["compass", "ember", "tide", "leaf", "b01", "b02", "b03", "b04", "b05", "b06", "b07", "b08", "b09", "b10", "g01", "g02", "g03", "g04", "g05", "g06", "g07", "g08", "g09", "g10"];
+  | "g01" | "g02" | "g03" | "g04" | "g05" | "g06" | "g07" | "g08" | "g09" | "g10"
+  | "onb01" | "onb02" | "onb03" | "onb04" | "onb05"
+  | "ong01" | "ong02" | "ong03" | "ong04" | "ong05";
+export type GradeLevel = 4 | 5 | 6;
+const AVATAR_IDS: AvatarId[] = ["compass", "ember", "tide", "leaf", "b01", "b02", "b03", "b04", "b05", "b06", "b07", "b08", "b09", "b10", "g01", "g02", "g03", "g04", "g05", "g06", "g07", "g08", "g09", "g10", "onb01", "onb02", "onb03", "onb04", "onb05", "ong01", "ong02", "ong03", "ong04", "ong05"];
 export type StudentProfile = {
   id: string;
   name: string;
@@ -22,6 +28,10 @@ export type StudentProfile = {
   username?: string;
   passwordSalt?: string;
   passwordHash?: string;
+  gradeLevel?: GradeLevel;
+  authProvider?: "google";
+  authSubject?: string;
+  onboardingCompleted?: boolean;
   createdAt: string;
   xp: number;
   streak: number;
@@ -154,8 +164,9 @@ export type ElementLevelUp = { element: ElementName; previousLevel: number; next
 export type LearningBadgeId = "streak-7" | "streak-14";
 export type LeaderboardEntry = { profileId: string; name: string; avatar: AvatarId; score: number; level: number; badges: number; guardians: number; stations: number; streak: number };
 export type StudyReminder = { state: "today" | "tomorrow" | "rest"; label: string; scheduledDays: number[] };
+export type SupabaseSyncStatus = "disabled" | "syncing" | "synced" | "offline" | "error";
 type ParentPinRecord = { salt: string; hash: string; createdAt: string; securityQuestion?: string; answerSalt?: string; answerHash?: string };
-type GameStore = { version: 14; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; ambientEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
+type GameStore = { version: 15; profiles: StudentProfile[]; activeProfileId: string | null; audioEnabled: boolean; ambientEnabled: boolean; siteVisitCount: number; lastSiteVisitAt?: string; parentPin?: ParentPinRecord; questionOverrides: Record<string, QuestionOverride> };
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type StreakMilestone = { streak: number; bonusGold: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null; streakMilestone?: StreakMilestone };
@@ -167,6 +178,8 @@ type GameContextValue = {
   profiles: StudentProfile[];
   hasProfile: boolean;
   isAdmin: boolean;
+  syncStatus: SupabaseSyncStatus;
+  syncStatusLabel: string;
   questionBank: VerifiedQuestion[];
   questionReports: QuestionReport[];
   reportQuestion: (questionId: string, category: QuestionReportCategory, note: string) => { ok: boolean; message: string };
@@ -186,7 +199,9 @@ type GameContextValue = {
   level: number;
   levelProgress: number;
   weeklyOpenCount: number;
-  createProfile: (name: string, avatar: AvatarId, username: string, password: string) => Promise<{ ok: boolean; message: string }>;
+  createProfile: (name: string, avatar: AvatarId, username: string, password: string, gradeLevel: GradeLevel) => Promise<{ ok: boolean; message: string }>;
+  continueWithGoogleIdentity: (subject: string, displayName: string) => { ok: boolean; message: string; created: boolean };
+  completeAvatarOnboarding: (avatar: AvatarId) => void;
   signIn: (profileId: string, password: string) => Promise<{ ok: boolean; message: string }>;
   setLegacyProfilePassword: (profileId: string, username: string, password: string) => Promise<{ ok: boolean; message: string }>;
   selectProfile: (profileId: string) => void;
@@ -250,10 +265,10 @@ type GameContextValue = {
 const STORAGE_KEY = "math4fun-field-journal-v3";
 const emptyBattle = (): BattleState => ({ mode: "atlas", status: "idle", questionIds: [], questionIndex: 0, playerHp: 100, bossHp: 150 });
 const emptyMetrics = (): LearningMetrics => ({ totalAnswers: 0, correctAnswers: 0, stationSessions: 0, bossRuns: 0, bossWins: 0 });
-const emptyInventory = (): Record<ShopItem["id"], number> => ({ "potion-25": 0, "potion-50": 0, "potion-100": 0, "outfit-indigo": 0, "outfit-marigold": 0, "outfit-moss": 0, "trail-stars": 0, "trail-leaves": 0 });
+const emptyInventory = (): Record<ShopItem["id"], number> => Object.fromEntries(SHOP_ITEMS.map((item) => [item.id, 0])) as Record<ShopItem["id"], number>;
 const GUARDIAN_MAX_HP = 100;
 const GUARDIAN_HP_PER_HOUR = 20;
-const DEFAULT_STORE: GameStore = { version: 14, profiles: [], activeProfileId: null, audioEnabled: true, ambientEnabled: true, siteVisitCount: 0, questionOverrides: {} };
+const DEFAULT_STORE: GameStore = { version: 15, profiles: [], activeProfileId: null, audioEnabled: true, ambientEnabled: true, siteVisitCount: 0, questionOverrides: {} };
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 function localDate() { return new Date().toISOString().slice(0, 10); }
@@ -312,7 +327,7 @@ function writeSessionCookie(profileId: string | null) {
   document.cookie = `${ACTIVE_SESSION_COOKIE}=${encodeURIComponent(profileId)}; Max-Age=${60 * 60 * 24 * 30}; Path=/; SameSite=Lax`;
 }
 function buildAdminProfile(): StudentProfile {
-  const record = createProfileRecord("Quản trị viên", "compass", { username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH });
+  const record = createProfileRecord("Quản trị viên", "compass", { username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH, gradeLevel: 4, onboardingCompleted: true });
   return {
     ...record,
     id: ADMIN_PROFILE_ID,
@@ -363,12 +378,14 @@ function shuffle<T>(source: T[]) {
   }
   return result;
 }
-function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<StudentProfile, "username" | "passwordSalt" | "passwordHash">): StudentProfile {
+function createProfileRecord(name: string, avatar: AvatarId, account?: Pick<StudentProfile, "username" | "passwordSalt" | "passwordHash" | "gradeLevel" | "authProvider" | "authSubject" | "onboardingCompleted">): StudentProfile {
   return {
     id: `student-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     name: name.trim().slice(0, 22),
     avatar,
     ...account,
+    gradeLevel: account?.gradeLevel ?? 4,
+    onboardingCompleted: account?.onboardingCompleted ?? false,
     createdAt: new Date().toISOString(),
     xp: 0,
     streak: 0,
@@ -423,6 +440,11 @@ function hydrateProfile(candidate: Partial<StudentProfile>, forcedId?: string): 
     username: typeof candidate.username === "string" && normalizeUsername(candidate.username).length >= 3 ? normalizeUsername(candidate.username).slice(0, 18) : undefined,
     passwordSalt: typeof candidate.passwordSalt === "string" && candidate.passwordSalt.length >= 16 ? candidate.passwordSalt : undefined,
     passwordHash: typeof candidate.passwordHash === "string" && candidate.passwordHash.length >= 32 ? candidate.passwordHash : undefined,
+    gradeLevel: candidate.gradeLevel === 4 || candidate.gradeLevel === 5 || candidate.gradeLevel === 6 ? candidate.gradeLevel : 4,
+    authProvider: candidate.authProvider === "google" ? "google" : undefined,
+    authSubject: typeof candidate.authSubject === "string" && candidate.authSubject.length >= 8 ? candidate.authSubject : undefined,
+    // Hồ sơ phát hành trước onboarding được coi là đã hoàn tất để không ngắt hành trình đang chơi.
+    onboardingCompleted: typeof candidate.onboardingCompleted === "boolean" ? candidate.onboardingCompleted : true,
     createdAt: typeof candidate.createdAt === "string" ? candidate.createdAt : base.createdAt,
     xp: typeof candidate.xp === "number" && Number.isFinite(candidate.xp) ? Math.max(0, candidate.xp) : 0,
     streak: typeof candidate.streak === "number" && Number.isFinite(candidate.streak) ? Math.max(0, candidate.streak) : 0,
@@ -479,7 +501,7 @@ function readStore(): GameStore {
     const profiles = hydratedProfiles.some((candidate) => candidate.id === ADMIN_PROFILE_ID) ? hydratedProfiles.map((candidate) => candidate.id === ADMIN_PROFILE_ID ? { ...buildAdminProfile(), ...candidate, role: "admin" as const, username: "admin", passwordSalt: ADMIN_SALT, passwordHash: ADMIN_PASSWORD_HASH } : candidate) : [...hydratedProfiles, buildAdminProfile()];
     const requestedActiveProfileId = readSessionCookie() ?? (typeof parsed.activeProfileId === "string" ? parsed.activeProfileId : null);
     return {
-      version: 14,
+      version: 15,
       activeProfileId: profiles.some((candidate) => candidate.id === requestedActiveProfileId) ? requestedActiveProfileId : null,
       audioEnabled: typeof parsed.audioEnabled === "boolean" ? parsed.audioEnabled : true,
       ambientEnabled: typeof parsed.ambientEnabled === "boolean" ? parsed.ambientEnabled : true,
@@ -496,7 +518,13 @@ function readStore(): GameStore {
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
   const [store, setStore] = useState<GameStore>(readStore);
+  const [cloudLeaderboard, setCloudLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [syncStatus, setSyncStatus] = useState<SupabaseSyncStatus>(() => !isSupabaseSyncEnabled ? "disabled" : (typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "syncing"));
+  const [syncRetry, setSyncRetry] = useState(0);
   const parentPinRef = useRef<ParentPinRecord | undefined>(store.parentPin);
+  const syncOwnerRef = useRef<string | null>(null);
+  const lastSyncedProfileRef = useRef<Record<string, string>>({});
+  const observedGoldRef = useRef<{ profileId: string; gold: number } | null>(null);
   useEffect(() => { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }, [store]);
   useEffect(() => { writeSessionCookie(store.activeProfileId); }, [store.activeProfileId]);
   useEffect(() => { parentPinRef.current = store.parentPin; }, [store.parentPin]);
@@ -504,24 +532,134 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const profile = useMemo(() => store.profiles.find((entry) => entry.id === store.activeProfileId) ?? null, [store]);
   const isAdmin = profile?.role === "admin" && profile.id === ADMIN_PROFILE_ID;
+  useEffect(() => {
+    if (!profile) { observedGoldRef.current = null; return; }
+    const observed = observedGoldRef.current;
+    if (!observed || observed.profileId !== profile.id) {
+      observedGoldRef.current = { profileId: profile.id, gold: profile.gold };
+      return;
+    }
+    if (profile.gold > observed.gold) playGoldGainSound(store.audioEnabled);
+    observedGoldRef.current = { profileId: profile.id, gold: profile.gold };
+  }, [profile?.id, profile?.gold, store.audioEnabled]);
+  const markSyncFailure = useCallback(() => setSyncStatus(typeof navigator !== "undefined" && !navigator.onLine ? "offline" : "error"), []);
+  const syncStatusLabel = useMemo(() => {
+    if (syncStatus === "synced") return "Đã đồng bộ Supabase";
+    if (syncStatus === "syncing") return "Đang đồng bộ Supabase";
+    if (syncStatus === "offline") return "Ngoại tuyến · tiến độ vẫn lưu trên thiết bị";
+    if (syncStatus === "error") return "Chưa thể đồng bộ · tiến độ vẫn lưu trên thiết bị";
+    return "Đồng bộ Supabase đang tắt";
+  }, [syncStatus]);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) { setSyncStatus("disabled"); return; }
+    const handleOnline = () => { setSyncStatus("syncing"); setSyncRetry((value) => value + 1); };
+    const handleOffline = () => setSyncStatus("offline");
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => { window.removeEventListener("online", handleOnline); window.removeEventListener("offline", handleOffline); };
+  }, []);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    let disposed = false;
+    const startSync = async () => {
+      if (typeof navigator !== "undefined" && !navigator.onLine) { setSyncStatus("offline"); return; }
+      setSyncStatus("syncing");
+      const ownerId = await getSupabaseOwnerId();
+      if (disposed) return;
+      if (!ownerId) { markSyncFailure(); return; }
+      syncOwnerRef.current = ownerId;
+      const profilesToSync = store.profiles.filter((entry) => entry.role !== "admin");
+      const writes = await Promise.all(profilesToSync.map(async (entry) => {
+        const result = await syncProfileToSupabase(entry, ownerId);
+        if (result.ok) lastSyncedProfileRef.current[entry.id] = JSON.stringify(entry);
+        return result;
+      }));
+      const remote = await fetchSupabaseLeaderboardResult();
+      if (disposed) return;
+      if (remote.ok) setCloudLeaderboard(remote.entries);
+      if (writes.every((result) => result.ok) && remote.ok) setSyncStatus("synced");
+      else markSyncFailure();
+    };
+    void startSync();
+    return () => { disposed = true; };
+  }, [markSyncFailure, syncRetry]);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    let disposed = false;
+    const refresh = async () => {
+      if (typeof navigator !== "undefined" && !navigator.onLine) { if (!disposed) setSyncStatus("offline"); return; }
+      const remote = await fetchSupabaseLeaderboardResult();
+      if (disposed) return;
+      if (remote.ok) { setCloudLeaderboard(remote.entries); setSyncStatus("synced"); }
+      else markSyncFailure();
+    };
+    void refresh();
+    const refreshId = window.setInterval(() => { void refresh(); }, 60_000);
+    return () => { disposed = true; window.clearInterval(refreshId); };
+  }, [markSyncFailure]);
+  useEffect(() => {
+    if (!isSupabaseSyncEnabled) return;
+    const ownerId = syncOwnerRef.current;
+    if (!ownerId) return;
+    const pendingProfiles = store.profiles
+      .filter((entry) => entry.role !== "admin")
+      .map((entry) => ({ profile: entry, snapshot: JSON.stringify(entry) }))
+      .filter(({ profile: entry, snapshot }) => lastSyncedProfileRef.current[entry.id] !== snapshot);
+    if (!pendingProfiles.length) return;
+    const syncId = window.setTimeout(() => {
+      if (typeof navigator !== "undefined" && !navigator.onLine) { setSyncStatus("offline"); return; }
+      setSyncStatus("syncing");
+      void Promise.all(pendingProfiles.map(async ({ profile: entry, snapshot }) => {
+        const result = await syncProfileToSupabase(entry, ownerId);
+        if (result.ok) lastSyncedProfileRef.current[entry.id] = snapshot;
+        return result;
+      })).then(async (writes) => {
+        const remote = await fetchSupabaseLeaderboardResult();
+        if (remote.ok) setCloudLeaderboard(remote.entries);
+        if (writes.every((result) => result.ok) && remote.ok) setSyncStatus("synced");
+        else markSyncFailure();
+      });
+    }, 900);
+    return () => window.clearTimeout(syncId);
+  }, [markSyncFailure, store.profiles]);
   const questionBank = useMemo(() => Object.values(QUESTIONS_BY_ID).sort((left, right) => left.stationId - right.stationId || left.id.localeCompare(right.id)), [store.questionOverrides]);
   const updateProfile = useCallback((profileId: string, updater: (entry: StudentProfile) => StudentProfile) => {
     setStore((previous) => ({ ...previous, profiles: previous.profiles.map((entry) => entry.id === profileId ? updater(entry) : entry) }));
   }, []);
-  const createProfile = useCallback(async (name: string, avatar: AvatarId, username: string, password: string) => {
+  const createProfile = useCallback(async (name: string, avatar: AvatarId, username: string, password: string, gradeLevel: GradeLevel) => {
     const accountName = normalizeUsername(username);
     if (name.trim().length < 2) return { ok: false, message: "Hãy nhập tên hiển thị gồm ít nhất 2 ký tự." };
     if (accountName.length < 3 || accountName.length > 18) return { ok: false, message: "Tên đăng nhập cần từ 3–18 ký tự, không có khoảng trắng." };
     if (!isStudentPassword(password)) return { ok: false, message: "Mật khẩu cần từ 6–64 ký tự." };
+    if (gradeLevel !== 4) return { ok: false, message: "Math4Fun hiện đang mở hành trình dành cho lớp 4." };
     if (typeof window === "undefined" || !window.crypto?.subtle) return { ok: false, message: "Trình duyệt này chưa hỗ trợ tạo mật khẩu an toàn." };
     if (store.profiles.some((entry) => entry.username === accountName)) return { ok: false, message: "Tên đăng nhập này đã có trên thiết bị." };
     const passwordSalt = createParentPinSalt();
     const passwordHash = await hashParentPin(password, passwordSalt);
     if (!passwordHash) return { ok: false, message: "Không thể lưu mật khẩu trên trình duyệt này." };
-    const record = createProfileRecord(name || "Nhà thám hiểm", avatar, { username: accountName, passwordSalt, passwordHash });
+    const record = createProfileRecord(name || "Nhà thám hiểm", avatar, { username: accountName, passwordSalt, passwordHash, gradeLevel, onboardingCompleted: false });
     setStore((previous) => ({ ...previous, profiles: [...previous.profiles, record], activeProfileId: record.id }));
     return { ok: true, message: "Đã tạo nhật ký và đăng nhập trên thiết bị này." };
   }, [store.profiles]);
+  const continueWithGoogleIdentity = useCallback((subject: string, displayName: string) => {
+    const normalizedSubject = subject.trim();
+    if (normalizedSubject.length < 8) return { ok: false, message: "Không nhận được danh tính Google hợp lệ.", created: false };
+    const existing = store.profiles.find((entry) => entry.authProvider === "google" && entry.authSubject === normalizedSubject);
+    if (existing) {
+      setStore((previous) => ({ ...previous, activeProfileId: existing.id }));
+      return { ok: true, message: `Chào mừng ${existing.name} quay lại hành trình.`, created: false };
+    }
+    const usernameBase = `g-${normalizedSubject.slice(0, 12).toLocaleLowerCase("vi-VN")}`;
+    const usernames = new Set(store.profiles.map((entry) => entry.username).filter((entry): entry is string => Boolean(entry)));
+    const username = usernames.has(usernameBase) ? `${usernameBase.slice(0, 14)}-${Math.random().toString(36).slice(2, 5)}` : usernameBase;
+    const record = createProfileRecord(displayName.trim() || "Nhà thám hiểm", "onb01", { username, gradeLevel: 4, authProvider: "google", authSubject: normalizedSubject, onboardingCompleted: false });
+    setStore((previous) => ({ ...previous, profiles: [...previous.profiles, record], activeProfileId: record.id }));
+    return { ok: true, message: "Đã mở một nhật ký mới bằng tài khoản Google.", created: true };
+  }, [store.profiles]);
+  const completeAvatarOnboarding = useCallback((avatar: AvatarId) => {
+    if (!profile || profile.role === "admin" || !AVATAR_IDS.includes(avatar)) return;
+    updateProfile(profile.id, (current) => ({ ...current, avatar, onboardingCompleted: true }));
+  }, [profile, updateProfile]);
   const setLegacyProfilePassword = useCallback(async (profileId: string, username: string, password: string) => {
     const accountName = normalizeUsername(username);
     const existing = store.profiles.find((entry) => entry.id === profileId);
@@ -1074,17 +1212,19 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (profile.streak >= 14) badges.push("streak-14");
     return badges;
   }, [profile]);
-  const leaderboard = useMemo<LeaderboardEntry[]>(() => store.profiles.map((entry) => {
-    const elementCount = ELEMENT_ORDER.filter((element) => (entry.elementXp[element] ?? 0) >= ELEMENT_XP_PER_LEVEL * 2).length;
-    const streakBadgeCount = entry.streak >= 14 ? 2 : entry.streak >= 7 ? 1 : 0;
-    const score = entry.xp + entry.completedStationIds.length * 250 + entry.collectedGuardianIds.length * 175 + elementCount * 300 + streakBadgeCount * 200;
-    return { profileId: entry.id, name: entry.name, avatar: entry.avatar, score, level: Math.floor(entry.xp / 250) + 1, badges: elementCount + streakBadgeCount, guardians: entry.collectedGuardianIds.length, stations: entry.completedStationIds.length, streak: entry.streak };
-  }).sort((left, right) => right.score - left.score || right.level - left.level || left.name.localeCompare(right.name, "vi")), [store.profiles]);
+  const leaderboard = useMemo<LeaderboardEntry[]>(() => {
+    const localEntries = store.profiles.map(toLeaderboardEntry);
+    const localIds = new Set(localEntries.map((entry) => entry.profileId));
+    return [...localEntries, ...cloudLeaderboard.filter((entry) => !localIds.has(entry.profileId))]
+      .sort((left, right) => right.score - left.score || right.level - left.level || left.name.localeCompare(right.name, "vi"));
+  }, [cloudLeaderboard, store.profiles]);
   const value = useMemo<GameContextValue>(() => ({
     profile,
     profiles: store.profiles,
     hasProfile: Boolean(profile),
     isAdmin,
+    syncStatus,
+    syncStatusLabel,
     questionBank,
     questionReports,
     reportQuestion,
@@ -1105,6 +1245,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     levelProgress,
     weeklyOpenCount,
     createProfile,
+    continueWithGoogleIdentity,
+    completeAvatarOnboarding,
     signIn,
     setLegacyProfilePassword,
     selectProfile,
@@ -1162,7 +1304,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     requestStudyNotifications,
     setAudioEnabled,
     resetActiveProfile,
-  }), [profile, store.profiles, store.audioEnabled, store.ambientEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unreadReportReplies, markReportReplyRead, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, setAmbientEnabled, resetActiveProfile]);
+  }), [profile, store.profiles, store.audioEnabled, store.ambientEnabled, store.siteVisitCount, store.lastSiteVisitAt, level, levelProgress, weeklyOpenCount, isAdmin, syncStatus, syncStatusLabel, questionBank, questionReports, reportQuestion, updateQuestionReportStatus, respondToQuestionReport, unreadReportReplies, markReportReplyRead, unlockQuestionHint, saveQuestionOverride, resetQuestionOverride, adminUnlockAll, createProfile, signIn, setLegacyProfilePassword, selectProfile, leaderboard, learningBadges, unlockStationForWeek, isStationUnlocked, isStationMastered, stationProgress, getStationAttempt, startStationSession, answerStationQuestion, isBossUnlocked, startBattle, isMapUnlocked, isMap1BossUnlocked, isMap2BossUnlocked, startMap1BossBattle, startMap2BossBattle, canTrainPets, startTrainingBattle, guardianTrainingLevel, getGuardianTrainingHistory, getGuardianTrainingXpTimeline, resolveBattleAnswer, advanceBattle, markMagicVideoWatched, magicBookWatchedCount, hasMagicBookAchievement, mostUsedMagicElement, elementLevel, weeklyMagicQuest, studyReminder, createProfileBackup, hasParentPin, parentSecurityQuestion, setParentPin, changeParentPin, resetParentPin, restoreProfileBackup, toggleTeamGuardian, exitGame, elementBadges, guardianHp, purchaseItem, useHealingItem, equipCosmetic, setStudyDays, requestStudyNotifications, setAudioEnabled, setAmbientEnabled, resetActiveProfile]);
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 

@@ -108,6 +108,9 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Artifact chính của mỗi trang phụ phải khác vai trò: So sánh là phiếu đối chiếu hai nhật ký, Lịch học là tuyến bảy ngày, Shop là sổ tiếp tế và Xếp hạng là thiết bị ghi bằng chứng; không lặp một tấm panel viền indigo trống.
 - Bản đồ tuyệt đối không được trở thành danh sách trạm dọc: các mốc phải ghim trên route chỉ khâu lệch trục, có hướng di chuyển nhìn thấy và một mốc kế tiếp được nhấn bằng Marigold Compass.
 - Trang chủ là một trang sổ đang mở, luôn phải cho thấy một đoạn lộ trình hoặc bản nháp hành trình bên dưới lời dẫn; không để hero card trôi trên nền giấy trống.
+- Hero fantasy phải là **field plate được dán vào một trang sổ thám hiểm**, không phải splash screen toàn màn hình: viền giấy không đều, ghi chú ghim, nhãn khảo sát, route draft và lớp vật liệu giấy luôn xuất hiện trước cảnh đêm.
+- Bản đồ là địa hình có đường chỉ khâu làm trục chính; các trạm thay đổi kích thước, vị trí và nhịp ghim theo tuyến, một điểm Marigold Compass duy nhất chỉ mốc kế tiếp.
+- Chọn companion là một **specimen trail**: mẫu đang chọn xuất hiện như bằng chứng số 01 ở quy mô lớn; các mẫu còn lại có nhịp kích thước và góc ghim khác nhau, không tạo catalog thẻ đồng hạng.
 - Side navigation duy trì vai trò chỉ mục phụ; từng trang phải có một artifact trung tâm lớn hơn, giàu tính tường thuật hơn và dễ nhớ hơn điều hướng.
 - Guardian trước hết là mẫu vật Math4Fun: tem mực, taxonomy, trạng thái niêm phong và bằng chứng tiến độ phải bao quanh portrait để định nghĩa asset.
 - Các mốc Map là nhãn field-guide ghim lệch trục trên đường chỉ khâu: không dùng hàng card toàn chiều ngang; Marigold chỉ đánh dấu rõ một điểm đến kế tiếp.
@@ -127,3 +130,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Route/evidence trail trên các trang phụ ưu tiên cấu trúc ghim lệch, note và dấu chuyển hóa; không biến thành thanh onboarding ngang đều đặn.
 - Chọn companion là một tuyến tiêu bản ghim dọc route thread, có các thẻ lệch nhịp và một bằng chứng đang chọn lớn hơn rõ rệt; không để 20 lựa chọn có cùng trọng số như một catalog.
 - Ảnh avatar phải được đặt trên xử lý giấy/taxonomy trung tính; không dùng các trường nền tím hoặc hồng bão hòa làm nền thẻ mặc định.
+- Hero là một trang sổ/artefact thám hiểm vật lý: các dải Indigo chỉ xuất hiện cùng nhãn giấy, route fragment, stamp hoặc bằng chứng mở tuyến.
+- Chọn companion luôn ưu tiên tiêu bản đang chọn như bằng chứng số 01; các lựa chọn còn lại là specimen ghim lệch theo tuyến, không phải catalog đồng trọng số.
+- Xếp hạng là **field score log**: thứ hạng, điểm, guardian, huy hiệu và tiến độ phải nằm trong cùng một bản ghi hành trình có trail/stamp, không được đọc như bảng dữ liệu tab chung chung.
