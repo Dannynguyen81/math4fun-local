@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import GameLayout from "./components/GameLayout";
 import { GameProvider } from "./contexts/GameContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import "./game/guardianBranding";
 import BossPage from "./pages/BossPage";
 import TrainingPage from "./pages/TrainingPage";
 import CollectionPage from "./pages/CollectionPage";
