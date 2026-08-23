@@ -28,33 +28,32 @@ const brand = (
 ): GuardianBrand => ({ name, species, affinity, description, spells, artwork });
 
 /**
- * The current gameplay IDs came from the local-gameplay integration. Artwork
- * filenames intentionally keep the earlier Guardian asset IDs so save IDs never
- * need to change just because art/branding changed.
+ * Current gameplay/save IDs remain stable. Artwork IDs are a separate visual
+ * namespace so every topic can own one unique Guardian without migrating saves.
  */
 export const GUARDIAN_BRANDING: Record<string, GuardianBrand> = {
-  cubix: brand("Homa", "Hỏa miêu tinh", "hỏa", "Linh sủng nhỏ bùng sáng khi người học tìm đúng nhịp giải.", ["Hỏa Châu", "Hỏa Hoa", "Noãn Giáp", "Nhật Vũ"], "pipra"),
-  vane: brand("Rilu", "Thủy mao linh", "thủy", "Linh sủng nước vui tính, gom những giọt sáng thành dòng chữa lành.", ["Thủy Châu", "Lam Triều", "Tịnh Lưu", "Ngân Hải"], "mimo"),
-  scalera: brand("Kemi", "Kim giác thú", "kim", "Linh sủng kim loại chính xác, dùng giáp xoay để đổi hướng đòn phép.", ["Kim Quang", "Hoàn Giáp", "Phản Quang", "Thiên Kim Trận"], "voltix"),
-  voltaria: brand("Toru", "Thạch giáp linh", "thổ", "Linh sủng mai đá hiền lành, đứng vững để bảo vệ bạn đồng hành.", ["Thạch Tử", "Địa Thuẫn", "Trấn Bộ", "Sơn Thành"], "mossy"),
-  mossar: brand("Veli", "Diệp hồ linh", "mộc", "Linh sủng lá non nhạy bén, làm nở mầm khi chuỗi học tập được giữ vững.", ["Diệp Phi", "Mầm Hoa", "Sinh Khí", "Vạn Mộc"], "coru"),
-  coris: brand("Sylu", "Vân diệp thú", "mộc", "Linh sủng nhẹ như lá, dẫn luồng sinh khí để khóa nhịp đối thủ.", ["Diệp Tiễn", "Lục Hoàn", "Mộc Phược", "Thanh Lâm"], "aeris"),
-  aerion: brand("Brum", "Nham cầu thú", "thổ", "Linh sủng tròn chắc, càng bình tĩnh càng tạo được lớp địa giáp dày.", ["Nham Châu", "Trọng Giáp", "Địa Neo", "Đại Địa Tâm"], "brix"),
-  brio: brand("Sori", "Dương hỏa thú", "hỏa", "Linh sủng ánh dương ấm áp, chuyển nhiệt thành những vòng sáng dễ đọc.", ["Hỏa Tinh", "Dương Hoàn", "Ấm Quang", "Nhật Thăng"], "luma"),
-  lumen: brand("Aomi", "Lam vây linh", "thủy", "Linh sủng thủy sinh linh hoạt, dùng vây như dải lụa để đổi hướng dòng phép.", ["Lam Châu", "Thủy Vũ", "Sương Màn", "Hải Hoàn"], "nori"),
-  noris: brand("Livi", "Hoa lộc linh", "mộc", "Linh sủng hươu lá thân thiện, nụ hoa trên sừng nở theo tiến bộ học tập.", ["Mầm Sáng", "Hoa Giác", "Lộc Tức", "Xuân Lâm"], "pavo"),
-  pavor: brand("Karo", "Liệt vĩ linh", "hỏa", "Linh sủng nhanh và gan dạ, chiếc đuôi hỏa vũ là dấu hiệu không thể nhầm lẫn.", ["Viêm Tử", "Vĩ Hỏa", "Hỏa Bộ", "Liệt Nhật"], "soli"),
-  solaris: brand("Zeni", "Ngân giáp linh", "kim", "Linh sủng kim quang nhỏ gọn, nổi bật bởi giáp sáng và vòng từ lực.", ["Ngân Tinh", "Từ Hoàn", "Kim Thuẫn", "Tinh Kim"], "dexo"),
-  dexia: brand("Aroa", "Thủy long miêu", "thủy", "Linh sủng nửa mèo nửa thủy linh, uốn đuôi tạo vòng nước mềm.", ["Thủy Tinh", "Vĩ Triều", "Thanh Tẩy", "Nguyệt Hải"], "maru"),
-  marion: brand("Yori", "Mộc miêu hoa", "mộc", "Linh sủng rừng nhanh nhẹn, lao qua đối thủ bằng dải lá sáng.", ["Lá Sao", "Hoa Xoáy", "Lục Bộ", "Bích Lâm"], "sena"),
-  senia: brand("Moru", "Tinh thạch thú", "thổ", "Linh sủng đất mang tinh thể, dựng các mốc đá để điều tiết nhịp trận.", ["Thổ Tinh", "Thạch Trụ", "Trầm Trọng", "Địa Mạch"], "kora"),
+  cubix: brand("Homa", "Hỏa kỳ lân", "hỏa", "Kỳ lân lửa lanh lợi, bùng sáng khi người học tìm đúng nhịp giải.", ["Hỏa Châu", "Hỏa Hoa", "Noãn Giáp", "Nhật Vũ"], "pipra"),
+  vane: brand("Rilu", "Thủy long rái cá", "thủy", "Linh thú nước vui tính, dùng đuôi sóng để giữ nhịp và chữa lành.", ["Thủy Châu", "Lam Triều", "Tịnh Lưu", "Ngân Hải"], "mimo"),
+  scalera: brand("Kemi", "Kim sư tinh", "kim", "Sư tử kim quang chính xác, dùng giáp xoay để đổi hướng đòn phép.", ["Kim Quang", "Hoàn Giáp", "Phản Quang", "Thiên Kim Trận"], "voltix"),
+  voltaria: brand("Toru", "Tinh quy thạch", "thổ", "Linh quy mang tinh thể, đứng vững để bảo vệ bạn đồng hành.", ["Thạch Tử", "Địa Thuẫn", "Trấn Bộ", "Sơn Thành"], "mossy"),
+  mossar: brand("Veli", "Diệp linh giác", "mộc", "Linh thú lá non có sừng nhánh, làm nở mầm khi chuỗi học tập được giữ vững.", ["Diệp Phi", "Mầm Hoa", "Sinh Khí", "Vạn Mộc"], "coru"),
+  coris: brand("Sylu", "Hoa lộc linh", "mộc", "Linh hươu hoa nhẹ bước, dẫn sinh khí để khóa nhịp đối thủ.", ["Diệp Tiễn", "Lục Hoàn", "Mộc Phược", "Thanh Lâm"], "aeris"),
+  aerion: brand("Brum", "Địa thần nham", "thổ", "Linh thú đá tròn chắc, càng bình tĩnh càng tạo được lớp địa giáp dày.", ["Nham Châu", "Trọng Giáp", "Địa Neo", "Đại Địa Tâm"], "brix"),
+  brio: brand("Sori", "Liệt hồ", "hỏa", "Hồ ly hỏa dực ấm áp, chuyển nhiệt thành những vòng sáng dễ đọc.", ["Hỏa Tinh", "Dương Hoàn", "Ấm Quang", "Nhật Thăng"], "luma"),
+  lumen: brand("Aomi", "Thủy miêu lưu quang", "thủy", "Linh miêu thủy sinh linh hoạt, dùng đuôi nước để đổi hướng dòng phép.", ["Lam Châu", "Thủy Vũ", "Sương Màn", "Hải Hoàn"], "nori"),
+  noris: brand("Livi", "Diệp miêu linh", "mộc", "Linh miêu lá thân thiện, đôi cánh lá mở rộng theo tiến bộ học tập.", ["Mầm Sáng", "Hoa Giác", "Lộc Tức", "Xuân Lâm"], "pavo"),
+  pavor: brand("Karo", "Hỏa long ấu", "hỏa", "Rồng lửa nhỏ nhanh và gan dạ, chiếc đuôi hỏa vũ là dấu hiệu không thể nhầm lẫn.", ["Viêm Tử", "Vĩ Hỏa", "Hỏa Bộ", "Liệt Nhật"], "soli"),
+  solaris: brand("Zeni", "Kim dực miêu", "kim", "Linh miêu có cánh kim quang, nổi bật bởi giáp sáng và phản xạ chính xác.", ["Ngân Tinh", "Từ Hoàn", "Kim Thuẫn", "Tinh Kim"], "dexo"),
+  dexia: brand("Aroa", "Hải quy linh", "thủy", "Linh quy biển cân bằng, dựng vòm nước để chia đều lực và nhịp trận.", ["Thủy Tinh", "Vĩ Triều", "Thanh Tẩy", "Nguyệt Hải"], "maru"),
+  marion: brand("Yori", "Mộc lửng linh", "mộc", "Linh lửng rừng nhanh nhẹn, lao qua đối thủ bằng dải lá sáng.", ["Lá Sao", "Hoa Xoáy", "Lục Bộ", "Bích Lâm"], "sena"),
+  senia: brand("Moru", "Thổ huyền thú", "thổ", "Linh thú đá tối mang tinh thể, dựng các mốc địa lực để điều tiết nhịp trận.", ["Thổ Tinh", "Thạch Trụ", "Trầm Trọng", "Địa Mạch"], "kora"),
   koran: brand("Hổm", "Hỏa lân khúc", "hỏa", "Linh sủng phát triển từ bản vẽ gia đình: thân chữ S, bốn chân nhỏ, sừng nhánh và đuôi hoa lửa.", ["Hỏa Châu", "Hỏa Hoa", "Noãn Giáp", "Nhật Vĩ Vũ"], "vexa"),
-  vexan: brand("Orin", "Kim hoàn thú", "kim", "Linh sủng bảo hộ có các vòng kim loại nổi, ghép chúng thành khiên chính xác.", ["Kim Điểm", "Hoàn Trận", "Hộ Quang", "Thiên Hoàn"], "runo"),
-  runon: brand("Tilu", "Thủy cầu linh", "thủy", "Linh sủng nhỏ thích lăn trong bong bóng nước và hỗ trợ đồng đội.", ["Bọt Lam", "Cầu Triều", "Thủy Dưỡng", "Hải Cầu"], "tavi"),
-  tavira: brand("Kintar", "Kim lân thú", "kim", "Linh sủng giáp sáng mạnh mẽ nhưng thân thiện, tập trung lực qua tinh thể trán.", ["Kim Xạ", "Tinh Kích", "Bạch Giáp", "Kim Nhật"], "oryx"),
-  nexia: brand("Fenu", "Mầm vân linh", "mộc", "Linh sủng mầm cây hoạt bát, tạo dấu vân lá để tăng nhịp học và chiến đấu.", ["Mầm Quang", "Vân Diệp", "Sinh Mạch", "Mộc Tinh Vũ"], "nexa"),
+  vexan: brand("Orin", "Kim cú tinh", "kim", "Cú kim loại bảo hộ, dùng đôi cánh tinh thể để ghép khiên chính xác.", ["Kim Điểm", "Hoàn Trận", "Hộ Quang", "Thiên Hoàn"], "runo"),
+  runon: brand("Tilu", "Thủy long vũ", "thủy", "Thủy long nhỏ uốn thân theo dòng nước và hỗ trợ đồng đội bằng nhịp sóng mềm.", ["Bọt Lam", "Cầu Triều", "Thủy Dưỡng", "Hải Cầu"], "tavi"),
+  tavira: brand("Kintar", "Kim lộc tinh", "kim", "Linh hươu giáp sáng mạnh mẽ nhưng thân thiện, tập trung lực qua tinh thể trán.", ["Kim Xạ", "Tinh Kích", "Bạch Giáp", "Kim Nhật"], "oryx"),
+  nexia: brand("Fenu", "Mộc long non", "mộc", "Linh long mầm cây hoạt bát, tạo dấu vân lá để tăng nhịp học và chiến đấu.", ["Mầm Quang", "Vân Diệp", "Sinh Mạch", "Mộc Tinh Vũ"], "nexa"),
   "atlas-prime": brand("Rokan", "Sơn giáp vương", "thổ", "Thủ hộ Map 1: linh thú địa tầng lớn, kiên định và thiên về phòng thủ chiến thuật.", ["Nham Tinh", "Sơn Môn", "Địa Trấn", "Vạn Sơn"], "atlas"),
-  myrion: brand("Astra", "Thiên kim linh", "kim", "Thủ hộ Map 2: linh thú kim quang điều khiển các mảnh tinh thể theo quỹ đạo.", ["Tinh Phi", "Quỹ Hoàn", "Phản Kính", "Thiên Tinh Trận"], "myrion"),
+  myrion: brand("Astra", "Thiên kim kỳ lân", "kim", "Thủ hộ Map 2: kỳ lân kim quang điều khiển các mảnh tinh thể theo quỹ đạo.", ["Tinh Phi", "Quỹ Hoàn", "Phản Kính", "Thiên Tinh Trận"], "myrion"),
 };
 
 export const GUARDIAN_AFFINITY: Record<string, GuardianAffinity> = Object.fromEntries(
@@ -70,17 +69,17 @@ for (const guardian of GUARDIANS) {
   guardian.name = item.name;
   guardian.type = `${item.affinity.toUpperCase()} · ${item.species}`;
   guardian.description = item.description;
-  guardian.sprite = `/guardians/${item.artwork}.webp`;
+  guardian.sprite = `/guardians/${item.artwork}.svg`;
 }
 
 const map1 = GUARDIAN_BRANDING["atlas-prime"];
 MAP_BOSS_ARCHIVES[1].name = map1.name;
 MAP_BOSS_ARCHIVES[1].title = "Sơn Giáp Vương · Người Giữ Nhật Ký Mực Chàm";
 MAP_BOSS_ARCHIVES[1].note = map1.description;
-MAP_BOSS_ARCHIVES[1].sprite = `/guardians/${map1.artwork}.webp`;
+MAP_BOSS_ARCHIVES[1].sprite = `/guardians/${map1.artwork}.svg`;
 
 const map2 = GUARDIAN_BRANDING.myrion;
 MAP_BOSS_ARCHIVES[2].name = map2.name;
-MAP_BOSS_ARCHIVES[2].title = "Thiên Kim Linh · Người Gác La Bàn Vàng";
+MAP_BOSS_ARCHIVES[2].title = "Thiên Kim Kỳ Lân · Người Gác La Bàn Vàng";
 MAP_BOSS_ARCHIVES[2].note = map2.description;
-MAP_BOSS_ARCHIVES[2].sprite = `/guardians/${map2.artwork}.webp`;
+MAP_BOSS_ARCHIVES[2].sprite = `/guardians/${map2.artwork}.svg`;
