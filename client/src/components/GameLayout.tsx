@@ -7,7 +7,7 @@ import { useGame } from "@/contexts/GameContext";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-const AMBIENT_AUDIO = "/manus-storage/math4fun-field-journal-ambient_ab24706b.mp3";
+const AMBIENT_AUDIO = "/media/math4fun-field-journal-ambient.mp3";
 
 const navItems = [
   { href: "/", label: "Trang chủ", icon: Home },
