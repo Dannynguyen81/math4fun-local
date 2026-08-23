@@ -69,17 +69,17 @@ for (const guardian of GUARDIANS) {
   guardian.name = item.name;
   guardian.type = `${item.affinity.toUpperCase()} · ${item.species}`;
   guardian.description = item.description;
-  guardian.sprite = `/guardians/${item.artwork}.svg`;
+  guardian.sprite = `/guardians/${item.artwork}.webp`;
 }
 
 const map1 = GUARDIAN_BRANDING["atlas-prime"];
 MAP_BOSS_ARCHIVES[1].name = map1.name;
 MAP_BOSS_ARCHIVES[1].title = "Sơn Giáp Vương · Người Giữ Nhật Ký Mực Chàm";
 MAP_BOSS_ARCHIVES[1].note = map1.description;
-MAP_BOSS_ARCHIVES[1].sprite = `/guardians/${map1.artwork}.svg`;
+MAP_BOSS_ARCHIVES[1].sprite = `/guardians/${map1.artwork}.webp`;
 
 const map2 = GUARDIAN_BRANDING.myrion;
 MAP_BOSS_ARCHIVES[2].name = map2.name;
 MAP_BOSS_ARCHIVES[2].title = "Thiên Kim Kỳ Lân · Người Gác La Bàn Vàng";
 MAP_BOSS_ARCHIVES[2].note = map2.description;
-MAP_BOSS_ARCHIVES[2].sprite = `/guardians/${map2.artwork}.svg`;
+MAP_BOSS_ARCHIVES[2].sprite = `/guardians/${map2.artwork}.webp`;
