@@ -1,23 +1,27 @@
-/* Math4Fun Guardian art presentation.
- * Canonical Guardian assets are transparent/circular specimens. Keep the art
- * large enough to read on phones without letting tails, wings or horns escape.
- */
+/* Math4Fun Guardian art presentation. */
+.guardian-art-tile {
+  display: inline-block;
+  flex: 0 0 auto;
+  background-color: transparent !important;
+  background-image: url("/guardians/guardian-sprite.webp");
+  background-repeat: no-repeat;
+  background-size: 500% 500%;
+  background-position: var(--guardian-x, 0%) var(--guardian-y, 0%);
+}
+
 img[src*="/guardians/"] {
   background: transparent !important;
   object-fit: contain;
   clip-path: circle(49% at 50% 50%);
 }
 
-/* The sprite cells already include safe internal breathing room, so do not
- * shrink them a second time inside Map/Guardian seals. */
+.guardian-stamp .guardian-art-tile,
 .guardian-stamp img[src*="/guardians/"] {
   width: 100%;
   height: 100%;
   margin: auto;
 }
 
-/* Mobile first: route cards form a clean single column. The stitched zig-zag
- * returns only when there is enough horizontal room for it. */
 .route-mobile-card {
   margin-left: 0 !important;
   rotate: 0deg !important;
