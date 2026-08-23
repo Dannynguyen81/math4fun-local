@@ -1,0 +1,88 @@
+# Math4Fun Pet Spec Template
+
+id: ""
+name: ""
+species_name: ""
+element: "hoa | thuy | moc | kim | tho"
+role: "striker | guardian | support | control | balanced"
+body_archetype: ""
+animal_sources:
+  - ""
+  - ""
+mythical_motif: ""
+
+personality:
+  traits: ["", "", ""]
+  cute_habit: ""
+  signature_expression: ""
+  combat_attitude: ""
+  student_relationship_hook: ""
+
+preserved_traits: []
+
+signature_traits:
+  - ""
+  - ""
+
+visual:
+  silhouette: ""
+  proportions: ""
+  face: ""
+  body_surface: ""
+  elemental_anatomy: ""
+  movement_language: ""
+  primary_palette: ["", "", ""]
+  accent_palette: ["", ""]
+  material_notes: ""
+
+spells:
+  - id: ""
+    name: ""
+    tier: basic
+    element: ""
+    type: ""
+    visual: ""
+    gameplay_intent: ""
+    kid_readability: ""
+    animation_beats: ["", "", ""]
+  - id: ""
+    name: ""
+    tier: signature
+    element: ""
+    type: ""
+    visual: ""
+    gameplay_intent: ""
+    kid_readability: ""
+    animation_beats: ["", "", ""]
+  - id: ""
+    name: ""
+    tier: utility
+    element: ""
+    type: ""
+    visual: ""
+    gameplay_intent: ""
+    kid_readability: ""
+    animation_beats: ["", "", ""]
+  - id: ""
+    name: ""
+    tier: ultimate
+    element: ""
+    type: ""
+    visual: ""
+    gameplay_intent: ""
+    kid_readability: ""
+    animation_beats: ["", "", ""]
+
+image_outputs:
+  concept_sheet: true
+  portrait: true
+  battle_splash: false
+  transparent_game_asset: false
+
+quality_gates:
+  readability: null
+  appeal: null
+  elemental_clarity: null
+  originality: null
+  animation_readiness: null
+  production_readiness: null

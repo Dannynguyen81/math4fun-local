@@ -1,0 +1,77 @@
+id: "hoa-linh-01"
+name: "Hổm"
+species_name: "Hỏa Lân Khúc"
+element: "hoa"
+role: "striker"
+body_archetype: "serpentine"
+animal_sources:
+  - "salamander"
+  - "deer"
+  - "small lizard"
+mythical_motif: "ember-antler spirit"
+
+personality:
+  traits: ["nhiệt tình", "tò mò", "gan dạ"]
+  cute_habit: "cuộn đuôi thành vòng khi chờ học sinh trả lời"
+  signature_expression: "cười nhẹ và nghiêng đầu"
+  combat_attitude: "lao nhanh rồi lùi về bảo vệ bạn"
+  student_relationship_hook: "bờm sáng hơn khi học sinh giữ streak"
+
+preserved_traits:
+  - "thân dài cong chữ S"
+  - "bốn chân nhỏ"
+  - "sừng phân nhánh"
+  - "đuôi hình ngọn lửa"
+
+signature_traits:
+  - "bờm lửa xếp như cánh hoa"
+  - "vân sóng kép phát sáng khi cast phép"
+
+visual:
+  silhouette: "thân dài chữ S, đầu tròn, sừng mềm phân nhánh, đuôi bùng thành hoa lửa"
+  proportions: "đầu lớn vừa phải, thân dài, chân ngắn, mắt lớn nhưng không chibi quá mức"
+  face: "thân thiện, thông minh, má ửng nhẹ"
+  body_surface: "vảy mịn vàng hổ phách với vân cam đỏ"
+  elemental_anatomy: "bờm và đuôi là cấu trúc lửa sống"
+  movement_language: "uốn, bật, lướt thấp"
+  primary_palette: ["amber", "gold", "orange"]
+  accent_palette: ["coral red", "cream"]
+  material_notes: "soft glossy scales, translucent ember tips"
+
+spells:
+  - id: "ember-orb"
+    name: "Hỏa Châu"
+    tier: basic
+    element: "hoa"
+    type: "projectile"
+    visual: "quả cầu lửa nhỏ xoáy từ đầu đuôi"
+    gameplay_intent: "basic damage"
+    kid_readability: "một khối cầu sáng rõ"
+    animation_beats: ["đuôi sáng", "orb hình thành", "bay theo vòng cung"]
+  - id: "petal-flare"
+    name: "Hỏa Hoa"
+    tier: signature
+    element: "hoa"
+    type: "burst"
+    visual: "bờm bung thành vòng cánh lửa"
+    gameplay_intent: "area burst"
+    kid_readability: "vòng hoa lửa rõ, không che màn hình"
+    animation_beats: ["bờm dựng", "vòng cánh lửa mở", "spark tan"]
+  - id: "warm-guard"
+    name: "Noãn Giáp"
+    tier: utility
+    element: "hoa"
+    type: "shield"
+    visual: "màng lửa vàng mỏng bao quanh"
+    gameplay_intent: "temporary shield"
+    kid_readability: "vòng sáng vàng"
+    animation_beats: ["dậm chân", "vòng lửa lên", "shield ổn định"]
+  - id: "sun-tail-dance"
+    name: "Nhật Vĩ Vũ"
+    tier: ultimate
+    element: "hoa"
+    type: "ultimate"
+    visual: "đuôi tạo dải lửa hình vòng xoắn lớn"
+    gameplay_intent: "finisher"
+    kid_readability: "một đường xoắn chính, không particle clutter"
+    animation_beats: ["cuộn thân", "đuôi bùng sáng", "vòng lửa quét và tan"]

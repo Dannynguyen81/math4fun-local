@@ -13,6 +13,15 @@ Math4Fun là game học Toán lớp 4 dùng nội bộ, có tham chiếu Pokémo
 5. Với hoạt ảnh, chỉ animate `transform` và `opacity`; tôn trọng `prefers-reduced-motion`.
 6. Chạy `pnpm check && pnpm build` trước khi commit. Kèm ảnh kiểm tra nếu thay đổi bố cục lớn.
 
+## Guardian / Pet art direction
+
+- Trước khi tạo mới, chỉnh sửa hoặc thay thế bất kỳ Guardian/Pet nào, bắt buộc đọc `AI_SKILLS/math4fun-pet-designer/SKILL.md` và tuân theo skill này như chuẩn art direction chính thức.
+- Guardian/Pet mới phải có thiết kế nguyên bản; không mô phỏng hoặc tạo hình quá gần creature/nhân vật của game, phim hay thương hiệu khác.
+- Nếu dùng ảnh do người dùng/trẻ em tự vẽ làm creative seed, giữ các đặc trưng nhận diện cốt lõi nhưng phải nâng cấp theo visual language Math4Fun và ghi rõ `preserved_traits` trong pet spec.
+- Phép thuật phải gắn với hệ Ngũ hành và hình thái của pet, không chỉ thêm particle effect bên ngoài.
+- Khi tạo theo batch, phải kiểm tra diversity về silhouette, body archetype, tail/ear/horn language, movement và combat role.
+- Chỉ sửa dữ liệu/code Guardian khi yêu cầu công việc bao gồm tích hợp vào game; nếu chỉ được yêu cầu artwork/concept thì không thay đổi progression hoặc game logic.
+
 ## Quy ước Git
 
 - Làm việc trên nhánh `feat/`, `fix/`, `docs/` hoặc `chore/`; không push trực tiếp lên `main` khi có Agent khác cùng làm việc.
