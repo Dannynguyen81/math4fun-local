@@ -6,7 +6,7 @@
   "outputDirectory": "dist/public",
   "rewrites": [
     {
-      "source": "/((?!assets/|guardians/|manus-storage/|favicon\\.ico|robots\\.txt).*)",
+      "source": "/((?!assets/|guardians/|media/|favicon\\.ico|robots\\.txt).*)",
       "destination": "/index.html"
     }
   ]

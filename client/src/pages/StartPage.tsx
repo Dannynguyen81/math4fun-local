@@ -16,10 +16,10 @@ const avatars: AvatarCard[] = [
   ...girls.map((label, index) => { const id = `g${String(index + 1).padStart(2, "0")}` as AvatarId; return { id, label, note: notes[(index + 3) % notes.length], gender: "Nữ" as const, icon: iconSet[(index + 2) % iconSet.length], tint: tones[(index + 4) % tones.length], image: avatarImageById[id] }; }),
 ];
 const legacyAvatars: AvatarCard[] = [
-  { id: "compass", label: "Mây La Bàn", note: "ham khám phá", gender: "Nữ", icon: Compass, tint: "bg-[#fff0b6]", image: "/manus-storage/math4fun-avatar-compass_c1cebf77.png" },
-  { id: "ember", label: "Nhi Hỏa Tinh", note: "gan dạ thử thách", gender: "Nữ", icon: Sparkles, tint: "bg-[#ffe4dc]", image: "/manus-storage/math4fun-avatar-ember_095098ee.png" },
-  { id: "tide", label: "Lam Thủy Triều", note: "điềm tĩnh suy luận", gender: "Nữ", icon: Shell, tint: "bg-[#e4f3fb]", image: "/manus-storage/math4fun-avatar-tide_cc836336.png" },
-  { id: "leaf", label: "Mầm Rêu Non", note: "chăm chỉ từng bước", gender: "Nữ", icon: Leaf, tint: "bg-[#e7f2e5]", image: "/manus-storage/math4fun-avatar-leaf_b35efd62.png" },
+  { id: "compass", label: "Mây La Bàn", note: "ham khám phá", gender: "Nữ", icon: Compass, tint: "bg-[#fff0b6]", image: "/media/math4fun-avatar-compass.png" },
+  { id: "ember", label: "Nhi Hỏa Tinh", note: "gan dạ thử thách", gender: "Nữ", icon: Sparkles, tint: "bg-[#ffe4dc]", image: "/media/math4fun-avatar-ember.png" },
+  { id: "tide", label: "Lam Thủy Triều", note: "điềm tĩnh suy luận", gender: "Nữ", icon: Shell, tint: "bg-[#e4f3fb]", image: "/media/math4fun-avatar-tide.png" },
+  { id: "leaf", label: "Mầm Rêu Non", note: "chăm chỉ từng bước", gender: "Nữ", icon: Leaf, tint: "bg-[#e7f2e5]", image: "/media/math4fun-avatar-leaf.png" },
 ];
 const getAvatar = (id: AvatarId) => avatars.find((entry) => entry.id === id) ?? legacyAvatars.find((entry) => entry.id === id) ?? avatars[0];
 
