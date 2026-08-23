@@ -1,6 +1,6 @@
 /**
  * Field Journal Quest auth artifact: an ink-stamped parchment modal with one clear next step.
- * It keeps local credentials on-device while Google OAuth only establishes the Supabase identity.
+ * Student credentials stay local; the reserved admin account is verified by Supabase Auth + app_metadata.
  */
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { BookOpen, Chrome, Compass, KeyRound, LockKeyhole, Sparkles, UserRound, X } from "lucide-react";
@@ -12,6 +12,8 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 type AuthMode = "login" | "register";
 type AuthModalProps = { open: boolean; initialMode?: AuthMode; onOpenChange: (open: boolean) => void };
 
+const ADMIN_USERNAME = "admin";
+const ADMIN_AUTH_EMAIL = "admin@math4fun.local";
 function normalizeUsername(value: string) { return value.trim().toLocaleLowerCase("vi-VN").replace(/\s+/g, ""); }
 
 export function AuthModal({ open, initialMode = "login", onOpenChange }: AuthModalProps) {
@@ -55,6 +57,20 @@ export function AuthModal({ open, initialMode = "login", onOpenChange }: AuthMod
     if (error) { setBusy(false); setNotice("Google chưa được cấu hình hoàn chỉnh. Phụ huynh có thể dùng tên đăng nhập và mật khẩu trong lúc này."); }
   }
 
+  async function signInAdmin(passwordValue: string) {
+    if (!supabase) return { ok: false, message: "Supabase Auth chưa sẵn sàng nên không thể mở quyền quản trị." };
+    const adminProfile = profiles.find((entry) => entry.id === "math4fun-local-admin");
+    if (!adminProfile) return { ok: false, message: "Không tìm thấy hồ sơ quản trị cục bộ." };
+    const { data, error } = await supabase.auth.signInWithPassword({ email: ADMIN_AUTH_EMAIL, password: passwordValue });
+    if (error || !data.user) return { ok: false, message: "Tên đăng nhập hoặc mật khẩu quản trị chưa chính xác." };
+    if (data.user.app_metadata?.math4fun_role !== "admin") {
+      await supabase.auth.signOut();
+      return { ok: false, message: "Tài khoản Supabase này chưa được cấp quyền quản trị Math4Fun." };
+    }
+    selectProfile(adminProfile.id);
+    return { ok: true, message: "Đã xác thực quyền Quản trị viên qua Supabase." };
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setBusy(true); setNotice("");
     if (mode === "register") {
@@ -62,17 +78,18 @@ export function AuthModal({ open, initialMode = "login", onOpenChange }: AuthMod
       setNotice(result.message); if (result.ok) onOpenChange(false);
     } else {
       const accountName = normalizeUsername(username);
-      const target = profiles.find((entry) => entry.username === accountName);
-      const result = !target
-        ? { ok: false, message: "Không tìm thấy nhật ký có tên đăng nhập này trên thiết bị." }
-        : target.id === "math4fun-local-admin"
-          ? password === "passw@rd"
-            ? (selectProfile(target.id), { ok: true, message: "Chào mừng Quản trị viên." })
-            : { ok: false, message: "Mật khẩu chưa chính xác." }
+      if (accountName === ADMIN_USERNAME) {
+        const result = await signInAdmin(password);
+        setNotice(result.message); if (result.ok) onOpenChange(false);
+      } else {
+        const target = profiles.find((entry) => entry.username === accountName && entry.role !== "admin");
+        const result = !target
+          ? { ok: false, message: "Không tìm thấy nhật ký có tên đăng nhập này trên thiết bị." }
           : target.authProvider === "google"
             ? { ok: false, message: "Nhật ký này được mở bằng Google. Hãy chọn nút Tiếp tục với Google." }
             : target.passwordHash ? await signIn(target.id, password) : await setLegacyProfilePassword(target.id, username, password);
-      setNotice(result.message); if (result.ok) onOpenChange(false);
+        setNotice(result.message); if (result.ok) onOpenChange(false);
+      }
     }
     setBusy(false);
   }
@@ -104,7 +121,7 @@ export function AuthModal({ open, initialMode = "login", onOpenChange }: AuthMod
           </form>
           <div className="my-5 flex items-center gap-3 text-[10px] font-black tracking-[.12em] text-[#58708b]"><i className="h-px flex-1 bg-[#c9b88c]" />HOẶC<i className="h-px flex-1 bg-[#c9b88c]" /></div>
           <button type="button" disabled={busy} onClick={handleGoogle} className="flex w-full items-center justify-center gap-3 border-2 border-[#172a48] bg-white px-4 py-3 text-sm font-black shadow-[2px_2px_0_#c9b88c] transition hover:bg-[#eef1fb] active:scale-[.97] disabled:opacity-60"><span className="grid h-5 w-5 place-items-center rounded-full border border-[#172a48] bg-[#fff8da] font-black text-[#294f86]">G</span>Tiếp tục với Google<Chrome size={16} /></button>
-          <p className="mt-4 text-center text-xs leading-relaxed text-[#58708b]">Tên đăng nhập và mật khẩu chỉ được lưu trên thiết bị này. Google chỉ dùng để xác thực và đồng bộ tiến độ khi phụ huynh bật kết nối.</p>
+          <p className="mt-4 text-center text-xs leading-relaxed text-[#58708b]">Hồ sơ học sinh vẫn local-first. Tài khoản <b>admin</b> được xác thực bằng Supabase Auth và chỉ có quyền quản trị khi JWT mang <code>app_metadata.math4fun_role=admin</code>.</p>
         </section>
       </div>
     </DialogContent>
