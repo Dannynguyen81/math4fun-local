@@ -11,6 +11,7 @@ import { GameProvider } from "./contexts/GameContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import "./game/guardianBranding";
 import "./game/fiveElementCombat";
+import "./styles/guardian-art.css";
 import BossPage from "./pages/BossPage";
 import TrainingPage from "./pages/TrainingPage";
 import CollectionPage from "./pages/CollectionPage";

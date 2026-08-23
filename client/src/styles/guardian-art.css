@@ -1,0 +1,16 @@
+/* Math4Fun Guardian art presentation.
+ * All canonical Guardian assets render as circular transparent specimens so
+ * legacy rectangular card backgrounds never leak into Map/Collection/Training/Boss UI.
+ */
+img[src*="/guardians/"] {
+  background: transparent !important;
+  object-fit: contain;
+  clip-path: circle(49% at 50% 50%);
+}
+
+/* Map stamps are deliberately inset so horns, tails and effects stay inside the seal. */
+.guardian-stamp img[src*="/guardians/"] {
+  width: 88%;
+  height: 88%;
+  margin: auto;
+}
