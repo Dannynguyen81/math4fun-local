@@ -5,6 +5,15 @@ name: ""
 species_name: ""
 element: "hoa | thuy | moc | kim | tho"
 role: "striker | guardian | support | control | balanced"
+roster:
+  map: "map1 | map2 | cross-map | boss"
+  topic_order: 0
+  element_slot: "vanguard | guide | guardian | trickster | finisher"
+  progression_tier: "guardian | elite | boss"
+learning_link:
+  topic: ""
+  visual_metaphor: ""
+  field_note: ""
 body_archetype: ""
 animal_sources:
   - ""
@@ -34,6 +43,19 @@ visual:
   primary_palette: ["", "", ""]
   accent_palette: ["", ""]
   material_notes: ""
+
+card_contract:
+  portrait_boundary: "round | oval | stamp | dossier-window"
+  element_seal_position: ""
+  slot_marker_position: ""
+  learning_label: ""
+  compact_readability_note: ""
+
+animation_contract:
+  idle_silhouette: ""
+  cast_source_anatomy: ""
+  impact_language: ""
+  victory_beat: ""
 
 spells:
   - id: ""
@@ -78,6 +100,20 @@ image_outputs:
   portrait: true
   battle_splash: false
   transparent_game_asset: false
+
+asset_manifest:
+  portrait_1x1: ""
+  card_crop_4x5: ""
+  battle_16x9: ""
+  element_emblem: ""
+  spell_icon_set: []
+  alt_text: ""
+
+reference_provenance:
+  source_type: "none | user_drawing | user_reference_board | internal_style_anchor"
+  extracted_principles: []
+  preserved_traits: []
+  do_not_copy: []
 
 quality_gates:
   readability: null

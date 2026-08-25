@@ -1,18 +1,20 @@
 ---
 name: math4fun-pet-designer
-version: 1.0.0
 description: >
   Thiết kế linh sủng nguyên bản cho Math4Fun theo phong cách 3D hoạt hình,
   dễ thương nhưng có khí chất, đồng bộ Field Journal Quest và hệ ngũ hành
-  Hỏa–Thủy–Mộc–Kim–Thổ. Dùng để tạo concept, prompt ảnh, bộ phép thuật,
-  character sheet và metadata sẵn sàng tích hợp vào game.
-tags:
-  - math4fun
-  - pet-design
-  - character-design
-  - image-generation
-  - five-elements
-  - game-art
+  Hỏa–Thủy–Mộc–Kim–Thổ. Dùng để bóc tách reference board thành dữ liệu thiết kế
+  không sao chép IP, tạo concept, prompt ảnh, bộ phép thuật, character sheet,
+  roster/card contract và metadata sẵn sàng tích hợp vào game.
+metadata:
+  version: "1.1.0"
+  tags:
+    - math4fun
+    - pet-design
+    - character-design
+    - image-generation
+    - five-elements
+    - game-art
 ---
 
 # Math4Fun Pet Designer Skill
@@ -116,6 +118,19 @@ Không viết prompt kiểu:
 - “DreamWorks style”
 
 Thay bằng mô tả kỹ thuật hình ảnh.
+
+---
+
+### 3.1 Reference-board extraction guardrail
+
+Khi người dùng đưa bảng roster, thẻ nhân vật hoặc concept art làm tham chiếu:
+
+1. Chỉ trích xuất **nguyên tắc thiết kế**: nhịp roster, hierarchy thẻ, shape language, độ đọc ở thumbnail, vật liệu, nhịp animation, quan hệ hệ–vai trò–kỹ năng.
+2. Không giữ tên, loài, silhouette riêng, pattern lông/vảy, palette nhận diện hoặc bố cục độc đáo của một creature trong ảnh làm template trực tiếp.
+3. Chuyển mọi quan sát thành **design variable** trung tính; tạo species, anatomy và signature traits mới từ `real animal + mythical motif + elemental morphology`.
+4. Ghi `reference_provenance` và `do_not_copy` trong Pet Spec. Nếu chi tiết nhận diện của reference bị giữ lại, phải redesign trước khi sinh ảnh.
+
+Đọc `references/reference-board-extraction.md` khi cần bóc tách nhiều pet, roster 10/20 vị trí hoặc một card UI từ ảnh tham chiếu.
 
 ---
 
@@ -300,6 +315,8 @@ id:
 name:
 element:
 role:
+roster_slot:
+learning_link:
 body_archetype:
 animal_sources:
 mythical_motif:
@@ -307,6 +324,7 @@ personality:
 signature_traits:
 primary_palette:
 secondary_palette:
+card_contract:
 ```
 
 ### 9.2 Art direction
@@ -319,6 +337,7 @@ Viết 5–10 bullet mô tả:
 - signature visual;
 - mood;
 - pose language.
+- compact-card hierarchy: slot index, element seal, portrait boundary, learning label và progression cue.
 
 ### 9.3 Spell kit
 Bảng 4 phép.
@@ -373,6 +392,8 @@ Một character sheet chuẩn có:
 - **3 magic icons**.
 - **5–6 palette swatches**.
 
+Khi asset đi vào roster, xuất thêm **card-ready crop**: portrait tròn/oval, vùng an toàn cho huy hiệu hệ ở góc, vùng an toàn cho số thứ tự và nhãn chủ đề. Card UI phải chuyển hóa thành field tag/parchment dossier của Math4Fun, không lặp bố cục thương hiệu của reference board.
+
 Aspect ratio khuyến nghị:
 - 4:5 cho concept sheet.
 - 1:1 cho portrait/icon.
@@ -396,6 +417,23 @@ Khi có ảnh trẻ em/người dùng tự vẽ:
 4. Không “sửa thành creature nổi tiếng”.
 5. Ghi rõ `preserved_traits`.
 
+### 11.1 Reference-board intake
+
+Đối với ảnh board do người dùng cung cấp, trích xuất bằng bảng 8 cột:
+
+| Trích xuất | Ghi ở Pet Spec | Không được sao chép |
+|---|---|---|
+| Nhịp roster | `roster.map`, `topic_order`, `element_slot` | Tên/đội hình/sequence nhận diện của thương hiệu khác |
+| Shape grammar | `visual.silhouette`, `elemental_anatomy` | Silhouette riêng của creature trong reference |
+| Face grammar | `visual.face` | Khuôn mặt, tai, đuôi, crest đặc trưng của IP |
+| Material/light | `visual.material_notes` | Texture, marking hoặc costume nhận diện |
+| Combat role | `role`, `spells`, `animation_contract` | Move name, effect sequence hoặc biểu tượng riêng |
+| Learning link | `learning_link` | Mascot/subject pairing của reference |
+| Card hierarchy | `card_contract` | Border, logo, typography hoặc layout độc quyền |
+| Production needs | `asset_manifest`, `quality_gates` | File art/reference asset gốc |
+
+Chỉ dùng board như **bản đồ quyết định**. Không dùng nó như prompt nhân bản creature.
+
 ---
 
 ## 12. Batch generation
@@ -415,6 +453,8 @@ Không để hai pet cạnh nhau trùng quá nhiều:
 | Role | striker / support / guardian / control |
 
 Tối đa 2 pet trong cùng batch được chia sẻ một body archetype.
+
+Khi thiết kế roster 10 hoặc 20 vị trí, tạo thêm `element_slot` để mỗi hệ có nhịp vai trò rõ ràng, ví dụ `vanguard`, `guide`, `guardian`, `trickster`. Không mặc định một hệ chỉ có một loài, không gán nguyên tố chỉ bằng màu, và không làm toàn bộ pet cùng là thú bốn chân.
 
 ---
 
@@ -462,6 +502,14 @@ Khi agent có quyền đọc repo:
 
 Nếu repo chưa có asset registry rõ ràng, đề xuất trước khi tạo hàng loạt.
 
+Mỗi batch dự định dùng trong UI phải có `asset_manifest` tối thiểu gồm:
+- `portrait_1x1`: 512px hoặc lớn hơn, nền trong suốt;
+- `card_crop_4x5`: vùng an toàn cho badge/nhãn;
+- `battle_16x9`: hero pose và vùng cast phép;
+- `element_emblem`: biểu tượng nguyên bản, không dùng icon thương hiệu ngoài;
+- `spell_icon_set`: 4 icon cùng material language;
+- `alt_text`: mô tả ngắn, không dùng tên franchise.
+
 ---
 
 ## 15. Standard command interpretation
@@ -471,6 +519,9 @@ Nếu repo chưa có asset registry rõ ràng, đề xuất trước khi tạo h
 
 ### “Tạo 10 pet”
 → trước tiên tạo diversity matrix, sau đó 10 design pack rút gọn.
+
+### “Bóc tách dữ liệu hình ảnh để nâng cấp skill/roster”
+→ đọc `references/reference-board-extraction.md`, tạo `reference extraction matrix`, tách rõ `usable principles` và `do_not_copy`, rồi cập nhật template/spec trước khi đề xuất pet mới.
 
 ### “Biến hình con tôi vẽ thành pet”
 → giữ 3–5 signature traits của bản vẽ, tạo `preserved_traits`, rồi nâng cấp theo style bible.
@@ -527,6 +578,8 @@ photorealism, horror, gore, aggressive weapons, excessive armor clutter, distort
 ## 17. Pet specification template
 
 Dùng file `templates/pet-spec.yaml`.
+
+Khi yêu cầu xuất phát từ reference board, điền các khối `reference_provenance`, `roster`, `learning_link`, `card_contract`, `animation_contract` và `asset_manifest`; không bỏ trống chúng.
 
 ---
 
