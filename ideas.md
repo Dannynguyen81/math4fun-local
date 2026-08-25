@@ -133,3 +133,6 @@ Logo là **la bàn bốn nhánh ghép từ dấu cộng, đường cong quỹ đ
 - Hero là một trang sổ/artefact thám hiểm vật lý: các dải Indigo chỉ xuất hiện cùng nhãn giấy, route fragment, stamp hoặc bằng chứng mở tuyến.
 - Chọn companion luôn ưu tiên tiêu bản đang chọn như bằng chứng số 01; các lựa chọn còn lại là specimen ghim lệch theo tuyến, không phải catalog đồng trọng số.
 - Xếp hạng là **field score log**: thứ hạng, điểm, guardian, huy hiệu và tiến độ phải nằm trong cùng một bản ghi hành trình có trail/stamp, không được đọc như bảng dữ liệu tab chung chung.
+- Bộ sưu tập Guardian phải ưu tiên một **current evidence artifact** ở quy mô lớn; các mẫu còn lại đi theo specimen trail ghim lệch, thể hiện liên kết mở khóa thay vì lưới thẻ đồng trọng số.
+- Dossier Boss khóa phải hợp nhất Atlas specimen, dây bằng chứng 10 mốc, battle permit, điều kiện 10 câu M/H và huy hiệu vào cùng một case file; không dùng fantasy banner đơn độc trên nền giấy.
+- Mọi trang ngoài Map cần một artifact trung tâm có silhouette rõ ràng hơn sidebar; route/evidence marks phải tổ chức nội dung thay vì chỉ trang trí phần đầu.

@@ -294,3 +294,10 @@
 - [ ] Thêm hiệu ứng viền sáng/đổ bóng nổi bật (specimen highlight ring) cho nhân vật ở vị trí trung tâm.
 - [ ] Đặt nút "Chọn nhân vật này" ngay bên dưới card avatar kèm hoạt ảnh xác nhận thành công (particles / scale pulse / checkmark flash) khi click.
 - [ ] Chạy `pnpm check`, `pnpm build` và kiểm tra trực quan trên desktop/mobile.
+
+## Roster guardian ngũ hành thử nghiệm — 2026-08-25
+
+- [x] Thiết kế 10 guardian nguyên bản cho năm hệ Hỏa, Thủy, Mộc, Kim và Thổ, gồm hai vai trò khác nhau ở mỗi hệ, giữ nguyên ID legacy và tương thích tiến độ.
+- [x] Thêm Boss Map 1 Atlas nguyên bản, cập nhật display branding và sử dụng 11 PNG 3D tự chứa tại `client/public/media/guardians/`.
+- [x] Xác nhận không còn tham chiếu `/manus-storage/` trong production source; giữ nguyên bridge five-element combat, map/station links và logic Boss.
+- [x] Kiểm tra map, collection specimen trail, Boss dossier, `pnpm check` và `pnpm build`; chuẩn bị push nhánh review, không merge vào `main`.
