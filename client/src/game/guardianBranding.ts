@@ -215,6 +215,17 @@ export const GUARDIAN_AFFINITY: Record<string, GuardianAffinity> =
     Object.entries(GUARDIAN_BRANDING).map(([id, item]) => [id, item.affinity])
   ) as Record<string, GuardianAffinity>;
 
+export const GUARDIAN_ELEMENT_LABEL: Record<string, string> =
+  Object.fromEntries(
+    Object.entries(GUARDIAN_BRANDING).map(([id, item]) => [
+      id,
+      item.affinity[0].toUpperCase() + item.affinity.slice(1),
+    ])
+  );
+
+export const getGuardianElementLabel = (id: string | undefined) =>
+  id ? GUARDIAN_ELEMENT_LABEL[id] : undefined;
+
 export const getGuardianBrand = (id: string | undefined) =>
   id ? GUARDIAN_BRANDING[id] : undefined;
 

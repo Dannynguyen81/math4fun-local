@@ -22,6 +22,7 @@ import {
 } from "@/game/gameData";
 import { EXTRA_STATION_OPEN_GOLD, useGame } from "@/contexts/GameContext";
 import { PlayerAvatar } from "@/components/PlayerAvatar";
+import { getGuardianElementLabel } from "@/game/guardianBranding";
 
 const routeOffsets = [
   0, 29, 6, 39, 12, 44, 18, 35, 5, 31, 9, 42, 15, 37, 3, 28, 11, 40, 20, 34,
@@ -405,7 +406,7 @@ function RouteArtifact({
                   </p>
                   <div className="mt-2 flex flex-wrap gap-1">
                     <span className="field-tag bg-[#eef1fb] text-[8px] text-[#172a48] sm:text-[9px]">
-                      MẪU VẬT · {guardian?.element ?? "SEALED"}
+                      MẪU VẬT · {guardian ? getGuardianElementLabel(guardian.id) ?? guardian.element : "SEALED"}
                     </span>
                     <span className="field-tag bg-[#fff8da] text-[8px] text-[#172a48] sm:text-[9px]">
                       {mastered

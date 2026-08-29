@@ -39,6 +39,7 @@ import {
   playFiveStreakSound,
   playTechniqueSound,
 } from "@/lib/magicAudio";
+import { getGuardianElementLabel } from "@/game/guardianBranding";
 
 type Feedback = {
   correct: boolean;
@@ -858,7 +859,10 @@ export default function BossPage({ mapId = 1 }: { mapId?: MapId }) {
                     />
                   </div>
                   <div className="battle-pet-meta">
-                    <span>{boss.element}</span>
+                    <span>
+                      {getGuardianElementLabel(boss.mapId === 1 ? "atlas-prime" : "myrion") ??
+                        boss.element}
+                    </span>
                     <span>{boss.title}</span>
                   </div>
                 </motion.div>

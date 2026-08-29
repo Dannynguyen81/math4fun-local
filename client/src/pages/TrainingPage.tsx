@@ -34,6 +34,7 @@ import {
   type TrainingDifficultyId,
 } from "@/game/gameData";
 import { useGame } from "@/contexts/GameContext";
+import { getGuardianElementLabel } from "@/game/guardianBranding";
 import {
   ChartContainer,
   ChartTooltip,
@@ -436,7 +437,7 @@ function TrainingSeal({ hasProfile }: { hasProfile: boolean }) {
             {specimen.name}
           </p>
           <p className="text-[10px] font-bold tracking-[.1em] text-[#58708b]">
-            PHÂN LOẠI · {specimen.element.toUpperCase()}
+            PHÂN LOẠI · {(getGuardianElementLabel(specimen.id) ?? specimen.element).toUpperCase()}
           </p>
           <p className="mt-2 border-t border-dashed border-[#58708b] pt-2 text-[10px] text-[#58708b]">
             Bằng chứng: 0 trận · 0 XP
@@ -764,7 +765,7 @@ export default function TrainingPage() {
                       <span>
                         <b className="font-display text-xl">{guardian.name}</b>
                         <small className="block text-xs">
-                          {guardian.element} · Cấp{" "}
+                          {getGuardianElementLabel(guardian.id) ?? guardian.element} · Cấp{" "}
                           {guardianTrainingLevel(guardian.id)}
                         </small>
                       </span>
@@ -793,7 +794,7 @@ export default function TrainingPage() {
                         {guardian.name}
                       </b>
                       <small className="block text-[10px] uppercase">
-                        {guardian.element}
+                        {getGuardianElementLabel(guardian.id) ?? guardian.element}
                       </small>
                     </button>
                   );
@@ -972,7 +973,7 @@ export default function TrainingPage() {
                     />
                   </div>
                   <div className="battle-pet-meta">
-                    <span>{activeGuardian.element}</span>
+                    <span>{getGuardianElementLabel(activeGuardian.id) ?? activeGuardian.element}</span>
                     <span>{spell.name}</span>
                   </div>
                 </motion.div>
@@ -1006,7 +1007,7 @@ export default function TrainingPage() {
                     />
                   </div>
                   <div className="battle-pet-meta">
-                    <span>{opponent.element}</span>
+                    <span>{getGuardianElementLabel(opponent.id) ?? opponent.element}</span>
                     <span>{opponentAdvantage.label}</span>
                   </div>
                 </motion.div>
