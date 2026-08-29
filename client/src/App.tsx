@@ -2,7 +2,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Router as WouterRouter, Switch, useLocation } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthGateProvider } from "./components/AuthGate";
@@ -30,4 +31,4 @@ import GeometryPetSelectionPage from "./pages/GeometryPetSelectionPage";
 
 function LegacyStartRedirect() { const [, navigate] = useLocation(); useEffect(() => { navigate("/", { replace: true }); }, [navigate]); return null; }
 function Router() { return <Switch><Route path="/" component={Home} /><Route path="/start" component={LegacyStartRedirect} /><Route path="/profile" component={ProfilePage} /><Route path="/geometry-pets" component={GeometryPetSelectionPage} /><Route path="/admin/questions" component={AdminQuestionsPage} /><Route path="/map" component={MapPage} /><Route path="/collection" component={CollectionPage} /><Route path="/magic-book" component={MagicBookPage} /><Route path="/shop" component={ShopPage} /><Route path="/leaderboard" component={LeaderboardPage} /><Route path="/compare" component={CompareProfilesPage} /><Route path="/study-calendar" component={StudyCalendarPage} /><Route path="/station/:id" component={StationPage} /><Route path="/boss" component={() => <BossPage />} /><Route path="/map-boss" component={() => <BossPage />} /><Route path="/map2-boss" component={() => <BossPage mapId={2} />} /><Route path="/training" component={TrainingPage} /><Route path="/stats" component={StatsPage} /><Route path="/404" component={NotFound} /><Route component={NotFound} /></Switch>; }
-export default function App() { return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><GameProvider><AuthGateProvider><GameLayout><Router /></GameLayout></AuthGateProvider></GameProvider></TooltipProvider></ThemeProvider></ErrorBoundary>; }
+export default function App() { const githubPages = import.meta.env.VITE_GITHUB_PAGES === "true"; return <ErrorBoundary><ThemeProvider defaultTheme="light"><TooltipProvider><Toaster /><GameProvider><AuthGateProvider><GameLayout><WouterRouter hook={githubPages ? useHashLocation : undefined}><Router /></WouterRouter></GameLayout></AuthGateProvider></GameProvider></TooltipProvider></ThemeProvider></ErrorBoundary>; }
