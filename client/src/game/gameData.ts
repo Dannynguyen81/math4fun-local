@@ -32,6 +32,11 @@ export const GOLD_BY_DIFFICULTY: Record<Difficulty, number> = {
   H: 4,
 };
 export const FIVE_CORRECT_STREAK_GOLD = 5;
+/** Progression pacing: a full station should feel meaningful without granting a level every run. */
+export const PLAYER_XP_PER_LEVEL = 500;
+export const PLAYER_MAX_LEVEL = 20;
+export const GUARDIAN_TRAINING_XP_PER_LEVEL = 150;
+export const GUARDIAN_TRAINING_MAX_LEVEL = 10;
 export const TRAINING_TECHNIQUES = [
   { level: 1, name: "Đòn Cơ Bản", bonusDamage: 0 },
   { level: 2, name: "Ấn Liên Hoàn", bonusDamage: 4 },
@@ -68,8 +73,8 @@ export const TRAINING_DIFFICULTIES: Record<
     opponentHp: 90,
     opponentDamageMultiplier: 0.75,
     playerDamageMultiplier: 1.1,
-    xpCorrect: 15,
-    xpIncorrect: 3,
+    xpCorrect: 8,
+    xpIncorrect: 0,
   },
   pathfinder: {
     id: "pathfinder",
@@ -81,8 +86,8 @@ export const TRAINING_DIFFICULTIES: Record<
     opponentHp: 120,
     opponentDamageMultiplier: 1,
     playerDamageMultiplier: 1,
-    xpCorrect: 20,
-    xpIncorrect: 5,
+    xpCorrect: 10,
+    xpIncorrect: 0,
   },
   champion: {
     id: "champion",
@@ -94,8 +99,8 @@ export const TRAINING_DIFFICULTIES: Record<
     opponentHp: 155,
     opponentDamageMultiplier: 1.2,
     playerDamageMultiplier: 0.95,
-    xpCorrect: 30,
-    xpIncorrect: 8,
+    xpCorrect: 12,
+    xpIncorrect: 0,
   },
 };
 export const getTrainingDifficulty = (id?: TrainingDifficultyId) =>
@@ -210,6 +215,7 @@ export type ShopItem = {
     | "potion-25"
     | "potion-50"
     | "potion-100"
+    | "potion-150"
     | "outfit-indigo"
     | "outfit-marigold"
     | "outfit-moss"
@@ -230,6 +236,7 @@ export type ShopItem = {
   heal?: number;
   slot?: CosmeticSlot;
   setId?: "indigo" | "moss" | "tide" | "ember" | "wind";
+  artwork?: string;
 };
 
 export type CosmeticSetDefinition = {
@@ -2440,6 +2447,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 30,
     description: "Hồi 25 HP cho một guardian đang sở hữu.",
     tone: "bg-[#e4f3fb] border-[#55a9dd]",
+    artwork: "/shop/3d/potion-aurora.webp",
   },
   {
     id: "potion-50",
@@ -2450,6 +2458,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 60,
     description: "Hồi 50 HP cho một guardian đang sở hữu.",
     tone: "bg-[#e7f2e5] border-[#3e9b7a]",
+    artwork: "/shop/3d/potion-aurora.webp",
   },
   {
     id: "potion-100",
@@ -2460,6 +2469,18 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 120,
     description: "Hồi đầy 100 HP cho một guardian đang sở hữu.",
     tone: "bg-[#fff0b6] border-[#f6b73c]",
+    artwork: "/shop/3d/potion-aurora.webp",
+  },
+  {
+    id: "potion-150",
+    label: "Bình Cực Quang",
+    kind: "healing",
+    icon: "✺",
+    heal: 100,
+    price: 180,
+    description: "Bình cực hiếm, hồi đầy HP với lõi cực quang 3D.",
+    tone: "bg-[#f3e8ff] border-[#9a77b8]",
+    artwork: "/shop/3d/potion-aurora.webp",
   },
   {
     id: "outfit-indigo",
@@ -2471,6 +2492,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 40,
     description: "Áo giáp mô hình nổi 3D phong cách mực chàm.",
     tone: "bg-[#e9e8f7] border-[#57518d]",
+    artwork: "/shop/3d/outfit-indigo.webp",
   },
   {
     id: "outfit-marigold",
@@ -2481,6 +2503,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 55,
     description: "Áo giáp pha lê la bàn vàng 3D nổi khối.",
     tone: "bg-[#fff0b6] border-[#d99818]",
+    artwork: "/shop/3d/element-chest.webp",
   },
   {
     id: "outfit-moss",
@@ -2492,6 +2515,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 70,
     description: "Ba lô dập nổi 3D chứa tài liệu thám hiểm.",
     tone: "bg-[#e6f0df] border-[#5f8a5e]",
+    artwork: "/shop/3d/outfit-moss.webp",
   },
   {
     id: "trail-stars",
@@ -2503,6 +2527,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 45,
     description: "Hào quang hạt sao 3D xoay quanh companion.",
     tone: "bg-[#f3e8ff] border-[#9a77b8]",
+    artwork: "/magic/spells/kim.webp",
   },
   {
     id: "trail-leaves",
@@ -2514,6 +2539,79 @@ export const SHOP_ITEMS: ShopItem[] = [
     price: 65,
     description: "Vòng xoáy lá 3D sinh động theo từng bước chân.",
     tone: "bg-[#e7f2e5] border-[#4d8b67]",
+    artwork: "/magic/spells/moc.webp",
+  },
+  {
+    id: "outfit-tide",
+    label: "Áo Choàng Thủy Triều 3D",
+    kind: "cosmetic",
+    icon: "≈",
+    slot: "outfit",
+    setId: "tide",
+    price: 90,
+    description: "Phù hiệu Thủy tinh thể giúp companion mang theo nhịp sóng bình tĩnh.",
+    tone: "bg-[#e4f3fb] border-[#3698d4]",
+    artwork: "/magic/spells/thuy.webp",
+  },
+  {
+    id: "outfit-ember",
+    label: "Giáp Phượng Hỏa 3D",
+    kind: "cosmetic",
+    icon: "✦",
+    slot: "outfit",
+    setId: "ember",
+    price: 105,
+    description: "Mảnh giáp Hỏa tinh thể bừng sáng mỗi khi companion trả lời đúng.",
+    tone: "bg-[#ffe4dc] border-[#ee6b4e]",
+    artwork: "/magic/spells/hoa.webp",
+  },
+  {
+    id: "outfit-wind",
+    label: "Mặt Nạ Mộc Sinh Trưởng 3D",
+    kind: "cosmetic",
+    icon: "❋",
+    slot: "outfit",
+    setId: "wind",
+    price: 115,
+    description: "Mặt nạ mầm cây giữ nhịp sinh trưởng cho những chuyến đi dài.",
+    tone: "bg-[#e7f2e5] border-[#4d8b67]",
+    artwork: "/magic/spells/moc.webp",
+  },
+  {
+    id: "trail-bubbles",
+    label: "Dấu Chân Bong Bóng 3D",
+    kind: "cosmetic",
+    icon: "◌",
+    slot: "trail",
+    setId: "tide",
+    price: 75,
+    description: "Chuỗi bong bóng nước lấp lánh theo từng bước di chuyển.",
+    tone: "bg-[#e4f3fb] border-[#3698d4]",
+    artwork: "/shop/3d/trail-bubbles.webp",
+  },
+  {
+    id: "trail-embers",
+    label: "Vệt Lửa Phượng 3D",
+    kind: "cosmetic",
+    icon: "✧",
+    slot: "trail",
+    setId: "ember",
+    price: 85,
+    description: "Dải lửa cam đỏ uốn theo companion, để lại hạt sáng sau lưng.",
+    tone: "bg-[#ffe4dc] border-[#ee6b4e]",
+    artwork: "/shop/3d/trail-embers.webp",
+  },
+  {
+    id: "trail-gust",
+    label: "Vòng Lá Sinh Khí 3D",
+    kind: "cosmetic",
+    icon: "❋",
+    slot: "trail",
+    setId: "wind",
+    price: 95,
+    description: "Vòng lá xanh xoay nhẹ như một luồng gió nuôi dưỡng hành trình.",
+    tone: "bg-[#e7f2e5] border-[#4d8b67]",
+    artwork: "/magic/spells/moc.webp",
   },
 ];
 
@@ -2535,6 +2633,33 @@ export const COMPANION_COSMETIC_SETS: CosmeticSetDefinition[] = [
     itemIds: ["outfit-moss", "trail-leaves"],
     bonusGold: 50,
     bonusXp: 120,
+  },
+  {
+    id: "tide",
+    label: "Bộ Người Gọi Thủy Triều",
+    motif: "≈",
+    note: "Thủy tinh thể và bong bóng dẫn đường.",
+    itemIds: ["outfit-tide", "trail-bubbles"],
+    bonusGold: 65,
+    bonusXp: 150,
+  },
+  {
+    id: "ember",
+    label: "Bộ Phượng Hỏa Tinh Thể",
+    motif: "✦",
+    note: "Cánh lửa và vệt sáng bộc phát.",
+    itemIds: ["outfit-ember", "trail-embers"],
+    bonusGold: 75,
+    bonusXp: 170,
+  },
+  {
+    id: "wind",
+    label: "Bộ Mộc Sinh Trưởng",
+    motif: "❋",
+    note: "Mầm lá và vòng sinh khí xanh.",
+    itemIds: ["outfit-wind", "trail-gust"],
+    bonusGold: 85,
+    bonusXp: 190,
   },
 ];
 

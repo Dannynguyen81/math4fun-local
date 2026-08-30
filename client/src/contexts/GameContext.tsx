@@ -5,7 +5,8 @@
  * and collectible-set rewards are recorded once per companion profile.
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { BOSS_QUESTION_IDS, COMPANION_COSMETIC_SETS, Difficulty, ELEMENT_ORDER, ELEMENT_XP_PER_LEVEL, ElementName, FIVE_CORRECT_STREAK_GOLD, getElementalAdvantage, getGuardian, getMapIdForStation, getMapStations, getStation, getStationSessionQuestionIds, getTrainingDifficulty, getTrainingTechnique, GOLD_BY_DIFFICULTY, GUARDIANS, GUARDIAN_TRAINING_MAX_LEVEL, GUARDIAN_TRAINING_XP_PER_LEVEL, MAP1_BOSS_QUESTION_IDS, MAP2_BOSS_QUESTION_IDS, MAP_BOSS_RULES, PLAYER_MAX_LEVEL, PLAYER_XP_PER_LEVEL, QUESTIONS_BY_ID, SHOP_ITEMS, SPELLS, STATIONS, WEEKLY_MAGIC_QUESTS, type CosmeticSlot, type CosmeticSetDefinition, type MapId, type ShopItem, type TrainingDifficultyId, type VerifiedQuestion, type WeeklyMagicQuestDefinition } from "@/game/gameData";
+import { MAGIC_BOOK_ELEMENTS, MAGIC_BOOK_MAX_LEVEL, MAGIC_BOOK_XP_PER_LEVEL, getMagicBookElement, getMagicBookLevel } from "@/game/magicCanon";
 import { isSupabaseSyncEnabled } from "@/lib/supabase";
 import { fetchSupabaseLeaderboardResult, getSupabaseOwnerId, syncProfileToSupabase, toLeaderboardEntry } from "@/lib/supabaseSync";
 import { playGoldGainSound } from "@/lib/magicAudio";
@@ -105,6 +106,12 @@ export type BattleState = {
   trainingXpStart?: number;
   trainingCorrectCount?: number;
   trainingIncorrectCount?: number;
+  trainingPendingXp?: number;
+  trainingPendingElementXp?: Partial<Record<ElementName, number>>;
+  battlePendingXp?: number;
+  battlePendingElementXp?: Partial<Record<ElementName, number>>;
+  pendingQuestUses?: number;
+  pendingQuestReward?: number;
 };
 
 export type TrainingBattleRecord = {
@@ -170,7 +177,7 @@ type GameStore = { version: 15; profiles: StudentProfile[]; activeProfileId: str
 export type StationProgress = { correct: number; answered: number; target: number; total: number; accuracy: number };
 export type StreakMilestone = { streak: number; bonusGold: number };
 export type AnswerResult = { correct: boolean; stationMastered: boolean; nextQuestionId: string | null; streakMilestone?: StreakMilestone };
-export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp; trainingLevelUp?: { guardianId: string; previousLevel: number; nextLevel: number; totalXp: number }; streakMilestone?: StreakMilestone };
+export type BattleAnswerResult = { correct: boolean; playerDamage: number; bossDamage: number; ended: boolean; levelUp?: ElementLevelUp; trainingLevelUp?: { guardianId: string; previousLevel: number; nextLevel: number; totalXp: number }; trainingXpAwarded: number; streakMilestone?: StreakMilestone };
 export type PurchaseResult = { ok: boolean; message: string; setReward?: CosmeticSetDefinition };
 
 type GameContextValue = {
@@ -838,7 +845,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const unseen = BOSS_QUESTION_IDS.filter((id) => !profile.bossQuestionHistory.includes(id));
     if (unseen.length < 5) return false;
     const questionIds = shuffle(unseen).slice(0, 5);
-    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { mode: "atlas", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 150, guardianId, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
+    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { mode: "atlas", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: 150, guardianId, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0, startedAt: new Date().toISOString() }, bossQuestionHistory: [...current.bossQuestionHistory, ...questionIds], metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
     return true;
   }, [profile, isBossUnlocked, updateProfile]);
   const startMap1BossBattle = useCallback((guardianId: string) => {
@@ -853,7 +860,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     updateProfile(profile.id, (current) => ({
       ...current,
       guardianHealth: { ...current.guardianHealth, [guardianId]: health },
-      battle: { mode: "map1-boss", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: MAP_BOSS_RULES[1].maxHp, guardianId, startedAt: new Date().toISOString() },
+      battle: { mode: "map1-boss", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: MAP_BOSS_RULES[1].maxHp, guardianId, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0, startedAt: new Date().toISOString() },
       map1BossQuestionHistory: Array.from(new Set([...current.map1BossQuestionHistory, ...questionIds])),
       metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 },
     }));
@@ -868,11 +875,11 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const pool = unseen.length >= 10 ? unseen : MAP2_BOSS_QUESTION_IDS;
     if (pool.length < 10) return false;
     const questionIds = shuffle(pool).slice(0, 10);
-    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { mode: "map2-boss", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: MAP_BOSS_RULES[2].maxHp, guardianId, startedAt: new Date().toISOString() }, map2BossQuestionHistory: Array.from(new Set([...current.map2BossQuestionHistory, ...questionIds])), metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
+    updateProfile(profile.id, (current) => ({ ...current, guardianHealth: { ...current.guardianHealth, [guardianId]: health }, battle: { mode: "map2-boss", status: "active", questionIds, questionIndex: 0, playerHp: health.hp, bossHp: MAP_BOSS_RULES[2].maxHp, guardianId, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0, startedAt: new Date().toISOString() }, map2BossQuestionHistory: Array.from(new Set([...current.map2BossQuestionHistory, ...questionIds])), metrics: { ...current.metrics, bossRuns: current.metrics.bossRuns + 1 } }));
     return true;
   }, [profile, isMap2BossUnlocked, updateProfile]);
   const canTrainPets = Boolean(profile?.collectedGuardianIds.length);
-  const guardianTrainingLevel = useCallback((guardianId: string) => Math.floor((profile?.guardianTrainingXp[guardianId] ?? 0) / 100) + 1, [profile?.guardianTrainingXp]);
+  const guardianTrainingLevel = useCallback((guardianId: string) => Math.min(GUARDIAN_TRAINING_MAX_LEVEL, Math.floor((profile?.guardianTrainingXp[guardianId] ?? 0) / GUARDIAN_TRAINING_XP_PER_LEVEL) + 1), [profile?.guardianTrainingXp]);
   const startTrainingBattle = useCallback((guardianId: string, opponentGuardianId: string, difficulty: TrainingDifficultyId) => {
     if (!profile || !profile.collectedGuardianIds.includes(guardianId)) return false;
     const unlockedQuestionPool = Object.values(QUESTIONS_BY_ID).filter((question) => profile.unlockedStationIds.includes(question.stationId) && question.pool === "station");
@@ -887,7 +894,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     if (questionIds.length < 1) return false;
     updateProfile(profile.id, (current) => ({
       ...current,
-      battle: { mode: "training", status: "active", questionIds, questionIndex: 0, playerHp: rule.playerHp, bossHp: rule.opponentHp, guardianId, opponentGuardianId: opponent.id, trainingDifficulty: difficulty, trainingXpStart: current.guardianTrainingXp[guardianId] ?? 0, trainingCorrectCount: 0, trainingIncorrectCount: 0, startedAt: new Date().toISOString() },
+      battle: { mode: "training", status: "active", questionIds, questionIndex: 0, playerHp: rule.playerHp, bossHp: rule.opponentHp, guardianId, opponentGuardianId: opponent.id, trainingDifficulty: difficulty, trainingXpStart: current.guardianTrainingXp[guardianId] ?? 0, trainingCorrectCount: 0, trainingIncorrectCount: 0, trainingPendingXp: 0, trainingPendingElementXp: {}, startedAt: new Date().toISOString() },
       trainingQuestionHistory: Array.from(new Set([...current.trainingQuestionHistory, ...questionIds])).slice(-120),
     }));
     return true;
@@ -902,6 +909,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const isMap1Boss = profile.battle.mode === "map1-boss";
     const isMap2Boss = profile.battle.mode === "map2-boss";
     const isMapBoss = isMap1Boss || isMap2Boss;
+    const isBossBattle = profile.battle.mode === "atlas" || isMapBoss;
     const isTraining = profile.battle.mode === "training";
     const trainingRule = isTraining ? getTrainingDifficulty(profile.battle.trainingDifficulty) : null;
     const correct = answer === question.answer;
@@ -912,7 +920,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const playerAdvantage = isTraining && opponentGuardian ? getElementalAdvantage(magicElement, opponentGuardian.element) : null;
     const opponentAdvantage = isTraining && playerGuardian && opponentGuardian ? getElementalAdvantage(opponentGuardian.element, playerGuardian.element) : null;
     const preBattleTrainingXp = profile.guardianTrainingXp[profile.battle.guardianId ?? profile.teamGuardianIds[0] ?? ""] ?? 0;
-    const trainingTechnique = getTrainingTechnique(Math.floor(preBattleTrainingXp / 100) + 1);
+    const trainingTechnique = getTrainingTechnique(Math.floor(preBattleTrainingXp / GUARDIAN_TRAINING_XP_PER_LEVEL) + 1);
     const mapBossRule = isMap1Boss ? MAP_BOSS_RULES[1] : isMap2Boss ? MAP_BOSS_RULES[2] : null;
     const bossDamage = correct ? Math.round((selectedSpell.damage + (isTraining ? trainingTechnique.bonusDamage : 0)) * (trainingRule?.playerDamageMultiplier ?? 1) * (playerAdvantage?.multiplier ?? 1)) : 0;
     const playerDamage = Math.round((correct ? selectedSpell.counterDamage * (mapBossRule?.counterMultiplier ?? 1) : (mapBossRule?.wrongAnswerDamage ?? 34)) * (trainingRule?.opponentDamageMultiplier ?? 1) * (opponentAdvantage?.multiplier ?? 1));
@@ -921,22 +929,38 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const startingPlayerHp = isTraining ? profile.battle.playerHp : currentGuardianHealth.hp;
     const playerHp = Math.max(0, startingPlayerHp - playerDamage);
     const ended = bossHp === 0 || playerHp === 0;
+    const victory = bossHp === 0;
     const currentQuest = profile.weeklyMagicQuest.week === weekKey() ? profile.weeklyMagicQuest : getWeeklyMagicQuest();
-    const nextUsedCount = magicElement === currentQuest.element ? Math.min(currentQuest.target, currentQuest.usedCount + 1) : currentQuest.usedCount;
-    const questJustCompleted = nextUsedCount >= currentQuest.target && !currentQuest.rewardClaimed;
+    const previousPendingQuestUses = profile.battle.pendingQuestUses ?? 0;
+    const questEligible = isBossBattle && correct && magicElement === currentQuest.element;
+    const nextPendingQuestUses = Math.min(currentQuest.target - currentQuest.usedCount, previousPendingQuestUses + (questEligible ? 1 : 0));
+    const questJustCompleted = isBossBattle && !currentQuest.rewardClaimed && (profile.battle.pendingQuestReward ?? 0) === 0 && currentQuest.usedCount + nextPendingQuestUses >= currentQuest.target;
     const questReward = questJustCompleted ? currentQuest.rewardXp : 0;
-    const elementGain = (correct ? 18 : 5) + (magicElement === currentQuest.element ? questReward : 0);
-    const previousElementXp = profile.elementXp[magicElement] ?? 0;
-    const previousLevel = Math.floor(previousElementXp / ELEMENT_XP_PER_LEVEL) + 1;
-    const totalElementXp = previousElementXp + elementGain;
-    const nextElementLevel = Math.floor(totalElementXp / ELEMENT_XP_PER_LEVEL) + 1;
-    const levelUp = nextElementLevel > previousLevel ? { element: magicElement, previousLevel, nextLevel: nextElementLevel, totalXp: totalElementXp } : undefined;
-    const trainingGain = isTraining ? (correct ? trainingRule?.xpCorrect ?? 20 : trainingRule?.xpIncorrect ?? 5) : 0;
+    const pendingQuestReward = (profile.battle.pendingQuestReward ?? 0) + questReward;
+    const trainingAnswerGain = isTraining && correct ? trainingRule?.xpCorrect ?? 10 : 0;
+    const previousTrainingPendingXp = profile.battle.trainingPendingXp ?? 0;
+    const pendingTrainingXp = previousTrainingPendingXp + trainingAnswerGain;
+    const trainingXpAwarded = isTraining && victory ? pendingTrainingXp : 0;
     const previousTrainingXp = profile.guardianTrainingXp[guardianId] ?? 0;
-    const previousTrainingLevel = Math.floor(previousTrainingXp / 100) + 1;
-    const totalTrainingXp = previousTrainingXp + trainingGain;
-    const nextTrainingLevel = Math.floor(totalTrainingXp / 100) + 1;
-    const trainingLevelUp = isTraining && nextTrainingLevel > previousTrainingLevel ? { guardianId, previousLevel: previousTrainingLevel, nextLevel: nextTrainingLevel, totalXp: totalTrainingXp } : undefined;
+    const previousTrainingLevel = Math.min(GUARDIAN_TRAINING_MAX_LEVEL, Math.floor(previousTrainingXp / GUARDIAN_TRAINING_XP_PER_LEVEL) + 1);
+    const totalTrainingXp = previousTrainingXp + trainingXpAwarded;
+    const nextTrainingLevel = Math.min(GUARDIAN_TRAINING_MAX_LEVEL, Math.floor(totalTrainingXp / GUARDIAN_TRAINING_XP_PER_LEVEL) + 1);
+    const trainingLevelUp = isTraining && victory && nextTrainingLevel > previousTrainingLevel ? { guardianId, previousLevel: previousTrainingLevel, nextLevel: nextTrainingLevel, totalXp: totalTrainingXp } : undefined;
+    const answerElementGain = correct ? 12 : 0;
+    const previousPendingElementXp = profile.battle.battlePendingElementXp ?? {};
+    const pendingElementXp = isBossBattle ? { ...previousPendingElementXp, [magicElement]: (previousPendingElementXp[magicElement] ?? 0) + answerElementGain + questReward } : previousPendingElementXp;
+    const trainingPendingElementXp = isTraining ? { ...(profile.battle.trainingPendingElementXp ?? {}), [magicElement]: ((profile.battle.trainingPendingElementXp ?? {})[magicElement] ?? 0) + answerElementGain } : profile.battle.trainingPendingElementXp ?? {};
+    const committedElementXp = isTraining ? (victory ? trainingPendingElementXp : {}) : isBossBattle ? (victory ? pendingElementXp : {}) : {};
+    const committedElementGain = committedElementXp[magicElement] ?? 0;
+    const previousElementXp = profile.elementXp[magicElement] ?? 0;
+    const previousLevel = getMagicBookLevel(previousElementXp);
+    const totalElementXp = previousElementXp + committedElementGain;
+    const nextElementLevel = getMagicBookLevel(totalElementXp);
+    const levelUp = (isBossBattle || isTraining) && victory && nextElementLevel > previousLevel ? { element: magicElement, previousLevel, nextLevel: nextElementLevel, totalXp: totalElementXp } : undefined;
+    const battlePendingXp = isBossBattle ? (profile.battle.battlePendingXp ?? 0) + (correct ? 30 : 0) + questReward : 0;
+    const battleXpAwarded = isBossBattle && victory ? battlePendingXp : 0;
+    const trainingGlobalXpAwarded = isTraining && victory ? Math.min(40, 10 + Math.floor(trainingXpAwarded / 2)) : 0;
+    const globalXpAwarded = isTraining ? trainingGlobalXpAwarded : battleXpAwarded;
     const nextAnswerStreak = correct ? profile.answerStreak + 1 : 0;
     const streakMilestone = correct && nextAnswerStreak % 5 === 0 ? { streak: nextAnswerStreak, bonusGold: isTraining ? 0 : FIVE_CORRECT_STREAK_GOLD } : undefined;
     updateProfile(profile.id, (current) => {
@@ -950,15 +974,17 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
       const earnedGold = isTraining ? 0 : (correct ? GOLD_BY_DIFFICULTY[question.difficulty] + streakBonus : 1);
       const trainingCorrectCount = (current.battle.trainingCorrectCount ?? 0) + (isTraining && correct ? 1 : 0);
       const trainingIncorrectCount = (current.battle.trainingIncorrectCount ?? 0) + (isTraining && !correct ? 1 : 0);
-      const trainingFinished = isTraining && (bossHp === 0 || playerHp === 0);
+      const trainingFinished = isTraining && ended;
       const xpBeforeTraining = current.battle.trainingXpStart ?? (current.guardianTrainingXp[guardianId] ?? 0);
-      const xpAfterTraining = (current.guardianTrainingXp[guardianId] ?? 0) + trainingGain;
+      const currentPendingTrainingXp = (current.battle.trainingPendingXp ?? 0) + trainingAnswerGain;
+      const currentTrainingAward = isTraining && victory ? currentPendingTrainingXp : 0;
+      const xpAfterTraining = (current.guardianTrainingXp[guardianId] ?? 0) + currentTrainingAward;
       const trainingRecord: TrainingBattleRecord | undefined = trainingFinished && current.battle.opponentGuardianId && current.battle.trainingDifficulty ? {
         id: `training-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         guardianId,
         opponentGuardianId: current.battle.opponentGuardianId,
         difficulty: current.battle.trainingDifficulty,
-        outcome: bossHp === 0 ? "victory" : "defeat",
+        outcome: victory ? "victory" : "defeat",
         correctCount: trainingCorrectCount,
         incorrectCount: trainingIncorrectCount,
         xpBefore: xpBeforeTraining,
@@ -967,22 +993,32 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         startedAt: current.battle.startedAt ?? new Date().toISOString(),
         endedAt: new Date().toISOString(),
       } : undefined;
+      const currentPendingElementXp = current.battle.battlePendingElementXp ?? {};
+      const currentTrainingPendingElementXp = current.battle.trainingPendingElementXp ?? {};
+      const nextBattlePendingElementXp = isBossBattle ? { ...currentPendingElementXp, [magicElement]: (currentPendingElementXp[magicElement] ?? 0) + answerElementGain + questReward } : currentPendingElementXp;
+      const nextTrainingPendingElementXp = isTraining ? { ...currentTrainingPendingElementXp, [magicElement]: (currentTrainingPendingElementXp[magicElement] ?? 0) + answerElementGain } : currentTrainingPendingElementXp;
+      const committedElements = isTraining ? (victory ? nextTrainingPendingElementXp : {}) : isBossBattle ? (victory ? nextBattlePendingElementXp : {}) : {};
+      const committedGlobalXp = isTraining ? (victory ? Math.min(40, 10 + Math.floor(currentTrainingAward / 2)) : 0) : (victory ? (current.battle.battlePendingXp ?? 0) + (correct ? 30 : 0) + questReward : 0);
+      const nextQuestUses = Math.min(currentQuest.target - currentQuest.usedCount, (current.battle.pendingQuestUses ?? 0) + (questEligible ? 1 : 0));
+      const currentQuestReward = (current.battle.pendingQuestReward ?? 0) + questReward;
+      const shouldCommitQuest = victory && isBossBattle;
+      const nextQuestState = shouldCommitQuest ? { ...currentQuest, usedCount: Math.min(currentQuest.target, currentQuest.usedCount + nextQuestUses), rewardClaimed: currentQuest.rewardClaimed || currentQuestReward > 0, completedAt: currentQuestReward > 0 ? new Date().toISOString() : currentQuest.completedAt } : currentQuest;
       return {
         ...current,
-        battle: { ...current.battle, bossHp, playerHp, status: bossHp === 0 ? "victory" : playerHp === 0 ? "defeat" : "active", trainingCorrectCount, trainingIncorrectCount, lastResult: { correct, bossDamage, playerDamage, spellId, advantageLabel: playerAdvantage?.label } },
-        xp: current.xp + (isTraining ? trainingGain : (correct ? 30 : 0) + questReward),
+        battle: { ...current.battle, bossHp, playerHp, status: victory ? "victory" : playerHp === 0 ? "defeat" : "active", trainingCorrectCount, trainingIncorrectCount, trainingPendingXp: isTraining ? (trainingFinished ? 0 : currentPendingTrainingXp) : current.battle.trainingPendingXp, trainingPendingElementXp: isTraining ? (trainingFinished ? {} : nextTrainingPendingElementXp) : current.battle.trainingPendingElementXp, battlePendingXp: isBossBattle ? (ended ? 0 : (current.battle.battlePendingXp ?? 0) + (correct ? 30 : 0) + questReward) : current.battle.battlePendingXp, battlePendingElementXp: isBossBattle ? (ended ? {} : nextBattlePendingElementXp) : current.battle.battlePendingElementXp, pendingQuestUses: isBossBattle ? (ended ? 0 : nextQuestUses) : current.battle.pendingQuestUses, pendingQuestReward: isBossBattle ? (ended ? 0 : currentQuestReward) : current.battle.pendingQuestReward, lastResult: { correct, bossDamage, playerDamage, spellId, advantageLabel: playerAdvantage?.label } },
+        xp: current.xp + committedGlobalXp,
         gold: current.gold + earnedGold,
         goldHistory: isTraining ? current.goldHistory : appendGoldHistory(current.goldHistory, makeGoldTransaction(earnedGold, "answer", `${correct ? "Đòn đúng" : "Đòn phản công"} · ${question.id}`)),
         answerStreak,
-        guardianTrainingXp: isTraining ? { ...current.guardianTrainingXp, [guardianId]: (current.guardianTrainingXp[guardianId] ?? 0) + trainingGain } : current.guardianTrainingXp,
+        guardianTrainingXp: isTraining && currentTrainingAward > 0 ? { ...current.guardianTrainingXp, [guardianId]: (current.guardianTrainingXp[guardianId] ?? 0) + currentTrainingAward } : current.guardianTrainingXp,
         magicUsage: { ...current.magicUsage, [magicElement]: (current.magicUsage[magicElement] ?? 0) + 1 },
-        elementXp: { ...current.elementXp, [magicElement]: (current.elementXp[magicElement] ?? 0) + elementGain },
-        weeklyMagicQuest: { ...currentQuest, usedCount: nextUsedCount, rewardClaimed: currentQuest.rewardClaimed || questJustCompleted, completedAt: questJustCompleted ? new Date().toISOString() : currentQuest.completedAt },
-        metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + (bossHp === 0 ? 1 : 0), lastActiveAt: new Date().toISOString() },
-        map1BossDefeated: current.map1BossDefeated || (isMap1Boss && bossHp === 0),
-        map2BossDefeated: current.map2BossDefeated || (isMap2Boss && bossHp === 0),
-        bossBadges: Array.from(new Set([...current.bossBadges, ...(isMap1Boss && bossHp === 0 ? ["boss-slayer-1" as const] : []), ...(isMap2Boss && bossHp === 0 ? ["boss-slayer-2" as const] : [])])),
-        collectedGuardianIds: guardianLost ? current.collectedGuardianIds.filter((id) => id !== guardianId) : !isMapBoss && bossHp === 0 && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
+        elementXp: Object.keys(committedElements).length ? { ...current.elementXp, ...Object.fromEntries(Object.entries(committedElements).map(([element, amount]) => [element, (current.elementXp[element as ElementName] ?? 0) + (amount ?? 0)])) } : current.elementXp,
+        weeklyMagicQuest: nextQuestState,
+        metrics: { ...current.metrics, totalAnswers: current.metrics.totalAnswers + 1, correctAnswers: current.metrics.correctAnswers + (correct ? 1 : 0), bossWins: current.metrics.bossWins + ((isBossBattle || isMapBoss) && victory ? 1 : 0), lastActiveAt: new Date().toISOString() },
+        map1BossDefeated: current.map1BossDefeated || (isMap1Boss && victory),
+        map2BossDefeated: current.map2BossDefeated || (isMap2Boss && victory),
+        bossBadges: Array.from(new Set([...current.bossBadges, ...(isMap1Boss && victory ? ["boss-slayer-1" as const] : []), ...(isMap2Boss && victory ? ["boss-slayer-2" as const] : [])])),
+        collectedGuardianIds: guardianLost ? current.collectedGuardianIds.filter((id) => id !== guardianId) : !isMapBoss && victory && !current.collectedGuardianIds.includes("atlas") ? [...current.collectedGuardianIds, "atlas"] : current.collectedGuardianIds,
         teamGuardianIds: guardianLost ? current.teamGuardianIds.filter((id) => id !== guardianId) : current.teamGuardianIds,
         guardianHealth: isTraining ? current.guardianHealth : guardianLost ? Object.fromEntries(Object.entries(current.guardianHealth).filter(([id]) => id !== guardianId)) : { ...current.guardianHealth, [guardianId]: { hp: playerHp, updatedAt: new Date().toISOString() } },
         guardianLosses: guardianLost && !current.guardianLosses.includes(guardianId) ? [...current.guardianLosses, guardianId] : current.guardianLosses,
@@ -993,14 +1029,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         trainingBattleHistory: trainingRecord ? [trainingRecord, ...current.trainingBattleHistory].slice(0, 50) : current.trainingBattleHistory,
       };
     });
-    return { correct, playerDamage, bossDamage, ended, levelUp, trainingLevelUp, streakMilestone };
+    return { correct, playerDamage, bossDamage, ended, levelUp, trainingLevelUp, trainingXpAwarded, streakMilestone };
   }, [profile, updateProfile]);
   const advanceBattle = useCallback(() => {
-    if (!profile || profile.battle.status !== "active") return;
+    if (!profile || profile.battle.status === "idle") return;
     const nextIndex = profile.battle.questionIndex + 1;
     updateProfile(profile.id, (current) => {
+      if (current.battle.status !== "active") return { ...current, battle: { ...current.battle, status: "idle", lastResult: undefined, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0, trainingPendingXp: 0, trainingPendingElementXp: {} } };
       if (nextIndex < current.battle.questionIds.length) return { ...current, battle: { ...current.battle, questionIndex: nextIndex, lastResult: undefined } };
-      if (current.battle.mode !== "training" || !current.battle.guardianId || !current.battle.opponentGuardianId || !current.battle.trainingDifficulty) return { ...current, battle: { ...current.battle, status: "defeat" } };
+      if (current.battle.mode !== "training" || !current.battle.guardianId || !current.battle.opponentGuardianId || !current.battle.trainingDifficulty) return { ...current, battle: { ...current.battle, status: "idle", lastResult: undefined, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0 } };
       const guardianId = current.battle.guardianId;
       const xpAfter = current.guardianTrainingXp[guardianId] ?? 0;
       const xpBefore = current.battle.trainingXpStart ?? xpAfter;
@@ -1018,7 +1055,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         startedAt: current.battle.startedAt ?? new Date().toISOString(),
         endedAt: new Date().toISOString(),
       };
-      return { ...current, battle: { ...current.battle, status: "defeat" }, trainingBattleHistory: [record, ...current.trainingBattleHistory].slice(0, 50) };
+      return { ...current, battle: { ...current.battle, status: "idle", lastResult: undefined, trainingPendingXp: 0, trainingPendingElementXp: {}, battlePendingXp: 0, battlePendingElementXp: {}, pendingQuestUses: 0, pendingQuestReward: 0 }, trainingBattleHistory: [record, ...current.trainingBattleHistory].slice(0, 50) };
     });
   }, [profile, updateProfile]);
   const markMagicVideoWatched = useCallback((element: ElementName) => {
@@ -1084,10 +1121,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   }, [profile, updateProfile]);
   const resetActiveProfile = useCallback(() => { if (profile) updateProfile(profile.id, (current) => createProfileRecord(current.name, current.avatar)); }, [profile, updateProfile]);
 
-  const level = Math.floor((profile?.xp ?? 0) / 250) + 1;
-  const levelProgress = (profile?.xp ?? 0) % 250;
-  const magicBookWatchedCount = profile?.magicBookWatchedElements.length ?? 0;
-  const hasMagicBookAchievement = magicBookWatchedCount === ELEMENT_ORDER.length;
+  const level = Math.min(PLAYER_MAX_LEVEL, Math.floor((profile?.xp ?? 0) / PLAYER_XP_PER_LEVEL) + 1);
+  const levelProgress = level === PLAYER_MAX_LEVEL ? PLAYER_XP_PER_LEVEL : (profile?.xp ?? 0) % PLAYER_XP_PER_LEVEL;
+  const magicBookWatchedCount = useMemo(() => profile ? MAGIC_BOOK_ELEMENTS.filter((element) => profile.collectedGuardianIds.some((guardianId) => getMagicBookElement(getGuardian(guardianId)?.element) === element.key)).length : 0, [profile]);
+  const hasMagicBookAchievement = magicBookWatchedCount === MAGIC_BOOK_ELEMENTS.length;
   const mostUsedMagicElement = useMemo<ElementName | null>(() => {
     if (!profile) return null;
     return ELEMENT_ORDER.reduce<ElementName | null>((leader, element) => (profile.magicUsage[element] ?? 0) > (leader ? profile.magicUsage[leader] ?? 0 : 0) ? element : leader, null);
@@ -1107,7 +1144,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const permission = await window.Notification.requestPermission();
     return permission === "granted" ? { ok: true, message: "Đã cho phép nhắc học khi Math4Fun đang mở." } : { ok: false, message: "Chưa được cấp quyền thông báo. Nhắc học vẫn hiện trong game." };
   }, []);
-  const elementLevel = useCallback((element: ElementName) => Math.floor((profile?.elementXp[element] ?? 0) / ELEMENT_XP_PER_LEVEL) + 1, [profile]);
+  const elementLevel = useCallback((element: ElementName) => Math.min(MAGIC_BOOK_MAX_LEVEL, Math.floor((profile?.elementXp[element] ?? 0) / MAGIC_BOOK_XP_PER_LEVEL) + 1), [profile]);
   const createProfileBackup = useCallback(() => profile ? JSON.stringify({ format: "math4fun-profile-backup", version: 1, exportedAt: new Date().toISOString(), profile }, null, 2) : null, [profile]);
   const saveParentPin = useCallback(async (pin: string, securityQuestion: string, securityAnswer: string) => {
     if (!isParentPin(pin)) return { ok: false as const, message: "PIN cần gồm 4–8 chữ số." };

@@ -65,6 +65,7 @@ type BattleFeedback = {
   playerDamage: number;
   bossDamage: number;
   ended: boolean;
+  trainingXpAwarded: number;
 };
 type LevelCelebration = {
   level: number;
@@ -315,11 +316,15 @@ function TrainingArchive({
                 >
                   <div className="flex items-center justify-between gap-2">
                     <b className="font-display text-base">
-                      {record.outcome === "victory" ? "Thắng" : "Thua"} ·{" "}
-                      {foe?.name ?? "Đối thủ"}
+                      {record.outcome === "victory"
+                        ? "Thắng"
+                        : record.outcome === "completed"
+                          ? "Dở dang"
+                          : "Thua"}{" "}
+                      · {foe?.name ?? "Đối thủ"}
                     </b>
                     <span className="font-mono text-[9px]">
-                      +{record.xpGain} XP
+                      {record.xpGain > 0 ? `+${record.xpGain}` : "+0"} XP
                     </span>
                   </div>
                   <p className="mt-1 text-[#58708b]">
@@ -437,7 +442,10 @@ function TrainingSeal({ hasProfile }: { hasProfile: boolean }) {
             {specimen.name}
           </p>
           <p className="text-[10px] font-bold tracking-[.1em] text-[#58708b]">
-            PHÂN LOẠI · {(getGuardianElementLabel(specimen.id) ?? specimen.element).toUpperCase()}
+            PHÂN LOẠI ·{" "}
+            {(
+              getGuardianElementLabel(specimen.id) ?? specimen.element
+            ).toUpperCase()}
           </p>
           <p className="mt-2 border-t border-dashed border-[#58708b] pt-2 text-[10px] text-[#58708b]">
             Bằng chứng: 0 trận · 0 XP
@@ -484,7 +492,8 @@ export default function TrainingPage() {
 
   const battle = profile?.battle;
   const trainingActive =
-    battle?.mode === "training" && battle.status === "active";
+    battle?.mode === "training" &&
+    (battle.status === "active" || Boolean(feedback));
   const team = profile?.collectedGuardianIds.filter(id => id !== "atlas") ?? [];
   const activeGuardian =
     getGuardian(battle?.guardianId ?? selectedGuardianId ?? team[0] ?? "") ??
@@ -611,7 +620,7 @@ export default function TrainingPage() {
       });
       playElementLevelUpSound(activeGuardian.element, audioEnabled);
     }
-    if (result.ended && result.correct && battle?.status === "victory") {
+    if (result.ended && result.correct) {
       playTrainingVictorySound(audioEnabled);
       playFireworkPopSound(audioEnabled);
     }
@@ -712,8 +721,9 @@ export default function TrainingPage() {
           </p>
           <h1 className="font-display text-4xl font-black">Võ đài bài tập</h1>
           <p className="mt-2 max-w-2xl text-sm text-[#58708b]">
-            Đúng để ra đòn, sai để bị phản công. Võ đài không trao Gold;
-            guardian nhận XP và lên cấp Huấn luyện. Rời võ đài, HP luôn hồi đầy.
+            Đúng để ra đòn, sai để bị phản công. Võ đài không trao Gold; chỉ
+            thắng trận mới chốt XP Huấn luyện; trả lời sai và trận thua đều nhận
+            0 XP. Rời võ đài, HP luôn hồi đầy.
           </p>
         </div>
         <span className="field-tag">
@@ -765,8 +775,9 @@ export default function TrainingPage() {
                       <span>
                         <b className="font-display text-xl">{guardian.name}</b>
                         <small className="block text-xs">
-                          {getGuardianElementLabel(guardian.id) ?? guardian.element} · Cấp{" "}
-                          {guardianTrainingLevel(guardian.id)}
+                          {getGuardianElementLabel(guardian.id) ??
+                            guardian.element}{" "}
+                          · Cấp {guardianTrainingLevel(guardian.id)}
                         </small>
                       </span>
                     </button>
@@ -794,7 +805,8 @@ export default function TrainingPage() {
                         {guardian.name}
                       </b>
                       <small className="block text-[10px] uppercase">
-                        {getGuardianElementLabel(guardian.id) ?? guardian.element}
+                        {getGuardianElementLabel(guardian.id) ??
+                          guardian.element}
                       </small>
                     </button>
                   );
@@ -842,7 +854,7 @@ export default function TrainingPage() {
                       </span>
                       <span className="mt-3 block font-mono text-[10px] font-black tracking-[.1em]">
                         {rule.questionCount} CÂU · HP {rule.playerHp}/
-                        {rule.opponentHp} · +{rule.xpCorrect} XP ĐÚNG
+                        {rule.opponentHp} · +{rule.xpCorrect} XP ĐÚNG KHI THẮNG
                       </span>
                     </button>
                   );
@@ -852,7 +864,8 @@ export default function TrainingPage() {
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-dashed border-white/40 pt-5">
               <p className="max-w-xl text-sm text-[#d5dfed]">
                 {trainingRule.questionCount} câu từ các trạm đã mở. Không Gold,
-                không mất guardian; rời võ đài là HP hồi đầy.
+                không mất guardian; chỉ thắng mới ghi XP, rời võ đài là HP hồi
+                đầy.
               </p>
               <button
                 onClick={begin}
@@ -973,7 +986,10 @@ export default function TrainingPage() {
                     />
                   </div>
                   <div className="battle-pet-meta">
-                    <span>{getGuardianElementLabel(activeGuardian.id) ?? activeGuardian.element}</span>
+                    <span>
+                      {getGuardianElementLabel(activeGuardian.id) ??
+                        activeGuardian.element}
+                    </span>
                     <span>{spell.name}</span>
                   </div>
                 </motion.div>
@@ -1007,7 +1023,9 @@ export default function TrainingPage() {
                     />
                   </div>
                   <div className="battle-pet-meta">
-                    <span>{getGuardianElementLabel(opponent.id) ?? opponent.element}</span>
+                    <span>
+                      {getGuardianElementLabel(opponent.id) ?? opponent.element}
+                    </span>
                     <span>{opponentAdvantage.label}</span>
                   </div>
                 </motion.div>
@@ -1094,21 +1112,28 @@ export default function TrainingPage() {
                   {feedback.correct ? (
                     <>
                       <Check className="mr-1 inline" size={16} /> Đúng:{" "}
-                      {activeGuardian.name} tấn công, +{trainingRule.xpCorrect}{" "}
-                      XP Huấn luyện.
+                      {activeGuardian.name} tấn công,{" "}
+                      {feedback.ended && battle?.status === "victory"
+                        ? `+${feedback.trainingXpAwarded} XP Huấn luyện đã ghi.`
+                        : `+${trainingRule.xpCorrect} XP tạm tính; thắng trận mới ghi.`}
                     </>
                   ) : (
                     <>
                       <X className="mr-1 inline" size={16} /> Sai:{" "}
-                      {opponent.name} phản công, +{trainingRule.xpIncorrect} XP
-                      Huấn luyện.
+                      {opponent.name}
+                      {feedback.ended && battle?.status === "defeat"
+                        ? " phản công. Trận thua: 0 XP Huấn luyện."
+                        : " phản công. Không cộng XP cho câu sai."}
                     </>
                   )}{" "}
                   <span className="font-normal">{question?.explanation}</span>
                 </span>
                 <button
-                  onClick={() => advanceBattle()}
-                  className="border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]"
+                  onClick={() => {
+                    advanceBattle();
+                    setFeedback(null);
+                  }}
+                  className="training-next-button border-2 border-[#172a48] bg-[#f6b73c] px-3 py-2 text-[#172a48] shadow-[2px_2px_0_#172a48]"
                 >
                   {feedback.ended ? "Kết thúc lượt luyện" : "Lượt tiếp"}
                 </button>
