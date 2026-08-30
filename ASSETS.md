@@ -4,12 +4,13 @@
 
 | Asset | Role | URL |
 | --- | --- | --- |
-| Arcane arena reference | Visual QA target and Boss battle backdrop | `/manus-storage/math4fun-arcane-arena-reference_3e0f6085.jpg` |
+| Battle arena | Local, uncluttered 16:9 backdrop for training and Boss battles | `client/public/media/math4fun-battle-arena.webp` |
+| World map | Atlas overview shown before the route evidence cards | `client/public/media/math4fun-world-map.png` |
 | Element emblems | Visual reference for elemental spell buttons | `/manus-storage/math4fun-spell-elements_450241d7.png` |
 | Profile compass | Visual reference for local profile/team UI | `/manus-storage/math4fun-profile-compass_bf90b6cf.png` |
 | Battle loop | Nền âm thanh sau thao tác tấn công | `/manus-storage/math4fun-battle-loop_053e734b.wav` |
 | Sáu clip ấn phép | Sổ Phép và hiệu ứng hệ | `MAGIC_MEDIA` trong `gameData.ts` |
 
-The generated originals are held outside the project in `/home/ubuntu/webdev-static-assets/`; web code uses only the manuscript storage URLs.
+The original Math4Fun guardian portraits are bundled in `client/public/guardians/original/`; the artwork catalog and gameplay-ID mapping are documented beside the files. The web code no longer depends on third-party creature sprites.
 
-Đợt mở rộng Map/PvP tái sử dụng asset arena, guardian và avatar có sẵn. Companion dialogue dùng Framer Motion/CSS, không tham chiếu ảnh mới chưa tồn tại trong lúc quota tạo hình vẫn bị giới hạn.
+Combat effects use local arena art plus lightweight Framer Motion/CSS layers. The scene reserves the center for question-independent action feedback while the adjacent question panel remains readable.

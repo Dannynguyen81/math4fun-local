@@ -11,7 +11,8 @@ const samples = [
 const missing = samples.flatMap(({ id, difficulty, answer }) => {
   const start = source.indexOf(`id: "${id}"`);
   if (start < 0) return [id];
-  const record = source.slice(start, source.indexOf("\n", start));
+  const end = source.indexOf("\n  },", start);
+  const record = source.slice(start, end < 0 ? source.length : end);
   return record.includes('source: "Luyện Boss Map 1 · câu mẫu kiểm thử') && record.includes(`difficulty: "${difficulty}"`) && record.includes(answer) && record.includes('pool: "boss"') ? [] : [id];
 });
 

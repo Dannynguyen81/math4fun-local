@@ -1,17 +1,20 @@
-/* Math4Fun Guardian art presentation.
- * Guardian canon now points to direct WebP files again. Keep presentation
- * transparent and circular; do not paint a second sprite behind the image.
- */
+/* Math4Fun Guardian art presentation. The original local portraits keep their
+ * full silhouette; circular clipping is reserved for the stamp container. */
 img[src*="/guardians/"] {
-  background: transparent !important;
+  background: #fff8e6 !important;
   object-fit: contain;
-  clip-path: circle(49% at 50% 50%);
+  clip-path: none;
+}
+
+.guardian-stamp {
+  overflow: hidden;
 }
 
 .guardian-stamp img[src*="/guardians/"] {
   width: 100%;
   height: 100%;
   margin: auto;
+  border-radius: 50%;
 }
 
 /* Mobile first: route cards form one clean column; zig-zag returns on larger screens. */
